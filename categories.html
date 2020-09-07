@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Categories</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" type="text/css" href="styles/courses.css">
+<link rel="stylesheet" type="text/css" href="styles/courses_responsive.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel='stylesheet' href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet" href="LandingPage/css/owl.carousel.css">
+        <link rel="stylesheet" href="LandingPage/css/owl.theme.default.min.css">
+        <style>
+    body,html {
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+        overflow-x: hidden;
+        font-family: Raleway;
+    }
+    .item{
+        background-color: white;
+        min-height: 250px;
+
+        border-radius: 10px;
+        border:2px solid black;
+    }
+    .label{
+        color: white;
+    }
+    .head{
+        color: black;
+    }
+    .signup-form form{
+
+        width:100%;
+        background-color: #f1f2f6;
+        border-radius: 3px;
+        margin-bottom: 15px;
+
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .signup-form .hint {
+        color: black;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    
+    .slider-area{
+        margin:0;
+    }
+    .carousel-control.left, .carousel-control.right{
+        background: transparent;
+    } 
+    .img-area{
+        margin: auto;
+        overflow: hidden;
+        align-items: center;
+    }
+    .img-area img{
+        height: 400px;
+        width: 500px;
+    }
+    .carousel-caption{
+        position: static;
+        padding-bottom: 15px;
+        padding-top: 0;
+    }
+    .carousel-caption h4{
+        font-size: 20px;
+    }
+    #navbar-left a{
+        text-decoration: none;
+        color: #ababab;
+    }
+    #navbar-left a:hover{
+        color: black;
+    }
+    #navbar-left button{
+        color: white;
+    }
+    footer{
+        background: #eeeeee; 
+        color:#757575;
+        font-size: 13px;
+        line-height: 1.2
+    }
+    footer h6{
+        color: #9e9e9e;
+    }
+    footer a{
+        color: black;
+    }
+    footer a:link{
+        text-decoration: none;
+    }
+    footer a:hover{
+        color: #757575;
+    }
+    footer #social i{
+        color: black;
+        font-size: 1.2rem;
+    }
+    footer #social i:hover{
+        color: #3db166;
+    }
+    @media (max-width: 768px) {
+        #navbar-left{
+            display: block;
+        }
+        #first {
+            padding-top: 2px;
+            padding-bottom: 2px;
+            line-height: 12px;
+        }
+        .container-fluid{
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+        .section-a img{
+            padding: 0;
+        }
+        footer{
+            font-size: 7.2px;    
+        }
+    }
+    @media (max-width: 990px){
+        #navbar-left{
+            display: block;
+        }
+        #navbar-left form{
+            display: none;
+        }
+        .section-a{
+            margin-bottom: 32px;
+        }
+        .section-a img{
+            margin: 32px;
+        }
+        .section-a #section-a-learn h2,h3{
+            font-size: 31px;
+        }
+        .section-a #section-a-learn h4{
+            font-size: 15px;
+        }
+        #query{
+            margin-left: 11em;
+        }
+        #query_request{
+            text-align: center !important;
+        } 
+        footer{
+            font-size: 7.2px;    
+        }
+    }
+    @media (max-width: 375px){
+        #query{
+            margin-left: 0 !important; 
+        }
+    }
+    @media all and (max-width: 765px){
+        footer{
+            font-size: 1rem;
+        }
+        #query{
+            margin-left: 1.5em;
+        }
+        #footer-left{
+            padding-left: 3em;
+            text-align: left;
+        }
+    }
+    @media only screen and (max-width: 1000px){
+        #logo{
+            margin-left:10px!important;
+        }
+    }
+
+    @media only screen and (max-width: 1080px){
+        #request{
+            align-items: center;
+            justify-content: center;
+            text-align:center;
+        }
+    }
+
+    </style>
+    </head>
+
+<body>
+ 
+    <figure class="figure" style="margin: 11px;">
+        <img src="LandingPage/img/logotiny.png" class="figure-img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;">
+        <figcaption class="figure-caption text-center">LearnOpad</figcaption>
+    </figure>
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e0e0e0;">
+        <a class="navbar-brand" href="/home"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#exampl">
+                    Free Content
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav justify-content-end text-sm-left" id="navbar-left">
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0">
+                    
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn my-sm-0" type="submit" style="color: black;s"><i class="fa fa-search"></i></button>
+                    </form>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" style="padding-left: 0;">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/signup" class="btn btn-primary rounded" style="color: white">Sign Up</a>
+                </li>
+                
+            </ul>
+        </div>
+    </nav>    
+
+
+
+<div class="super_container">
+
+
+	<!-- Courses -->
+
+	<div class="courses">
+		<div class="container">
+			<div class="row">
+
+				<!-- Courses Main Content -->
+				<div class="col-lg-8">
+					<div class="courses_search_container">
+						<form action="#" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
+							<input type="search" class="courses_search_input" placeholder="Search Courses" required="required">
+							<select id="courses_search_select" class="courses_search_select courses_search_input">
+								<option>All Categories</option>
+								<option>Category</option>
+								<option>Category</option>
+								<option>Category</option>
+							</select>
+							<button action="submit" class="courses_search_button ml-auto">search now</button>
+						</form>
+					</div>
+					<div class="courses_container">
+						<div class="row courses_row">
+							
+							<!-- Course -->
+							<div class="col-lg-6 course_col">
+								<div class="course">
+									<div class="course_image"><img src="images/course_4.jpg" alt=""></div>
+									<div class="course_body">
+										<h3 class="course_title"><a href="course.html">Software Training</a></h3>
+										<div class="course_teacher">Mr. John Taylor</div>
+										<div class="course_text">
+											<p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
+										</div>
+									</div>
+									<div class="course_footer">
+										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+											<div class="course_info">
+												<i class="fa fa-graduation-cap" aria-hidden="true"></i>
+												<span>20 Student</span>
+											</div>
+											<div class="course_info">
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<span>5 Ratings</span>
+											</div>
+											<div class="course_price ml-auto">$130</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Course -->
+							<div class="col-lg-6 course_col">
+								<div class="course">
+									<div class="course_image"><img src="images/course_5.jpg" alt=""></div>
+									<div class="course_body">
+										<h3 class="course_title"><a href="course.html">Developing Mobile Apps</a></h3>
+										<div class="course_teacher">Ms. Lucius</div>
+										<div class="course_text">
+											<p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
+										</div>
+									</div>
+									<div class="course_footer">
+										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+											<div class="course_info">
+												<i class="fa fa-graduation-cap" aria-hidden="true"></i>
+												<span>20 Student</span>
+											</div>
+											<div class="course_info">
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<span>5 Ratings</span>
+											</div>
+											<div class="course_price ml-auto">Free</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Course -->
+							<div class="col-lg-6 course_col">
+								<div class="course">
+									<div class="course_image"><img src="images/course_6.jpg" alt=""></div>
+									<div class="course_body">
+										<h3 class="course_title"><a href="course.html">Starting a Startup</a></h3>
+										<div class="course_teacher">Mr. Charles</div>
+										<div class="course_text">
+											<p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
+										</div>
+									</div>
+									<div class="course_footer">
+										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+											<div class="course_info">
+												<i class="fa fa-graduation-cap" aria-hidden="true"></i>
+												<span>20 Student</span>
+											</div>
+											<div class="course_info">
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<span>5 Ratings</span>
+											</div>
+											<div class="course_price ml-auto"><span>$320</span>$220</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Course -->
+							<div class="col-lg-6 course_col">
+								<div class="course">
+									<div class="course_image"><img src="images/course_7.jpg" alt=""></div>
+									<div class="course_body">
+										<h3 class="course_title"><a href="course.html">Learn Basic German Fast</a></h3>
+										<div class="course_teacher">Mr. John Taylor</div>
+										<div class="course_text">
+											<p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
+										</div>
+									</div>
+									<div class="course_footer">
+										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+											<div class="course_info">
+												<i class="fa fa-graduation-cap" aria-hidden="true"></i>
+												<span>20 Student</span>
+											</div>
+											<div class="course_info">
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<span>5 Ratings</span>
+											</div>
+											<div class="course_price ml-auto">$130</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Course -->
+							<div class="col-lg-6 course_col">
+								<div class="course">
+									<div class="course_image"><img src="images/course_8.jpg" alt=""></div>
+									<div class="course_body">
+										<h3 class="course_title"><a href="course.html">Business Groud Up</a></h3>
+										<div class="course_teacher">Ms. Lucius</div>
+										<div class="course_text">
+											<p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
+										</div>
+									</div>
+									<div class="course_footer">
+										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+											<div class="course_info">
+												<i class="fa fa-graduation-cap" aria-hidden="true"></i>
+												<span>20 Student</span>
+											</div>
+											<div class="course_info">
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<span>5 Ratings</span>
+											</div>
+											<div class="course_price ml-auto">Free</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Course -->
+							<div class="col-lg-6 course_col">
+								<div class="course">
+									<div class="course_image"><img src="images/course_9.jpg" alt=""></div>
+									<div class="course_body">
+										<h3 class="course_title"><a href="course.html">Java Technology</a></h3>
+										<div class="course_teacher">Mr. Charles</div>
+										<div class="course_text">
+											<p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
+										</div>
+									</div>
+									<div class="course_footer">
+										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+											<div class="course_info">
+												<i class="fa fa-graduation-cap" aria-hidden="true"></i>
+												<span>20 Student</span>
+											</div>
+											<div class="course_info">
+												<i class="fa fa-star" aria-hidden="true"></i>
+												<span>5 Ratings</span>
+											</div>
+											<div class="course_price ml-auto"><span>$320</span>$220</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						
+					</div>
+				</div>
+
+				<!-- Courses Sidebar -->
+				<div class="col-lg-4">
+					<div class="sidebar" style="margin-top: 0;">
+
+						<!-- Categories -->
+						<div class="sidebar_section">
+							<div class="sidebar_section_title">Categories</div>
+							<div class="sidebar_categories">
+								<ul>
+                                <div class="accordion" id="accordionExample">
+                                  <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                      <h2 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="border:none">
+                                         Art & Design 
+                                        </button>
+                                      </h2>
+                                    </div>
+
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                      <div class="card-body">
+                                        <li><a href="#">Art & Design</a></li>
+                                        <li><a href="#">Business</a></li>
+                                        <li><a href="#">IT & Software</a></li>
+                                        <li><a href="#">Languages</a></li>
+                                        <li><a href="#">Programming</a></li>
+                                      </div>
+                                    </div>
+                                  </div>
+                                    <div class="card">
+                                    <div class="card-header" id="headingtwo">
+                                      <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="true" aria-controls="collapsetwo" style="border:none">
+                                         IT & Software 
+                                        </button>
+                                      </h2>
+                                    </div>
+
+                                    <div id="collapsetwo" class="collapse" aria-labelledby="headingtwo" data-parent="#accordionExample">
+                                      <div class="card-body">
+                                        <li><a href="#">Art & Design</a></li>
+                                        <li><a href="#">Business</a></li>
+                                        <li><a href="#">IT & Software</a></li>
+                                        <li><a href="#">Languages</a></li>
+                                        <li><a href="#">Programming</a></li>
+                                      </div>
+                                    </div>
+                                  </div>
+                                    <div class="card">
+                                    <div class="card-header" id="headingthree">
+                                      <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsethree" aria-expanded="true" aria-controls="collapsethree" style="border:none">
+                                         Programming 
+                                        </button>
+                                      </h2>
+                                    </div>
+
+                                    <div id="collapsethree" class="collapse" aria-labelledby="headingthree" data-parent="#accordionExample">
+                                      <div class="card-body">
+                                        <li><a href="#">C</a></li>
+                                        <li><a href="#">C++</a></li>
+                                        <li><a href="#">Python</a></li>
+                                        <li><a href="#">Java</a></li>
+                                        <li><a href="#">c#</a></li>
+                                        <li><a href="#">Perl</a></li>
+                                        <li><a href="#">Ruby</a></li>
+                                        <li><a href="#">JavaScript</a></li>
+                                        <li><a href="#"></a></li>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                      <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="border:none">
+                                        Creative Fields
+                                        </button>
+                                      </h2>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                      <div class="card-body">
+                                        <li><a href="#">Arts & Crafts</a></li>
+                                        <li><a href="#">Photography</a></li>
+                                        <li><a href="#">Video Editing/Film Making</a></li>
+                                        <li><a href="#">Multimedia</a></li>
+                                        <li><a href="#">Music</a></li>
+                                        <li><a href="#">Caligraphy</a></li>
+                                        <li><a href="#">Content Writing</a></li>
+                                        <li><a href="#">Web Desing-UI/UX</a></li>
+                                        <li><a href="#">Fashion</a></li>
+                                        <li><a href="#">Graphics Design</a></li>
+                                        <li><a href="#">Architecture</a></li>
+                                        <li><a href="#">Interior</a></li>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="card">
+                                    <div class="card-header" id="headingThree">
+                                      <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="border:none">
+                                          Teaching & Coaching
+                                        </button>
+                                      </h2>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                      <div class="card-body">
+                                        <li><a href="#">Engineering</a></li>
+                                        <li><a href="#">Maths</a></li>
+                                        <li><a href="#">Physics</a></li>
+                                        <li><a href="#">Humanities</a></li>
+                                        <li><a href="#">Test Preparation</a></li>
+                                        <li><a href="#">Languages</a></li>
+                                        <li><a href="#">Teacher Training</a></li>
+                                        <li><a href="#">Others</a></li>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                </ul>
+							</div>
+						</div>
+
+						
+						
+						<!-- Tags -->
+						<div class="sidebar_section">
+							<div class="sidebar_section_title">Tags</div>
+							<div class="sidebar_tags">
+								<ul class="tags_list">
+									<li><a href="#">creative</a></li>
+									<li><a href="#">unique</a></li>
+									<li><a href="#">photography</a></li>
+									<li><a href="#">ideas</a></li>
+									<li><a href="#">wordpress</a></li>
+									<li><a href="#">startup</a></li>
+								</ul>
+							</div>
+						</div>
+
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+    
+               
+<!-- Footer -->
+<footer class="page-footer font-small pt-4">
+    <div class="container text-center text-md-left">
+        <div class="row text-center text-md-left pb-3" style="background: transparent;">
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3" id="footer-left" style="">
+                <figure class="figure" style="">
+                    <img src="LandingPage/img/logotiny.png" class="figure-img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;width: 60px; height: 40px;">
+                    <figcaption class="figure-caption text-center">LearnOpad</figcaption>
+                </figure>
+            </div>
+
+            <hr class="w-100 clearfix d-md-none">
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3" id="footer-left">
+                <p>
+                <a href="#!">About Us</a>
+                </p>
+                <p>
+                <a href="#!">Career</a>
+                </p>
+                <p>
+                <a href="contact.html">Contact Us</a>
+                </p>
+                <p>
+                <a href="#!">Terms/Services</a>
+                </p>
+            </div>
+
+            <hr class="w-100 clearfix d-md-none">
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto" id="footer-left">
+                <br>
+                <p>
+                <a href="#!">Learners</a>
+                </p>
+                <p>
+                <a href="{% url 'facilitator' %}">Facilitators</a>
+                </p>
+                <p>
+                <a href="#!">Campus</a>
+                </p>
+                <p>
+                <a href="#!">Corporates</a>
+                </p>
+            </div>
+        
+            <hr class="w-100 clearfix d-md-none">
+    
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 social" id="footer-left">
+            <h6 class="text-uppercase font-weight-bold">Our App</h6>
+            <hr class="mb-2 mt-0 d-inline-block mx-auto" style="width: 20px;">
+            <p>
+            <a href="https://www.apple.com/ios/app-store/"><i class="fab fa-apple mr-1" style="font-size: 20px;"></i> IOS Store</a>
+            </p>
+            <p>
+            <a href="https://play.google.com/store"><img class="mr-1" src="LandingPage/img/play-store.svg" width="20px" height="20px"> Andriod Store</a>
+            </p>
+        </div>
+
+    </div>
+       
+
+        <hr class="mb-4 mt-0 d-inline-block mx-auto text-sm-lef" style="width: 100%; height: 1px; background-color: #3db166;">
+
+        <div class="row d-flex align-items-center">
+
+        <div class="col-md-7 col-lg-8">            
+            <p class="text-center text-md-left text-sm-left">© 2020 Copyright:
+            <a href="#" style="font-size:11px">
+                <strong> TMHM Consulting Services Pvt.Ltd</strong>
+            </a>
+            </p>
+        </div>
+        <div class="col-md-5 col-lg-4 ml-lg-0">
+            <div class="text-center text-md-right text-sm-left" id="social">
+    
+            <ul class="list-unstyled list-inline">
+                <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                </li>
+                <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                </li>
+                <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                    <i class="fab fa-wordpress-simple"></i>
+                </a>
+                </li>
+                <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                </li>
+                <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                </li>
+            </ul>
+            </div>
+
+        </div>
+
+        </div>
+    </div>
+
+</footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/da956b6924.js" crossorigin="anonymous"></script>
+   
+    <script>
+
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+
+            $(".toggle-password").click(function() {
+
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+            input.attr("type", "text");
+            } else {
+            input.attr("type", "password");
+            }
+        });
+
+        function check_ephone(phno, email){
+            var regex = /^[0-9]{10}$/;
+            var regexe_email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if(regex.test(phno.yourphone.value) && regex_email.test(email.youremail.value)){
+                return true;
+                } else {
+                    if (!(regex.test(phno.yourphone.value)) ) {
+                        alert("This is not a valid phone number");
+                        return false;
+                    }
+                    if (!(regex.test(email.youreamil.value)) ) {
+                        alert("This is not a valid email id");
+                        return false;
+                    }
+                    if (!(regex.test(phno.yourphone.value) && regex_email.test(email.youremail.value)) ) {
+                        alert("This is not a valid phone number and email id");
+                        return false;
+                    } 
+            }
+        }
+    </script><script src="LandingPage/js/owl.carousel.js"></script>
+    
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="plugins/colorbox/jquery.colorbox-min.js"></script>
+<script src="js/courses.js"></script>
+</body>
+</html>

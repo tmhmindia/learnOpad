@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Course Details</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Unicat project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" type="text/css" href="styles/course.css">
+<link rel="stylesheet" type="text/css" href="styles/course_responsive.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel='stylesheet' href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400">
+        <link rel="stylesheet" href="LandingPage/css/owl.carousel.css">
+        <link rel="stylesheet" href="LandingPage/css/owl.theme.default.min.css">
+        <style>
+    body,html {
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+        overflow-x: hidden;
+        font-family: Raleway;
+    }
+    .item{
+        background-color: white;
+        min-height: 250px;
+
+        border-radius: 10px;
+        border:2px solid black;
+    }
+    .label{
+        color: white;
+    }
+    .head{
+        color: black;
+    }
+    .signup-form form{
+
+        width:100%;
+        background-color: #f1f2f6;
+        border-radius: 3px;
+        margin-bottom: 15px;
+
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .signup-form .hint {
+        color: black;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    
+    .slider-area{
+        margin:0;
+    }
+    .carousel-control.left, .carousel-control.right{
+        background: transparent;
+    } 
+    .img-area{
+        margin: auto;
+        overflow: hidden;
+        align-items: center;
+    }
+    .img-area img{
+        height: 400px;
+        width: 500px;
+    }
+    .carousel-caption{
+        position: static;
+        padding-bottom: 15px;
+        padding-top: 0;
+    }
+    .carousel-caption h4{
+        font-size: 20px;
+    }
+    #navbar-left a{
+        text-decoration: none;
+        color: #ababab;
+    }
+    #navbar-left a:hover{
+        color: black;
+    }
+    #navbar-left button{
+        color: white;
+    }
+    footer{
+        background: #eeeeee; 
+        color:#757575;
+        font-size: 13px;
+        line-height: 1.2
+    }
+    footer h6{
+        color: #9e9e9e;
+    }
+    footer a{
+        color: black;
+    }
+    footer a:link{
+        text-decoration: none;
+    }
+    footer a:hover{
+        color: #757575;
+    }
+    footer #social i{
+        color: black;
+        font-size: 1.2rem;
+    }
+    footer #social i:hover{
+        color: #3db166;
+    }
+    @media (max-width: 768px) {
+        #navbar-left{
+            display: block;
+        }
+        #first {
+            padding-top: 2px;
+            padding-bottom: 2px;
+            line-height: 12px;
+        }
+        .container-fluid{
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+        .section-a img{
+            padding: 0;
+        }
+        footer{
+            font-size: 7.2px;    
+        }
+    }
+    @media (max-width: 990px){
+        #navbar-left{
+            display: block;
+        }
+        #navbar-left form{
+            display: none;
+        }
+        .section-a{
+            margin-bottom: 32px;
+        }
+        .section-a img{
+            margin: 32px;
+        }
+        .section-a #section-a-learn h2,h3{
+            font-size: 31px;
+        }
+        .section-a #section-a-learn h4{
+            font-size: 15px;
+        }
+        #query{
+            margin-left: 11em;
+        }
+        #query_request{
+            text-align: center !important;
+        } 
+        footer{
+            font-size: 7.2px;    
+        }
+    }
+    @media (max-width: 375px){
+        #query{
+            margin-left: 0 !important; 
+        }
+    }
+    @media all and (max-width: 765px){
+        footer{
+            font-size: 1rem;
+        }
+        #query{
+            margin-left: 1.5em;
+        }
+        #footer-left{
+            padding-left: 3em;
+            text-align: left;
+        }
+    }
+    @media only screen and (max-width: 1000px){
+        #logo{
+            margin-left:10px!important;
+        }
+    }
+
+    @media only screen and (max-width: 1080px){
+        #request{
+            align-items: center;
+            justify-content: center;
+            text-align:center;
+        }
+    }
+
+    </style>
+    </head>
+
+<body>
+ 
+    <figure class="figure" style="margin: 11px;">
+        <img src="LandingPage/img/logotiny.png" class="figure-img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;">
+        <figcaption class="figure-caption text-center">LearnOpad</figcaption>
+    </figure>
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e0e0e0;">
+        <a class="navbar-brand" href="/home"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#exampl">
+                    Free Content
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav justify-content-end text-sm-left" id="navbar-left">
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0">
+                    
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn my-sm-0" type="submit" style="color: black;s"><i class="fa fa-search"></i></button>
+                    </form>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" style="padding-left: 0;">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/signup" class="btn btn-primary rounded" style="color: white">Sign Up</a>
+                </li>
+                
+            </ul>
+        </div>
+    </nav>    
+
+
+
+<div class="super_container">
+    <div style="background-color: black;padding-bottom: 50px">
+        <div class="container" style="color: white">
+			<div class="row">
+
+				<!-- Course -->
+				<div class="col-lg-8">
+					
+					<div class="" style="color: white">
+                        <div class="course_title" style="margin-top: 30px">Software Training</div>
+                        <h5 style="color: white">Build 20 mini frontend projects from scratch with HTML5, CSS & JavaScript</h5>
+                        <h5 style="color: white">(No frameworks or libraries)</h5>
+                        <button class="btn btn-info btn-sm" style="margin-right: 10px">Highest rated</button>4.5
+                        <span class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></span>(2,951 ratings) 17,616 students
+                        <h6 style="color: white;margin-top: 10px">Created by <a href="#" style="color:#14bdee">Priya Dikshit</a></h6>
+                        <h6 style="color: white;margin-top: 10px"><i class="fa fa-cog" aria-hidden="true"></i> Last updated 1/2020 </h6>
+                        <h6 style="color: white;margin-top: 10px"><i class="fa fa-globe" aria-hidden="true"></i> English </h6>
+                        <div style="margin-top: 10px">
+                        <button type="button" class="btn btn-outline-info" style="margin-right: 30px">Wishlist <i class="fa fa-heart" aria-hidden="true"></i></button>
+                        <button type="button" class="btn btn-outline-info">Share <i class="fa fa-share" aria-hidden="true"></i></button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<!-- Course -->
+
+	<div class="course" style="">
+		<div class="container">
+			<div class="row">
+
+				<!-- Course -->
+				<div class="col-lg-8">
+					
+					<div class="course_container">
+						
+						<div class="course_info d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+
+							<!-- Course Info Item -->
+							<div class="course_info_item">
+								<div class="course_info_title">Teacher:</div>
+								<div class="course_info_text"><a href="#">Jacke Masito</a></div>
+							</div>
+
+							<!-- Course Info Item -->
+							<div class="course_info_item">
+								<div class="course_info_title">Reviews:</div>
+								<div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div>
+							</div>
+
+							<!-- Course Info Item -->
+							<div class="course_info_item">
+								<div class="course_info_title">Categories:</div>
+								<div class="course_info_text"><a href="#">Languages</a></div>
+							</div>
+
+						</div>
+
+						<!-- Course Image -->
+						<div class="course_image"><img src="images/course_image.jpg" alt=""></div>
+
+						<!-- Course Tabs -->
+						<div class="course_tabs_container">
+							<div class="tabs d-flex flex-row align-items-center justify-content-start">
+								<div class="tab active">description</div>
+								<div class="tab">curriculum</div>
+								<div class="tab">reviews</div>
+							</div>
+							<div class="tab_panels">
+
+								<!-- Description -->
+								<div class="tab_panel active">
+									<div class="tab_panel_title">Software Training</div>
+									<div class="tab_panel_content">
+										<div class="tab_panel_text">
+											<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosquad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Lorem Ipsn gravida nibh vel velit auctor aliquet. Class aptent taciti sociosquad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+										</div>
+										<div class="tab_panel_section">
+											<div class="tab_panel_subtitle">Requirements</div>
+											<ul class="tab_panel_bullets">
+												<li>Lorem Ipsn gravida nibh vel velit auctor aliquet. Class aptent taciti sociosquad litora torquent.</li>
+												<li>Cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a.</li>
+												<li>Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat.</li>
+												<li>Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.</li>
+											</ul>
+										</div>
+										<div class="tab_panel_section">
+											<div class="tab_panel_subtitle">What is the target audience?</div>
+											<div class="tab_panel_text">
+												<p>This course is intended for anyone interested in learning to master his or her own body.This course is aimed at beginners, so no previous experience with hand balancing skillts is necessary Aenean viverra tincidunt nibh, in imperdiet nunc. Suspendisse eu ante pretium, consectetur leo at, congue quam. Nullam hendrerit porta ante vitae tristique. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+											</div>
+										</div>
+										<div class="tab_panel_faq">
+											<div class="tab_panel_title">FAQ</div>
+
+											<!-- Accordions -->
+											<div class="accordions">
+												
+												<div class="elements_accordions">
+
+													<div class="accordion_container">
+														<div class="accordion d-flex flex-row align-items-center"><div>Can I just enroll in a single course?</div></div>
+														<div class="accordion_panel">
+															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
+														</div>
+													</div>
+
+													<div class="accordion_container">
+														<div class="accordion d-flex flex-row align-items-center active"><div>I'm not interested in the entire Specialization?</div></div>
+														<div class="accordion_panel">
+															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
+														</div>
+													</div>
+
+													<div class="accordion_container">
+														<div class="accordion d-flex flex-row align-items-center"><div>What is the refund policy?</div></div>
+														<div class="accordion_panel">
+															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
+														</div>
+													</div>
+
+													<div class="accordion_container">
+														<div class="accordion d-flex flex-row align-items-center"><div>What background knowledge is necessary?</div></div>
+														<div class="accordion_panel">
+															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
+														</div>
+													</div>
+
+													<div class="accordion_container">
+														<div class="accordion d-flex flex-row align-items-center"><div>Do i need to take the courses in a specific order?</div></div>
+														<div class="accordion_panel">
+															<p>Lorem ipsun gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a.</p>
+														</div>
+													</div>
+
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- Curriculum -->
+								<div class="tab_panel tab_panel_2">
+									<div class="tab_panel_content">
+										<div class="tab_panel_title">Software Training</div>
+										<div class="tab_panel_content">
+											<div class="tab_panel_text">
+												<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.</p>
+											</div>
+
+											<!-- Dropdowns -->
+											<ul class="dropdowns">
+												<li class="has_children">
+													<div class="dropdown_item">
+														<div class="dropdown_item_title"><span>Lecture 1:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
+														<div class="dropdown_item_text">
+															<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
+														</div>
+													</div>
+													<ul>
+														<li>
+															<div class="dropdown_item">
+																<div class="dropdown_item_title"><span>Lecture 1.1:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
+																<div class="dropdown_item_text">
+																	<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="dropdown_item">
+																<div class="dropdown_item_title"><span>Lecture 1.2:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
+																<div class="dropdown_item_text">
+																	<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
+																</div>
+															</div>
+														</li>
+													</ul>
+												</li>
+												<li class="has_children">
+													<div class="dropdown_item">
+														<div class="dropdown_item_title"><span>Lecture 2:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
+														<div class="dropdown_item_text">
+															<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
+														</div>
+													</div>
+													<ul>
+														<li>
+															<div class="dropdown_item">
+																<div class="dropdown_item_title"><span>Lecture 2.1:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
+																<div class="dropdown_item_text">
+																	<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="dropdown_item">
+																<div class="dropdown_item_title"><span>Lecture 2.2:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
+																<div class="dropdown_item_text">
+																	<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
+																</div>
+															</div>
+														</li>
+													</ul>
+												</li>
+												<li>
+													<div class="dropdown_item">
+														<div class="dropdown_item_title"><span>Lecture 3:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
+														<div class="dropdown_item_text">
+															<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="dropdown_item">
+														<div class="dropdown_item_title"><span>Lecture 4:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
+														<div class="dropdown_item_text">
+															<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="dropdown_item">
+														<div class="dropdown_item_title"><span>Lecture 5:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
+														<div class="dropdown_item_text">
+															<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus.</p>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+								<!-- Reviews -->
+								<div class="tab_panel tab_panel_3">
+									<div class="tab_panel_title">Course Review</div>
+
+									<!-- Rating -->
+									<div class="review_rating_container">
+										<div class="review_rating">
+											<div class="review_rating_num">4.5</div>
+											<div class="review_rating_stars">
+												<div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div>
+											</div>
+											<div class="review_rating_text">(28 Ratings)</div>
+										</div>
+										<div class="review_rating_bars">
+											<ul>
+												<li><span>5 Star</span><div class="review_rating_bar"><div style="width:90%;"></div></div></li>
+												<li><span>4 Star</span><div class="review_rating_bar"><div style="width:75%;"></div></div></li>
+												<li><span>3 Star</span><div class="review_rating_bar"><div style="width:32%;"></div></div></li>
+												<li><span>2 Star</span><div class="review_rating_bar"><div style="width:10%;"></div></div></li>
+												<li><span>1 Star</span><div class="review_rating_bar"><div style="width:3%;"></div></div></li>
+											</ul>
+										</div>
+									</div>
+									
+									<!-- Comments -->
+									<div class="comments_container">
+										<ul class="comments_list">
+											<li>
+												<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
+													<div class="comment_image"><div><img src="images/comment_1.jpg" alt=""></div></div>
+													<div class="comment_content">
+														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
+															<div class="comment_author"><a href="#">Milley Cyrus</a></div>
+															<div class="comment_rating"><div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div></div>
+															<div class="comment_time ml-auto">1 day ago</div>
+														</div>
+														<div class="comment_text">
+															<p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
+														</div>
+														<div class="comment_extras d-flex flex-row align-items-center justify-content-start">
+															<div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div>
+															<div class="comment_extra comment_reply"><a href="#"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a></div>
+														</div>
+													</div>
+												</div>
+												<ul>
+													<li>
+														<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
+															<div class="comment_image"><div><img src="images/comment_2.jpg" alt=""></div></div>
+															<div class="comment_content">
+																<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
+																	<div class="comment_author"><a href="#">John Tyler</a></div>
+																	<div class="comment_rating"><div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div></div>
+																	<div class="comment_time ml-auto">1 day ago</div>
+																</div>
+																<div class="comment_text">
+																	<p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
+																</div>
+																<div class="comment_extras d-flex flex-row align-items-center justify-content-start">
+																	<div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div>
+																	<div class="comment_extra comment_reply"><a href="#"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a></div>
+																</div>
+															</div>
+														</div>
+													</li>
+												</ul>
+											</li>
+											<li>
+												<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
+													<div class="comment_image"><div><img src="images/comment_3.jpg" alt=""></div></div>
+													<div class="comment_content">
+														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
+															<div class="comment_author"><a href="#">Milley Cyrus</a></div>
+															<div class="comment_rating"><div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div></div>
+															<div class="comment_time ml-auto">1 day ago</div>
+														</div>
+														<div class="comment_text">
+															<p>There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some form, by injected humour.</p>
+														</div>
+														<div class="comment_extras d-flex flex-row align-items-center justify-content-start">
+															<div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div>
+															<div class="comment_extra comment_reply"><a href="#"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a></div>
+														</div>
+													</div>
+												</div>
+											</li>
+										</ul>
+										<div class="add_comment_container">
+											<div class="add_comment_title">Add a review</div>
+											<div class="add_comment_text">You must be <a href="#">logged</a> in to post a comment.</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Course Sidebar -->
+                
+				<div class="col-lg-4" style="top: -50px">
+					<div class="sidebar">
+                        <div align="center">
+                        <div class="card" style="width: 18rem;">
+                            <div style="">
+                          <img src="images/office.jpeg" class="card-img-top" alt="...">
+                                <div class="centered" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;background-color: rgba(0,0,0,0.4);width: 100%;height: 100%"></div>
+                                <div class="centered" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;"><center><a href="#"><i class="fa fa-play-circle" aria-hidden="true" style="font-size: 60px;color: #14bdee;"></i></a></center></div>
+                                
+                                <div style="position: absolute;top: 75%;left: 50%;transform: translate(-50%, -50%);color: white;"><h5 style="color: white;width: 200px"><center>Course Preview</center></h5></div></div>
+                            
+                          <div class="card-body" style="margin-bottom:-30px">
+                            <h5 class="card-title">$180 <span style="text-decoration-line: line-through;font-size: 15px;" class="text-muted">$500 </span><span style="font-size: 15px;" > 30% Off </span> </h5>
+                          </div>
+                            <a href="buyNow.html" style="display: contents;"><button type="button" class="btn btn-primary" style="margin: 10px;">Buy Now</button></a>
+                            <a href="cart.html"><button type="button" class="btn btn-outline-primary" style="margin: 10px">Add to cart</button></a>
+                            <div class="card-title" style="margin-left: 20px;margin-top: 10px"><h5>Course Feature</h5></div>
+                            <div align="center" style="margin-left: 20px;margin-right: 20px">
+                            <div class="feature d-flex flex-row align-items-center justify-content-start">
+										<div class="feature_title"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Duration:</span></div>
+										<div class="feature_text ml-auto">2 weeks</div>
+									</div>
+
+									<!-- Feature -->
+									<div class="feature d-flex flex-row align-items-center justify-content-start">
+										<div class="feature_title"><i class="fa fa-file-text-o" aria-hidden="true"></i><span>Lectures:</span></div>
+										<div class="feature_text ml-auto">10</div>
+									</div>
+
+									<!-- Feature -->
+									<div class="feature d-flex flex-row align-items-center justify-content-start">
+										<div class="feature_title"><i class="fa fa-question-circle-o" aria-hidden="true"></i><span>Lectures:</span></div>
+										<div class="feature_text ml-auto">6</div>
+									</div>
+
+									<!-- Feature -->
+									<div class="feature d-flex flex-row align-items-center justify-content-start">
+										<div class="feature_title"><i class="fa fa-list-alt" aria-hidden="true"></i><span>Lectures:</span></div>
+										<div class="feature_text ml-auto">Yes</div>
+									</div>
+
+									<!-- Feature -->
+									<div class="feature d-flex flex-row align-items-center justify-content-start">
+										<div class="feature_title"><i class="fa fa-users" aria-hidden="true"></i><span>Lectures:</span></div>
+										<div class="feature_text ml-auto">35</div>
+									</div>
+                            </div>
+                          <div class="card-body">
+                              <hr>
+                              <center><a href="#" class="card-link" style="font-weight: 300"><b>Apply</b></a></center>
+                            
+                          </div>
+                        </div>
+                        </div>
+						<!-- Feature -->
+						<div class="sidebar_section" style="margin-top: 30px">
+							<div class="sidebar_section_title">Teacher</div>
+							<div class="sidebar_teacher">
+								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
+									<div class="teacher_image"><img src="images/teacher.jpg" alt=""></div>
+									<div class="teacher_title">
+										<div class="teacher_name"><a href="#">Jacke Masito</a></div>
+										<div class="teacher_position">Marketing & Management</div>
+									</div>
+								</div>
+								<div class="teacher_meta_container">
+									<!-- Teacher Rating -->
+									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+										<div class="teacher_meta_title">Average Rating:</div>
+										<div class="teacher_meta_text ml-auto"><span>4.7</span><i class="fa fa-star" aria-hidden="true"></i></div>
+									</div>
+									<!-- Teacher Review -->
+									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+										<div class="teacher_meta_title">Review:</div>
+										<div class="teacher_meta_text ml-auto"><span>12k</span><i class="fa fa-comment" aria-hidden="true"></i></div>
+									</div>
+									<!-- Teacher Quizzes -->
+									<div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
+										<div class="teacher_meta_title">Quizzes:</div>
+										<div class="teacher_meta_text ml-auto"><span>600</span><i class="fa fa-user" aria-hidden="true"></i></div>
+									</div>
+								</div>
+								<div class="teacher_info">
+									<p>Hi! I am Masion, I’m a marketing & management  eros pulvinar velit laoreet, sit amet egestas erat dignissim. Sed quis rutrum tellus, sit amet viverra felis. Cras sagittis sem sit amet urna feugiat rutrum nam nulla ipsum.</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- Latest Course -->
+						<div class="sidebar_section" style="margin-bottom: -100px">
+							<div class="sidebar_section_title">Latest Courses</div>
+							<div class="sidebar_latest">
+
+								<!-- Latest Course -->
+								<div class="latest d-flex flex-row align-items-start justify-content-start">
+									<div class="latest_image"><div><img src="images/latest_1.jpg" alt=""></div></div>
+									<div class="latest_content">
+										<div class="latest_title"><a href="course.html">How to Design a Logo a Beginners Course</a></div>
+										<div class="latest_price">Free</div>
+									</div>
+								</div>
+
+								<!-- Latest Course -->
+								<div class="latest d-flex flex-row align-items-start justify-content-start">
+									<div class="latest_image"><div><img src="images/latest_2.jpg" alt=""></div></div>
+									<div class="latest_content">
+										<div class="latest_title"><a href="course.html">Photography for Beginners Masterclass</a></div>
+										<div class="latest_price">$170</div>
+									</div>
+								</div>
+
+								<!-- Latest Course -->
+								<div class="latest d-flex flex-row align-items-start justify-content-start">
+									<div class="latest_image"><div><img src="images/latest_3.jpg" alt=""></div></div>
+									<div class="latest_content">
+										<div class="latest_title"><a href="course.html">The Secrets of Body Language</a></div>
+										<div class="latest_price">$220</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    </div>
+    <!-- Footer -->
+<footer class="page-footer font-small pt-4">
+    <div class="container text-center text-md-left">
+        <div class="row text-center text-md-left pb-3" style="background: transparent;">
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3" id="footer-left">
+                <figure class="figure" style="margin: 11px;">
+                    <img src="LandingPage/img/logotiny.png" class="figure-img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;width: 60px; height: 40px;">
+                    <figcaption class="figure-caption text-center">LearnOpad</figcaption>
+                </figure>
+            </div>
+
+            <hr class="w-100 clearfix d-md-none">
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3" id="footer-left">
+                <p>
+                <a href="#!">About Us</a>
+                </p>
+                <p>
+                <a href="#!">Career</a>
+                </p>
+                <p>
+                <a href="contact.html">Contact Us</a>
+                </p>
+                <p>
+                <a href="#!">Terms/Services</a>
+                </p>
+            </div>
+
+            <hr class="w-100 clearfix d-md-none">
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto" id="footer-left">
+                <br>
+                <p>
+                <a href="#!">Learners</a>
+                </p>
+                <p>
+                <a href="{% url 'facilitator' %}">Facilitators</a>
+                </p>
+                <p>
+                <a href="#!">Campus</a>
+                </p>
+                <p>
+                <a href="#!">Corporates</a>
+                </p>
+            </div>
+        
+            <hr class="w-100 clearfix d-md-none">
+    
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 social" id="footer-left">
+            <h6 class="text-uppercase font-weight-bold">Our App</h6>
+            <hr class="mb-2 mt-0 d-inline-block mx-auto" style="width: 20px;">
+            <p>
+            <a href="https://www.apple.com/ios/app-store/"><i class="fab fa-apple mr-1" style="font-size: 20px;"></i> IOS Store</a>
+            </p>
+            <p>
+            <a href="https://play.google.com/store"><img class="mr-1" src="LandingPage/img/play-store.svg" width="20px" height="20px"> Andriod Store</a>
+            </p>
+        </div>
+
+    </div>
+       
+
+        <hr class="mb-4 mt-0 d-inline-block mx-auto text-sm-lef" style="width: 100%; height: 1px; background-color: #3db166;">
+
+        <div class="row d-flex align-items-center">
+
+        <div class="col-md-7 col-lg-8">            
+            <p class="text-center text-md-left text-sm-left">© 2020 Copyright:
+            <a href="#" style="font-size:11px">
+                <strong> TMHM Consulting Services Pvt.Ltd</strong>
+            </a>
+            </p>
+        </div>
+        <div class="col-md-5 col-lg-4 ml-lg-0">
+            <div class="text-center text-md-right text-sm-left" id="social">
+    
+            <ul class="list-unstyled list-inline">
+                <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                </li>
+                <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                </li>
+                <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                    <i class="fab fa-wordpress-simple"></i>
+                </a>
+                </li>
+                <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                </li>
+                <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                </li>
+            </ul>
+            </div>
+
+        </div>
+
+        </div>
+    </div>
+
+</footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/da956b6924.js" crossorigin="anonymous"></script>
+   
+    <script>
+
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+
+            $(".toggle-password").click(function() {
+
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+            input.attr("type", "text");
+            } else {
+            input.attr("type", "password");
+            }
+        });
+
+        function check_ephone(phno, email){
+            var regex = /^[0-9]{10}$/;
+            var regexe_email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if(regex.test(phno.yourphone.value) && regex_email.test(email.youremail.value)){
+                return true;
+                } else {
+                    if (!(regex.test(phno.yourphone.value)) ) {
+                        alert("This is not a valid phone number");
+                        return false;
+                    }
+                    if (!(regex.test(email.youreamil.value)) ) {
+                        alert("This is not a valid email id");
+                        return false;
+                    }
+                    if (!(regex.test(phno.yourphone.value) && regex_email.test(email.youremail.value)) ) {
+                        alert("This is not a valid phone number and email id");
+                        return false;
+                    } 
+            }
+        }
+    </script><script src="LandingPage/js/owl.carousel.js"></script>
+
+
+	
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="plugins/colorbox/jquery.colorbox-min.js"></script>
+<script src="js/course.js"></script>
+</body>
+</html>
