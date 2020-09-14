@@ -1,0 +1,173 @@
+<form action="/action_page.php">
+            <br>
+            <br>
+<!--
+            <br>
+            <br>
+-->
+            
+            
+                            <h1 style="margin-left: 30px; font-family: system-ui;">Some of FAQs which might help before raising a support ticket.</h1>
+
+            <div class="container">
+                
+                
+                <div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          FAQ #1
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          FAQ #2
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          FAQ #3
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+                
+                
+                
+                
+<!--
+                <form action="action_page.php">
+                    <h1>Need Help?</h1>
+                    <p>Get in touch with us.Solve your problems by contacting our support team.</p>
+
+                    <br>
+                    <label for="subject">Queries</label>
+                    <br>
+
+                    <textarea id="subject" name="Queries" rows="4" cols="10" maxlength="4" size="2" placeholder="Write down your Queries here.." style="height:250px"></textarea>
+                    <br>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-submit btn-default">Submit</button>
+
+
+
+
+
+                </form>
+-->
+                </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            <div class="container">
+                
+                <hr>
+                
+                <h3 style="margin-bottom: 5px;">Still need Support ?</h3>
+                
+                
+                
+                <form>
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Email address</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1">Example select</label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect2">Example multiple select</label>
+                    <select multiple class="form-control" id="exampleFormControlSelect2">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Example textarea</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+                </form>
+                
+   
+                
+                
+                
+                
+<!--
+                <form action="action_page.php">
+                    <h1>Still Need Help?</h1>
+                    <p>Get in touch with us.Solve your problems by contacting our support team.</p>
+
+                    <br>
+                    <label for="subject">Queries</label>
+                    <br>
+
+                    <textarea id="subject" name="Queries" rows="4" cols="10" maxlength="4" size="2" placeholder="Write down your Queries here.." style="height:250px"></textarea>
+                    <br>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-submit btn-default">Submit</button>
+
+
+
+
+
+                </form>
+-->
+                </div>
+            
+            
+            
+            
+            
+            
+            
+          
+
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
