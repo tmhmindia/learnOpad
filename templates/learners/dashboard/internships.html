@@ -1,0 +1,382 @@
+{% extends 'learners/base.html'%}
+{% load static %}
+<!--------------------------------- -->
+
+{% block title %}
+Internships
+{% endblock title %}
+<!--------------------------------- -->
+
+{% block header %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="author" content="Priya">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <!-- Icons  -->
+    <link rel="stylesheet" href="{% static 'learners/css/nucleo.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--<script src='https://kit.fontawesome.com/a076d05399.js'></script>-->
+    <!-- <link rel="stylesheet" href="css/all.min.css" type="text/css">-->
+
+    <!-- Argon CSS -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="{% static 'learners/css/index.css' %}" type="text/css">
+
+    <link rel="stylesheet" href="{% static 'learners/css/style.css' %}" type="text/css">
+{% endblock header %}
+
+{% block stylesheet %}
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+        
+        body {
+            color: #272727;
+            font-family: 'Quicksand', serif;
+            font-style: normal;
+            font-weight: 400;
+            letter-spacing: 0;
+            padding: 1rem;
+        }
+        
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 24px;
+            font-weight: 400;
+            text-align: center;
+        }
+        
+        img {
+            height: auto;
+            max-width: 100%;
+            vertical-align: middle;
+        }
+        
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            margin: 0px;
+            padding: 0;
+        }
+        
+        .cards_item {
+            display: flex;
+            padding: 1rem;
+        }
+        
+        @media (min-width: 40rem) {
+            .cards_item {
+                width: 50%;
+            }
+        }
+        
+        @media (min-width: 56rem) {
+            .cards_item {
+                width: 50.3333%;
+            }
+        }
+        @media only screen and (max-width: 767px) {
+                    #topbar {
+                        left: 0;
+                    }
+                    #accordionSidebar {
+                        top: 65px;
+                    }
+                    #content {
+                        left: auto;
+                       
+                        width: 100%;
+                        width: calc(100% - 0px);
+                    }
+                    .content-wrapper {
+                        padding:0;
+                    }
+                }
+        
+        .card {
+            background-color: white;
+            border-radius: 0.25rem;
+            box-shadow: 0 40px 40px -14px rgba(0, 0, 0, 0.35);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .card_content {
+            padding: 1rem;
+            background: linear-gradient(90deg, rgba(15, 56, 75, 1) 16%, rgba(41, 128, 170, 1) 53%, rgba(36, 219, 217, 1) 100%);
+        }
+        
+        .card_title {
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: capitalize;
+            margin: 0px;
+        }
+        
+        .card_text {
+            color: #ffffff;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin-bottom: 1.25rem;
+            font-weight: 400;
+        }
+        
+        @media only screen and (max-width: 480px) {
+            col2 {
+                position: absolute;
+                transform: translate(-50%, -50%);
+                left: 50%;
+                top: 50%;
+                margin-right: 50px;
+            }
+            col1 {
+                position: absolute;
+                transform: translate(-50%, -50%);
+                left: 50%;
+                top: 50%;
+                margin-right: 50px;
+            }
+            col3 {
+                position: absolute;
+                transform: translate(-50%, -50%);
+                left: 50%;
+                top: 50%;
+                margin-right: 50px;
+            }
+        }
+    </style>
+{% endblock stylesheet %}
+
+{% block content %}
+        <!--content-->
+        <div class="container-fluid bg-white">
+           
+            <div class="container">
+                <div class="row justify-content-md-center" id="col1">
+                    <div class="col col-lg-3">
+        
+                        <div class="card text-light " style="left:-20px;" id="col2">
+                            <div class="card-header bg-info" style="color: #fff">Filter</div>
+                            <div class="card-body ">
+                                <h5 class="card-title">Category</h5>
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" id="inputGroupSelect01">
+                                        <option selected>Choose...</option>
+                                        <option value="1">Web Development</option>
+                                        <option value="2">Graphics Designing</option>
+                                        <option value="3">Python Development</option>
+                                        <option value="4">Content Writing</option>
+                                        <option value="5">Visualizer</option>
+                                        <option value="6">Marketing and Sales</option>
+                                        <option value="7">Accounts</option>
+                                        <option value="8">Android app Development</option>
+                                        <option value="9">Cloud Computing</option>
+                                    </select>
+                                </div>
+                                <h5 class="card-title">Location</h5>
+                                <div class="input-group mb-3">
+        
+                                    <select class="custom-select" id="inputGroupSelect01">
+                                        <option selected>Choose...</option>
+                                        <option value="1">Bangalore</option>
+                                        <option value="2">Delhi</option>
+                                        <option value="3">Mumbai</option>
+                                        <option value="4">Hyderabad</option>
+                                        <option value="5">Chennai</option>
+                                        <option value="6">Pune</option>
+                                        <option value="7">Noaida</option>
+                                        <option value="8">Kolkata</option>
+                                        <option value="9">Jaipur</option>
+        
+                                    </select>
+                                </div>
+                                <div class="custom-control custom-switch"
+                                    style="margin-left: 30px;color: black;margin-right: 30px;">
+                                    <input type="checkbox" class="custom-control-input bg-light" id="customSwitch1"
+                                        style="color: aqua">
+                                    <label class="custom-control-label" for="customSwitch1">
+                                        <h5>Part Time</h5>
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-switch" style="margin-left: 30px;color: black;">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch2">
+                                    <label class="custom-control-label" for="customSwitch2">
+                                        <h5>Work from Home</h5>
+                                    </label>
+                                </div>
+        
+        
+                                <h5 class="card-title">Max durations (in months)</h5>
+                                <div class="input-group mb-3">
+        
+                                    <select class="custom-select" id="inputGroupSelect01">
+                                        <option selected>Choose...</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+        
+                                    </select>
+                                </div>
+                                <div class="custom-control custom-switch"
+                                    style="margin-left: 30px;color: black;margin-right: 30px;">
+                                    <input type="checkbox" class="custom-control-input bg-light" id="customSwitch3"
+                                        style="color: aqua">
+                                    <label class="custom-control-label" for="customSwitch3">
+                                        <h5>Internships for Women</h5>
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-switch" style="margin-left: 30px;color: black;">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch4">
+                                    <label class="custom-control-label" for="customSwitch4">
+                                        <h5>Internships with job offer</h5>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="card bg-secondary"
+                            style="width: 100%;border-left: 5px solid deepskyblue;left: -20px;color: black;" id="col3">
+                            <div class="card-body">
+                                <h2 class="card-title" style="margin-bottom: 0px">
+                                    <div class="media">
+                                        <img src={% static "LandingPage/img/logotiny.png" %} class="mr-3" alt="...">
+                                        <div class="media-body">
+                                            <h2 class="mt-0">Web Development</h2>
+                                            <h3 class="mt-0 text-muted" style="margin-bottom: -10px">Amazon</h3>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <h4 class="card-subtitle mb-2 text-muted" style="top: 50px;"><i class="fa fa-home"
+                                            aria-hidden="true"></i>Work from home</h4>
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <i class="fa fa-play-circle" aria-hidden="true"></i> START DATE<br><span
+                                                class="text-muted">24/08/20</span>
+                                        </div>
+                                        <div class="col-sm">
+                                            <i class="fa fa-calendar-o" aria-hidden="true"></i> DURATION<br><span
+                                                class="text-muted">2 months</span>
+                                        </div>
+                                        <div class="col-sm">
+                                            <i class="fa fa-money" aria-hidden="true"></i> STIPEND<br><span
+                                                class="text-muted">10000/month</span>
+                                        </div>
+                                        <div class="col-sm">
+                                            <i class="fa fa-clock-o" aria-hidden="true"></i> APPLY BY<br><span
+                                                class="text-muted">24/09/2000</span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="card-link btn btn-dark" style="float: right;margin-top: 10px;border-radius: 100px;">Apply Now</a>
+
+                            </div>
+                        </div>
+                        <div class="card bg-secondary"
+                            style="width: 100%;border-left: 5px solid deepskyblue;left: -20px;color: black;" id="col3">
+                            <div class="card-body">
+                                <h2 class="card-title" style="margin-bottom: 0px">
+                                    <div class="media">
+                                        <img src={% static "LandingPage/img/logotiny.png" %} class="mr-3" alt="...">
+                                        <div class="media-body">
+                                            <h2 class="mt-0">Web Development</h2>
+                                            <h3 class="mt-0 text-muted" style="margin-bottom: -10px">Amazon</h3>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <h4 class="card-subtitle mb-2 text-muted" style="top: 50px;"><i class="fa fa-home"
+                                            aria-hidden="true"></i>Work from home</h4>
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <i class="fa fa-play-circle" aria-hidden="true"></i> START DATE<br><span
+                                                class="text-muted">24/08/20</span>
+                                        </div>
+                                        <div class="col-sm">
+                                            <i class="fa fa-calendar-o" aria-hidden="true"></i> DURATION<br><span
+                                                class="text-muted">2 months</span>
+                                        </div>
+                                        <div class="col-sm">
+                                            <i class="fa fa-money" aria-hidden="true"></i> STIPEND<br><span
+                                                class="text-muted">10000/month</span>
+                                        </div>
+                                        <div class="col-sm">
+                                            <i class="fa fa-clock-o" aria-hidden="true"></i> APPLY BY<br><span
+                                                class="text-muted">24/09/2000</span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="card-link btn btn-dark" style="float: right;margin-top: 10px;border-radius: 100px;">Apply Now</a>
+
+                            </div>
+                        </div>
+                        <div class="card bg-secondary"
+                            style="width: 100%;border-left: 5px solid deepskyblue;left: -20px;color: black;" id="col3">
+                            <div class="card-body">
+                                <h2 class="card-title" style="margin-bottom: 0px">
+                                    <div class="media">
+                                        <img src={% static "LandingPage/img/logotiny.png" %} class="mr-3" alt="...">
+                                        <div class="media-body">
+                                            <h2 class="mt-0">Web Development</h2>
+                                            <h3 class="mt-0 text-muted" style="margin-bottom: -10px">Amazon</h3>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <h4 class="card-subtitle mb-2 text-muted" style="top: 50px;"><i class="fa fa-home"
+                                            aria-hidden="true"></i>Work from home</h4>
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <i class="fa fa-play-circle" aria-hidden="true"></i> START DATE<br><span
+                                                class="text-muted">24/08/20</span>
+                                        </div>
+                                        <div class="col-sm">
+                                            <i class="fa fa-calendar-o" aria-hidden="true"></i> DURATION<br><span
+                                                class="text-muted">2 months</span>
+                                        </div>
+                                        <div class="col-sm">
+                                            <i class="fa fa-money" aria-hidden="true"></i> STIPEND<br><span
+                                                class="text-muted">10000/month</span>
+                                        </div>
+                                        <div class="col-sm">
+                                            <i class="fa fa-clock-o" aria-hidden="true"></i> APPLY BY<br><span
+                                                class="text-muted">24/09/2000</span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="card-link btn btn-dark" style="float: right;margin-top: 10px;border-radius: 100px;">Apply Now</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    
+    <!-- Argon Scripts -->
+    <!-- Core -->
+    <script src="{% static 'learners/jquery/jquery.min.js' %}"></script>
+            <script src="{% static 'learners/jquery/bootstrap.bundle.min.js' %}"></script>
+            <script src="{% static 'lerners/js/js.cookie.js' %}"></script>
+            <!-- Argon JS -->
+            <script src="{% static 'learners/js/argon.js?v=1.2.0' %}"></script>
+{% endblock content %}

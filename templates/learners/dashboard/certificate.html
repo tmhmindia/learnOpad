@@ -1,0 +1,112 @@
+{% extends 'learners/base.html'%}
+{% load static %}
+<!--------------------------------- -->
+
+{% block title %}
+Certificate
+{% endblock title %}
+<!--------------------------------- -->
+
+{% block header %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+    <meta name="author" content="Creative Tim">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <!-- Icons  -->
+    <link rel="stylesheet" href="{% static 'learners/css/nucleo.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--<script src='https://kit.fontawesome.com/a076d05399.js'></script>-->
+    <!-- <link rel="stylesheet" href="css/all.min.css" type="text/css">-->
+
+    <!-- Argon CSS -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+    <link rel="stylesheet" href="{% static 'learners/css/index.css' %}" type="text/css">
+
+    <link rel="stylesheet" href="{% static 'learners/css/style.css' %}" type="text/css">
+{% endblock header %}
+
+{% block content %}
+            <!-- Header -->
+            <style>
+                @media only screen and (max-width: 767px) {
+                    #topbar {
+                        left: 0;
+                    }
+                    #accordionSidebar {
+                        top: 65px;
+                    }
+                    #content {
+                        left: auto;
+                       
+                        width: 100%;
+                        width: calc(100% - 0px);
+                    }
+                    .content-wrapper {
+                        padding:0;
+                    }
+                }
+                </style>
+            <div class="header  pb-6" style="background-color: #fff;">
+                <div class="container-fluid">
+                    <div class="header-body">
+                        <div class="row align-items-center py-4">
+                            <div class="col-lg-6 col-7">
+                                <h6 class="h4 d-inline-block mb-0 text-center" style="color:black">Course Certificate
+                                    &nbsp;&nbsp;&nbsp;<span class="fa fa-chevron-right"></span></h6>
+        
+                            </div>
+                        </div>
+                        <div class="row">
+    
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <div class="card" style="width: 18rem; margin: 10px 10px 10px 10px;">
+                                    <img class="card-img-top"
+                                        src="https://www.360edukraft.com/wp-content/uploads/2018/08/Python-Certification-Training-Course.jpg"
+                                        alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title" style="font-size: large;">Course Title</h5>
+                                        <p class="card-text">Course Description. Some quick example text to build on the card
+                                            title and make up content.</p>
+        
+                                        <a href="#" class="btn btn-primary" style="color: white;">View/Download Certificate</a>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <div class="card" style="width: 18rem; margin: 10px 10px 10px 10px;">
+                                    <img class="card-img-top"
+                                        src="https://www.360edukraft.com/wp-content/uploads/2018/08/Python-Certification-Training-Course.jpg"
+                                        alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title" style="font-size: large;">Course Title</h5>
+                                        <p class="card-text">Course Description. Some quick example text to build on the card
+                                            title and make up content.</p>
+        
+                                        <a href="#" class="btn btn-primary" style="color: white;">Download Certificate</a>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+        
+                    </div>
+                </div>
+            </div>
+        <!-- Argon Scripts -->
+        <!-- Core -->
+        <!-- <script src="{% static 'learners/jquery/jquery.min.js' %}"></script> -->
+        <script src="{% static 'learners/jquery/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'learners/js/js.cookie.js' %}"></script>
+        <!-- Argon JS -->
+        <script src="{% static 'learners/js/argon.js?v=1.2.0' %}"></script>
+
+{% endblock content %}

@@ -1,0 +1,430 @@
+{% extends '../base.html' %}
+{% load static %}
+<!-- ---------------------------------------------- -->
+    {% block title %}
+    Facilitator Dashboard
+    {% endblock title %}
+<!-- --------------------------------------------- -->
+    {% block header %}
+ <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'facilitators/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="css2/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <!-- <link href="{% static 'facilitators/css/main.css'%}" rel="stylesheet"> -->
+    {% endblock header %}
+<!-- ------------------------------------------- -->
+    {% block stylesheet %}
+
+    <style>
+            .rate {
+                font-size: 37px;
+             }
+             .rate .fu{
+               font-size: 37px;
+               color:#FF9800;      
+               
+             }
+        #accordionSidebar {
+            height: 100%;
+            width: 160px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+        
+        #topbar {
+            position: fixed;
+            z-index: 100;
+            vertical-align: top;
+            left: 224px;
+        }
+        
+        @media only screen and (max-width: 400px) {
+            #topbar {
+                left: 0;
+            }
+            #accordionSidebar {
+                top: 65px;
+            }
+        }
+        
+        @media only screen and (max-width: 767px) {
+            #topbar {
+                left: 0;
+            }
+            #accordionSidebar {
+                top: 65px;
+            }
+            #content {
+                left: auto;
+               
+                width: 100%;
+                width: calc(100% - 0px);
+            }
+            .content-wrapper {
+                padding:0;
+            }
+        }
+        
+        @media only screen and (max-width: 1800px) {
+            #content {
+                padding: 20px 30px;
+            }
+        }
+    </style>
+    {% endblock stylesheet %}
+<!-- ----------------------------------------------------- -->
+    {% block content %}
+                <!-- Begin Page Content -->
+                <div class="outer-container-that-is-relative bg-white" style="position: relative;font-family: 'Raleway';" id="content">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 col-lg-8 col-md-6" style="color: black">
+                                        <h3 class="mb-0 text-truncated">{{ facilitator_name }}</h3>
+                                        <p class="lead">{{ intrest }}</p>
+                                        {% if Bio %}
+                                        <p>
+                                            {{ Bio }}
+                                        </p>
+                                        {% endif %}
+                                        <!-- <p> <span class="badge badge-info tags">HTML5</span>
+                                            <span class="badge badge-info tags">CSS3</span>
+                                            <span class="badge badge-info tags">nodejs</span>
+                                        </p> -->
+                                        <ul class="list-inline ratings" title="Ratings">
+                                            <div class="rate">
+                                                <span>&#9733</span>
+                                                <span>&#9733</span>
+                                                <span>&#9733</span>
+                                                <span>&#9733</span>
+                                                <span>&#9733</span>
+                                             </div>
+                                    ({{facilitator_rating}})
+                                            </li>
+                                        </ul>
+                                        
+                                        <a href="{% url 'profile' profile_id %}" style="text-decoration: none;"><button class="btn btn-outline-info "><span class="fa fa-user"></span>View Profile</button></a>
+                                    </div>
+                                    <div class="col-12 col-lg-4 col-md-6 text-center">
+                                        <img src="{{ request.user.user.facilitator.profile.url }}" alt="" class=" rounded-circle img-fluid" style="max-width: 200px; height: auto;">
+                                        <br>
+                                        
+                                    </div>
+
+                                    <!--/col-->
+                                </div>
+                                <!--/row-->
+                            </div>
+                            <!--/card-block-->
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h6 class="h2 d-inline-block mb-0" style="color:black">My Courses</h6>
+
+                    </div>
+                    <div class="row">
+                        {% if courses %}
+                        {% for course in courses %}
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold  text-uppercase mb-1">{{ course.Cid.name }}</div>
+
+                                        </div>
+                                        <a href="#"><img src="{% static 'facilitators/img/office.jpeg' %}" style="width:100%;"></a>
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Learners</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">215</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Active Learners</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">200</div>
+
+                                        </div>
+                                        <div class="col-auto" style="top: 10px;">
+                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="col-xl-3 col-md-6 mb-4">
+                        <h4>No courses!</h4>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% if courses %}
+                    
+=======
+                    
+                    <div class="see-more">
+                        <div class="font-weight-bold text-center">
+                            <a href="#">See more...</a>
+                        </div>
+                    </div>
+                    {% endif %} -->
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h6 class="h2 d-inline-block mb-0" style="color:black">Course Overview</h6>
+
+                    </div>
+
+                    <div class="row">
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary  h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Courses</div>
+                                            {% if total_course %}
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_course }}</div>
+                                            {% else %}
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success  h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Learners</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{total_learners}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info  h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Active Learners</div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{active_learners}}%</div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="progress progress-sm mr-2">
+                                                        <div class="progress-bar bg-info" role="progressbar" style="width: {{active_learners}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning  h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Queries</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{total_queries}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h6 class="h2 d-inline-block mb-0" style="color:black">My Courses</h6>
+                    </div>
+       
+                    {% if count == 0 %}
+                    <div class="card" style="width: 18rem;margin-left: 30%;margin-top: 5%">
+                        <div class="card-body">
+                          No Courses
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="slider-area">
+                        <div class="container">
+                            <div id="carouselExampleIndicators{{forloop.counter}}" class="carousel slide" data-ride="carousel">
+                                
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators{{forloop.counter}}" data-slide-to="0" class="active"></li>
+                                    {% for i in range %}
+                                    <li data-target="#carouselExampleIndicators{{forloop.parentloop.counter}}" data-slide-to={{ i }}></li>
+                                    {% endfor %}
+                                </ol>
+                                <div class='carousel-inner'>
+                                    <div class='carousel-item active'>
+                                        <div class='container'>
+                                            <div class='row text-center'>
+                                                <!-- <div class='col-md-4 col-sm-12 mb-2'>
+                                                    <div class="card border">
+                                                        
+                                                        {% if courses.0.thumbnail %}
+                                                        <img class="card-img-top" src={{ courses.0.thumbnail.url }} alt="Card image cap" height="250px">
+                                                        {% endif %}
+                                                            
+                                                        
+                                                        <div class="card-body" style="background-color:gainsboro">
+                                                            <h5 class="card-title" style="color:green;">{{ courses.0.title }}</h5>
+                                                            <h6 style="color:#262626;font-size: 0.75em;">{{ courses.0.name }}</h6>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                                <style>
+                                                    .card-footer{
+                                                        border-top: 1px solid #ececee;
+                                                        background-color: #fff;
+                                                        display: flex;
+                                                        flex-direction: row;
+                                                        justify-content: space-between;
+                                                    }
+                                                    .card-footer .fa{
+                                                        color: #4e73df;
+                                                    }
+                                                    a{
+                                                        color: #000;
+                                                    }
+                                                    a:hover{
+                                                        text-decoration: none;
+                                                    }
+                                                    .course-card:hover .border{
+                                                        box-shadow: 2px 2px 15px #7a7a7a;
+                                                    }
+                                                </style>
+                                                  
+                                                {% for i in courses|slice:"0:" %}
+                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
+                                                    <a class=" course-card"  href="{% url 'VideoPage' %}?Cid={{i.Cid}}">
+                                                        <div class="card border">
+                                                            {% if i.thumbnail %}
+                                                            <img class="card-img-top" src={{ i.thumbnail.url }} alt="Card image cap" height="250px">
+                                                            {% endif %}
+                                                                
+                                                            <!-- background-color:gainsboro -->
+                                                            <div class="card-body" >
+                                                                <h5 class="card-title" style="color:#4e73df;" >{{ i.title }}</h5>
+                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore amet eveniet eos tempore modi sed. </p>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <div class="course_info">
+                                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                                    <span>230</span>
+                                                                </div>
+                                                                <div class="course_info">
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <span>5 Ratings</span>
+                                                                </div>
+                                                                <div class="course_price ml-auto">$130</div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
+                                                </div></div></div>
+                                                <div class='carousel-item'>
+                                                <div class='container'>
+                                                    <div class='row text-center'>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                                <!-- <a class="carousel-control-prev primary" href="#carouselExampleIndicators{{forloop.counter}}" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators{{forloop.counter}}" role="button" data-slide="next" >
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a> -->
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+                   
+                
+    
+    
+                    
+    <!-- Bootstrap core JavaScript-->
+    <!-- <script src="{% static 'facilitators/vendor/jquery/jquery.min.js'%}"></script> -->
+    <script src="{% static 'facilitators/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'facilitators/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'facilitators/js/sb-admin-2.min.js'%}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{% static 'facilitators/vendor/chart.js/Chart.min.js'%}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{% static 'facilitators/js/demo/chart-area-demo.js'%}"></script>
+    <script src="{% static 'facilitators/js/demo/chart-pie-demo.js'%}"></script>
+    {% endblock content %}
+<!-- ------------------------------------------------- -->
+    {% block javascript %}
+    <script>
+        const stars=document.querySelector(".rate").children;
+         let rated = {{facilitator_rating | safe }};
+          for(let i=0; i<stars.length; i++){          
+           if (i<rated) { 
+              for(let j=0; j<=i; j++){	 	
+              stars[j].classList.add("fu");		 	
+              }
+           }
+          }
+  </script>
+    {% endblock javascript%}
+

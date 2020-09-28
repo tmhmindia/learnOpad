@@ -1,0 +1,590 @@
+{% extends 'LandingPage/base.html' %}
+{% load static%}
+<!---------------------------------- -->
+
+{% block title %}
+Explore Courses
+{% endblock title %}
+<!--------------------------- -->
+
+{% block header %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href='{% static 'LandingPage/styles/bootstrap4/bootstrap.min.css'%}'>
+<link href='{% static 'LandingPage/plugins/font-awesome-4.7.0/css/font-awesome.min.css'%}' rel="stylesheet" type="text/css">
+<link href='{% static 'LandingPage/plugins/colorbox/colorbox.css'%}' rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/plugins/OwlCarousel2-2.2.1/owl.carousel.css'%}'>
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/plugins/OwlCarousel2-2.2.1/owl.theme.default.css'%}'>
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/plugins/OwlCarousel2-2.2.1/animate.css'%}'>
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/styles/courses.css'%}'>
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/styles/courses_responsive.css'%}'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel='stylesheet' href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400">
+        <link rel="stylesheet" href='{% static 'LandingPage/LandingPage/css/owl.carousel.css'%}'>
+        <link rel="stylesheet" href='{% static 'LandingPage/LandingPage/css/owl.theme.default.min.css'%}'>
+{% endblock header %}
+
+{% block stylesheet %}
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            max-width: 100%;
+            overflow-x: hidden;
+            font-family: Raleway;
+        }
+        
+        .maincontainer {
+            margin-left: 4rem;
+            margin-right: 4rem;
+        }
+        
+        .item {
+            background-color: white;
+            min-height: 250px;
+            border-radius: 10px;
+            border: 2px solid black;
+        }
+        
+        .label {
+            color: white;
+        }
+        
+        .head {
+            color: black;
+        }
+        
+        .signup-form form {
+            width: 100%;
+            background-color: #f1f2f6;
+            border-radius: 3px;
+            margin-bottom: 15px;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+        }
+        
+        .signup-form .hint {
+            color: black;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .slider-area {
+            margin: 0;
+        }
+        
+        .carousel-control.left,
+        .carousel-control.right {
+            background: transparent;
+        }
+        
+        .img-area {
+            margin: auto;
+            overflow: hidden;
+            align-items: center;
+        }
+        
+        .img-area img {
+            height: 400px;
+            width: 500px;
+        }
+        
+        .carousel-caption {
+            position: static;
+            padding-bottom: 15px;
+            padding-top: 0;
+        }
+        
+        .carousel-caption h4 {
+            font-size: 20px;
+        }
+        
+        #navbar-left a {
+            text-decoration: none;
+            color: #ababab;
+        }
+        
+        #navbar-left a:hover {
+            color: black;
+        }
+        
+        #navbar-left button {
+            color: white;
+        }
+        
+        footer {
+            background: #eeeeee;
+            color: #757575;
+            font-size: 13px;
+            line-height: 1.2
+        }
+        
+        footer h6 {
+            color: #9e9e9e;
+        }
+        
+        footer a {
+            color: black;
+        }
+        
+        footer a:link {
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: #757575;
+        }
+        
+        footer #social i {
+            color: black;
+            font-size: 1.2rem;
+        }
+        
+        footer #social i:hover {
+            color: #3db166;
+        }
+        
+        @media (max-width: 768px) {
+            #navbar-left {
+                display: block;
+            }
+            #first {
+                padding-top: 2px;
+                padding-bottom: 2px;
+                line-height: 12px;
+            }
+            .container-fluid {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+            .section-a img {
+                padding: 0;
+            }
+            footer {
+                font-size: 7.2px;
+            }
+        }
+        
+        @media (max-width: 990px) {
+            #navbar-left {
+                display: block;
+            }
+            #navbar-left form {
+                display: none;
+            }
+            .section-a {
+                margin-bottom: 32px;
+            }
+            .section-a img {
+                margin: 32px;
+            }
+            .section-a #section-a-learn h2,
+            h3 {
+                font-size: 31px;
+            }
+            .section-a #section-a-learn h4 {
+                font-size: 15px;
+            }
+            #query {
+                margin-left: 11em;
+            }
+            #query_request {
+                text-align: center !important;
+            }
+            footer {
+                font-size: 7.2px;
+            }
+        }
+        
+        @media (max-width: 375px) {
+            #query {
+                margin-left: 0 !important;
+            }
+        }
+        
+        @media all and (max-width: 765px) {
+            footer {
+                font-size: 1rem;
+            }
+            #query {
+                margin-left: 1.5em;
+            }
+            #footer-left {
+                padding-left: 3em;
+                text-align: left;
+            }
+        }
+        
+        @media only screen and (max-width: 1000px) {
+            #logo {
+                margin-left: 10px!important;
+            }
+        }
+        
+        @media only screen and (max-width: 1080px) {
+            #request {
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+        }
+    </style>
+{% endblock stylesheet %}
+<!-------------------------------------- -->
+
+{% block content %}
+    <div class="super_container">
+
+
+        <!-- Courses -->
+
+        <div class="courses">
+            <div class="maincontainer">
+                <div class="row">
+
+
+
+
+                    <!-- Courses Sidebar -->
+                    <div class="col-lg-4">
+                        <div class="sidebar" style="margin-top: 0;">
+
+                            <!-- Categories -->
+                            <form method="GET">
+                            <div class="sidebar_section">
+                                <div class="sidebar_section_title">Filter</div>
+                                <div class="sidebar_categories">
+                                    <ul>
+                                        <div class="accordion" id="accordionExample">
+                                            <div class="card">
+                                                <div class="card-header" id="headingtwo">
+                                                    <h2 class="mb-0">
+                                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="true" aria-controls="collapsetwo" style="border:none">
+                                                        Level
+                                                        </button>
+                                                    </h2>
+                                                </div>
+
+                                                <div id="collapsetwo" class="collapse" aria-labelledby="headingtwo" data-parent="#accordionExample">
+                                                    <div class="card-body">
+
+                                                        <label class="container">
+                                                            <input type="checkbox" name="level" value="Beginner">
+                                                            <span class="checkmark"></span>Beginner
+                                                          </label>
+                                                        <label class="container">
+                                                            <input type="checkbox" name="level" value="Advanced">
+                                                            <span class="checkmark"></span>Advanced
+                                                          </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header" id="headingthree">
+                                                    <h2 class="mb-0">
+                                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsethree" aria-expanded="true" aria-controls="collapsethree" style="border:none">
+                                                        Sub-Categories
+                                                        </button>
+                                                    </h2>
+                                                </div>
+
+                                                <div id="collapsethree" class="collapse" aria-labelledby="headingthree" data-parent="#accordionExample">
+                                                    <div class="card-body">
+                                                        {% for cat in subcat %}
+                                                        <label class="container">
+                                                            <input type="checkbox" name="subcat" value="{{ cat.name }}">
+                                                            <span class="checkmark"></span>{{ cat.name }}
+                                                          </label>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header" id="headingTwo">
+                                                    <h2 class="mb-0">
+                                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="border:none">
+                                        Language
+                                        </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                                    <div class="card-body">
+                                                        <label class="container">
+                                                            <input type="checkbox" name="lang" value="Hindi">
+                                                            <span class="checkmark"></span>Hindi
+                                                          </label>
+                                                        <label class="container">
+                                                            <input type="checkbox" name="lang" value="English">
+                                                            <span class="checkmark"></span>English
+                                                          </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header" id="headingThree">
+                                                    <h2 class="mb-0">
+                                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="border:none">
+                                         Price
+                                        </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                                    <div class="card-body">
+                                                        <label class="container">
+                                                            <input type="checkbox" name="price" value="300">
+                                                            <span class="checkmark"></span>300
+                                                          </label>
+                                                        <label class="container">
+                                                            <input type="checkbox" name="price" value="500">
+                                                            <span class="checkmark"></span>500
+                                                          </label>
+                                                        <label class="container" name="price" value="800">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>800
+                                                          </label>
+                                                        <label class="container">
+                                                            <input type="checkbox" name="price" value="1000">
+                                                            <span class="checkmark"></span>1000
+                                                          </label>
+
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <center><button type="submit" class="btn btn-link"><b>Apply</b></a></center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </form>
+
+                            <!-- Tags -->
+                            <div class="sidebar_section">
+                                <div class="sidebar_section_title">Tags</div>
+                                <!-- <div class="sidebar_tags">
+                                    <ul class="tags_list">
+                                        <li><a href="#">creative</a></li>
+                                        <li><a href="#">unique</a></li>
+                                        <li><a href="#">photography</a></li>
+                                        <li><a href="#">ideas</a></li>
+                                        <li><a href="#">wordpress</a></li>
+                                        <li><a href="#">startup</a></li>
+                                    </ul>
+                                </div> -->
+                                    <p class="mt-3">No Tags</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <!-- Courses Main Content -->
+
+
+
+
+                    <div class="col-lg-8">
+                        <div class="courses_search_container">
+                            <form action="{% url 'Lexplorecourses' %}" id="courses_search_form" method="GET" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
+                                <input type="search" class="courses_search_input" placeholder="Search Courses" name="query">
+                                <select class="courses_search_select courses_search_input" name="cat" onchange='findCat(this.value)'>
+                                {% if selected_cat %}
+                                <option value="{{selected_cat}}">{{selected_cat}}</option> 
+                                {% else %}       
+                                <option selected>All Categories</option>
+                                {% endif %}
+                                <option>All Categories</option>
+                                {% for c in cat %}
+                                <option>{{ c.name }}</option>
+                                {% endfor %}
+							    </select>
+                                <button action="submit" class="courses_search_button ml-auto">search now</button>
+                            </form>
+                        </div>
+                        <div class="courses_container">
+                            {% for crse in page_obj%}
+                            {% cycle "<div class='row courses_row'>" "" %}
+                                <!-- Course -->
+                                
+                                <div class="col-lg-6 course_col">
+                                    <div class="course">
+                                        <div class="course_image"><img src="{% static 'LandingPage/images/course_7.jpg' %}" alt=""></div>
+                                        <div class="course_body">
+                                            <h3 class="course_title"><a href="{% url "course" crse.Cid %}">{{ crse.title}}</a></h3>
+                                            <div class="course_teacher">{{ crse.offering.all.0.name }}</div>
+                                            <div class="course_text">
+                                                <p>{{ crse.description }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="course_footer">
+                                            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+                                                <div class="course_info">
+                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                    <span>20 Student</span>
+                                                </div>
+                                                <div class="course_info">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>5 Ratings</span>
+                                                </div>
+                                                <div class="course_price ml-auto"><span>$320</span>$220</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% cycle "" "</div>" %}
+                                {% endfor %}
+                                <div class="container" style="margin-top: -30px">
+                                    <div class="row">
+                                        <div class="col-sm" align="center" style="margin-left: -20px">
+                                
+                                            <ul class="pagination_list">
+                                                {% if page_obj.has_previous %}
+                                                <li class="active"><a
+                                                        href="?page={{ page_obj.previous_page_number }}"><i
+                                                            class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                                                {% endif %}
+                                                <li><a href="#">{{ page_obj.number }}</a></li>
+                                
+                                                {% if page_obj.has_next %}
+                                                <li><a href="?page={{ page_obj.next_page_number }}"><i
+                                                            class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                                                {% endif %}
+                                            </ul>
+                                
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/da956b6924.js" crossorigin="anonymous"></script>
+    <script src='{% static 'LandingPage/LandingPage/js/owl.carousel.js'%}'></script>
+    <script src='{% static 'LandingPage/js/jquery-3.2.1.min.js'%}'></script>
+    <script src='{% static 'LandingPage/styles/bootstrap4/popper.js'%}'></script>
+    <script src='{% static 'LandingPage/styles/bootstrap4/bootstrap.min.js'%}'></script>
+    <script src='{% static 'LandingPage/plugins/OwlCarousel2-2.2.1/owl.carousel.js'%}'></script>
+    <script src='{% static 'LandingPage/plugins/easing/easing.js'%}'></script>
+    <script src='{% static 'LandingPage/plugins/parallax-js-master/parallax.min.js'%}'></script>
+    <script src='{% static 'LandingPage/plugins/colorbox/jquery.colorbox-min.js'%}'></script>
+    <script src='{% static 'LandingPage/js/course.js'%}'></script>
+{% endblock content %}
+
+{% block javascript %}
+
+    <script>
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+        $(".toggle-password").click(function() {
+
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+
+        $(document).ready(function () {
+            $("#courses_search_select").click(function(){
+                var op=$(this).val();
+                if(op!="All Categories")
+                {
+                    console.log(op);
+                    $.ajax({
+                        type: "GET",
+                        url: "{% url "Lexplorecourses" %}",
+                        data: {
+                            'op': op,
+                        },
+                        success: function (data) {
+                            // document.getElementById("try").style.visibility = "hidden";
+                            page_obj=data
+                            console.log(data)
+                            // $(".figure").html(data);
+                        //    for(var i=0;i<data.length;i++)
+                        //    {
+                        //        ("#course_title"+data[i].Cid).val=(data[i].title);
+                        //        ("#course_text"+data[i].Cid).val=(data[i].description);
+                        //    }
+                            // $(".courses_container").html(data);
+                           
+
+                        }
+                    });
+                }
+            });
+        });
+           
+
+        function check_ephone(phno, email) {
+            var regex = /^[0-9]{10}$/;
+            var regexe_email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (regex.test(phno.yourphone.value) && regex_email.test(email.youremail.value)) {
+                return true;
+            } else {
+                if (!(regex.test(phno.yourphone.value))) {
+                    alert("This is not a valid phone number");
+                    return false;
+                }
+                if (!(regex.test(email.youreamil.value))) {
+                    alert("This is not a valid email id");
+                    return false;
+                }
+                if (!(regex.test(phno.yourphone.value) && regex_email.test(email.youremail.value))) {
+                    alert("This is not a valid phone number and email id");
+                    return false;
+                }
+            }
+        }
+    </script>
+    <script>
+        function findCat(val){
+            window.location.href=`/explore/courses?cat=${val}`;
+        }
+    </script>
+    <!-- <script>
+        $(document).ready(function () {
+            $("#courses_search_select").click(function(){
+                var op=$(this).val();
+                if(op!="All Categories")
+                {
+                    console.log(op);
+                    $.ajax({
+                        type: "GET",
+                        url: "{% url "Lexplorecourses" %}",
+                        data: {
+                            'op': op,
+                        },
+                        success: function (data) {
+                            // $(".courses_container").html(data);
+                           
+
+                        }
+                    });
+                }
+            });
+        });
+    </script> -->
+{% endblock javascript %}

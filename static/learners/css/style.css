@@ -1,0 +1,68 @@
+.container {
+    margin: 20px;
+}
+
+.conatiner-fluid h2 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.expert img {
+    border-radius: 100%;
+}
+
+.info a {
+    text-decoration: none;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.info {
+    text-align: center;
+}
+
+.box {
+    padding-bottom: 50px;
+}
+
+.header {
+    background-position: cover;
+}
+
+.head {
+    padding: 20px;
+}
+
+.head h2:hover {
+    color: #2eb8b8;
+}
+
+.head a {
+    text-decoration: none;
+}
+
+.card-body {
+    height: fit-content;
+    background-color: #fff;
+}
+
+.go_to_program {
+    margin-top: 30px;
+}
+
+.card-body .card-link {
+    color: #00bfff;
+    border-spacing: 2px;
+    border-color: #00bfff;
+    padding: 10px;
+    box-shadow: 3px 3px 3px #888888;
+}
+
+.card-link:hover{
+    color: #fff;
+    box-shadow: none;
+    border-color: #fff;
+}
+.course-program {
+    margin: auto;
+}

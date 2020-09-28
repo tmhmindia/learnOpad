@@ -1,0 +1,231 @@
+{% extends '../base.html' %}
+{% load static %}
+<!-- ---------------------------------------------- -->
+    {% block title %}
+My Earnings|Facilitator
+    {% endblock title %}
+<!-- --------------------------------------------- -->
+    {% block header %}
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'facilitators/css2/all.min.css'%}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <!-- <link href="{% static 'facilitators/css/main.css'%}" rel="stylesheet"> -->
+    <link href="{% static 'facilitators/css/my_earning.css'%}" rel="stylesheet">
+    {% endblock header %}
+<!-- ------------------------------------------- -->
+    {% block stylesheet %}
+   <style>
+        #accordionSidebar {
+            height: 100%;
+            width: 160px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+        
+        #topbar {
+            position: fixed;
+            z-index: 100;
+            vertical-align: top;
+            left: 224px;
+        }
+        
+        @media only screen and (max-width: 400px) {
+            #topbar {
+                left: 0;
+            }
+            #accordionSidebar {
+                top: 65px;
+            }
+        }
+        
+        @media only screen and (max-width: 767px) {
+            #topbar {
+                left: 0;
+            }
+            #accordionSidebar {
+                top: 65px;
+            }
+            #content {
+                left: auto;
+               
+                width: 100%;
+                width: calc(100% - 0px);
+            }
+            .content-wrapper {
+                padding:0;
+            }
+        }
+        
+        @media only screen and (max-width: 1800px) {
+            #content {
+                padding: 20px 30px;
+            }
+        }
+    </style>
+
+    {% endblock stylesheet %}
+<!-- ----------------------------------------------------- -->
+    {% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="outer-container-that-is-relative bg-white" style=" position: relative;font-family: 'Raleway';" id="content">
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+                    </div>
+
+                    <div class="row justify-content-center justify-content-around">
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card border-left-primary  h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class=" h5 text-center font-weight-bold text-primary  text-uppercase mb-1">INR1,590.02</div>
+                                            <div class="h5 mb-0 text-center font-weight-bold text-gray-800">Earning This Month</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card border-left-success  h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class=" h5 text-center font-weight-bold text-success  text-uppercase mb-1">INR1,590.02</div>
+                                            <div class="h5 mb-0 text-center font-weight-bold text-gray-800">Total Earnings</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-0">
+                            <hr>
+                        </div>
+
+                    </div>
+                    <div class="border-0 font-weight-bold h4">
+                        <p>Overview
+                            <hr>
+                        </p>
+                    </div>
+
+                    <!-- Bar Chart -->
+                    <!--<div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Earnings</h6>
+            </div>
+            <div class="card-body">
+              <div class="chart-bar">
+                <canvas id="myBarChart"></canvas>
+              </div>
+              <hr>
+              
+            </div>
+          </div>-->
+
+
+
+                    <!---Earning Chart(monthly)-->
+                    <div class="table-responsive-sm earnings shadow">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">S.No.</th>
+                                    <th scope="col">Courses</th>
+                                    <th scope="col">Fees</th>
+                                    <th scope="col">Revenue</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1.</th>
+                                    <td>Digital Marketing</td>
+                                    <td>$200.00</td>
+                                    <td>$1000.00</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2.</th>
+                                    <td>Web Development</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3.</th>
+                                    <td>Photography</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr class="last-row">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Total-$4000.00</td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="prev">
+
+
+                            <a href="#"><i class="fa fa-chevron-left"></i></a>
+                            <a href="#">PREV</a>
+                            <a href="#">NEXT</a>
+                            <a href="#"><i class="fa fa-chevron-right"></i></a>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    <!-- Bootstrap core JavaScript-->
+    <!-- <script src="{% static 'facilitators/vendor/jquery/jquery.min.js'%}"></script> -->
+    <script src="{% static 'facilitators/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'facilitators/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'facilitators/js/sb-admin-2.min.js'%}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{% static 'facilitators/vendor/chart.js/Chart.min.js'%}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{% static 'facilitators/js/demo/chart-area-demo.js'%}"></script>
+    <script src="{% static 'facilitators/js/demo/chart-pie-demo.js'%}"></script>
+
+    {% endblock content %}
+<!-- ------------------------------------------------- -->
+    {% block javascript %}
+
+    {% endblock javascript%}
+
