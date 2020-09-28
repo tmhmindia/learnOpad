@@ -202,25 +202,24 @@ def facilitator_Dashboard_settings_page(request):
 @login_required(login_url='/facilitator/login/')
 @allowed_users(['Facilitators'])
 @api_view(['GET', 'POST'])
-def facilitator_Profile_page(request, pk):
+def facilitator_Profile_page(request):
 
     if request.method == 'GET':
-        ourdata = Facilitator.objects.get(Fid=pk)   
+        ourdata = Facilitator.objects.get(user=request.user)   
         ourname = ourdata.name.split()
         firstname = ourname[0]
         lastname = ourname[1]
-
-        context = {'ourdata':ourdata, 'firstname':firstname, 'lastname':lastname,'pk':pk}
+        context = {'ourdata':ourdata, 'firstname':firstname, 'lastname':lastname}
         return render(request, 'facilitators/Dashboard/profile.html',context)
 
     if request.method == 'POST':
-          
-        ourdata=Facilitator.objects.get(Fid=pk)
+        ourdata=Facilitator.objects.get(user=request.user)
         #profileimg = request.FILES
         #for i in request.FILES:
         if request.FILES:
             ourdata.profile=request.FILES['profile']
-
+        else:
+            ourdata.profile='default/profile.png'
         firstname = request.POST.get('firstName')
         lastname = request.POST.get('lastName')
         ourdata.name=str(firstname)+" "+str(lastname)
@@ -238,7 +237,7 @@ def facilitator_Profile_page(request, pk):
         
         ourdata.save()
         
-        context = {'ourdata':ourdata, 'firstname':firstname, 'lastname':lastname,'pk':pk}
+        context = {'ourdata':ourdata, 'firstname':firstname, 'lastname':lastname}
         return render(request, 'facilitators/Dashboard/profile.html', context)
 
     #context = {'ourdata':ourdata}

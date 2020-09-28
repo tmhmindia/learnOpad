@@ -41,7 +41,33 @@ def liveclasses(request):
 @login_required(login_url='/learner_page')
 @allowed_users(['Learners'])
 def profile(request):
-    return render(request,'learners/dashboard/profile.html')
+    if request.method == 'GET':
+        ourdata = Learners.objects.get(user=request.user)
+        ourname = ourdata.name.split()
+        firstname = ourname[0]
+        lastname = ourname[1]
+        context = {'ourdata':ourdata, 'firstname':firstname, 'lastname':lastname}
+        return render(request, 'learners/Dashboard/profile.html',context)
+
+    if request.method == 'POST':
+        ourdata=Learners.objects.get(user=request.user)
+        if request.FILES:
+            ourdata.profile=request.FILES['profile']
+        else:
+            ourdata.profile='default/profile.png'
+        firstname = request.POST.get('firstName')
+        lastname = request.POST.get('lastName')
+        ourdata.name=str(firstname)+" "+str(lastname)
+        ourdata.phone = request.POST.get('phone')
+        ourdata.DOB = request.POST.get('dob')
+        ourdata.state = request.POST.get('state')
+        ourdata.country = request.POST.get('country')
+        ourdata.Paddress = request.POST.get('addressLine1')
+        ourdata.Taddress = request.POST.get('addressLine2')
+        ourdata.zipcode = request.POST.get('zipCode')
+        ourdata.save()
+        context = {'ourdata':ourdata, 'firstname':firstname, 'lastname':lastname}
+        return render(request, 'learners/Dashboard/profile.html', context)
 
 #learners dashboard Account setting page
 @login_required(login_url='/learner_page')
@@ -70,5 +96,3 @@ def tte(request):
     return render(request,'learners/dashboard/tte.html')
 
 
-
- 
