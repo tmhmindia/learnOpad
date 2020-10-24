@@ -6,15 +6,18 @@
 
     <link href="{% static 'LandingPage/img/logotiny.png' %}" rel="icon">
     <title>{% block title %}{% endblock title %}</title>
+    
+
+   
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/b5dc9b9c74.js" crossorigin="anonymous"></script>
     {% block header %}
     {% endblock header %}
-
     {% block stylesheet %}
     {% endblock stylesheet %}
-
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-    crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/b5dc9b9c74.js" crossorigin="anonymous"></script>
 
 <script>
 $(document).ready(function() {
@@ -152,18 +155,26 @@ $(document).ready(function() {
         font-size: 13px;
         line-height: 1.2;
     }
+    .logo_img{
+        width:70px;
+        height: 40px;
+    }
+    .logo-text{
+        margin-bottom: 0;
+    }
     </style>
 </head>
 
 <body>
 
-    <figure class="figure" style="margin-right: 11px;margin-top: 18px;margin-bottom: 11px;margin-left: 15px;">
-        <img src="{% static 'LandingPage/img/logotiny.png' %}" class="figure-img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;">
-        <figcaption class="figure-caption text-center">LearnOpad</figcaption>
-    </figure>
+    
 
     <nav class="navbar navbar-expand-lg navbar-light" style="background: #f7f7f7;">
-        <div class="container">
+        <div class="container-fluid">
+            <!-- <figure class="figure" style="margin-right: 11px;margin-top: 18px;margin-bottom: 11px;margin-left: 15px;"> -->
+                <a href=""><img src="{% static 'LandingPage/img/logotiny.png' %}" class="figure-img logo_img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;">
+                <p class="figure-caption text-center logo-text">LearnOpad</p></a>
+            <!-- </figure> -->
             <a class="navbar-brand" href="/home"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -217,7 +228,7 @@ $(document).ready(function() {
                             {% csrf_token %}
                             <div class="form-row">
                             <div class="col-10">
-                            <input class="form-control " style="width: 250px;" type="text" placeholder="Search by domain or course">
+                            <input class="form-control " style="width: 400px; margin-right: 30px;" type="text" placeholder="Search by domain or course">
                             </div>
                             
                             <button class="btn my-sm-0" type="submit" style="color: black;"><i class="fa fa-search"></i></button>

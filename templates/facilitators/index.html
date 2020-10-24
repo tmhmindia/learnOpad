@@ -39,6 +39,10 @@ body,html {
     overflow-x: hidden;
     font-family: Raleway;
 }
+.phl:hover{
+  text-decoration: underline;
+  color: #3db166;
+}
 #faqs-hidden{
   display: none;
 }
@@ -453,7 +457,7 @@ footer #social i:hover{
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex justify-content-center align-items-center">
     <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
-      <h1>Be a <a href="/facilitator-register"> Philanthropist</a></h1>
+      <h1>Be a <a href="/facilitator-register" class="phl"> Philanthropist</a></h1>
       <h2>Learn more, Do-better, Get smarter</h2>
       <a href='{% url 'facilitator-register' %}' class="btn-get-started">Become A Facilitator</a>
     </div>

@@ -3,6 +3,6 @@ from django.urls import path
 
 urlpatterns = [
 
-    path('success/', registration, name='registration'),
+    
     
 ]

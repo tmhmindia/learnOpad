@@ -37,6 +37,7 @@ def certicate(request):
         total=time+timedelta(days=month*30+day)
         if total.date()<=datetime.now().date():
             completed.append(enroll.Cid)
+        completed=Course.objects.all()
     context={
         'completed':completed
     }

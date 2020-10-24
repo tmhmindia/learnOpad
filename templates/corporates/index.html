@@ -14,8 +14,7 @@
 
     <link rel="stylesheet" href="{% static 'LandingPage/fonts/icomoon/style.css' %}">
     <link rel="stylesheet" href="{% static 'LandingPage/fonts/brand/style.css' %}">
-
-    <link rel="stylesheet" href="{% static 'LandingPage/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'LandingPage/css/bootstrap-datepicker.css' %}">
     <link rel="stylesheet" href="{% static 'LandingPage/css/jquery.fancybox.min.css' %}">
     <link rel="stylesheet" href="{% static 'LandingPage/css/owl.carousel.min.css' %}">
@@ -202,10 +201,10 @@
                 </div>
             </div>
         </div><br><br><br><br>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row justify-content-md-center" id="col1">
                 
-                <div class="col col-lg-3">
+                <div class="col-3 col-lg-3">
                     <div class="card text-light " id="col2">
                         <div class="card-header bg-info" style="color: black">Filter</div>
                         <form method="GET">
@@ -274,33 +273,36 @@
 
                 </div>
                     
-                <div class=" col-lg-7" id="col1">
+                <div class=" col-lg-9 col-9" id="col1">
 
+                    <div class="row">
+                        {% for crse in course %}
+                        <div class="col-6">
+                            <div class=" card tutorial-item mb-4 " >
+                                <div class=" ">
+                                    <img src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Image" class=" " style="">
+                                </div>
+                                <div>
+                                    <h3><a href="# ">{{ crse.title }}</a></h3>
+                                    <p> {{ crse.description }}
+                                    </p>
 
-                    {% for crse in course %}
-                    <div class=" card tutorial-item mb-4 " style="margin:2rem 0rem; ">
-                        <div class="img-wrap ">
-                            <img src="{% static 'corporates/images/hh.png' %}" alt="Image" class="img-fluid " style="border-radius:50% ">
+                                    <p class="mb-0 ">
+                                        <span class="brand-react h5 "></span>
+                                        <span class="brand-javascript h5 "></span>
+                                    </p>
+                                    <p class="meta ">
+                                        <span class="mr-2 mb-2 ">{{ crse.duration }}</span>
+                                        <span class="mr-2 mb-2 ">{{ crse.level }}</span>
+                                        <span class="mr-2 mb-2 ">Jun 18, 2020</span>
+                                    </p>
+
+                                    <p><a href="{% url 'course' crse.Cid %}" class="btn btn-primary custom-btn ">View</a></p>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <h3><a href="# ">{{ crse.title }}</a></h3>
-                            <p> {{ crse.description }}
-                            </p>
-
-                            <p class="mb-0 ">
-                                <span class="brand-react h5 "></span>
-                                <span class="brand-javascript h5 "></span>
-                            </p>
-                            <p class="meta ">
-                                <span class="mr-2 mb-2 ">{{ crse.duration }}</span>
-                                <span class="mr-2 mb-2 ">{{ crse.level }}</span>
-                                <span class="mr-2 mb-2 ">Jun 18, 2020</span>
-                            </p>
-
-                            <p><a href="{% url 'course' crse.Cid %}" class="btn btn-primary custom-btn ">View</a></p>
-                        </div>
-                    </div>
-                        {% endfor %}    
+                        {% endfor %}
+                    </div>    
 
                     <div class="custom-pagination ">
                         <ul class="pagination_list">
@@ -318,7 +320,7 @@
                 </div>
 
             </div><br><br>
-
+        </div>
             <div class="row justify-content-center justify-content-around my-center-row " style="background-color:rgb(64, 65, 68);color: #b0d2e6; ">
                 <div class="col-lg-6 col-md-4 col-sm-6 col-xs-8 my-center-col1 ">
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-6 my-center-col1-2 " style="font-size:1.5rem;color: #fff; ">

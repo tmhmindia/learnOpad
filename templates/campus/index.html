@@ -21,9 +21,9 @@ Campus
     <link rel="stylesheet" href="{% static 'campus/css/owl.theme.default.min.css'%}">
     <link rel="stylesheet" href="{% static 'campus/css/magnific-popup.css'%}">
 
-    <link rel="stylesheet" href="{% static 'campus/css/aos.css'%}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'campus/css/ionicons.min.css'%}">
+    <link rel="stylesheet" href="{% static 'campus/css/ionicons.min.css'%}">    
 
     <link rel="stylesheet" type="text/css" href="{% static 'LandingPage/css/section/plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'campus/css/flaticon.css'%}">
@@ -207,8 +207,8 @@ Campus
             <div class="overlay"></div>
             <div class="container">
                 <div class="row no-gutters slider-text align-items-center justify-content-start">
-                    <div class="col-md-6 ftco-animate">
-                        <h1 class="mb-4">Get Your <span style="background-color: #007bff;color: #fff;">Education</span>Today!!</h1>
+                    <div class="col-md-6  " data-aos="fade-up"> 
+                        <h1 class="mb-4">Get Your Education Today!!</h1>
                         <p>Providing quality education online.</p>
 
 
@@ -223,13 +223,13 @@ Campus
 
 
     <!-- changes made  -->
-    <section class="ftco-section ftco-no-pt ftc-no-pb" style="margin-bottom:50px;">
+    <section class="" style="margin-bottom:50px;">
         <div class="container">
             <div class="row d-flex">
                 <div class="col-md-5 order-md-last wrap-about wrap-about d-flex align-items-stretch">
                     <div class="img" style="background-image: url(https://i.pinimg.com/originals/12/6c/a6/126ca6fa4ffbb94a8cb4abdb8670e02f.jpg); border"></div>
                 </div>
-                <div class="col-md-7 wrap-about py-5 pr-md-4 ftco-animate">
+                <div class="col-md-7 wrap-about py-5 pr-md-4 "  >
                     <h2 class="mb-4">Are your Students hidden talents still hidden?</h2>
                     <p>Then probably you are at the right place to uncover the skillset while your students become competent.
                     </p>
@@ -287,7 +287,7 @@ Campus
 
                     </div>
                 </div>
-                <div class="col-md-6 heading-section heading-section-white ftco-animate pl-lg-5 pt-md-0 pt-5">
+                <div class="col-md-6 heading-section heading-section-white  pl-lg-5 pt-md-0 pt-5" >
                     <h2 class="mb-4">LearnOpad Online Learning</h2>
                     <p>TMHM works as a harbinger between facilitator and learners. We aim to connect learners with their faculty directly for any constraint they face during the learning process.This portal will help you to expand your practical knowledge
                         and provide you with an insight related to the discipline you opt during enrollment.       </p>
@@ -302,13 +302,13 @@ Campus
     <section id="courses" class="ftco-section" style="margin-top:0;">
         <div class="container-fluid px-4">
             <div class="row justify-content-center mb-5 pb-2">
-                <div class="col-md-8 text-center heading-section ftco-animate">
+                <div class="col-md-8 text-center heading-section ">
                     <h2 class="mb-4"><span>Our</span> Courses</h2>
                     <p>Experience the advanced learning.</p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4 course ftco-animate">
+                <div class="col-md-4 course ">
                     <div class="img" style="background-image: url('{% static 'campus/images/course-1.jpg'%}');"></div>
                     <div class="text pt-4">
                         <p class="meta d-flex">
@@ -321,7 +321,7 @@ Campus
                         <p><a href="#" class="btn btn-primary">Apply now</a></p>
                     </div>
                 </div>
-                <div class="col-md-4 course ftco-animate">
+                <div class="col-md-4 course ">
                     <div class="img" style="background-image: url('{% static 'campus/images/course-2.jpg'%}');"></div>
                     <div class="text pt-4">
                         <p class="meta d-flex">
@@ -334,7 +334,7 @@ Campus
                         <p><a href="#" class="btn btn-primary">Apply now</a></p>
                     </div>
                 </div>
-                <div class="col-md-4 course ftco-animate">
+                <div class="col-md-4 course ">
                     <div class="img" style="background-image: url('{% static 'campus/images/course-3.jpg'%}');"></div>
                     <div class="text pt-4">
                         <p class="meta d-flex">
@@ -357,12 +357,12 @@ Campus
     <section class="ftco-section testimony-section">
         <div class="container">
             <div class="row justify-content-center mb-5 pb-2">
-                <div class="col-md-8 text-center heading-section ftco-animate">
+                <div class="col-md-8 text-center heading-section ">
                     <h2 class="mb-4">Meet the Alumni</h2>
                     <p>recommended by the best.</p>
                 </div>
             </div>
-            <div class="row ftco-animate justify-content-center">
+            <div class="row  justify-content-center">
                 <div class="col-md-12">
                     <div class="carousel-testimony owl-carousel">
 
@@ -453,16 +453,16 @@ Campus
     <!-- loader -->
 
 
-    <script src="{% static 'campus/js/jquery.min.js'%}"></script>
+    
     <script src="{% static 'campus/js/jquery-migrate-3.0.1.min.js'%}"></script>
-    <script src="{%static 'campus/js/popper.min.js'%}"></script>
+    
     <script src="{% static 'campus/js/bootstrap.min.js'%}"></script>
     <script src="{% static 'campus/js/jquery.easing.1.3.js'%}"></script>
     <script src="{% static 'campus/js/jquery.waypoints.min.js'%}"></script>
     <script src="{% static 'campus/js/jquery.stellar.min.js'%}"></script>
     <script src="{% static 'campus/js/owl.carousel.min.js'%}"></script>
     <script src="{% static 'campus/js/jquery.magnific-popup.min.js'%}"></script>
-    <script src="{% static 'campus/js/aos.js'%}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="{% static 'campus/js/jquery.animateNumber.min.js'%}"></script>
     <script src="{% static 'campus/js/scrollax.min.js'%}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
@@ -486,6 +486,12 @@ Campus
             } else {
             input.attr("type", "password");
             }
+        });
+    </script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'slide'
         });
     </script>
 {% endblock javascript %}

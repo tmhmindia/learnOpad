@@ -97,7 +97,7 @@ class FacilitatorRegisterAPI(APIView):
         
 
 
-        successOnRegistration(user.email,'Registration.png')
+        successOnRegistration(user)
 
         RegistrationSuccessAdminEmail(personal_detail['first_name']+" "+personal_detail['last_name'],catlist)
 

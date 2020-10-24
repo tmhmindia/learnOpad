@@ -41,7 +41,7 @@ class ApplicantsAdmin(admin.ModelAdmin):
                 group = Group.objects.get(name='Facilitators')
                 user.user.groups.add(group)
                 user.save()
-                successOnRegistration(user.user.email,'finalstep.png')
+                successOnRegistration(user.user)
                 messages.success(request, (user.name+' is approved !'))
             else:
                 user.status='Approved'
@@ -57,7 +57,7 @@ class ApplicantsAdmin(admin.ModelAdmin):
                 applicant.status='Shortlisted'
                 applicant.save()
                 li.append(applicant.user.email)
-                successOnShortlisted(li,'Beforepayment.png')
+                successOnShortlisted(applicant.user)
                 messages.info(request, (applicant.name+' is  shortlisted !'))
             
 
