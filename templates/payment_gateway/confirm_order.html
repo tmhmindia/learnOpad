@@ -139,12 +139,16 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item d-flex justify-content-between align-items-center  px-0 ">
               Name
-              <span id>{{ name }}</span>
+              <span id></label><input type="text" name="name" placeholder="{{ name }}" disabled></span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
               Email
-              <span>{{ email }}</span>
+              <span><input type="text" name="email" placeholder="{{ email }}" disabled></span>
             </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                Phone
+                <span><input type="text" name="phone" placeholder="{{ phone }}" disabled></span>
+              </li>
            
             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                <div class=" text-center">
@@ -181,7 +185,7 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 var options = {
-    "key": "rzp_live_9InLer7hkxhkys", // Enter the Key ID generated from the Dashboard
+    "key": "rzp_test_0G5HtLCg0WpC26", // Enter the Key ID generated from the Dashboard
     "amount": "{{total}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
     "currency": "INR",
     "name": "{{name}}",
@@ -189,11 +193,13 @@ var options = {
     "image": "{% static 'LandingPage/img/logotiny.png' %}",
     "order_id": "{{ order_id }}" , //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
     "handler": function (response){
-      swal("Done!", "Your Payment is Successfull!", "success");
-      setTimeout(function(){
-            window.location.href = '/facilitator';
-         }, 5000);
+        setTimeout(function(){
+        swal("Done!", "Your Payment is Successfull!", "success");
+}, 6000);
         
+        window.location.href = 'payment_status/';
+
+     
     },
     "prefill": {
         "name": "{{name}}",
