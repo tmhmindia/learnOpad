@@ -27,7 +27,46 @@ from .utils import *
 
 # Landing  page
 def home(request):
-    
+    if request.method=="POST":
+        query=request.POST["search"]
+        # search_results=
+        # cat = Category.objects.all()
+        # subcat = SubCategory.objects.all()
+        # course = Course.objects.all()
+        course = Course.objects.filter(Q(title__icontains=query) or Q(subCat_id__name__icontains=query)).order_by('Cid')
+        # query = request.GET.get('query')
+        # option = request.GET.get('categ')
+        # filter_level = request.GET.getlist('level')
+        # filter_subcat = request.GET.getlist('subcat')
+        # filter_lang = request.GET.getlist('lang')
+        # filter_price = request.GET.getlist('price')
+        # selected_cat = option
+        # # Categories
+        # if option != None:
+        #     if option == "All Categories":
+        #         course = Course.objects.all()
+        #     else:
+        course = Course.objects.filter(Q(subCat_id__cat_id__name__icontains=query)) or course
+        # # Search Filter
+        # if query is not None:
+        #     course = Course.objects.filter(Q(title__icontains=query) or Q(
+        #         subCat_id__name__icontains=query)).order_by('Cid')
+        # # Side Filters
+        # if filter_level:
+        #     course = Course.objects.filter(level__in=filter_level) & course
+        # if filter_subcat:
+        course = Course.objects.filter(subCat_id__name__in=query) or course
+        # if filter_lang:
+        course = Course.objects.filter(language__in=query) or course
+        # if filter_price:
+        #     course = Course.objects.filter(price__in=filter_price) & course
+        paginator = Paginator(course.values(), 6, orphans=1)
+        page_number = 1
+        page_obj = paginator.get_page(page_number)
+        context = {
+            'page_obj': page_obj
+        }
+        return render(request, 'LandingPage/exploreCourses/exploreCourses.html', context)
     return render(request,'LandingPage/index.html')
 
 def cart(request):
