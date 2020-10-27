@@ -1,160 +1,124 @@
-<!doctype html>
-{% load static %}
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
 
-  <title>Certificate</title>
-  <style>
-    hr {
-      background-color: black;
-      height: 3px;
-      margin: 5px;
-    }
-
-    div.cert-footer {
-      /*top: 485px;*/
-      text-align: center;
-    }
-
-    .cert-stamp,
-    .cert-ceo-sign {
-      width: 60%;
-      /*display: inline-block;*/
-    }
-
-    div#cert-issued-by,
-    div#cert-ceo-design {
-      width: 40%;
-      display: inline-block;
-    }
-
-    div#cert-ceo-design {
-      margin-left: 10%;
-    }
-
-    h1 {
-      font-family: 'Saira Condensed', sans-serif;
-      margin: 5px 0px;
-    }
-
-    body {
-      width: 950px;
-      height: 690px;
-      position: absolute;
-      left: 30px;
-      top: 30px;
-      /* border: 3px solid; */
-    }
-
-    p {
-      font-family: 'Arial', sans-serif;
-      font-size: 18px;
-      margin: 5px 0px;
-    }
-
-    html {
-      display: inline-block;
-      width: 1024px;
-      height: 768px;
-      /* border: 2px solid; */
-      background: #eee url("https://paralegal.com.au/wp-content/uploads/2019/04/certificate-background-template-blue-copy-simple-powerpoint-templates-interest-p-16.jpg") no-repeat;
-      background-size: 100%;
-    }
-
-    h1#cert-holder {
-      font-size: 50px;
-      color: #34C3FF;
-    }
-
-    p.smaller {
-      font-size: 17px !important;
-    }
-
-    p#cert-from {
-      color: #34C3FF;
-      font-family: 'Saira Condensed', sans-serif;
-    }
-
-    div#cert-verify {
-      opacity: 1;
-      position: absolute;
-      top: 680px;
-      left: 60%;
-      font-size: 12px;
-      color: grey;
-    }
-  </style>
+        }
+        body{
+            height: 100vh;
+            width: 100%;
+            background-image: url('https://i.ibb.co/PMyrSY4/blank-certificate.jpg%22');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+        .content{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 120px 0;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+        .web{
+            font-family: "Comic Sans MS", cursive, sans-serif;
+        }
+        .web::after{
+            content: '*';
+            font-size: 15px;
+            padding: 0 10px;
+        }
+        .web::before{
+            content: '*';
+            font-size: 15px;
+            padding: 0 10px;
+        }
+        h1{
+            font-size: 50px;
+        }
+        .certify{
+            background-color : rgb(15,58,95);
+            color: #fff;
+            padding: 10px;
+            margin: 10px;
+        }
+        .cert-name{
+            width: 600px;
+            margin-top: 10px;
+            border-bottom: 2px solid #000;
+            text-align: center;
+        }
+        .cert-name h2{
+            font-size: 50px;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+        }
+        .info{
+            color: #0b85a0;
+            width: 700px;
+            font-size: 22px;
+            padding: 20px;
+            line-height: 30px;
+            font-weight: 600;
+        }
+        .sign{
+            width: 550px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 70px;
+           
+        }
+        .sign .direc .name{
+            width: 170px;
+            border-bottom: 2px solid #000;
+            color: #000;
+            
+        }
+        .sign .fac .name{
+            width: 170px;
+            border-bottom: 2px solid #000;
+            color: #000;
+        }
+        .sign p{
+            padding: 5px;
+            color: #5c5c61;
+            font-weight: 600;
+            text-transform: capitalize;
+            
+        }
+    </style>
 </head>
-
 <body>
+    <div class="content">
+        <p class="web"><i>www.learnopad.com</i></p>
+        <h1>CERTIFICATE</h1>
+        <h2>OF COMPLETEION</h2>
+        <div class="certify">
+            <p>This certificate is hereby bestowed by</p>
+        </div>
+        <div class="cert-name">
+            <h2>{{ name }} </h2>
+            <!-- <hr style="width: 100%;height: 2px;color: #000;"/> -->
+        </div>
+        <p class="info">in recognition of his/her hardwork and dedication in completing the {{ title }} from date to date </p>
 
+        <div class="sign">
+            <div class="direc">
+                <p class="name">Kamal </p>
+                <p>CEO</p>
+            </div>
+            <div class="fac">
+                <p class="name">{{ facilitator }} </p>
+                <p>Facilitator</p>
+            </div>
 
-
-  <h1 id="cert-title" style="display: flex;
-    justify-content: center;">
-    Certificate of Proficiency
-  </h1>
-  <br>
-
-  <p class="smaller" id="cert-declaration" style="display: flex;
-    justify-content: center;">
-    THIS IS TO CERTIFY THAT
-  </p>
-<br>
-  <h1 id="cert-holder" style="display: flex;
-    justify-content: center;">
-    {{ name }}
-  </h1>
-<br>
-  <p class="smaller" id='cert-completed-line' style="display: flex;
-    justify-content: center;">
-    has successfully completed the
-  </p>
-<br>
-  <h2 id="cert-course" style="display: flex;
-    justify-content: center;">
-    {{ title }}
-  </h2>
-  <img id="" src="https://i.ibb.co/nn4W7JP/logotiny.png">
-
-  <div id="cert-desc">
-    <p class="smaller" id='cert-details' style="margin: 15px;
-    text-align: center;">
-      which includes the {{ description }}
-    </p>
-  </div>
-
-  <br>
-  <p id="cert-from" class="smaller" style="margin-left: 15px;
-">
-    &nbsp; from www.learnopad.com
-  </p>
-
-  <p class="smaller" id='cert-issued' style="margin-left: 19px;
-">
-    <b>Issued on:</b> 6th September 2020.
-  </p>
-
-
-  <br><br>
-
-
-  <div id="cert-footer">
-    <div id="cert-issued-by">
-      <img id="cert-stamp" src="https://keymancollectibles.com/autographs/images/mannyr4.gif">
-      <hr>
-      <p>Issued by<br>THE COMPANY TMHM</p>
+        </div>
     </div>
-    <div id="cert-ceo-design">
-      <img id="cert-ceo-sign" src="https://keymancollectibles.com/autographs/images/mannyr4.gif">
-      <hr>
-      <p>Company Ceo<br>Paige Haddy</p>
-    </div>
-  </div>
-
 </body>
-
 </html>

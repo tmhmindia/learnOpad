@@ -11,13 +11,13 @@ class Order(models.Model):
     status = models.BooleanField(default=False)
     @property
     def get_cart_total(self):
-        orderitems = self.ordercourses_set.all()
+        orderitems = self.order_course.all()
         total = sum([item.get_total for item in orderitems])
         return total 
 
     @property
     def get_cart_items(self):
-        total = self.ordercourses_set.all().count()
+        total = self.order_course.all().count()
         
         return total    
    
@@ -25,7 +25,7 @@ class Order(models.Model):
 
 class OrderCourses(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE,related_name='order_course')
     course = models.ForeignKey(to='LandingPage.Course',on_delete=models.CASCADE)
     @property
     def get_total(self):

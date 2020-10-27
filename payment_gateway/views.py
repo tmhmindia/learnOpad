@@ -89,25 +89,37 @@ def create_order(request):
             
 
 
+def payment_status(request,order_id):
+    order=Order.objects.get(id=order_id)
+    order.status=True
+    order.save()
+    learner=Learner.objects.create(name=order.customer.first_name+" "+order.customer.last_name,user=order.customer)
+    learner.save(commit=False)
+    enrolmnt=enrollment.objects.create(Lid=learner,Cid=order.order_course.course)
+    enrolmnt.save()
+    learner.enrolled=enrolmnt
+    learner.save()
+    return redirect('home')
+    
 
 #Razor pay payment status after successfull payment
-def payment_status(request):
-    print(request.POST)
-    response = request.POST
+# def payment_status(request):
+#     print(request.POST)
+#     response = request.POST
 
-    params_dict = {
-        'razorpay_payment_id' : response['razorpay_payment_id'],
-        'razorpay_order_id' : response['razorpay_order_id'],
-        'razorpay_signature' : response['razorpay_signature']
-    }
+#     params_dict = {
+#         'razorpay_payment_id' : response['razorpay_payment_id'],
+#         'razorpay_order_id' : response['razorpay_order_id'],
+#         'razorpay_signature' : response['razorpay_signature']
+#     }
 
-    print("payment ho gai ")
-    # VERIFYING SIGNATURE
-    try:
-        status = client.utility.verify_payment_signature(params_dict)
-        #successOnRegistration(request.user.email,'Afterpayment.png')
-        return render(request, 'payment_gateway/order_summary.html', {'status': 'Payment Successful'})
-    except:
-        return render(request, 'payment_gateway/order_summary.html', {'status': 'Payment Faliure!!!'})
+#     print("payment ho gai ")
+#     # VERIFYING SIGNATURE
+#     try:
+#         status = client.utility.verify_payment_signature(params_dict)
+#         #successOnRegistration(request.user.email,'Afterpayment.png')
+#         return render(request, 'payment_gateway/order_summary.html', {'status': 'Payment Successful'})
+#     except:
+#         return render(request, 'payment_gateway/order_summary.html', {'status': 'Payment Faliure!!!'})
 
 

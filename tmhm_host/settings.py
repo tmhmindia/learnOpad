@@ -66,12 +66,12 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.google',
     'widget_tweaks',
     'myauth',
-
+    'channels',
     'rest_framework',
     'payment_gateway',
     'mailing',
     # endVijay
-
+    'chat',
     #amir
     'wkhtmltopdf',
 ]
@@ -101,6 +101,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'chat.middileware.RequestMiddleware'
+
     
 ]
 
@@ -125,6 +127,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'tmhm_host.wsgi.application'
+ASGI_APPLICATION = "tmhm_host.routing.application"
+
 # By vijay
 ''' for google authentication integration '''
 # AUTHENTICATION_BACKENDS = [
@@ -182,6 +186,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [('127.0.0.1', 6379)],
+#         },
+#     },
+# }
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+   }
+}
 # By Vijay
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
