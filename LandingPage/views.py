@@ -29,9 +29,8 @@ from .utils import *
 def home(request):
     if request.method=="POST":
         query=request.POST["search"]
-        # search_results=
-        # cat = Category.objects.all()
-        # subcat = SubCategory.objects.all()
+        cat = Category.objects.all()
+        subcat = SubCategory.objects.all()
         # course = Course.objects.all()
         course = Course.objects.filter(Q(title__icontains=query) or Q(subCat_id__name__icontains=query)).order_by('Cid')
         # query = request.GET.get('query')
