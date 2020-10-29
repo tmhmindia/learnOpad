@@ -103,18 +103,18 @@
             <p>This certificate is hereby bestowed by</p>
         </div>
         <div class="cert-name">
-            <h2>{{ name }} </h2>
+            <h2> </h2>
             <!-- <hr style="width: 100%;height: 2px;color: #000;"/> -->
         </div>
-        <p class="info">in recognition of his/her hardwork and dedication in completing the {{ title }} from date to date </p>
-        
+        <p class="info">in recognition of his/her hardwork and dedication in completing the  from date to date </p>
+
         <div class="sign">
             <div class="direc">
                 <p class="name">Kamal </p>
                 <p>CEO</p>
             </div>
             <div class="fac">
-                <p class="name">{{ facilitator }} </p>
+                <p class="name"> </p>
                 <p>Facilitator</p>
             </div>
 

@@ -1,4 +1,4 @@
-from weasyprint import HTML
+
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import *
@@ -12,8 +12,8 @@ from io import BytesIO
 from django.template.loader import get_template
 from django.views import View
 from xhtml2pdf import pisa
+import pdfcrowd
 
-from django.core.files.storage import FileSystemStorage
 
 
 # Create your views here.
@@ -183,7 +183,12 @@ class GeneratePDF(View):
             'facilitator':course.offering.all()[0].name
         }
         html = template.render(context)
-        # html = HTML(string=html_string)
+        return HttpResponse(html)
+
+        # import pdfkit 
+        # pdf= pdfkit.from_string(html, False) 
+
+        # # html = HTML(string=html_string)
         # html.write_pdf(target='/tmp/certificate.pdf')
 
         # fs = FileSystemStorage('/tmp')
@@ -193,7 +198,7 @@ class GeneratePDF(View):
         #     return response
 
         # return response
-        pdf = render_to_pdf('learners/dashboard/cert.html', context)
+        # pdf = render_to_pdf('learners/dashboard/cert.html', context)
         if pdf:
             response = HttpResponse(pdf, content_type='application/pdf')
             filename = "Invoice_%s.pdf" %("12341231")

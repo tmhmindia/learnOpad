@@ -165,7 +165,7 @@ class ChatConsumer(WebsocketConsumer):
         data={}
         filename=None
         if text_data:
-            if '.' == text_data[len(text_data)-3]:
+            if '.' in text_data:
                 self.scope['session']['filename']=text_data
                 self.scope['session'].save()
             else:
