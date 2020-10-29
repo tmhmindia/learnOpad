@@ -33,7 +33,7 @@ SECRET_KEY = '5w^7@844)#j4!=w*8_sd_mr(0!q42n3@3@)gab91r!opc32t^9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-# production
+#production
 # DEBUG = False
 # ALLOWED_HOSTS = ['www.learnopad.com', 'learnopad.com', '68.183.81.120', '139.59.42.126', '127.0.0.1']
 
@@ -66,12 +66,12 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.google',
     'widget_tweaks',
     'myauth',
-
+    'channels',
     'rest_framework',
     'payment_gateway',
     'mailing',
     # endVijay
-
+    'chat',
     #amir
     'wkhtmltopdf',
 ]
@@ -101,6 +101,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'chat.middileware.RequestMiddleware'
+
     
 ]
 
@@ -125,6 +127,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'tmhm_host.wsgi.application'
+ASGI_APPLICATION = "tmhm_host.routing.application"
+
 # By vijay
 ''' for google authentication integration '''
 # AUTHENTICATION_BACKENDS = [
@@ -182,6 +186,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [('127.0.0.1', 6379)],
+#         },
+#     },
+# }
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+   }
+}
 # By Vijay
 SOCIALACCOUNT_PROVIDERS = {
     'google': {

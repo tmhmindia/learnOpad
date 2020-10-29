@@ -33,15 +33,16 @@ def create_order(request):
         for id in course:
             subcat=SubCategory.objects.get(subCat_id=id)
             catlist.append(subcat.name)
-        if(data['plan']==1):
-            data['order_amount']=4999
-        elif(data['plan']==2):
-            data['order_amount']=7499
+        print(data['plan'])
+        if(data['plan']=='1'):
+            data['order_amount']=1
+        elif(data['plan']=='2'):
+            data['order_amount']=10
         else:
-            data['order_amount']=9999
+            data['order_amount']=100
 
-        
-        order_amount=len(catlist)*data['order_amount']*100
+        print(data['order_amount'])
+        order_amount=data['order_amount']*100
         context['total']=order_amount/100
         data[order_amount]=context['total']
         print("checkpoint 1")
@@ -88,25 +89,37 @@ def create_order(request):
             
 
 
+def payment_status(request,order_id):
+    order=Order.objects.get(id=order_id)
+    order.status=True
+    order.save()
+    learner=Learner.objects.create(name=order.customer.first_name+" "+order.customer.last_name,user=order.customer)
+    learner.save(commit=False)
+    enrolmnt=enrollment.objects.create(Lid=learner,Cid=order.order_course.course)
+    enrolmnt.save()
+    learner.enrolled=enrolmnt
+    learner.save()
+    return redirect('home')
+    
 
 #Razor pay payment status after successfull payment
-def payment_status(request):
-    print(request.POST)
-    response = request.POST
+# def payment_status(request):
+#     print(request.POST)
+#     response = request.POST
 
-    params_dict = {
-        'razorpay_payment_id' : response['razorpay_payment_id'],
-        'razorpay_order_id' : response['razorpay_order_id'],
-        'razorpay_signature' : response['razorpay_signature']
-    }
+#     params_dict = {
+#         'razorpay_payment_id' : response['razorpay_payment_id'],
+#         'razorpay_order_id' : response['razorpay_order_id'],
+#         'razorpay_signature' : response['razorpay_signature']
+#     }
 
-    print("payment ho gai ")
-    # VERIFYING SIGNATURE
-    try:
-        status = client.utility.verify_payment_signature(params_dict)
-        successOnRegistration(request.user.email,'Afterpayment.png')
-        return render(request, 'payment_gateway/order_summary.html', {'status': 'Payment Successful'})
-    except:
-        return render(request, 'payment_gateway/order_summary.html', {'status': 'Payment Faliure!!!'})
+#     print("payment ho gai ")
+#     # VERIFYING SIGNATURE
+#     try:
+#         status = client.utility.verify_payment_signature(params_dict)
+#         #successOnRegistration(request.user.email,'Afterpayment.png')
+#         return render(request, 'payment_gateway/order_summary.html', {'status': 'Payment Successful'})
+#     except:
+#         return render(request, 'payment_gateway/order_summary.html', {'status': 'Payment Faliure!!!'})
 
 

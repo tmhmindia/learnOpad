@@ -112,7 +112,10 @@ def CourseCreationEmailToFacilitator(Course):
     recipient_list = ['vijaygwala97@gmail.com',]
     context={
         'name':"Vijay Gwala",
-        'msg':"This is to notify "+ name +" ,registration process for "+ catlist +" on LearnOpad has been successfully completed. Please check the facilitator 's profile and revert back to the facilitator."
+        'msg':'''The course you have created on the LearnOpad Platform is successfully uploaded and therefore open to interested aspirants to enroll.
+Course name : '''+course.title+'''
+Course code : '''+course.code+'''
+NOTE : The course code provided above is unique to your '''+ course.title +''' course, you can use that unique code to edit your course. Don't share it with anyone.'''
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
    

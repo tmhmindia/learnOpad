@@ -64,19 +64,17 @@ def cookieCart(request):
 
 def cartData(request):
     context={}
-   
     if request.user.is_authenticated:
         try:
             cart = json.loads(request.COOKIES['cart'])
         except:
             cart = {}
         if bool(cart):
-            print(cart,"c 1") 
             CreateOrderWithAnonymousCart(request,cart)
-        print(cart," c 2")
+        
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, status=False)
-        items = order.ordercourses_set.all()
+        items = order.order_course.all()
         cartItems = order.get_cart_items
         name = request.user.first_name+" "+request.user.last_name
     
