@@ -11,8 +11,8 @@ from datetime import timedelta
 from io import BytesIO
 from django.template.loader import get_template
 from django.views import View
-from xhtml2pdf import pisa
-import pdfcrowd
+
+
 
 
 
