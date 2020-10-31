@@ -160,7 +160,7 @@ var options = {
     "handler": function (response){
       swal("Done!", "Your Payment is Successfull!", "success");
       setTimeout(function(){
-            window.location.href = '/payment/successfull/';
+            window.location.href = '/payment/successfull/{{order.id}}/';
          }, 5000);
         
     },

@@ -11,8 +11,7 @@ from datetime import timedelta
 from io import BytesIO
 from django.template.loader import get_template
 from django.views import View
-from xhtml2pdf import pisa
-import pdfcrowd
+from learners.certificate.certificate import generateCertificate
 
 
 
@@ -174,38 +173,25 @@ def render_to_pdf(template_src, context_dict={}):
 
 class GeneratePDF(View):
     def get(self, request, id,*args, **kwargs):
-        template = get_template('learners/dashboard/cert.html')
         course= Course.objects.get(Cid=id)
-        context = {
-            'title':course.title,
-            'description':Course.objects.get(Cid=id).description,
-            'name': str(request.user.first_name)+" "+str(request.user.last_name),
-            'facilitator':course.offering.all()[0].name
-        }
-        html = template.render(context)
-        return HttpResponse(html)
+        learner=request.user.learner
+        certificate_name=None
+        info={}
+        try:
+            certificate_name=Certificate.objects.get(certificate_number=learner.name+str(learner.Lid)+str(course.Cid))
+        except:
+            certificate_name=None
+        if certificate_name is None:
+            info=generateCertificate(learner,course)
+            certificate=Certificate(certificate_number=info['certificate_name'],learner=learner,status='issued',course=course)
+            certificate.save()
+        else:
+            info['path']=os.path.join(settings.MEDIA_ROOT,'certificates',certificate_name)
 
-        # import pdfkit 
-        # pdf= pdfkit.from_string(html, False) 
+        image_data = open(info['path'], "rb").read()
+        return HttpResponse(image_data, content_type="image/jpeg")
 
-        # # html = HTML(string=html_string)
-        # html.write_pdf(target='/tmp/certificate.pdf')
 
-        # fs = FileSystemStorage('/tmp')
-        # with fs.open('certificate.pdf') as pdf:
-        #     response = HttpResponse(pdf, content_type='application/pdf')
-        #     response['Content-Disposition'] = 'attachment; filename="certificate.pdf"'
-        #     return response
+        
 
-        # return response
-        # pdf = render_to_pdf('learners/dashboard/cert.html', context)
-        if pdf:
-            response = HttpResponse(pdf, content_type='application/pdf')
-            filename = "Invoice_%s.pdf" %("12341231")
-            content = "inline; filename='%s'" %(filename)
-            # download = request.GET.get("download")
-            # if download:
-            content = "attachment; filename='%s'" %(filename)
-            response['Content-Disposition'] = content
-            return response
-        return HttpResponse("Not found")
+       

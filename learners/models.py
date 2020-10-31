@@ -76,8 +76,8 @@ class Reply(models.Model):
 
 class Certificate(models.Model):
     certificate_id=models.AutoField(primary_key=True)
-    certificate_number=models.CharField(max_length=100,blank=True,null=True,unique=True)
-    learner=models.OneToOneField(Learners, on_delete=models.CASCADE,null=True,related_name='learner_certificate')
+    certificate_number=models.CharField(max_length=100,blank=True,null=True)
+    learner=models.ForeignKey(Learners, on_delete=models.CASCADE,null=True,related_name='learner_certificate')
     status=models.CharField(max_length=100,blank=True,null=True)
-    course=models.OneToOneField(Course, on_delete=models.CASCADE,null=True,related_name='course_certificate')
+    course=models.ForeignKey(Course, on_delete=models.CASCADE,null=True,related_name='course_certificate')
     

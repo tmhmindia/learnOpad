@@ -10,6 +10,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 import razorpay
 client = razorpay.Client(auth=("rzp_test_0G5HtLCg0WpC26", "y8iPiSBFRf8w2Y1W0L6Q7F55"))
 from mailing.views import *
+from learners.models import *
 
     
 #facilitator order subscription 
@@ -93,8 +94,8 @@ def payment_status(request,order_id):
     order=Order.objects.get(id=order_id)
     order.status=True
     order.save()
-    learner=Learner.objects.create(name=order.customer.first_name+" "+order.customer.last_name,user=order.customer)
-    learner.save(commit=False)
+    learner=Learners.objects.create(name=order.customer.first_name+" "+order.customer.last_name,user=order.customer)
+    learner.save()
     enrolmnt=enrollment.objects.create(Lid=learner,Cid=order.order_course.course)
     enrolmnt.save()
     learner.enrolled=enrolmnt

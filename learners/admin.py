@@ -32,3 +32,4 @@ class ReviewsAdmin(admin.ModelAdmin):
 admin.site.register(Learners,LearnersAdmin)
 admin.site.register(LQueries,LQueryAdmin)
 admin.site.register(Reviews,ReviewsAdmin)
+admin.site.register(Certificate)
