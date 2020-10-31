@@ -1,5 +1,6 @@
 {% load static %}
 {% load filters %}
+{% load has_group %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -22,14 +23,16 @@
     <div id="sidepanel">
       <div id="profile">
         <div class="wrap">
-          <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
+          {% if sender|has_group:"Learners" %}
+          <img id="profile-img" src="{{sender.learner.profile.url}}" class="online" alt="" />
+          {% else %}
+          <img id="profile-img" src="{{sender.user.facilitator.profile.url}}" class="online" alt="" />
+          {% endif %}
           <p>{{sender.first_name}} {{sender.last_name}}</p>
           <!-- <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i> -->
           <div id="status-options">
             <ul>
               <li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
-              <li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
-              <li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
               <li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
 
               
@@ -65,7 +68,7 @@
           <li class="contact active" id="group-{{group.id}}"onclick="redirect('{{group.get_absolute_url}}')">
             <div class="wrap">
               <span class="contact-status busy"></span>
-              <img src="{{ group.icon.url }}" alt="" />
+              <img src="{{ group.get_group_receiver_profileUrl }}" alt="" />
               <div id="meta-{{group.id}}"class="meta">
                 <p class="name">{{ group.get_group_receiver }}</p>
               
@@ -88,7 +91,12 @@
     </div>
     <div class="content">
       <div class="contact-profile">
-        <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+        {% if receiver|has_group:"Learners" %}
+        <img src="{{receiver.learner.profile.url}}" alt="" />
+        {% else %}
+        <img src="{{receiver.user.facilitator.profile.url}}" alt="" />
+        {% endif %}
+        
         <p>{{ receiver.first_name }} {{receiver.last_name}}</p> 
        <div id="mystatus"></div>
         <div class="social-media">

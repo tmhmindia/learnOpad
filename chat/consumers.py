@@ -165,7 +165,7 @@ class ChatConsumer(WebsocketConsumer):
         data={}
         filename=None
         if text_data:
-            if '.' in text_data:
+            if text_data.split(".")[-1] in ['.jpg','.png','.pdf','.jpeg','.zip','.txt']:
                 self.scope['session']['filename']=text_data
                 self.scope['session'].save()
             else:

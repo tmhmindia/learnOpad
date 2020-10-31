@@ -38,6 +38,42 @@ class ChatGroup(Group):
             sender=users[1]
             receiver=users[0]
         return receiver.first_name+" "+receiver.last_name
+    def get_group_receiver_profileUrl(self):
+        users=CustomUser.objects.filter(groups__name=self.name)
+        request = RequestMiddleware(get_response=None)
+        request = request.thread_local.current_request
+
+        if request.user.email == users[0].email:
+            sender=users[0]
+            receiver=users[1]
+        else:
+            sender=users[1]
+            receiver=users[0]
+        url=None
+        if receiver.groups.filter(name='Learners').exists():
+            url=receiver.learner.profile.url
+        if receiver.groups.filter(name='Facilitators').exists():
+            url=receiver.user.facilitator.profile.url
+        return url
+    def get_group_sender_profileUrl(self):
+        users=CustomUser.objects.filter(groups__name=self.name)
+        request = RequestMiddleware(get_response=None)
+        request = request.thread_local.current_request
+
+        if request.user.email == users[0].email:
+            sender=users[0]
+            receiver=users[1]
+        else:
+            sender=users[1]
+            receiver=users[0]
+        url=None
+        if sender.groups.filter(name='Learners').exists():
+            url=receiver.learner.profile.url
+        if sender.groups.filter(name='Facilitators').exists():
+            url=receiver.user.facilitator.profile.url
+        return url
+        
+
 
 class Message(models.Model):
     author = models.ForeignKey(CustomUser, related_name='author_messages', on_delete=models.CASCADE)
