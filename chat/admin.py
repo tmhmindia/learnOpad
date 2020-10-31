@@ -11,8 +11,8 @@ class Messageadmin(admin.ModelAdmin):
 admin.site.register(Message,Messageadmin)
 class ChatGroupAdmin(admin.ModelAdmin):
     """ enable Chart Group admin """
-    list_display = ('id', 'name', 'description', 'icon', 'mute_notifications', 'date_created', 'date_modified')
-    list_filter = ('id', 'name', 'description', 'icon', 'mute_notifications', 'date_created', 'date_modified')
+    list_display = ('id', 'name', 'description',  'mute_notifications', 'date_created', 'date_modified')
+    list_filter = ('id', 'name', 'description',  'mute_notifications', 'date_created', 'date_modified')
     list_display_links = ('name',)
 
 admin.site.register(ChatGroup, ChatGroupAdmin)

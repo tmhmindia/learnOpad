@@ -10,9 +10,11 @@ def CreateOrder(request,productId,action=None):
     orderItem, created = OrderCourses.objects.get_or_create(order=order, course=product)
     if action == 'add':
         orderItem.save()
+        request.session['order_id']=order.id
     if action == 'remove':
         #print(orderItem)
         orderItem.delete()
+        del request.session['order_id']
         #print(orderItem)
         
         
@@ -64,6 +66,7 @@ def cookieCart(request):
 
 def cartData(request):
     context={}
+    cart={}
     if request.user.is_authenticated:
         try:
             cart = json.loads(request.COOKIES['cart'])

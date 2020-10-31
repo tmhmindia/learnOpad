@@ -11,6 +11,7 @@ import razorpay
 client = razorpay.Client(auth=("rzp_test_0G5HtLCg0WpC26", "y8iPiSBFRf8w2Y1W0L6Q7F55"))
 from mailing.views import *
 from learners.models import *
+from chat.models import *
 
     
 #facilitator order subscription 
@@ -92,15 +93,50 @@ def create_order(request):
 
 def payment_status(request,order_id):
     order=Order.objects.get(id=order_id)
+    print(order)
     order.status=True
     order.save()
+    order_c=order.order_course.all()
     learner=Learners.objects.create(name=order.customer.first_name+" "+order.customer.last_name,user=order.customer)
     learner.save()
-    enrolmnt=enrollment.objects.create(Lid=learner,Cid=order.order_course.course)
-    enrolmnt.save()
-    learner.enrolled=enrolmnt
-    learner.save()
-    return redirect('home')
+    for enroll_course in order_c:
+        learner.enrolled.add(enroll_course.course)
+        learner.save()
+        chatgroup=None
+        try:
+            chatgroup=ChatGroup.objects.get(name=learner.name+str(learner.Lid)+str(enroll_course.course.offering.all()[0].Fid))
+        except:
+            chatgroup=None
+        if chatgroup is None:
+            chatgroup=ChatGroup(name=learner.name+str(learner.Lid)+str(enroll_course.course.offering.all()[0].Fid))
+            chatgroup.save()
+            learner.user.groups.add(chatgroup)
+            enroll_course.course.offering.all()[0].user.user.groups.add(chatgroup)
+    
+
+        
+        facilitator_user_profile=None
+        try:
+            facilitator_user_profile=UserProfile.objects.get(user=enroll_course.course.offering.all()[0].user.user)
+        except:
+            facilitator_user_profile=None
+        if facilitator_user_profile is None:    
+            facilitator_user_profile=UserProfile(user=enroll_course.course.offering.all()[0].user.user,status=False)
+            facilitator_user_profile.save()
+        try:
+            learner_user_profile=UserProfile.objects.get(user=learner.user)
+        except:
+            learner_user_profile=None
+        if learner_user_profile is None:    
+            learner_user_profile=UserProfile(user=learner.user,status=False)
+            learner_user_profile.save()
+        
+
+    if not learner.user.groups.filter(name='Learners').exists():
+        group = Group.objects.get(name='Learners')
+        learner.user.groups.add(group)
+
+    return redirect('/learner/index/')
     
 
 #Razor pay payment status after successfull payment
