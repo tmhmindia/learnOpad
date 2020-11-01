@@ -28,6 +28,9 @@
 
 {% block stylesheet %}
     <style>
+        .active::after{
+            content: none;
+        }
         .figure-caption {
             font-size: 90%;
             color: #6c757d;
@@ -112,6 +115,38 @@
             line-height: 1.5;
             margin-bottom: 1.25rem;
             font-weight: 400;
+        }
+        .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link{
+            border-radius: 0;
+            padding: 10px 20px;
+            background-color: #ececec;
+            margin: 0 0px;
+        }
+        .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+
+            color: #fff;
+            background-color: #00beff;
+
+        }
+        .tab-pane{
+            padding: 30px;
+           
+           
+
+        }
+        .tab-pane p{
+            font-weight: 500;
+        }
+        .tab-content>.active {
+            display: block;
+            background-color: #fff;
+            border: 1px solid #ececec;
+        }
+        .form_tab{
+            padding: 20px 25px;
+            border: 1px solid;
+            border-radius: 10px;
+            box-shadow: 5px 10px 8px #888888;
         }
         
         @media only screen and (max-width: 480px) {}
@@ -201,125 +236,52 @@
                 </div>
             </div>
         </div><br><br><br><br>
-        <div class="container">
-            <div class="row justify-content-md-center" id="col1">
-                
-                <div class="col-3 col-lg-3">
-                    <div class="card text-light " id="col2">
-                        <div class="card-header bg-info" style="color: black">Filter</div>
-                        <form method="GET">
-                        <div class="card-body bg-secondary">
-                            <h5 class="card-title" style="color:#fff;">Category</h5>
-                            
-                            <div class="input-group mb-3">
-                                <select class="custom-select" id="inputGroupSelect01" name="subcat">
-                                                <option selected value="None">Choose...</option>
-                                                {% for sub in subcat %}
-                                                    <option value="{{ sub.name }}" name="subcat">{{ sub.name }}</option>
-                                                {% endfor %}
-                                              </select>
-                                              
-                            </div>
-                            <h5 class="card-title" style="color:#fff;">Partner</h5>
-                            <div class="input-group mb-3">
-
-                                <select class="custom-select" id="inputGroupSelect01" name="partner">
-                                             <option selected value="None">Choose...</option>
-                                             {% for part in partners %}
-                                           <option value="{{ part.name }}">{{ part.name }}</option>
-                                            {% endfor %}
-        
-                                    </select>
-                            </div>
+        <div class="container  mb-5 ">
+            <div class="row">
+                <div class="col-md-7 pt-5 col-12">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                        </li>
+                        
+                      </ul>
+                      <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                           <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero quod alias minus consequatur reiciendis nihil quos, quasi unde suscipit, consequuntur harum officia ut repellat ducimus facere aut eaque laborum voluptas.</p> 
                         </div>
-                        <div class="input-group mb-3 mt-3">
-
-                            <select class="custom-select" id="inputGroupSelect01" name="lang">
-                                 <br> 
-                                               <option selected value="None">Language</option>
-                                   <option value="{{ English }}">English</option>
-                                    <option value="{{ Hindi }}">Hindi</option>
-                   </select>
-                        </div>
-                        <div class="input-group mb-5">
-
-                            <select class="custom-select" id="inputGroupSelect01" name="level">
-                       <option selected value="None">Level</option>
-                          <option value="{{ Beginner }}">Beginner</option>
-                   <option value="{{ Advanced }}">Advanced</option>
-                   </select>
-                        </div>
-
-                        <!-- <div class="custom-control custom-switch" style="margin-left: 30px;color: black;margin-right: 30px;">
-                            <input type="checkbox" class="custom-control-input bg-light" id="customSwitch1" style="color: aqua">
-                            <label class="custom-control-label" for="customSwitch1"><h5>Certified</h5></label>
-                        </div>
-                        <div class="custom-control custom-switch" style="margin-left: 30px;color: black;">
-                            <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                            <label class="custom-control-label" for="customSwitch2"><h5>Guided Projects</h5></label>
-                        </div>
-                        <div class="custom-control custom-switch" style="margin-left: 30px;color: black;">
-                            <input type="checkbox" class="custom-control-input" id="customSwitch4">
-                            <label class="custom-control-label" for="customSwitch4"><h5>Training with offers</h5></label>
-                            <br> <br></div> -->
-
-                        <div class="card-body">
-                            <center><button type="submit" class="btn btn-link"><b>Apply</b></a></center>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                           <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero quod alias minus consequatur reiciendis nihil quos, quasi unde suscipit, consequuntur harum officia ut repellat ducimus facere aut eaque laborum voluptas.</p>
                         </div>
                         
-                    </div>
-                    </form>
-                    
-
+                      </div>
                 </div>
-                    
-                <div class=" col-lg-9 col-9" id="col1">
-
-                    <div class="row">
-                        {% for crse in course %}
-                        <div class="col-6">
-                            <div class=" card tutorial-item mb-4 " >
-                                <div class=" ">
-                                    <img src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Image" class=" " style="">
-                                </div>
-                                <div>
-                                    <h3><a href="# ">{{ crse.title }}</a></h3>
-                                    <p> {{ crse.description }}
-                                    </p>
-
-                                    <p class="mb-0 ">
-                                        <span class="brand-react h5 "></span>
-                                        <span class="brand-javascript h5 "></span>
-                                    </p>
-                                    <p class="meta ">
-                                        <span class="mr-2 mb-2 ">{{ crse.duration }}</span>
-                                        <span class="mr-2 mb-2 ">{{ crse.level }}</span>
-                                        <span class="mr-2 mb-2 ">Jun 18, 2020</span>
-                                    </p>
-
-                                    <p><a href="{% url 'course' crse.Cid %}" class="btn btn-primary custom-btn ">View</a></p>
-                                </div>
+                <div class="col-md-5 col-12 pt-5">
+                    <div class="form_tab">
+                        <form>
+                            <div class="form-group">
+                              <label for="formGroupExampleInput">Name</label>
+                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name">
                             </div>
-                        </div>
-                        {% endfor %}
-                    </div>    
-
-                    <div class="custom-pagination ">
-                        <ul class="pagination_list">
-                            {% if page_obj.has_previous %}
-                            <li class="active"><a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-left"
-                                        aria-hidden="true"></i></a></li>
-                            {% endif %}
-                            <li><a href="#">{{ page_obj.number }}</a></li>
-                        
-                            {% if page_obj.has_next %}
-                            <li><a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            {% endif %}
-                        </ul>
+                            <div class="form-group">
+                              <label for="formGroupExampleInput2">Email</label>
+                              <input type="email" class="form-control" id="formGroupExampleInput2" placeholder="Email">
+                            </div>
+                            <div class="form-group ">
+                                <label for="inputState">Courses</label>
+                                <select id="inputState" class="form-control">
+                                  <option selected>Choose...</option>
+                                  <option>...</option>
+                                </select>
+                              </div>
+                              <button type="submit" class="btn btn-primary">Submit</button>
+                          </form>
                     </div>
-                </div>
 
-            </div><br><br>
+                </div>
+            </div>
         </div>
             <div class="row justify-content-center justify-content-around my-center-row " style="background-color:rgb(64, 65, 68);color: #b0d2e6; ">
                 <div class="col-lg-6 col-md-4 col-sm-6 col-xs-8 my-center-col1 ">
@@ -379,7 +341,7 @@
 
 <script src="{% static 'LandingPage/js/jquery-3.3.1.min.js' %}"></script>
 <script src="{% static 'LandingPage/js/popper.min.js' %}"></script>
-<script src="{% static 'LandingPage/js/bootstrap.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 <script src="{% static 'LandingPage/js/owl.carousel.min.js' %}"></script>
 <script src="{% static 'LandingPage/js/jquery.sticky.js' %}"></script>
 <script src="{% static 'LandingPage/js/jquery.waypoints.min.js' %}"></script>
