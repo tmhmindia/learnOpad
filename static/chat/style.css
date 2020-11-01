@@ -88,7 +88,7 @@ body {
   width: 60px;
   border-radius: 50%;
   padding: 3px;
-  border: 2px solid #e74c3c;
+  
   height: auto;
   float: left;
   cursor: pointer;
@@ -103,9 +103,7 @@ body {
     margin-left: 4px;
   }
 }
-#frame #sidepanel #profile .wrap img.online {
-  border: 2px solid #2ecc71;
-}
+
 #frame #sidepanel #profile .wrap img.away {
   border: 2px solid #f1c40f;
 }
@@ -520,7 +518,11 @@ body {
   width: 60px;
   border-radius: 50%;
   float: left;
+  border: 2px solid #e74c3c;
   margin: 9px 12px 0 9px;
+}
+#frame .content .contact-profile img.online {
+  border: 2px solid #2ecc71;
 }
 #frame .content .contact-profile p {
   float: left;
