@@ -9,7 +9,7 @@
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">   
     <link rel="stylesheet" href="{% static 'chat/style.css' %}">
     <style>
       .file-input input {
@@ -100,9 +100,7 @@
         <p>{{ receiver.first_name }} {{receiver.last_name}}</p> 
        <div id="mystatus"></div>
         <div class="social-media">
-          <i class="fa fa-facebook" aria-hidden="true"></i>
-          <i class="fa fa-twitter" aria-hidden="true"></i>
-          <i class="fa fa-instagram" aria-hidden="true"></i>
+         
         </div>
       </div>
       <div id="message" class="messages">
@@ -262,14 +260,16 @@ document.querySelector('#chat-file-submit').onclick = function(e) {
       var imgTag = document.createElement('img');
       imgTag.classList.add('profileImg');
       var divp=document.createElement('div');
+      divp.classList.add('mescon');
       var nameTag = document.createElement('p');
       var i=document.createElement('i')
       i.classList.add('fa', 'fa-file-text', 'fa-7x');
       
-      
+      divp.appendChild(nameTag);
       var pTag = document.createElement('p');
       pTag.classList.add("mesp");
       nameTag.classList.add("timep");
+      divp.appendChild(pTag);
       var blobTag = document.createElement('img');
       var aTag = document.createElement('a');
       var imganchor= document.createElement('a');
@@ -292,14 +292,13 @@ document.querySelector('#chat-file-submit').onclick = function(e) {
       blobTag.src='http://127.0.0.1:8000'+data.blob
       imganchor.href='http://127.0.0.1:8000'+data.blob
       imganchor.appendChild(blobTag)
-      msgListTag.appendChild(imganchor);
+      pTag.appendChild(imganchor);
       }
       else{
           aTag.href='http://127.0.0.1:8000'+data.blob
         aTag.textContent=filename;
-        aTag.appendChild(i)
-
-      msgListTag.appendChild(aTag);
+        pTag.appendChild(i);
+        pTag.appendChild(aTag);
       }
       
       }else{
@@ -316,7 +315,7 @@ document.querySelector('#chat-file-submit').onclick = function(e) {
        
       }
       nameTag.textContent = data.timestamp.substring(11, 16);
-      divp.appendChild(nameTag);
+      
       document.querySelector('#chat-log').appendChild(msgListTag);
       var objDiv = document.getElementById("message");
         objDiv.scrollTop = objDiv.scrollHeight;
