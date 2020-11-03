@@ -1,5 +1,6 @@
 {% extends '../base.html' %}
 {% load static %}
+{% load filters %}
 <!-- ---------------------------------------------- -->
     {% block title %}
 Create Courses
@@ -287,17 +288,22 @@ Create Courses
                                 <form action="" method="post">
                                     {% csrf_token %}
                                     <div class="form-group ">
-                                        <label for="inputEmail4">Course Code</label>
-                                        <input type="text"  class="form-control" id="id_code" placeholder="code">
-                                    </div>
+                                        <label for="inputState">Courses</label>
+                                        <select id="select_course" class="form-control">
+                                          <option value="empty">Choose...</option>
+                                          {% for course in courses %}
+                                          <option value="{{course.Cid}}">{{course.title}}</option>
+                                          {% endfor %}
+                                        </select>
+                                      </div>
                                     <div class="form-group">
-                                        <input class="" type="radio" name="updvid" id="updvid" value="update" onclick="videoupdtdel()" >
+                                        <input class="" type="radio" name="check_video" id="updvid" value="update" onclick="videoupdtdel()" >
                                         <label class="form-check-label" for="exampleRadios1">
                                          Update
                                         </label>
                                       </div>
                                     <div class="form-group">
-                                        <input class="" type="radio" name="updvid" id="dltvid" value="delete"  onclick="videoupdtdel()" >
+                                        <input class="" type="radio" name="check_video" id="dltvid" value="delete"  onclick="videoupdtdel()" >
                                         <label class="form-check-label" for="exampleRadios1">
                                           Delete
                                         </label>
@@ -340,10 +346,8 @@ Create Courses
                                     </form>
                                 </div>
                                 <div class="deletevid" id="deletevid">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">Video 1 : <a href="" class="delete-btn"> Delete</a> </li>
-                                        <li class="list-group-item">Video 2 : <a href="" class="delete-btn"> Delete</a> </li>
-                                        <li class="list-group-item">Video 3 : <a href="" class="delete-btn"> Delete</a> </li>
+                                    <ul id="delete_list" class="list-group">
+                                              
                                     </ul>
                                 </div>
                             </div>
@@ -394,6 +398,63 @@ Create Courses
 {% endblock content %}
 
 {% block javascript %}
+<script>
+function validate()
+{
+ var ddl = document.getElementById("select_course");
+ var selectedValue = ddl.options[ddl.selectedIndex].value;
+    if (selectedValue == "empty")
+   {
+        alert("You have not selected any Course");
+        return false;
+   }
+   return true;
+}
+
+$("input[name='check_video']").change(function(){
+
+   var check=validate();
+   if(check){
+    var id=$('#select_course').val();
+    $.ajax({        
+            type: "GET",
+            url: "/delete/videos/?Cid="+id,
+            success: function(data) {
+              del_list=data.videos_name
+              id_list=data.videos_id
+              if(id_list.length === 0){
+                var h3=document.createElement("h3");
+                    h3.textContent="No Videos are Available !";
+                    document.getElementById("deletevid").appendChild(h3);
+
+
+              }
+              else{
+              for (i = 0; i < del_list.length; i++) {
+                var li = document.createElement("li");
+                    li.classList.add('list-group-item');
+
+                var a = document.createElement("a");
+                    a.textContent="Delete"
+                    a.href="/delete/videos/?Vid="+id_list[i];
+                    a.classList.add('delete-btn');
+                var text = document.createTextNode(del_list[i]);
+                li.appendChild(text);
+                li.appendChild(a);
+                document.getElementById("delete_list").appendChild(li);
+}
+              }// end else
+              
+              
+            },
+
+            error: function(response, error) {
+                alert(error);  
+            }
+        });
+   } // check validate
+});
+</script>
  <script>
  
     $(document).ready(function(){

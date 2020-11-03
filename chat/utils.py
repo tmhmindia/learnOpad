@@ -14,11 +14,7 @@ def BytesToImg(image_data):
 
 
 def BytesToFile(obj,name):
-    print(name)
-    template = get_template('learners/dashboard/cert.html')
-
-    html = template.render()
-    obj = io.BytesIO(html.encode("ISO-8859-1"))
+    obj = io.BytesIO(obj)
     file_content = ContentFile(obj.read())
     filename = os.path.join(settings.MEDIA_ROOT, 'msgs', name)
     print(file_content)

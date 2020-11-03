@@ -273,7 +273,9 @@
                                 <label for="inputState">Courses</label>
                                 <select id="inputState" class="form-control">
                                   <option selected>Choose...</option>
-                                  <option>...</option>
+                                  {% for course in courses %}
+                                  <option value="{{course.Cid}}">{{course.title}}</option>
+                                  {% endfor %}
                                 </select>
                               </div>
                               <button type="submit" class="btn btn-primary">Submit</button>

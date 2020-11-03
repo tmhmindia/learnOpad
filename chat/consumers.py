@@ -107,11 +107,17 @@ class ChatConsumer(WebsocketConsumer):
         chatgroup=ChatGroup.objects.get(id=self.room_name)
         receiver=self.get_group_receiver(chatgroup)
         flag=receiver.profile.status
-        # print(flag)
-        # print(receiver.username)
-        html_status = render_to_string("chat/status.html", {'flag': flag})
+        status=None
+        if flag:
+            status='online'
+            html_status='<p> (Online) </p>'
+
+        else:
+            status='offline'
+            html_status='<p> (Offline) </p>'
         message={
-            'html_status':html_status
+            'html_status':html_status,
+            'status':status
         }
         async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,
@@ -126,9 +132,20 @@ class ChatConsumer(WebsocketConsumer):
         flag=receiver.profile.status
         # print(flag)
         # print(receiver.username)
-        html_status = render_to_string("chat/disconnect.html", {'flag': flag})
+        #html_status = render_to_string("chat/disconnect.html", {'flag': flag})
+        status=None
+        if flag:
+            status='offline'
+            html_status='<p> (Offline) </p>'
+      
+           
+        else:
+            status='online'
+            html_status='<p> (Online) </p>'
+
         message={
-            'html_status':html_status
+            'html_status':html_status,
+            'status':status
         }
         async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,
@@ -165,7 +182,9 @@ class ChatConsumer(WebsocketConsumer):
         data={}
         filename=None
         if text_data:
-            if text_data.split(".")[-1] in ['.jpg','.png','.pdf','.jpeg','.zip','.txt']:
+            ext=text_data
+            if ext.split(".")[-1] in ['jpg','png','pdf','jpeg','zip','txt']:
+                print(text_data+" "+"filename")
                 self.scope['session']['filename']=text_data
                 self.scope['session'].save()
             else:

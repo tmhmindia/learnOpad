@@ -15,5 +15,7 @@ urlpatterns = [
     # path('facilitator/dashboard/changepassword/', views.ChangePassword, name="changePassword"),
     path('facilitator/dashboard/support/', views.facilitator_Dashboard_support_page,name='support1'),
     path('About/facilitator/<int:pk>/',views.aboutfacilitator, name="aboutfacilitator"),
+    path('delete/videos/',views.GetVideos, name="GetVideos"),
+
  ]
      
