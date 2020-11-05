@@ -597,6 +597,7 @@ body {
 #frame .content .messages ul li .mesp a{
   padding: 0 5px;
   color: #f5f5f5;
+  text-decoration: underline;
  
 }
 #frame .content .messages ul li.sent p.timep {
@@ -617,7 +618,7 @@ body {
   float: left;
 }
 .attImg{
-  width: 300px;
+  width: 200px;
   height: auto;
 }
 #frame .content .messages ul li p.mesp {
