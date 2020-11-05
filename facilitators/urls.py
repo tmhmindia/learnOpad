@@ -16,6 +16,8 @@ urlpatterns = [
     path('facilitator/dashboard/support/', views.facilitator_Dashboard_support_page,name='support1'),
     path('About/facilitator/<int:pk>/',views.aboutfacilitator, name="aboutfacilitator"),
     path('delete/videos/',views.GetVideos, name="GetVideos"),
+    path('update/videos/',views.UpdateVideos, name="update_videos")
+
 
  ]
      

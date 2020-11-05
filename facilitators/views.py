@@ -397,7 +397,19 @@ def GetVideos(request):
             data={'delete':'success'}
             return HttpResponseRedirect(reverse('createcourse'))
 
+def UpdateVideos(request):
+    if request.method == 'POST':
+        video=request.FILES['video'] # take a course 1 minute video
+        thumbnail=request.FILES['thumbnail'] # take course thumbnail
+        details=json.loads(request.POST.get('data')) # take the other course detail
+        Cid=request.POST.get('course_id')
+        course=Course.objects.get(Cid=Cid)
+        Course_video=CourseVideo(title=details.get('title'),description=details.get('description'),video=video,thumbnail=thumbnail,course=course)
+        Course_video.save()
 
+        return JsonResponse("success",safe=False)
+    
+        
 
 
 

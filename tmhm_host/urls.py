@@ -27,6 +27,7 @@ urlpatterns = [
     path('', include('myauth.api.urls')),
     path('', include('payment_gateway.urls')),
     path('', include('chat.urls')),
+     path('', include('Admin.urls')),
 
     path('', include('corporates.urls')),
     path('', include('LandingPage.urls')),
