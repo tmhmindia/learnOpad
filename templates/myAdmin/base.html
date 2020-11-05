@@ -232,16 +232,16 @@
                   <ul id="sidebarnav" class="p-t-30">
                       <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'dashboard_admin'%}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
                       <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'manage_learners'%}" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Manage Learners</span></a></li>
-                      <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-edit"></i><span class="hide-menu">Manage Fascilitators </span></a>
+                      <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-edit"></i><span class="hide-menu">Manage Facilitators </span></a>
                           <ul aria-expanded="false" class="collapse  first-level">
-                              <li class="sidebar-item"><a href="req_fascilitators.html" class="sidebar-link"><i class="mdi mdi-account-alert"></i><span class="hide-menu"> Requested Fascilitators </span></a></li>
-                              <li class="sidebar-item"><a href="approved_fascilitators.html" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu"> Approved Fascilitators </span></a></li>
+                              <li class="sidebar-item"><a href="{% url 'manage_facilitators'%}" class="sidebar-link"><i class="mdi mdi-account-alert"></i><span class="hide-menu"> Requested Fascilitators </span></a></li>
+                              <li class="sidebar-item"><a href="{% url 'Approved_facilitators'%}" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu"> Approved Fascilitators </span></a></li>
                           </ul>
                       </li>
                       <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Manage Courses</span></a>
                           <ul aria-expanded="false" class="collapse first-level">
-                              <li class="sidebar-item"><a href="req_course.html" class="sidebar-link"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Requested Courses </span></a></li>
-                              <li class="sidebar-item"><a href="approved_course.html" class="sidebar-link"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Approved Courses </span></a></li>
+                              <li class="sidebar-item"><a href="{% url 'manage_courses'%}" class="sidebar-link"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Requested Courses </span></a></li>
+                              <li class="sidebar-item"><a href="{% url 'Approved_courses'%}" class="sidebar-link"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Approved Courses </span></a></li>
                           </ul>
                       </li>
 
