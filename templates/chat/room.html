@@ -4,17 +4,21 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Chat</title>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
-    <script src="https://use.typekit.net/hoy3lrg.js"></script>
-    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <!-- <script src="https://use.typekit.net/hoy3lrg.js"></script> -->
+    <!-- <script>try{Typekit.load({ async: true });}catch(e){}</script> -->
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    <link rel="stylesheet" href="{% static 'style.css' %}" />
     <link rel="stylesheet" href="{% static 'chat/style.css' %}">
     <style>
+   
       .file-input input {
-  display: none;
-}
+        display: none;
+      }
     </style>
   </head>
 
@@ -147,7 +151,7 @@
 <script>
   $("li.contact").click(function(e){
 $(this).addClass("active").siblings().removeClass("active")
-  })
+  });
 </script>
 <script>
 
@@ -309,7 +313,7 @@ document.querySelector('#chat-file-submit').onclick = function(e) {
         
       blobTag.src='http://127.0.0.1:8000'+data.blob
       imganchor.href='http://127.0.0.1:8000'+data.blob
-      imganchor.appendChild(blobTag)
+      imganchor.appendChild(blobTag);
       msgListTag.appendChild(imganchor);
       }
       else{
