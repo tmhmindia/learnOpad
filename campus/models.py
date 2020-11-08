@@ -1,11 +1,12 @@
 from django.db import models
+from LandingPage.models import Course
 
 # Create your models here.
 class Campus(models.Model):
-    name=models.CharField(max_length=50)
+    name=models.CharField(max_length=100)
     email=models.EmailField(max_length=100)
-    mobile=models.CharField(max_length=10)
-    course_name=models.CharField(max_length=200)
+    campus=models.CharField(max_length=250)
+    course= models.ForeignKey(Course,related_name='campus_course', on_delete=models.CASCADE,null=True)
    
 
     def __str__(self):

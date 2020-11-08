@@ -80,7 +80,7 @@ class user_login(View):
             else:
                 return HttpResponseRedirect(reverse('login'))
 
-        print(context)
+
         return render(request,'facilitators/index.html', context)
 
 
@@ -140,12 +140,8 @@ class user_login(View):
                         'notification': 'Not registered! login failed',
                         'uemail': u.pk
                     }
-                if u.groups.filter(name='Facilitators').exists():
-                    return render(request, 'facilitators/index.html', context)
-                elif u.groups.filter(name='Learners').exists():
-                    return render(request, 'learners/index.html', context)
-                else:
-                    return render(request, 'LandingPage/index.html', context)
+                
+                return render(request, 'LandingPage/index.html', context)
                 
         #     # else:
         #     #     return HttpResponse("you are not authorized")
@@ -221,10 +217,10 @@ def forgot_password(request, pk=None):
         otp = random.randrange(1234, 99999, 3)
         print(otp)
         print(u)
-        receiver = 'vijaygwala73@gmail.com'
+        receiver = u.email
         subject = 'OTP from Learnopad' + ' : ' + str(otp)
         text = 'Hi '+ receiver+' Your OTP from Learnopad.com is: ' + str(otp) + 'This OTP is valid for 7 minutes only!'
-        send_mail(str(subject), text, 'vijaygwala97@gmail.com', [receiver,], fail_silently=False)
+        send_mail(str(subject), text, 'learnopad@gmail.com', [receiver,], fail_silently=False)
         print('mail sent')
         def expire():
             try:

@@ -1,11 +1,14 @@
 from django.shortcuts import render,redirect
 from LandingPage.models import *
-from django.contrib import messages
-from django.core.paginator import Paginator
+from django.http import JsonResponse
+from .models import CorporatesTalks
+
 # Create your views here.
 def corporate_landingPage(request):
     if request.method=='POST':
-        pass
+        course=Course.objects.get(Cid=request.POST.get('courses'))
+        campus=CorporatesTalks(name=request.POST.get('name'),email=request.POST.get('email'),organization=request.POST.get('organization'),course=course)
+        return JsonResponse("success",safe=False)
     else:
         courses=Course.objects.all()
         context={'courses':courses}

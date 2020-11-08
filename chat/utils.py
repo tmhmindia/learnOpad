@@ -14,10 +14,6 @@ def BytesToImg(image_data):
 
 
 def BytesToFile(obj,name):
-<<<<<<< HEAD
-=======
-   
->>>>>>> b3b8a2b7ae5d7c04559a71610ff129746e67b822
     obj = io.BytesIO(obj)
     file_content = ContentFile(obj.read())
     filename = os.path.join(settings.MEDIA_ROOT, 'msgs', name)

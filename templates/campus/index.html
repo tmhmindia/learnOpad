@@ -11,6 +11,7 @@ Campus
 {% block header %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
@@ -409,24 +410,28 @@ Campus
             </div>
             <div class="col-md-5 col-12 pt-5">
                 <div class="form_tab">
-                    <form>
+                    <form id="campus_form">
                         <div class="form-group">
                           <label for="formGroupExampleInput">Name</label>
-                          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name">
+                          <input type="text" class="form-control" id="name" placeholder="Name">
                         </div>
                         <div class="form-group">
                           <label for="formGroupExampleInput2">Email</label>
-                          <input type="email" class="form-control" id="formGroupExampleInput2" placeholder="Email">
+                          <input type="email" class="form-control" id="email" placeholder="Email">
                         </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">College Name</label>
+                            <input type="text" class="form-control" id="campus" placeholder="College Name">
+                          </div>
                         <div class="form-group ">
                             <label for="inputState">Courses</label>
-                            <select id="inputState" class="form-control">
+                            <select id="courses" class="form-control">
                               <option selected>Choose...</option>
                               {% for course in courses %}
                               <option value="{{course.Cid}}">{{course.title}}</option>
                               {% endfor %}                            </select>
                           </div>
-                          <button type="submit" class="btn btn-primary">Submit</button>
+                          <button type="submit" id="campus_form_btn"class="btn btn-primary">Submit</button>
                       </form>
                 </div>
 
@@ -552,6 +557,49 @@ Campus
 {% endblock content %}
 
 {% block javascript %}
+    <script>
+         $("#campus_form_btn").click(function(event){
+        event.preventDefault();
+        
+        var email=$('#email').val();
+        var name=$('#name').val();
+        var campus=$('#campus').val();
+        var courses=$('#courses').val();
+
+        
+var formData = new FormData();
+  formData.append('name',name)
+  formData.append('email',email)
+  formData.append('campus',campus)
+  formData.append('courses',courses)
+
+
+ 
+$.ajax({
+    url: "{% url 'campus_page' %}",
+    async: false,
+    data: formData,
+    contentType: false,
+    processData: false,
+    headers: {
+                        "X-CSRFTOKEN": "{{ csrf_token }}"
+                },
+    type: 'POST',
+    cache: false,
+    
+    error: function(xhr, status, error) {
+        alert(error);
+    },
+    success: function(response) {
+        
+    swal("Done!", "Your Response is submitted Successfully ", "success");
+    $('#campus_form').trigger("reset");
+}
+});
+
+
+    });
+    </script>
     <script>
       $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();

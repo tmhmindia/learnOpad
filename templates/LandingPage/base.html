@@ -8,7 +8,8 @@
     <title>{% block title %}{% endblock title %}</title>
     
 
-   
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -265,6 +266,36 @@ $(document).ready(function() {
        
     </nav>
 <!-- Modal -->
+{% if user is none %}
+<script>
+swal('Sorry!','This credential are Not Valid Try to Register Please !','error')
+</script>
+{% endif %}
+{% if notification %}
+
+<script>swal({
+    title: "Oops!",
+    text: "Incorrect Email or Password!",
+    icon: "error",
+    buttons: ["Try again", "Forgot Password?"],
+    dangerMode: false,
+  })
+  .then((forgot_password) => {
+    if (forgot_password) {
+        $.ajax({
+                url: "{% url 'forgotPassword' uemail %}",
+                type:"GET",
+                success: function (data) {
+                swal("OTP sent!", 'OTP is sent to your email', "success");
+                $("#forgotPasswordModal").modal();
+                 }     
+              })
+    }
+    else {
+      $("#exampleModal").modal();
+    }  
+  });</script>
+{% endif %}
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="font-size: 13px;">
   <div class="modal-dialog">
@@ -293,6 +324,11 @@ $(document).ready(function() {
                 <p style="font-size: 8.5px">By clicking Sign In, you agree to our <a href="/hpme">Terms of Use</a> and our <a href="/home">Privacy Policy.</a></p>
             </div>
             <button type="submit" class="btn btn-primary btn-block" style="font-size: 12px">SIGN IN</button>
+            <div class='col-md-6'>
+                {% if uemail %}
+                   <a class="btn btn-primary rounded text-white " id="otp" data-toggle="modal" data-target="#forgotPasswordModal" style="font-size: 12px" >Forgot Password?</a>
+                 {% endif %}
+                 </div>
         </form>
       </div>
     </div>

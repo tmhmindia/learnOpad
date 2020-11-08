@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'facilitators',
     'learners',
     'campus',
+    'corporates',
     #'django.contrib.sites',
     # By vijay
     # 'allauth',
