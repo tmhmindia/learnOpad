@@ -234,8 +234,8 @@
                       <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'manage_learners'%}" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Manage Learners</span></a></li>
                       <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-edit"></i><span class="hide-menu">Manage Facilitators </span></a>
                           <ul aria-expanded="false" class="collapse  first-level">
-                              <li class="sidebar-item"><a href="{% url 'manage_facilitators'%}" class="sidebar-link"><i class="mdi mdi-account-alert"></i><span class="hide-menu"> Requested Fascilitators </span></a></li>
-                              <li class="sidebar-item"><a href="{% url 'Approved_facilitators'%}" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu"> Approved Fascilitators </span></a></li>
+                              <li class="sidebar-item"><a href="{% url 'manage_facilitators'%}" class="sidebar-link"><i class="mdi mdi-account-alert"></i><span class="hide-menu"> Requested facilitators </span></a></li>
+                              <li class="sidebar-item"><a href="{% url 'Approved_facilitators'%}" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu"> Approved facilitators </span></a></li>
                           </ul>
                       </li>
                       <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Manage Courses</span></a>
@@ -244,7 +244,14 @@
                               <li class="sidebar-item"><a href="{% url 'Approved_courses'%}" class="sidebar-link"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Approved Courses </span></a></li>
                           </ul>
                       </li>
-
+                      <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-edit"></i><span class="hide-menu">Manage Trainings </span></a>
+                        <ul aria-expanded="false" class="collapse  first-level">
+                            <li class="sidebar-item"><a href="{% url 'campus_training'%}" class="sidebar-link"><i class="mdi mdi-account-alert"></i><span class="hide-menu"> Campus training submission </span></a></li>
+                            <li class="sidebar-item"><a href="{% url 'cor_training'%}" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu"> Corporate training submission </span></a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'query_submission'%}" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Contact & Councelling sub </span></a></li>
+                    
                   </ul>
               </nav>
               <!-- End Sidebar navigation -->
@@ -295,8 +302,7 @@
   <!-- ============================================================== -->
   <!-- All Jquery -->
   <!-- ============================================================== -->
-  {% block javascript %}
-  {% endblock javascript %}
+  
   <script src="{% static 'admin/assets/libs/jquery/dist/jquery.min.js'%}"></script>
   <!-- Bootstrap tether Core JavaScript -->
   <script src="{% static 'admin/assets/libs/popper.js/dist/umd/popper.min.js'%}"></script>
@@ -320,6 +326,7 @@
   <script src="{% static 'admin/assets/libs/flot/jquery.flot.crosshair.js'%}"></script>
   <script src="{% static 'admin/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js'%}"></script>
   <script src="{% static 'admin/dist/js/pages/chart/chart-page-init.js'%}"></script>
-
+  {% block javascript %}
+  {% endblock javascript %}
   </body>
 </html>

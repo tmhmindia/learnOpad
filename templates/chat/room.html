@@ -175,7 +175,6 @@ $(this).addClass("active").siblings().removeClass("active")
 
 
 
-
 document.querySelector('#chat-file-submit').onclick = function(e) {
   var file = document.getElementById('file').files[0];
         chatSocket.send(file.name);
@@ -296,9 +295,6 @@ document.querySelector('#chat-file-submit').onclick = function(e) {
       var aTag = document.createElement('a');
       var imganchor= document.createElement('a');
       blobTag.classList.add('attImg');
-      
-      
-      
       imgTag.src = 'http://emilcarlsson.se/assets/mikeross.png';
       msgListTag.appendChild(imgTag);
       msgListTag.appendChild(divp);
@@ -310,6 +306,7 @@ document.querySelector('#chat-file-submit').onclick = function(e) {
       console.log(filename+' '+ext)
       if (['jpg','jpeg','png'].indexOf(ext)>=0)
       {
+
       blobTag.src='http://127.0.0.1:8000'+data.blob
       imganchor.href='http://127.0.0.1:8000'+data.blob
       imganchor.appendChild(blobTag);

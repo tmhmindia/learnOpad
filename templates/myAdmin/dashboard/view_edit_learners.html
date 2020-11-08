@@ -129,7 +129,7 @@
                                             <input type="text" class="form-control" id="fname" placeholder="Name Here">
                                         
                                     </div>
-                                    <div class="form-group ">
+                                    <div class="form-group col-md-4 col-12">
                                         <label for="dob" class=" text-right control-label col-form-label">DOB</label>
                                         
                                             <input type="date" class="form-control" id="dob" placeholder="Last Name Here">
@@ -202,20 +202,7 @@
     {% endblock content %}
 <!-- ------------------------------------------------- -->
     {% block javascript %}
-    <script src="{% static 'admin/assets/libs/jquery/dist/jquery.min.js' %}"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="{% static 'admin/assets/libs/popper.js/dist/umd/popper.min.js' %}"></script>
-    <script src="{% static 'admin/assets/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="{% static 'admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js' %}"></script>
-    <script src="{% static 'admin/assets/extra-libs/sparkline/sparkline.js' %}"></script>
-    <!--Wave Effects -->
-    <script src="{% static 'admin/dist/js/waves.js' %}"></script>
-    <!--Menu sidebar -->
-    <script src="{% static 'admin/dist/js/sidebarmenu.js' %}"></script>
-    <!--Custom JavaScript -->
-    <script src="{% static 'admin/dist/js/custom.min.js' %}"></script>
-    <!-- this page js -->
+  
     <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
@@ -228,14 +215,7 @@
 
         /*colorpicker*/
         $('.demo').each(function() {
-        //
-        // Dear reader, it's actually very easy to initialize MiniColors. For example:
-        //
-        //  $(selector).minicolors();
-        //
-        // The way I've done it below is just for the demo, so don't get confused
-        // by it. Also, data- attributes aren't supported at this time...they're
-        // only used for this demo.
+     
         //
         $(this).minicolors({
                 control: $(this).attr('data-control') || 'hue',

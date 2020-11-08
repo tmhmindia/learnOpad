@@ -11,7 +11,10 @@ urlpatterns = [
     path('learnopad/admin/edit/Courses/', views.view_edit_courses, name='view_edit_courses'),
     path('learnopad/admin/Approved/Courses/', views.Approved_courses, name='Approved_courses'),
     path('learnopad/admin/Approved/facilitators/', views.Approved_facilitators, name='Approved_facilitators'),
-
+    path('learnopad/admin/view/campus/', views.campus_training, name='campus_training'),
+    path('learnopad/admin/view/corporate/', views.cor_training, name='cor_training'),
+    path('learnopad/admin/view/queries/', views.query_submission, name='query_submission'),
+    
 
 
 

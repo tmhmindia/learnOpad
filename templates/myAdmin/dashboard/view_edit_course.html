@@ -1,0 +1,167 @@
+{% extends '../base.html' %}
+{% load static %}
+<!-- ---------------------------------------------- -->
+    {% block title %}
+    Edit Learners
+    {% endblock title %}
+<!-- --------------------------------------------- -->
+    {% block header %}
+    <link href="{% static 'admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css'%}" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/extra-libs/multicheck/multicheck.css'%}">
+    <link href="{% static 'admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css'%}" rel="stylesheet">
+    <link href="{% static 'admin/assets/libs/flot/css/float-chart.css'%}" rel="stylesheet">
+     <!-- Custom CSS -->
+     <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/libs/select2/dist/css/select2.min.css'%}">
+     <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/libs/jquery-minicolors/jquery.minicolors.css'%}">
+     <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'%}">
+     <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/libs/quill/dist/quill.snow.css'%}">
+  
+    {% endblock header %}
+<!-- ------------------------------------------- -->
+    {% block stylesheet %}
+
+   
+    {% endblock stylesheet %}
+<!-- ----------------------------------------------------- -->
+    {% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Django (Beginner)</h3>
+                    <h5>Vijay Gwala</h5>
+                    <form action="" method="post">
+                    <div style="display: flex; align-items: center; justify-content: space-between;flex:1;flex-wrap: wrap;" >
+                    <ul class="list-style-none align-items-center " style="width: 555px;padding: 30px;">
+                       
+                            
+                        <li  class="d-flex no-block  pb-3 pt-3">Cid:<span class="pl-2 text-info">10</span></li>
+                        <li class="d-flex no-block border-top pb-3 pt-3">Title:
+                            <input type="text" class="form-control ml-2" id="title" placeholder="Title Here">
+                        </li>
+                        <li class="d-flex no-block border-top pb-3 pt-3">Code: <span class="pl-2 text-info"> 1102</span></li>
+                        <li class="d-flex no-block border-top pb-3 pt-3">Description:
+                            <textarea class="form-control"></textarea>
+                        </li>
+                        <li class="d-flex no-block border-top pb-3 pt-3">Days:
+                            <input type="text" class="form-control ml-2" id="days" placeholder="Days Here">
+                        </li>
+                        <li class="d-flex no-block border-top pb-3 pt-3">Months:
+                            <input type="text" class="form-control ml-2" id="months" placeholder="Months Here">
+                        </li>
+                    </ul>
+                    <ul class="list-style-none align-items-center  " style="width: 555px; padding: 30px;">
+                        <li class="d-flex no-block  pb-3 pt-3">Audience:<span class="pl-2 text-info">Students,freelancers</span></li>
+                        <li class="d-flex no-block border-top pb-3 pt-3">Sub category:
+                            <input type="text" class="form-control ml-2" id="subcat" placeholder="sub category Here">
+                        </li>
+                        <li class="d-flex no-block border-top pb-3 pt-3">Price:
+                            <input type="text" class="form-control ml-2" id="price" placeholder="Price Here">
+                        </li>
+                        <li  class="d-flex no-block border-top pb-3 pt-3">Total students enrolled:<span class="pl-2 text-info">10</span></li>
+                        <li class="d-flex no-block border-top pb-3 pt-3">added on:<span class="pl-2 text-info"></span></li>
+                        <li class="d-flex no-block border-top pb-3 pt-3">Last updated on:<span class="pl-2 text-info"></span></li>
+                       
+                        <li class="d-flex no-block border-top pb-3 pt-3">Total Revenue earned :<span class="pl-2 text-info"></span></li>
+                    
+                    </ul>
+                    
+                    </div>
+                    <div class="card-body">
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title m-b-0">Lerners enrolled</h5>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Lerners Name</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Ratings</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nazia</td>
+                            <td>
+                                <div class="d-flex no-block align-items-center">
+                                    <span>81% </span>
+                                    <div class="ml-auto">
+                                        <span>length</span>
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar  bg-info" role="progressbar" style="width: 81%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </td>
+                            
+                            <td>
+                                not yet
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Vijay</td>
+                            <td>
+                                <div class="d-flex no-block align-items-center">
+                                    <span>0% </span>
+                                    <div class="ml-auto">
+                                        <span>length</span>
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar " role="progressbar" style="width: 0%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </td>
+                            <td>
+                                not yet
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Hardik</td>
+                            <td>
+                                <div class="d-flex no-block align-items-center">
+                                    <span>Completed </span>
+                                    <div class="ml-auto">
+                                        <span>length</span>
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar  bg-success" role="progressbar" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </td>
+                            <td>
+                                4.5/5
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> 
+        </div>
+    </div>
+   
+    <div style="text-align: right;width: 100%;">
+        <a href=""><button type="button" class="btn btn-danger btn-lr">Delete this Course</button></a>
+    </div>
+</div>
+        
+{% endblock content %}
+<!-- ------------------------------------------------- -->
+    {% block javascript %}
+   
+    
+    <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
+    <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
+    <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
+   
+    
+    {% endblock javascript%}
+
