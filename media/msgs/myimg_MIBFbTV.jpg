@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+
+        }
+        body{
+            height: 100vh;
+            width: 100%;
+            background-image: url('https://i.ibb.co/PMyrSY4/blank-certificate.jpg%22');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+        .content{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 120px 0;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+        .web{
+            font-family: "Comic Sans MS", cursive, sans-serif;
+        }
+        .web::after{
+            content: '*';
+            font-size: 15px;
+            padding: 0 10px;
+        }
+        .web::before{
+            content: '*';
+            font-size: 15px;
+            padding: 0 10px;
+        }
+        h1{
+            font-size: 50px;
+        }
+        .certify{
+            background-color : rgb(15,58,95);
+            color: #fff;
+            padding: 10px;
+            margin: 10px;
+        }
+        .cert-name{
+            width: 600px;
+            margin-top: 10px;
+            border-bottom: 2px solid #000;
+            text-align: center;
+        }
+        .cert-name h2{
+            font-size: 50px;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+        }
+        .info{
+            color: #0b85a0;
+            width: 700px;
+            font-size: 22px;
+            padding: 20px;
+            line-height: 30px;
+            font-weight: 600;
+        }
+        .sign{
+            width: 550px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 70px;
+           
+        }
+        .sign .direc .name{
+            width: 170px;
+            border-bottom: 2px solid #000;
+            color: #000;
+            
+        }
+        .sign .fac .name{
+            width: 170px;
+            border-bottom: 2px solid #000;
+            color: #000;
+        }
+        .sign p{
+            padding: 5px;
+            color: #5c5c61;
+            font-weight: 600;
+            text-transform: capitalize;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <p class="web"><i>www.learnopad.com</i></p>
+        <h1>CERTIFICATE</h1>
+        <h2>OF COMPLETEION</h2>
+        <div class="certify">
+            <p>This certificate is hereby bestowed by</p>
+        </div>
+        <div class="cert-name">
+            <h2> </h2>
+            <!-- <hr style="width: 100%;height: 2px;color: #000;"/> -->
+        </div>
+        <p class="info">in recognition of his/her hardwork and dedication in completing the  from date to date </p>
+        
+        <div class="sign">
+            <div class="direc">
+                <p class="name">Kamal </p>
+                <p>CEO</p>
+            </div>
+            <div class="fac">
+                <p class="name"> </p>
+                <p>Facilitator</p>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

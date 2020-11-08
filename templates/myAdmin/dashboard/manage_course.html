@@ -1,0 +1,149 @@
+{% extends '../base.html' %}
+{% load static %}
+<!-- ---------------------------------------------- -->
+    {% block title %}
+    Manage Courses
+    {% endblock title %}
+<!-- --------------------------------------------- -->
+    {% block header %}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/extra-libs/multicheck/multicheck.css'%}">
+    <link href="{% static 'admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css'%}" rel="stylesheet">
+  
+    {% endblock header %}
+<!-- ------------------------------------------- -->
+    {% block stylesheet %}
+
+   
+    {% endblock stylesheet %}
+<!-- ----------------------------------------------------- -->
+    {% block content %}
+<!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">Manage Courses</h4>
+                        <div class="ml-auto text-right">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Manage Courses</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Requested Courses</h5>
+                                <div class="table-responsive">
+                                    <table id="zero_config" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Course title</th>
+                                                <th>Code</th>
+                                                <th>Audience</th>
+                                                <th>Fascilitator_created</th>
+                                               
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Web Development</th>
+                                                <th>1102</th>
+                                                <th>Students,freelancers</th>
+                                                <th>Vijay Gwala</th>
+                                                
+                                                <th> 
+                                                    <a href=""><button type="button" class="btn btn-info btn-md">Approve</button></a>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>Web Development</th>
+                                                <th>1102</th>
+                                                <th>Students,freelancers</th>
+                                                <th>Vijay Gwala</th>
+                                                
+                                                <th> 
+                                                    <a href=""><button type="button" class="btn btn-info btn-md">Approve</button></a>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>Web Development</th>
+                                                <th>1102</th>
+                                                <th>Students,freelancers</th>
+                                                <th>Vijay Gwala</th>
+                                                
+                                                <th> 
+                                                    <a href=""><button type="button" class="btn btn-info btn-md">Approve</button></a>
+                                                </th>
+                                            </tr>
+                                            
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Course title</th>
+                                                <th>Code</th>
+                                                <th>Audience</th>
+                                                <th>Fascilitator_created</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+         
+           
+    {% endblock content %}
+<!-- ------------------------------------------------- -->
+    {% block javascript %}
+   
+  
+    <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
+    <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
+    <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
+   
+    <script>
+        /****************************************
+         *       Basic Table                   *
+         ****************************************/
+        $('#zero_config').DataTable();
+    </script>
+    {% endblock javascript%}
+

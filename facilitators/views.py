@@ -183,10 +183,12 @@ def facilitator_Dashboard_create_course_page(request):
     audience_list=Audience.objects.values('audience')
     category=Category.objects.all()
     subcategory=SubCategory.objects.all()
+    courses=Course.objects.all()
     context={
         'audience_list':audience_list,
         'category':category,
-        'subcategory':subcategory
+        'subcategory':subcategory,
+        'courses':courses
     }
     return render(request, 'facilitators/Dashboard/create_course.html',context)
 
@@ -373,3 +375,42 @@ def forgot_password(request, pk=None):
         print('somthing went wrong')
         messages.add_message(request, messages.INFO, 'password_not_same')
         return HttpResponseRedirect(reverse('login'))
+
+def GetVideos(request):
+    if request.method == 'GET':
+        Cid=request.GET.get('Cid',None)
+        Vid=request.GET.get('Vid',None)
+        if Vid is None:
+            course=Course.objects.get(Cid=Cid)
+            videos=CourseVideo.objects.filter(course=course).values_list('Vid',flat=True)
+            videos_name=CourseVideo.objects.filter(course=course).values_list('title',flat=True)
+
+            print(videos)
+            data={
+                'videos_id':list(videos),
+                'videos_name':list(videos_name)
+            }
+            return JsonResponse(data)
+        else:
+            video=CourseVideo.objects.get(Vid=Vid)
+            video.delete()
+            data={'delete':'success'}
+            return HttpResponseRedirect(reverse('createcourse'))
+
+def UpdateVideos(request):
+    if request.method == 'POST':
+        video=request.FILES['video'] # take a course 1 minute video
+        thumbnail=request.FILES['thumbnail'] # take course thumbnail
+        details=json.loads(request.POST.get('data')) # take the other course detail
+        Cid=request.POST.get('course_id')
+        course=Course.objects.get(Cid=Cid)
+        Course_video=CourseVideo(title=details.get('title'),description=details.get('description'),video=video,thumbnail=thumbnail,course=course)
+        Course_video.save()
+
+        return JsonResponse("success",safe=False)
+    
+        
+
+
+
+            

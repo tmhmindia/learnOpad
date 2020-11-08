@@ -166,17 +166,24 @@ $(this).addClass("active").siblings().removeClass("active")
     var chatSocket = new ReconnectingWebSocket(
         'ws://' + window.location.host +
         '/ws/chat/' + roomName + '/');
-    document.querySelector('#chat-file-submit').onclick = function(e) {
-      var file = document.getElementById('file').files[0];
-            chatSocket.send(file.name);
-            chatSocket.binaryType = "blob";
-            chatSocket.send(file);
-      // var messageInputDom = document.getElementById('chat-text-input');
-      // var text = messageInputDom.value;
-      // filename=null
-      // filename=file.name
-          
-    };
+
+
+
+
+
+
+
+document.querySelector('#chat-file-submit').onclick = function(e) {
+  var file = document.getElementById('file').files[0];
+        chatSocket.send(file.name);
+        chatSocket.binaryType = "blob";
+        chatSocket.send(file);
+  // var messageInputDom = document.getElementById('chat-text-input');
+  // var text = messageInputDom.value;
+  // filename=null
+  // filename=file.name
+      
+ };
 
 
         function redirect(url) {
@@ -271,9 +278,6 @@ $(this).addClass("active").siblings().removeClass("active")
       var aTag = document.createElement('a');
       var imganchor= document.createElement('a');
       blobTag.classList.add('attImg');
-      
-      
-      
       imgTag.src = 'http://emilcarlsson.se/assets/mikeross.png';
       msgListTag.appendChild(imgTag);
       msgListTag.appendChild(divp);
@@ -285,6 +289,7 @@ $(this).addClass("active").siblings().removeClass("active")
       console.log(filename+' '+ext)
       if (['jpg','jpeg','png'].indexOf(ext)>=0)
       {
+
       blobTag.src='http://127.0.0.1:8000'+data.blob
       imganchor.href='http://127.0.0.1:8000'+data.blob
       imganchor.appendChild(blobTag)

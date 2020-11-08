@@ -1,5 +1,6 @@
 {% extends '../base.html' %}
 {% load static %}
+{% load filters %}
 <!-- ---------------------------------------------- -->
     {% block title %}
 Create Courses
@@ -287,17 +288,22 @@ Create Courses
                                 <form action="" method="post">
                                     {% csrf_token %}
                                     <div class="form-group ">
-                                        <label for="inputEmail4">Course Code</label>
-                                        <input type="text"  class="form-control" id="id_code" placeholder="code">
-                                    </div>
+                                        <label for="inputState">Courses</label>
+                                        <select id="select_course" class="form-control">
+                                          <option value="empty">Choose...</option>
+                                          {% for course in courses %}
+                                          <option value="{{course.Cid}}">{{course.title}}</option>
+                                          {% endfor %}
+                                        </select>
+                                      </div>
                                     <div class="form-group">
-                                        <input class="" type="radio" name="updvid" id="updvid" value="update" onclick="videoupdtdel()" >
+                                        <input class="" type="radio" name="check_video" id="updvid" value="update" onclick="videoupdtdel()" >
                                         <label class="form-check-label" for="exampleRadios1">
                                          Update
                                         </label>
                                       </div>
                                     <div class="form-group">
-                                        <input class="" type="radio" name="updvid" id="dltvid" value="delete"  onclick="videoupdtdel()" >
+                                        <input class="" type="radio" name="check_video" id="dltvid" value="delete"  onclick="videoupdtdel()" >
                                         <label class="form-check-label" for="exampleRadios1">
                                           Delete
                                         </label>
@@ -309,41 +315,39 @@ Create Courses
                                     <form action="" method="post">
                                         <div class="form-group ">
                                             <label for="inputEmail4">Title</label>
-                                            <input type="text" class="form-control" id="inputEmail4" placeholder="Title">
+                                            <input type="text" class="form-control" id="id_vtitle" placeholder="Title">
                                         </div>
                                         <div class="form-group">
                                             <label for="inputAddress">Description</label>
-                                            <input type="text" class="form-control" id="inputAddress" placeholder="Description">
+                                            <input type="text" class="form-control" id="id_vdescription" placeholder="Description">
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="exampleFormControlFile1">Upload Video</label>
-                                                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="videoup">
+                                                <input type="file" class="form-control-file" id="id_vvideo" name="videoup">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="exampleFormControlFile1">Upload Thumbnail</label>
-                                                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="thumbailup">
+                                                <input type="file" class="form-control-file" id="id_vthumbnail" name="thumbailup">
                                             </div>
                                         </div>
                                             <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="coursevid">
+                                            <input class="form-check-input" type="checkbox" id="online" value="online">
                                             <label class="form-check-label" for="inlineCheckbox1">Course Video</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="livevid">
+                                            <input class="form-check-input" type="checkbox" id="live" value="live">
                                             <label class="form-check-label" for="inlineCheckbox2">Live Video</label>
                                         </div>
                                         <div class="form-group mt-3">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" id="video_create"class="btn btn-primary">Submit</button>
                                         </div>
                                         
                                     </form>
                                 </div>
                                 <div class="deletevid" id="deletevid">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">Video 1 : <a href="" class="delete-btn"> Delete</a> </li>
-                                        <li class="list-group-item">Video 2 : <a href="" class="delete-btn"> Delete</a> </li>
-                                        <li class="list-group-item">Video 3 : <a href="" class="delete-btn"> Delete</a> </li>
+                                    <ul id="delete_list" class="list-group">
+                                              
                                     </ul>
                                 </div>
                             </div>
@@ -394,6 +398,123 @@ Create Courses
 {% endblock content %}
 
 {% block javascript %}
+<script>
+function validate()
+{
+ var ddl = document.getElementById("select_course");
+ var selectedValue = ddl.options[ddl.selectedIndex].value;
+    if (selectedValue == "empty")
+   {
+        alert("You have not selected any Course");
+        return false;
+   }
+   return true;
+}
+
+$("input[name='check_video']").change(function(){
+
+   var check=validate();
+   if(check){
+    var id=$('#select_course').val();
+    $.ajax({        
+            type: "GET",
+            url: "/delete/videos/?Cid="+id,
+            success: function(data) {
+              del_list=data.videos_name
+              id_list=data.videos_id
+              var h3;
+              if(id_list.length === 0){
+                    h3=document.createElement("h3");
+                    h3.textContent="No Videos are Available !";
+                    document.getElementById("deletevid").appendChild(h3);
+
+
+              }
+              else{
+              for (i = 0; i < del_list.length; i++) {
+                var li = document.createElement("li");
+                    li.classList.add('list-group-item');
+
+                var a = document.createElement("a");
+                    a.textContent="Delete"
+                    a.href="/delete/videos/?Vid="+id_list[i];
+                    a.classList.add('delete-btn');
+                var text = document.createTextNode(del_list[i]);
+                li.appendChild(text);
+                li.appendChild(a);
+                document.getElementById("delete_list").appendChild(li);
+                h3.textContent='';
+}               
+              }// end else
+              
+              
+            },
+
+            error: function(response, error) {
+                alert(error);  
+            }
+        });
+   } // check validate
+});
+</script>
+<script>
+     $("#video_create").click(function(event){
+        event.preventDefault();
+        var id=$('#select_course').val();
+
+        var type;
+        if ($('#online').is(":checked"))
+        {
+            type='online';
+        }
+        else{
+            type='live';
+        }
+        var video_details={
+       
+       "title":$('#id_vtitle').val(),
+       "description":$('#id_vdescription').val(),
+       "type":type
+   };
+$video=$('#id_vvideo').get(0).files[0];
+$thumbnail=$('#id_vthumbnail').get(0).files[0];
+var formData = new FormData();
+  formData.append('video',$video)
+  formData.append('thumbnail',$thumbnail)
+  formData.append('data',JSON.stringify(video_details))
+  formData.append('course_id',id)
+
+
+ 
+$.ajax({
+    url: "{% url 'update_videos' %}",
+    async: false,
+    data: formData,
+    contentType: false,
+    processData: false,
+    headers: {
+                        "X-CSRFTOKEN": "{{ csrf_token }}"
+                },
+    type: 'POST',
+    cache: false,
+    
+    error: function(xhr, status, error) {
+        alert(error);
+    },
+    success: function(response) {
+        
+    swal("Done!", "Video is Updated Successfully ", "success");
+      setTimeout(function(){
+            window.location.href = '{% url "createcourse" %}';
+         }, 5000); 
+                
+            
+    }
+});
+
+
+    });
+</script>
  <script>
  
     $(document).ready(function(){

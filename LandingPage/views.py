@@ -43,7 +43,29 @@ def UpdateCart(request):
     CreateOrder(request,productId,action)
     return JsonResponse('Item was added', safe=False)
 
-
+def searchbar(request):
+    context={}
+    if request.method == "POST":
+        query = request.POST["search"]
+        cat = Category.objects.all()
+        subcat = SubCategory.objects.all()
+        course = Course.objects.filter(Q(title__icontains=query) or Q(
+            subCat_id__name__icontains=query)).order_by('Cid')
+        # selected_cat = option
+        course = Course.objects.filter(
+            Q(subCat_id__cat_id__name__icontains=query)) or course
+        course = Course.objects.filter(subCat_id__name__in=query) or course
+        course = Course.objects.filter(language__in=query) or course
+        paginator = Paginator(course.values(), 6, orphans=1)
+        page_number = 1
+        page_obj = paginator.get_page(page_number)
+        context = {
+            'categ': cat.values(),
+            'subcateg': subcat.values(),
+            # 'selected_cat': selected_cat,
+            'page_obj': page_obj
+        }
+    return render(request, 'LandingPage/exploreCourses/exploreCourses.html', context)
 
 #free content avialable for users here 
 @login_required(login_url='/LandingPage/signup')
