@@ -63,42 +63,22 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for learner in learners %}
                                             <tr>
-                                                <th>Vijay Gwala</th>
-                                                <th>99999999999</th>
-                                                <th>Vijay@gmail.com</th>
-                                                <th>12/12/2020</th>
-                                                <th>6</th>
+                                                <th>{{learner.name}}</th>
+                                                <th>{{learner.phone}}</th>
+                                                <th>{{learner.user.email}}</th>
+                                                <th>{{learner.DOB}}</th>
+                                                <th>{{learner.CountCourses}}</th>
                                                 <th> 
-                                                    <a href="{% url 'view_edit_learners' %}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
+                                                    <a href="{% url 'view_edit_learners'  %}?Lid={{learner.Lid}}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
                                                     <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a>
                                                     <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
                                             </th>
+                                    
                                             </tr>
-                                            <tr>
-                                                <th>Vijay Gwala</th>
-                                                <th>99999999999</th>
-                                                <th>Vijay@gmail.com</th>
-                                                <th>12/12/2020</th>
-                                                <th>6</th>
-                                                <th> 
-                                                    <a href="{% url 'view_edit_learners' %}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
-                                                    <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a>
-                                                    <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
-                                               </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Vijay Gwala</th>
-                                                <th>99999999999</th>
-                                                <th>Vijay@gmail.com</th>
-                                                <th>12/12/2020</th>
-                                                <th>6</th>
-                                                <th> 
-                                                    <a href="{% url 'view_edit_learners' %}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
-                                                    <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a>
-                                                    <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
-                                               </th>
-                                            </tr>
+                                            {% endfor %}
+                                           
                                             
                                         </tbody>
                                         <tfoot>

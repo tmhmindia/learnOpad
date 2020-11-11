@@ -31,6 +31,12 @@ class Learners(models.Model):
         verbose_name_plural='Learners'
     def __str__(self):
         return self.name
+    def CountCourses(self):
+        return enrollment.objects.filter(Lid=self).count()
+    def GetCourses(self):
+        return enrollment.objects.filter(Lid=self)
+
+
 
 class enrollment(models.Model):
     Lid = models.ForeignKey(Learners, on_delete=models.CASCADE)

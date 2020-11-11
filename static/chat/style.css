@@ -401,10 +401,15 @@ body {
 #frame #sidepanel #contacts ul li.contact .wrap span.busy {
   background: #e74c3c;
 }
+#frame #sidepanel #contacts ul li.contact .wrap img.online{
+  border: 2px solid  #2ecc71;
+
+}
 #frame #sidepanel #contacts ul li.contact .wrap img {
   width: 50px;
   border-radius: 50%;
   float: left;
+  border: 2px solid #e74c3c;
   margin-right: 10px;
 }
 @media screen and (max-width: 735px) {

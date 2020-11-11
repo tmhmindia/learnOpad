@@ -117,7 +117,8 @@ class ChatConsumer(WebsocketConsumer):
             html_status='<p> (Offline) </p>'
         message={
             'html_status':html_status,
-            'status':status
+            'status':status,
+            'receiver_id':str(receiver.id)
         }
         async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,

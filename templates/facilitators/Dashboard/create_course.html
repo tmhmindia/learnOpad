@@ -406,6 +406,10 @@ function validate()
     if (selectedValue == "empty")
    {
         alert("You have not selected any Course");
+
+        $("#dltvid").attr("checked", false);
+
+
         return false;
    }
    return true;
@@ -423,15 +427,18 @@ $("input[name='check_video']").change(function(){
               del_list=data.videos_name
               id_list=data.videos_id
               var h3;
-              if(id_list.length === 0){
-                    h3=document.createElement("h3");
+              h3=document.createElement("h3");
+
+              if(id_list.length == 0){
                     h3.textContent="No Videos are Available !";
                     document.getElementById("deletevid").appendChild(h3);
 
 
               }
               else{
-              for (i = 0; i < del_list.length; i++) {
+                document.getElementById("delete_list").innerHTML = "";
+                console.log(id_list)
+              for (let i = 0; i < id_list.length; i++) {
                 var li = document.createElement("li");
                     li.classList.add('list-group-item');
 
@@ -443,10 +450,10 @@ $("input[name='check_video']").change(function(){
                 li.appendChild(text);
                 li.appendChild(a);
                 document.getElementById("delete_list").appendChild(li);
-                h3.textContent='';
+                
 }               
               }// end else
-              
+              h3.textContent="";
               
             },
 

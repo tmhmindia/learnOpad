@@ -11,3 +11,5 @@ def getVideos(id):
     video=CourseVdeo.objects.get(Vid=id)
     return video
 
+
+

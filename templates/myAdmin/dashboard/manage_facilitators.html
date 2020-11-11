@@ -62,48 +62,25 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for applicant in applicants %}
                                             <tr>
-                                                <th>Vijay Gwala</th>
-                                                <th>99999999999</th>
-                                                <th>Vijay@gmail.com</th>
-                                                <th>12/12/2020</th>
+                                                <th>{{applicant.name}}</th>
+                                                <th>{{applicant.phone}}</th>
+                                                <th>{{applicant.user.email}}</th>
+                                                <th>{{applicant.added.date}}</th>
                                                 
                                                 <th> 
                                                   
-                                                    <a href=""><button type="button" class="btn btn-info btn-md">Approve</button></a>
+                                                    <a href="" onclick="Approved('{{applicant.Aid}}')"><button type="button" id="btn_approve"class="btn btn-info btn-md">Approve</button></a>
                                                    
                                             </th>
                                             </tr>
-                                            <tr>
-                                                <th>Vijay Gwala</th>
-                                                <th>99999999999</th>
-                                                <th>Vijay@gmail.com</th>
-                                                <th>12/12/2020</th>
-                                                
-                                                <th> 
-                                                    <a href=""><button type="button" class="btn btn-info btn-md">Approve</button></a>
-                                               </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Vijay Gwala</th>
-                                                <th>99999999999</th>
-                                                <th>Vijay@gmail.com</th>
-                                                <th>12/12/2020</th>
-                                                
-                                                <th> 
-                                                    <a href=""><button type="button" class="btn btn-info btn-md">Approve</button></a>
-                                               </th>
-                                            </tr>
+                                            {% endfor %}
+                                            
                                             
                                         </tbody>
                                         <tfoot>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Phone number</th>
-                                                <th>Mail id</th>
-                                                <th>Added on</th>
-                                                <th>Actions</th>
-                                            </tr>
+                                            
                                         </tfoot>
                                     </table>
                                 </div>
@@ -134,7 +111,28 @@
 <!-- ------------------------------------------------- -->
     {% block javascript %}
     
-    
+    <script>
+        function Approved(id)
+        {
+            $.ajax({
+      type: "POST",
+      url: "{% url 'Approved_facilitators'%}",
+      data:{"Aid":id},
+      headers: {
+                        "X-CSRFTOKEN": "{{ csrf_token }}"
+                },
+      success: function(data){
+        $("#btn_approve").removeClass("btn-info");
+
+        $("#btn_approve").addClass("btn-danger");
+        swal("Done!", data.name+" is Approved", "success");
+
+
+
+      }
+});
+        }
+    </script>
     <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
