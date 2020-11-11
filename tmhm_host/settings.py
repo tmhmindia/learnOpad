@@ -34,12 +34,12 @@ SECRET_KEY = '5w^7@844)#j4!=w*8_sd_mr(0!q42n3@3@)gab91r!opc32t^9'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 #production
-# DEBUG = False
-# ALLOWED_HOSTS = ['www.learnopad.com', 'learnopad.com', '68.183.81.120', '139.59.42.126', '127.0.0.1']
+DEBUG = False
+ALLOWED_HOSTS = ['www.learnopad.com', 'learnopad.com', '68.183.81.120', '139.59.42.126', '127.0.0.1']
 
 #Development
-DEBUG = True
-ALLOWED_HOSTS = ['128.199.219.129', '127.0.0.1','139.59.42.126']
+# DEBUG = True
+# ALLOWED_HOSTS = ['128.199.219.129', '127.0.0.1','139.59.42.126']
 
 # Application definition
 
@@ -188,33 +188,20 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# CHANNEL_LAYERS = {
-#     'default': {
-#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
-#         'CONFIG': {
-#             "hosts": [('127.0.0.1', 6379)],
-#         },
-#     },
-# }
 CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-   }
-}
-# By Vijay
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-            ],
-
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
+    'default': {
+        'BACKEND': 'asgi_redis.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('localhost', 6379)],
+        },
+        'ROUTING': 'tmhm_host.routing.application',
     }
 }
-# endVijay
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels.layers.InMemoryChannelLayer"
+#    }
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
