@@ -13,7 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'admin/assets/images/logotiny.png'%}">
@@ -22,6 +21,7 @@
     <link href="{% static 'admin/assets/libs/flot/css/float-chart.css'%}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{% static 'admin/dist/css/style.min.css'%}" rel="stylesheet">
+
      {% block stylesheet %}
     {% endblock stylesheet %}
   </head>
@@ -328,6 +328,8 @@
   <script src="{% static 'admin/assets/libs/flot/jquery.flot.crosshair.js'%}"></script>
   <script src="{% static 'admin/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js'%}"></script>
   <script src="{% static 'admin/dist/js/pages/chart/chart-page-init.js'%}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
   {% block javascript %}
   {% endblock javascript %}
   </body>

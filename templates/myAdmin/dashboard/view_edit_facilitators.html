@@ -42,15 +42,15 @@
                             <div class="card-body">
                                 <h3 class="card-title">Vijay Gwala</h3>
                                 <ul class="list-style-none">
-                                    <li  class="d-flex no-block border-top pb-3 pt-3">Fid:<span class="pl-2 text-info">10</span></li>
-                                    <li class="d-flex no-block border-top pb-3 pt-3">DOB:<span class="pl-2 text-info"></span></li>
-                                    <li class="d-flex no-block border-top pb-3 pt-3">Email: <span class="pl-2 text-info"> Vijay@gmail.com</span></li>
+                                    <li  class="d-flex no-block border-top pb-3 pt-3">Fid:<span class="pl-2 text-info">{{facilitator.Fid}}</span></li>
+                                    <li class="d-flex no-block border-top pb-3 pt-3">DOB:<span class="pl-2 text-info">{% if facilitator.DOB %}{{facilitator.DOB}}{% endif %}</span></li>
+                                    <li class="d-flex no-block border-top pb-3 pt-3">Email: <span class="pl-2 text-info"> {{facilitator.user.user.email}}</span></li>
                                     <li class="d-flex no-block border-top pb-3 pt-3">Phone No:<span class="pl-2 text-info"></span></li>
-                                    <li class="d-flex no-block border-top pb-3 pt-3">Enrollement Date:<span class="pl-2 text-info"></span></li>
-                                    <li class="d-flex no-block border-top pb-3 pt-3">Address:<span class="pl-2 text-info"></span></li>
+                                
+                                    <li class="d-flex no-block border-top pb-3 pt-3">Address:<span class="pl-2 text-info">{% if facilitator.PAddress %}{{facilitator.PAddress}}{% endif %}</span></li>
                                     <li class="d-flex no-block border-top pb-3 pt-3">Status:<span class="pl-2 text-info">Active</span></li>
-                                    <li class="d-flex no-block border-top pb-3 pt-3">added on:<span class="pl-2 text-info"></span></li>
-                                    <li class="d-flex no-block border-top pb-3 pt-3">Last updated on:<span class="pl-2 text-info"></span></li>
+                                    <li class="d-flex no-block border-top pb-3 pt-3">added on:<span class="pl-2 text-info">{{facilitator.added.date}}</span></li>
+                                    <li class="d-flex no-block border-top pb-3 pt-3">Last updated on:<span class="pl-2 text-info">{{facilitator.updated.date}}</span></li>
                                     <li class="d-flex no-block border-top pb-3 pt-3">Total Revenue earned :<span class="pl-2 text-info"></span></li>
                                 </ul>
                             </div>
@@ -70,28 +70,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
+                                    {% for course in facilitator.getCourses %}
                                     <tr>
-                                        <td>Web Develpment</td>
-                                        <td class="text-info">Rs450</td>
+                                        <td>{{course.title}}</td>
+                                        <td class="text-info">Rs {{course.price}}</td>
                                         <td>
-                                            Ratings
+                                            {{ course.no_of_ratings }}
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>Business</td>
-                                        <td class="text-info">Rs450</td>
-                                        <td>
-                                            Ratings
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>App Development</td>
-                                        <td class="text-info">Rs450</td>
-                                        <td>
-                                            Ratings
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                    {% endfor %}
+                                    </tbody>
                             </table>
                         </div> 
                     </div>
@@ -99,67 +88,67 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <form class="form-horizontal">
+                            <form id="facilitator_form"class="form-horizontal">
                                 <div class="card-body">
                                     <h4 class="card-title">Personal Info</h4>
                                     <div class="form-group ">
                                         <label for="fname" class=" text-right control-label col-form-label">Name</label>
                                         
-                                            <input type="text" class="form-control" id="fname" placeholder="Name Here">
+                                            <input type="text" class="form-control" id="name" name="name" value="{{facilitator.name}}" placeholder="Name Here">
                                         
                                     </div>
                                     <div class="form-group ">
                                         <label for="dob" class=" text-right control-label col-form-label">DOB</label>
                                         
-                                            <input type="date" class="form-control" id="dob" placeholder="Last Name Here">
+                                            <input type="date" class="form-control" id="DOB" name="DOB" value="{% if facilitator.DOB.date %}{{facilitator.getDOB}}{% endif %}">
                                         
                                     </div>
                                    
                                     <div class="form-group ">
                                         <label for="email1" class="text-right control-label col-form-label">Email id</label>
                                         
-                                            <input type="email" class="form-control" id="email1" placeholder="Email Here" readonly>
+                                            <input type="email" class="form-control" id="email" name="email" value="{{facilitator.user.user.email}}"placeholder="Email Here" readonly>
                                         
                                     </div>
                                     <div class="form-group ">
                                         <label for="cono1" class=" text-right control-label col-form-label">Contact No</label>
                                         
-                                            <input type="number" class="form-control" id="cono1" placeholder="Contact No Here">
+                                            <input type="number" class="form-control" id="phone" name="phone" value="{{facilitator.phone}}"placeholder="Contact No Here">
                                         
                                     </div>
                                     <div class="form-group ">
                                         <label for="fname" class=" text-right control-label col-form-label">Address</label>
                                         
-                                            <input type="text" class="form-control" id="fname" placeholder="Address Here">
+                                            <input type="text" class="form-control" id="PAddress" name="PAddress" value="{% if facilitator.PAddress %}{{facilitator.PAddress}}{% endif %}" placeholder="Address Here">
                                         
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
-                                            <label for="fname" class=" text-right control-label col-form-label">City</label>
-                                            
-                                                <input type="text" class="form-control" id="fname" placeholder="City Here">
-                                        </div>
-                                        <div class="form-group col-md-4">
                                             <label for="fname" class=" text-right control-label col-form-label">State</label>
                                             
-                                                <input type="text" class="form-control" id="fname" placeholder="State Here">
+                                            <input type="text" class="form-control" id="state" name="state" value="{% if facilitator.state %}{{facilitator.state}}{% endif %}"placeholder="City Here">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="fname" class=" text-right control-label col-form-label">Country</label>
+                                            
+                                            <input type="text" class="form-control" name="country" value="{% if facilitator.country %}{{facilitator.country}}{% endif %}" id="country" placeholder="country Here">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="fname" class=" text-right control-label col-form-label">Pincode</label>
                                             
-                                                <input type="number" class="form-control" id="fname" placeholder="Pincode Here">
+                                                <input type="number" class="form-control" name="zip" value="{% if facilitator.zipcode %}{{facilitator.zipcode}}{% endif %}"id="zip" placeholder="Pincode Here">
                                         </div>
                                     </div>
                                     <div class="form-group ">
                                         <label for="cono1" class=" text-right control-label col-form-label">Bio</label>
                                         
-                                            <textarea class="form-control"></textarea>
+                                            <textarea class="form-control" name="bio" id="bio" value="{% if facilitator.Bio %}{{facilitator.Bio}}{% endif %}"></textarea>
                                         
                                     </div>
                                 </div>
                                 <div class="border-top">
                                     <div class="card-body">
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <button type="button" id="facilitator_profile_update" class="btn btn-primary">Save changes</button>
                                     </div>
                                 </div>
                             </form>
@@ -186,6 +175,43 @@
     <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
+    <script>
+$("#facilitator_profile_update").click(function(event){
+event.preventDefault();
+var formData = new FormData();
+formData.append('name',$('#name').val());
+formData.append('email',$('#email').val());
+formData.append('phone',$('#phone').val());
+formData.append('DOB',$('#DOB').val());
+formData.append('PAddress',$('#PAddress').val());
+formData.append('state',$('#state').val());
+formData.append('country',$('#country').val());
+formData.append('zipcode',$('#zip').val());
+formData.append('bio',$('#bio').val());
+$.ajax({
+url: "{% url 'view_edit_facilitators' %}",
+async: false,
+data: formData,
+contentType: false,
+processData: false,
+headers: {
+               "X-CSRFTOKEN": "{{ csrf_token }}"
+       },
+type: 'POST',
+cache: false,
+
+error: function(xhr, status, error) {
+alert(error);
+},
+success: function(response) {
+swal("Done!", "Profile updated Successfully", "success");
+
+}
+});
+
+
+});
+   </script>
    
     <script>
         //***********************************//

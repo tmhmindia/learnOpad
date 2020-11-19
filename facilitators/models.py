@@ -33,7 +33,7 @@ class Applicants(models.Model):
 class Facilitator(models.Model):
     Fid=models.AutoField(primary_key=True)
     name=models.CharField(max_length=100,null=True,blank=True)
-    DOB=models.DateField(blank=True,null=True)
+    DOB=models.DateTimeField(blank=True,null=True)
     phone=models.CharField(max_length=13,null=True,blank=True)
     country=models.TextField(blank=True, null=True)
     state=models.TextField(blank=True, null=True)
@@ -49,11 +49,21 @@ class Facilitator(models.Model):
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     
     class Meta:
-        
         verbose_name='Approved Facilitator'
         verbose_name_plural='Approved Facilitators'
     def __str__(self):
         return self.name
+    def getCourses(self):
+        courses=self.offering.all()
+        return courses
+    def getCoursesCount(self):
+        count=self.offering.all().count()
+        return count
+    def getDOB(self):
+        date=self.DOB.date()
+        return date.strftime("%x")
+
+        
 
 
 

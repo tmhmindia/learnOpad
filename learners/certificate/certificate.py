@@ -10,7 +10,7 @@ def generateCertificate(learner,course):
     path_file = os.path.join(settings.MEDIA_ROOT,'certificates','certificate.jpg')
     img = Image.open(path_file)
     draw = ImageDraw.Draw(img)
-    draw.text(xy=(287,287),text='{}'.format(learner.name),fill=(0,0,0),font=font_name)
+    draw.text(xy=(325,287),text='{}'.format(learner.name),fill=(0,0,0),anchor="ms",font=font_name)
     draw.text(xy=(400,380),text='{}'.format(course.title),fill='#0b85a0',font=font_course)
     draw.text(xy=(200,533),text='{}'.format(date.today().strftime("%d/%m/%Y")),fill=(0,0,0),font=font_date)
     draw.text(xy=(580,533),text='{}'.format('Kamal Pabba'),fill=(0,0,0),font=font_founder)

@@ -54,9 +54,9 @@
                                     <table id="zero_config" class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Course title</th>
                                                 <th>Code</th>
-                                                <th>Audience</th>
+                                                <th>Course title</th>
+                                                
                                                 <th>Fascilitator_created</th>
                                                 <th>No of enrollments</th>
                                                 <th>subCat_id</th>
@@ -64,57 +64,25 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for course in courses %}
                                             <tr>
-                                                <th>Django</th>
-                                                <th>1102</th>
-                                                <th>Students,freelancers</th>
-                                                <th>Vijay Gwala</th>
-                                                <th>6</th>
-                                                <th>Web Development</th>
+                                                <th>{{course.code}}</th>
+                                                <th>{{course.title}}</th>
+                                        
+                                                <th>{{course.offering.all.0.name}}</th>
+                                                <th>{{course.getTotalLearners}}</th>
+                                                <th>{{course.subCat_id.name}}</th>
                                                 <th> 
-                                                    <a href="{% url 'view_edit_courses' %}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
+                                                    <a href="{% url 'view_edit_courses' %}?Cid={{course.Cid}}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
                                                     <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a>
                                                     <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>         
                                                 </th>
                                             </tr>
-                                            <tr>
-                                                <th>Django</th>
-                                                <th>1102</th>
-                                                <th>Students,freelancers</th>
-                                                <th>Vijay Gwala</th>
-                                                <th>6</th>
-                                                <th>Web Development</th>
-                                                <th> 
-                                                    <a href="{% url 'view_edit_courses' %}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
-                                                    <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a>
-                                                    <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>                                               
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Django</th>
-                                                <th>1102</th>
-                                                <th>Students,freelancers</th>
-                                                <th>Vijay Gwala</th>
-                                                <th>6</th>
-                                                <th>Web Development</th>
-                                                <th> 
-                                                    <a href="{% url 'view_edit_courses' %}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
-                                                    <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a>
-                                                    <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a><a href="">
-                                                </th>
-                                            </tr>
+                                            {% endfor %}
+                                           
                                             
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Course title</th>
-                                                <th>Code</th>
-                                                <th>Audience</th>
-                                                <th>Fascilitator_created</th>
-                                                <th>No of enrollments</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </tfoot>
+                                        
                                     </table>
                                 </div>
 

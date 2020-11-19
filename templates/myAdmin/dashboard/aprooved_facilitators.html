@@ -63,54 +63,24 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% if facilitators %}
+                                            {% for facilitator in facilitators %}
                                             <tr>
-                                                <th>Vijay Gwala</th>
-                                                <th>99999999999</th>
-                                                <th>Vijay@gmail.com</th>
-                                                <th>12/12/2020</th>
-                                                <th>6</th>
+                                                <th>{{facilitator.name}}</th>
+                                                <th>{{facilitator.phone}}</th>
+                                                <th>{{facilitator.user.user.email}}</th>
+                                                <th>{{facilitator.added.date}}</th>
+                                                <th>{{facilitator.getCoursesCount}}</th>
                                                 <th> 
-                                                    <a href="{% url 'view_edit_facilitators' %}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
+                                                    <a href="{% url 'view_edit_facilitators' %}?Fid={{facilitator.Fid}}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
                                                     <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a>
                                                     <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
                                             </th>
                                             </tr>
-                                            <tr>
-                                                <th>Vijay Gwala</th>
-                                                <th>99999999999</th>
-                                                <th>Vijay@gmail.com</th>
-                                                <th>12/12/2020</th>
-                                                <th>6</th>
-                                                <th> 
-                                                    <a href="{% url 'view_edit_facilitators' %}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
-                                                    <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a>
-                                                    <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
-                                               </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Vijay Gwala</th>
-                                                <th>99999999999</th>
-                                                <th>Vijay@gmail.com</th>
-                                                <th>12/12/2020</th>
-                                                <th>6</th>
-                                                <th> 
-                                                    <a href="{% url 'view_edit_facilitators' %}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
-                                                    <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a>
-                                                    <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
-                                               </th>
-                                            </tr>
-                                            
+                                            {% endfor %}
+                                            {% endif %}
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Phone number</th>
-                                                <th>Mail id</th>
-                                                <th>Added on</th>
-                                                <th>No of Course's</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </tfoot>
+                                        
                                     </table>
                                 </div>
 

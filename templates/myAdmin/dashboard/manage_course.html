@@ -56,54 +56,27 @@
                                             <tr>
                                                 <th>Course title</th>
                                                 <th>Code</th>
-                                                <th>Audience</th>
-                                                <th>Fascilitator_created</th>
+                                                <th>Created</th>
+                                                <th>Facilitator_created</th>
                                                
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for course in courses %}
                                             <tr>
-                                                <th>Web Development</th>
-                                                <th>1102</th>
-                                                <th>Students,freelancers</th>
-                                                <th>Vijay Gwala</th>
+                                                <th>{{course.title}}</th>
+                                                <th>{{course.code}}</th>
+                                                <th>{{course.added.date}}</th>
+                                                <th>{{course.offering.all.0.name}}</th>
                                                 
                                                 <th> 
-                                                    <a href=""><button type="button" class="btn btn-info btn-md">Approve</button></a>
+                                                    <a href=""><button type="button" onclick="Approved('{{course.Cid}}')" class="btn btn-info btn-md">Approve</button></a>
                                                 </th>
                                             </tr>
-                                            <tr>
-                                                <th>Web Development</th>
-                                                <th>1102</th>
-                                                <th>Students,freelancers</th>
-                                                <th>Vijay Gwala</th>
-                                                
-                                                <th> 
-                                                    <a href=""><button type="button" class="btn btn-info btn-md">Approve</button></a>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Web Development</th>
-                                                <th>1102</th>
-                                                <th>Students,freelancers</th>
-                                                <th>Vijay Gwala</th>
-                                                
-                                                <th> 
-                                                    <a href=""><button type="button" class="btn btn-info btn-md">Approve</button></a>
-                                                </th>
-                                            </tr>
-                                            
+                                            {% endfor %}
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Course title</th>
-                                                <th>Code</th>
-                                                <th>Audience</th>
-                                                <th>Fascilitator_created</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </tfoot>
+                                       
                                     </table>
                                 </div>
 
@@ -138,7 +111,28 @@
     <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
-   
+    <script>
+        function Approved(id)
+        {
+            $.ajax({
+      type: "POST",
+      url: "{% url 'Approved_courses'%}",
+      data:{"Cid":id},
+      headers: {
+                        "X-CSRFTOKEN": "{{ csrf_token }}"
+                },
+      success: function(data){
+        //$("#btn_approve").removeClass("btn-info");
+
+        //$("#btn_approve").addClass("btn-danger");
+        swal("Done!", data.name+" is Approved", "success");
+
+
+
+      }
+});
+        }
+    </script>
     <script>
         /****************************************
          *       Basic Table                   *

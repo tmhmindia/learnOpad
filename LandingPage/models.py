@@ -89,6 +89,7 @@ class Course(models.Model):
     takeaway=models.TextField(null=True,blank=True)
     subCat_id = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     categories= models.ForeignKey(Category, on_delete=models.CASCADE)
+    approve=models.BooleanField(default=False,null=True,blank=True)
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     price = models.IntegerField(default=2000,blank=True,null=True)
@@ -146,6 +147,10 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+    def getTotalLearners(self):
+        return self.enroll.all().count()
+
+    
     
     class Meta:
         verbose_name='Courses'

@@ -71,7 +71,7 @@
                                                 
                                                 <th> 
                                                   
-                                                    <a href="" onclick="Approved('{{applicant.Aid}}')"><button type="button" id="btn_approve"class="btn btn-info btn-md">Approve</button></a>
+                                                    <button type="button" onclick="Approved('{{applicant.Aid}}')" id="btn_approve"class="btn btn-info btn-md">Approve</button>
                                                    
                                             </th>
                                             </tr>
@@ -114,6 +114,9 @@
     <script>
         function Approved(id)
         {
+           //preventDefault();
+
+
             $.ajax({
       type: "POST",
       url: "{% url 'Approved_facilitators'%}",
@@ -122,15 +125,13 @@
                         "X-CSRFTOKEN": "{{ csrf_token }}"
                 },
       success: function(data){
-        $("#btn_approve").removeClass("btn-info");
-
-        $("#btn_approve").addClass("btn-danger");
-        swal("Done!", data.name+" is Approved", "success");
-
+        
+swal("Done!", " is Approved", "success").then(function(){location.reload()});
 
 
       }
 });
+ 
         }
     </script>
     <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>

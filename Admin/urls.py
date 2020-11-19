@@ -14,10 +14,4 @@ urlpatterns = [
     path('learnopad/admin/view/campus/', views.campus_training, name='campus_training'),
     path('learnopad/admin/view/corporate/', views.cor_training, name='cor_training'),
     path('learnopad/admin/view/queries/', views.query_submission, name='query_submission'),
-    
-
-
-
-
-
 ]

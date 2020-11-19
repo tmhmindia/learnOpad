@@ -99,56 +99,56 @@
                                     <div class="form-group ">
                                         <label for="fname" class=" text-right control-label col-form-label">Name</label>
                                         
-                                            <input type="text" class="form-control" id="fname" value="{{learner.name}}"placeholder="Name Here">
+                                            <input type="text" class="form-control" id="name" value="{{learner.name}}"placeholder="Name Here">
                                         
                                     </div>
                                     <div class="form-group col-md-4 col-12">
                                         <label for="dob" class=" text-right control-label col-form-label">DOB</label>
                                         
-                                            <input type="date" class="form-control" id="dob" {% if learner.DOB %}value="{{learner.DOB}}"{% endif %} placeholder="Last Name Here">
+                                            <input type="date" class="form-control" id="DOB" {% if learner.DOB %}value="{{learner.DOB}}"{% endif %} placeholder="Last Name Here">
                                         
                                     </div>
                                    
                                     <div class="form-group ">
                                         <label for="email1" class="text-right control-label col-form-label">Email id</label>
                                         
-                                            <input type="email" class="form-control" id="email1" value="{{learner.user.email}}"placeholder="Email Here" readonly>
+                                            <input type="email" class="form-control" id="email" value="{{learner.user.email}}"placeholder="Email Here" readonly>
                                         
                                     </div>
                                     <div class="form-group ">
                                         <label for="cono1" class=" text-right control-label col-form-label">Contact No</label>
                                         
-                                            <input type="number" class="form-control" id="cono1"value="{{learner.phone}}" placeholder="Contact No Here">
+                                            <input type="number" class="form-control" id="phone"value="{{learner.phone}}" placeholder="Contact No Here">
                                         
                                     </div>
                                     <div class="form-group ">
                                         <label for="fname" class=" text-right control-label col-form-label">Address</label>
                                         
-                                            <input type="text" class="form-control" id="fname" {% if learner.PAddress %}value="{{learner.PAddress}}" {% endif %}placeholder="Address Here">
+                                            <input type="text" class="form-control" id="PAddress" {% if learner.PAddress %}value="{{learner.PAddress}}" {% endif %}placeholder="Address Here">
                                         
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="fname" class=" text-right control-label col-form-label">Country</label>
                                             
-                                                <input type="text" class="form-control" id="fname" {% if learner.country %}value="{{learner.country}}"{% endif %}placeholder="Country Here">
+                                                <input type="text" class="form-control" id="country" {% if learner.country %}value="{{learner.country}}"{% endif %}placeholder="Country Here">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="fname" class=" text-right control-label col-form-label">State</label>
                                             
-                                                <input type="text" class="form-control" id="fname" {% if learner.state %}value="{{learner.state}}"{% endif %} placeholder="State Here">
+                                                <input type="text" class="form-control" id="state" {% if learner.state %}value="{{learner.state}}"{% endif %} placeholder="State Here">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="fname" class=" text-right control-label col-form-label">Pincode</label>
                                             
-                                                <input type="number" class="form-control" id="fname" {% if learner.zip %}value="{{learner.zip}}"{% endif %}placeholder="Pincode Here">
+                                                <input type="number" class="form-control" id="zip" {% if learner.zip %}value="{{learner.zip}}"{% endif %}placeholder="Pincode Here">
                                         </div>
                                     </div>
                                    
                                 </div>
                                 <div class="border-top">
                                     <div class="card-body">
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <button type="button" id="learner_profile_update"class="btn btn-primary">Save changes</button>
                                     </div>
                                 </div>
                             </form>
@@ -174,7 +174,43 @@
     <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
-   
+    <script>
+        $("#learner_profile_update").click(function(event){
+        event.preventDefault();
+        var formData = new FormData();
+        formData.append('name',$('#name').val());
+        formData.append('email',$('#email').val());
+        formData.append('phone',$('#phone').val());
+        formData.append('DOB',$('#DOB').val());
+        formData.append('PAddress',$('#PAddress').val());
+        formData.append('state',$('#state').val());
+        formData.append('country',$('#country').val());
+        formData.append('zipcode',$('#zip').val());
+        
+        $.ajax({
+        url: "{% url 'view_edit_learners' %}",
+        async: false,
+        data: formData,
+        contentType: false,
+        processData: false,
+        headers: {
+                       "X-CSRFTOKEN": "{{ csrf_token }}"
+               },
+        type: 'POST',
+        cache: false,
+        
+        error: function(xhr, status, error) {
+        alert(error);
+        },
+        success: function(response) {
+        swal("Done!", "Profile updated Successfully", "success");
+        
+        }
+        });
+        
+        
+        });
+           </script>
     <script>
         //***********************************//
         // For select 2
