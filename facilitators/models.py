@@ -61,7 +61,7 @@ class Facilitator(models.Model):
         return count
     def getDOB(self):
         date=self.DOB.date()
-        return date.strftime("%x")
+        return date.strftime("%m/%d/%y")
 
         
 

@@ -7,7 +7,8 @@ class Campus(models.Model):
     email=models.EmailField(max_length=100)
     campus=models.CharField(max_length=250)
     course= models.ForeignKey(Course,related_name='campus_course', on_delete=models.CASCADE,null=True)
-   
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
 
     def __str__(self):
         return self.name

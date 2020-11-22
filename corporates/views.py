@@ -7,7 +7,8 @@ from .models import CorporatesTalks
 def corporate_landingPage(request):
     if request.method=='POST':
         course=Course.objects.get(Cid=request.POST.get('courses'))
-        campus=CorporatesTalks(name=request.POST.get('name'),email=request.POST.get('email'),organization=request.POST.get('organization'),course=course)
+        corporate=CorporatesTalks(name=request.POST.get('name'),email=request.POST.get('email'),organization=request.POST.get('organization'),course=course)
+        corporate.save()
         return JsonResponse("success",safe=False)
     else:
         courses=Course.objects.all()

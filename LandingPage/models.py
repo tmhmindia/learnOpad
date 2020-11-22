@@ -245,7 +245,9 @@ class ContactUs(models.Model):
     categories=models.CharField(max_length=100,choices=Categories)
     mobile=models.CharField(max_length=10)
     message=models.TextField(max_length=200)
-
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
+    
     def __str__(self):
         return self.name
     class Meta:

@@ -7,7 +7,8 @@ class CorporatesTalks(models.Model):
     email=models.EmailField(max_length=100)
     organization=models.CharField(max_length=250)
     course= models.ForeignKey(Course,related_name='corporate_course', on_delete=models.CASCADE,null=True)
-   
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
 
 
     def __str__(self):

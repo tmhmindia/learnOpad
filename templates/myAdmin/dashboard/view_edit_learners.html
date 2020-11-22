@@ -105,7 +105,7 @@
                                     <div class="form-group col-md-4 col-12">
                                         <label for="dob" class=" text-right control-label col-form-label">DOB</label>
                                         
-                                            <input type="date" class="form-control" id="DOB" {% if learner.DOB %}value="{{learner.DOB}}"{% endif %} placeholder="Last Name Here">
+                                            <input type="date" class="form-control" id="DOB" {% if learner.DOB %}value="{{learner.DOB|date:'Y-m-d'}}"{% endif %} placeholder="Last Name Here">
                                         
                                     </div>
                                    
@@ -156,7 +156,7 @@
                     </div>
                 </div>
                 <div style="text-align: right;width: 100%;">
-                    <a href=""><button type="button" class="btn btn-danger btn-lr">Delete this Learner</button></a>
+                    <button type="button" onclick="DeleteUser('{{learner.user.id}}')" class="btn btn-danger btn-lr">Delete this Learner</button>
                 </div>
             </div>
             <!-- ============================================================== -->
@@ -174,6 +174,46 @@
     <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
+    <script>
+        function DeleteUser(id)
+        {
+            swal({
+    title: "Are you sure?",
+    text: "You will not be able to recover this Learner Data!",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Yes, delete it!",
+    cancelButtonText: "No, cancel plz!",
+    closeOnConfirm: false,
+    closeOnCancel: false
+  },
+    function (isConfirm) {
+      if (isConfirm) {
+        $.ajax({
+          type: 'POST',
+          url: '{% url "delete_user" %}',
+          headers: {
+                       "X-CSRFTOKEN": "{{ csrf_token }}"
+               },
+          data: {id : id},
+          success: function (data) {
+            swal("Deleted!", "Your Learner  has been deleted.", "success");
+          },
+          error: function (data) {
+            swal("NOT Deleted!", "Something blew up.", "error");
+          }
+        });
+      } else {
+        swal("Cancelled", "Your Learner is safe :)", "success");
+      }
+    });
+
+  return false;
+
+
+        }
+    </script>
     <script>
         $("#learner_profile_update").click(function(event){
         event.preventDefault();

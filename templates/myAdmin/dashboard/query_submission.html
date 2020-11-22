@@ -54,18 +54,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for record in councelling_list %}
                                             <tr>
-                                                <th>Vijay Gwala</th>
-                                                <th>99999999999</th>
-                                                <th>Vijay@gmail.com</th>
-                                                <th>12/12/2020</th>
+                                                <th>{{record.name}}</th>
+                                                <th>{{record.phone_number}}</th>
+                                                <th>{{record.email}}</th>
+                                                <th>{{record.added.date}}</th>
                                                 
                                                 <th> 
-                                                    <a href="{% url 'view_edit_facilitators' %}"><button type="button" class="btn btn-cyan btn-md">Mail</button></a>
+                                                    <a href="mailto:{{record.email}}"><button type="button" class="btn btn-cyan btn-md">Mail</button></a>
                                                     <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
                                                     <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
                                             </th>
                                             </tr>
+                                            {% endfor %}
                                             <!-- <tr>
                                                 <th>Vijay Gwala</th>
                                                 <th>99999999999</th>
@@ -92,16 +94,7 @@
                                             </tr> -->
                                             
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Phone number</th>
-                                                <th>Mail id</th>
-                                                <th>Added on</th>
-                                              
-                                                <th>Actions</th>
-                                            </tr>
-                                        </tfoot>
+                                        
                                     </table>
                                 </div>
 
@@ -132,56 +125,26 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for record in contact_list %}
                                             <tr>
-                                                <th>Vijay Gwala</th>
-                                                <th>99999999999</th>
-                                                <th>Vijay@gmail.com</th>
-                                                <th>My course videos are not working.</th>
-                                                <th>Courses</th>
-                                                <th>12/12/2020</th>
-                                                <th> 
-                                                    <a href="#"><button type="button" class="btn btn-cyan btn-md">Mail</button></a>
+                                                <th>{{record.name}}</th>
+                                                <th>{{record.mobile}}</th>
+                                                <th>{{record.email}}</th>
+                                                <th>{{record.message}}</th>
+                                                <th>{{record.categories}}</th>
+                                                <th>{{record.added.date}}</th>
+                                                <th>
+                                                     
+                                                    <a href="mailto:{{record.email}}"><button type="button" class="btn btn-cyan btn-md">Mail</button></a>
                                                     <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
                                                     <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
                                             </th>
                                             </tr>
-                                            <!-- <tr>
-                                                <th>Vijay Gwala</th>
-                                                <th>99999999999</th>
-                                                <th>Vijay@gmail.com</th>
-                                                <th>12/12/2020</th>
-                                                <th>6</th>
-                                                <th> 
-                                                    <a href="{% url 'view_edit_facilitators' %}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
-                                                    <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a>
-                                                    <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
-                                               </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Vijay Gwala</th>
-                                                <th>99999999999</th>
-                                                <th>Vijay@gmail.com</th>
-                                                <th>12/12/2020</th>
-                                                <th>6</th>
-                                                <th> 
-                                                    <a href="{% url 'view_edit_facilitators' %}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
-                                                    <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a>
-                                                    <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
-                                               </th>
-                                            </tr> -->
+                                            {% endfor %}
+                                            
                                             
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Phone number</th>
-                                                <th>Mail id</th>
-                                                <th>Message</th>
-                                                <th>Category</th>
-                                                <th>Added on</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </tfoot>
+                                    
                                     </table>
                                 </div>
 

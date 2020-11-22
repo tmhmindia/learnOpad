@@ -32,7 +32,7 @@ from django.contrib.messages import get_messages
 
 # global signup system
 def login_page(request):
-    return render(request,'login/login.html')
+    return render(request,'login/signin_signup.html',{'signin':True,'signup':False})
 def signup(request):
     exist=False
     if request.method == 'POST':
@@ -60,7 +60,7 @@ def signup(request):
 
     else:
         form = UserForm()
-    return render(request, 'LandingPage/signup/signup.html', {'form': form,'exist':exist})
+    return render(request, 'login/signin_signup.html', {'form': form,'exist':exist,'signin':False,'signup':True})
 
 class user_login(View):
     

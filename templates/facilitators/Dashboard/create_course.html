@@ -407,7 +407,6 @@ function validate()
    {
         alert("You have not selected any Course");
 
-        $("#dltvid").attr("checked", false);
 
 
         return false;
@@ -462,6 +461,11 @@ $("input[name='check_video']").change(function(){
             }
         });
    } // check validate
+   else{
+    $("input[name='check_video']").attr("checked", false);
+
+       return false;
+   }
 });
 </script>
 <script>

@@ -49,59 +49,29 @@
                                                 <!-- <th>Phone number</th> -->
                                                 <th>Mail id</th>
                                                 <th>Added on</th>
+                                                <th>Date</th>
                                                 <th>Course</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for record in records %}
                                             <tr>
-                                                <th>Vijay Gwala</th>
-                                                <!-- <th>99999999999</th> -->
-                                                <th>Vijay@gmail.com</th>
-                                                <th>12/12/2020</th>
-                                                <th>Django</th>
+                                                <th>{{record.name}}</th>
+                                                <th>{{record.organization}}</th> 
+                                                <th>{{record.email}}</th>
+                                                <th>{{record.added.date}}</th>
+                                                <th>{{record.course.title}}</th>
                                                 <th> 
-                                                    <a href="#"><button type="button" class="btn btn-cyan btn-md">Mail</button></a>
+                                                    <a href="mailto:{{record.email}}"><button type="button" class="btn btn-cyan btn-md">Mail</button></a>
                                                     <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
-                                                    <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
+                                                    <button type="button" onclick="DeleteTraining('{{record.id}}',false)" class="btn btn-danger btn-sm">Delete</button>
                                             </th>
                                             </tr>
-                                            <!-- <tr>
-                                                <th>Vijay Gwala</th>
-                                                <th>99999999999</th>
-                                                <th>Vijay@gmail.com</th>
-                                                <th>12/12/2020</th>
-                                                <th>6</th>
-                                                <th> 
-                                                    <a href="{% url 'view_edit_facilitators' %}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
-                                                    <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a>
-                                                    <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
-                                               </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Vijay Gwala</th>
-                                                <th>99999999999</th>
-                                                <th>Vijay@gmail.com</th>
-                                                <th>12/12/2020</th>
-                                                <th>6</th>
-                                                <th> 
-                                                    <a href="{% url 'view_edit_facilitators' %}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
-                                                    <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a>
-                                                    <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
-                                               </th>
-                                            </tr> -->
+                                           {% endfor %}
                                             
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Name</th>
-                                                <!-- <th>Phone number</th> -->
-                                                <th>Mail id</th>
-                                                <th>Added on</th>
-                                                <th>Course</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </tfoot>
+                                        
                                     </table>
                                 </div>
 
@@ -122,7 +92,56 @@
         <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
         <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
         <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
-       
+        <script>
+            function DeleteTraining(id,flag)
+            {
+                var data={};
+                if(flag)
+                {
+                    data['campus']=id;
+                }
+                else{
+                    data['corporate']=id;
+                }
+                
+            
+                swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this training Data!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel plz!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+        function (isConfirm) {
+          if (isConfirm) {
+            $.ajax({
+              type: 'POST',
+              url: '{% url "delete_training" %}',
+              headers: {
+                           "X-CSRFTOKEN": "{{ csrf_token }}"
+                   },
+              data: data,
+              success: function (data) {
+                swal("Deleted!", "Your Training Data  has been deleted.", "success");
+                window.location.reload();
+              },
+              error: function (data) {
+                swal("NOT Deleted!", "Something blew up.", "error");
+              }
+            });
+          } else {
+            swal("Cancelled", "Your Training Data is safe :)", "success");
+          }
+        });
+    
+      return false;
+    
+     }
+        </script>
         <script>
             /****************************************
              *       Basic Table                   *
