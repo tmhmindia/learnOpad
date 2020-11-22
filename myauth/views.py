@@ -114,6 +114,8 @@ class user_login(View):
                         return HttpResponseRedirect(reverse('dashboard'))
                     elif user.groups.filter(name='Learners').exists():
                         return HttpResponseRedirect(reverse('learner_index'))
+                    elif user.groups.filter(name='Admins').exists() or user.groups.filter(name='Admins').exists():
+                        return HttpResponseRedirect(reverse('dashboard_admin'))
                     else:
                         return HttpResponseRedirect(reverse('home')) 
                         

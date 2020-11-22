@@ -7,13 +7,21 @@ from mailing.views import *
 from django.core.paginator import Paginator
 from corporates.models import *
 from campus.models import * 
+from django.contrib.auth.decorators import login_required
+from myauth.decoraters import *
 
 # Create your views here.
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def Dashboard(request):
     return render(request,'myAdmin/dashboard/index.html')
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def manage_facilitators(request):
     applicants=Applicants.objects.filter(status="Due")
     return render(request,'myAdmin/dashboard/manage_facilitators.html',{'applicants':applicants})
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def Approved_facilitators(request):
     if request.method == "POST":
         Aid= request.POST.get('Aid')
@@ -30,6 +38,8 @@ def Approved_facilitators(request):
     else:
         facilitators=Facilitator.objects.all()
         return render(request,'myAdmin/dashboard/aprooved_facilitators.html',{'facilitators':facilitators})
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def Approved_courses(request):
     if request.method == "POST":
         Cid= request.POST.get('Cid')
@@ -40,13 +50,18 @@ def Approved_courses(request):
     else:
         courses=Course.objects.filter(approve=True)
         return render(request,'myAdmin/dashboard/aprooved_courses.html',{'courses':courses})
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def campus_training(request):
     campus_records=Campus.objects.all()
     return render(request,'myAdmin/dashboard/view_campus_sub.html',{'records':campus_records})
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def cor_training(request):
     records=CorporatesTalks.objects.all()
-
     return render(request,'myAdmin/dashboard/view_corporate_sub.html',{'records':records})
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def view_edit_facilitators(request):
     if request.method=='POST':
         email = request.POST.get('email')
@@ -69,6 +84,8 @@ def view_edit_facilitators(request):
         if Fid is not None:
             facilitator=Facilitator.objects.get(Fid=Fid)
         return render(request,'myAdmin/dashboard/view_edit_facilitators.html',{'facilitator':facilitator})
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def view_edit_courses(request):
     if request.method=='POST':
         Cid = request.POST.get('Cid')
@@ -85,17 +102,24 @@ def view_edit_courses(request):
         if Cid is not None:
             course=Course.objects.get(Cid=Cid)
         return render(request,'myAdmin/dashboard/view_edit_course.html',{'course':course})
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def manage_learners(request):
     learners=Learners.objects.all()
     return render(request,'myAdmin/dashboard/manage_learners.html',{'learners':learners})
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def manage_courses(request):
     courses=Course.objects.filter(approve=False)
     return render(request,'myAdmin/dashboard/manage_course.html',{'courses':courses})
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def query_submission(request):
     contactus_list=ContactUs.objects.all()
     councelling_details=OnlineCounsellingDetails.objects.all()
     return render(request,'myAdmin/dashboard/query_submission.html',{'contact_list':contactus_list,'councelling_list':councelling_details})
-
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def view_edit_learners(request):
     if request.method=='POST':
         email = request.POST.get('email')
