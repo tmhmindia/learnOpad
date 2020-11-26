@@ -235,7 +235,7 @@ AUTH_USER_MODEL = 'myauth.CustomUser'
 
 # By Vijay
 #STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 #MEDIA_URL = '/media/'
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'

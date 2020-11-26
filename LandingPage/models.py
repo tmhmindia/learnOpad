@@ -100,6 +100,8 @@ class Course(models.Model):
     def no_of_ratings(self):
         ratings = Rating.objects.filter(course=self)
         return len(ratings)
+    def getURL(self):
+        return self.thumbnail.url
 
     def avg_rating(self):
         sum = 0
