@@ -55,6 +55,19 @@ def Approved_courses(request):
 def campus_training(request):
     campus_records=Campus.objects.all()
     return render(request,'myAdmin/dashboard/view_campus_sub.html',{'records':campus_records})
+
+def facilitator_support(request):
+    return render(request,'myAdmin/dashboard/fac_support.html')    
+
+def facilitator_orders(request):
+    return render(request,'myAdmin/dashboard/fac_subscription.html')   
+def course_orders(request):
+    return render(request,'myAdmin/dashboard/course_orders.html') 
+ 
+def learner_support(request):
+    return render(request,'myAdmin/dashboard/learner_support.html')  
+
+       
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def cor_training(request):

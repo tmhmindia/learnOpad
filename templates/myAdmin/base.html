@@ -232,29 +232,40 @@
               <!-- Sidebar navigation-->
               <nav class="sidebar-nav">
                   <ul id="sidebarnav" class="p-t-30">
-                      <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'dashboard_admin'%}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'dashboard_admin'%}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
                                                      
-                      <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'manage_learners'%}" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Manage Learners</span></a></li>
-                      <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-edit"></i><span class="hide-menu">Manage Facilitators </span></a>
-                          <ul aria-expanded="false" class="collapse  first-level">
-                              <li class="sidebar-item"><a href="{% url 'manage_facilitators'%}" class="sidebar-link"><i class="mdi mdi-account-alert"></i><span class="hide-menu"> Requested facilitators </span></a></li>
-                              <li class="sidebar-item"><a href="{% url 'Approved_facilitators'%}" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu"> Approved facilitators </span></a></li>
-                          </ul>
-                      </li>
-                      <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Manage Courses</span></a>
-                          <ul aria-expanded="false" class="collapse first-level">
-                              <li class="sidebar-item"><a href="{% url 'manage_courses'%}" class="sidebar-link"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Requested Courses </span></a></li>
-                              <li class="sidebar-item"><a href="{% url 'Approved_courses'%}" class="sidebar-link"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Approved Courses </span></a></li>
-                          </ul>
-                      </li>
-                      <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-edit"></i><span class="hide-menu">Manage Trainings </span></a>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'manage_learners'%}" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Manage Learners</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-edit"></i><span class="hide-menu">Manage Facilitators </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="{% url 'manage_facilitators'%}" class="sidebar-link"><i class="mdi mdi-account-alert"></i><span class="hide-menu"> Requested facilitators </span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'Approved_facilitators'%}" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu"> Approved facilitators </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Manage Courses</span></a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item"><a href="{% url 'manage_courses'%}" class="sidebar-link"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Requested Courses </span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'Approved_courses'%}" class="sidebar-link"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Approved Courses </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-edit"></i><span class="hide-menu">Manage Trainings </span></a>
                         <ul aria-expanded="false" class="collapse  first-level">
                             <li class="sidebar-item"><a href="{% url 'campus_training'%}" class="sidebar-link"><i class="mdi mdi-account-alert"></i><span class="hide-menu"> Campus training submission </span></a></li>
                             <li class="sidebar-item"><a href="{% url 'cor_training'%}" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu"> Corporate training submission </span></a></li>
                         </ul>
-                    </li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'query_submission'%}" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Contact & Councelling sub </span></a></li>
-                    
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'query_submission'%}" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Contact & Councelling sub </span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-edit"></i><span class="hide-menu">Manage Support queries </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="{% url 'facilitator_support'%}" class="sidebar-link"><i class="mdi mdi-account-alert"></i><span class="hide-menu">  Facilitators Support Queries </span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'learner_support' %}" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">    Learner Support Queries  </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-edit"></i><span class="hide-menu">Orders </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="{% url 'facilitator_orders'%}" class="sidebar-link"><i class="mdi mdi-account-alert"></i><span class="hide-menu">  Facilitators Subscription </span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'course_orders' %}" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">   Course orders  </span></a></li>
+                            </ul>
+                        </li>
                   </ul>
               </nav>
               <!-- End Sidebar navigation -->

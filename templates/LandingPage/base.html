@@ -295,17 +295,20 @@ swal('Sorry!','This credential are Not Valid Try to Register Please !','error')
   })
   .then((forgot_password) => {
     if (forgot_password) {
+        swal("Please wait!", 'Otp will be sent to your account', "info");
         $.ajax({
                 url: "{% url 'forgotPassword' uemail %}",
                 type:"GET",
                 success: function (data) {
-                swal("OTP sent!", 'OTP is sent to your email', "success");
+                // swal("OTP sent!", 'OTP is sent to your email', "success");
                 $("#forgotPasswordModal").modal();
+                
                  }     
               })
     }
     else {
       $("#exampleModal").modal();
+    //   window.location.href="{% url 'login_page' %}"; 
     }  
   });</script>
 {% endif %}
