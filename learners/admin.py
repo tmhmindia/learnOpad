@@ -21,7 +21,7 @@ class LearnersAdmin(admin.ModelAdmin):
     inlines=(enrollinline,)
 
 class LQueryAdmin(admin.ModelAdmin):
-    list_display=('Lid','query','reply','added','updated')
+    list_display=('Lid','query','replay','added','updated')
 
 class ReviewsAdmin(admin.ModelAdmin):
     list_display=('Cid','Lid','reviews','created_at')

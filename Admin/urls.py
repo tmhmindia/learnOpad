@@ -18,11 +18,12 @@ urlpatterns = [
     path('learnopad/admin/Delete/User/', views.DeleteUser, name='delete_user'),
     path('learnopad/admin/Delete/contact/Councelling/', views.DeleteCouncellingContactUsData, name='delete_contactus_councelling'),
     path('learnopad/admin/Delete/Training/', views.DeleteTrainingData, name='delete_training'),
-    path('learnopad/admin/learner/support/', views.learner_support, name='learner_support'),
+    path('learnopad/admin/learner/support/', views.learner_support, name='admin_to_learner_support'),
     path('learnopad/admin/facilitator/support/', views.facilitator_support, name='facilitator_support'),
     path('learnopad/admin/course/orders/', views.course_orders, name='course_orders'),
     path('learnopad/admin/facilitator/orders/', views.facilitator_orders, name='facilitator_orders'),
-    
+    path('learnopad/admin/Delete/query/', views.DeleteSupportQueires, name='Delete_support_queries'),
+
 
 
 

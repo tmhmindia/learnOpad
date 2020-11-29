@@ -9,6 +9,8 @@ from corporates.models import *
 from campus.models import * 
 from django.contrib.auth.decorators import login_required
 from myauth.decoraters import *
+from LandingPage.models import Queries
+from payment_gateway.models import OrderCourses
 
 # Create your views here.
 @login_required(login_url='/user/signin/')
@@ -56,16 +58,47 @@ def campus_training(request):
     campus_records=Campus.objects.all()
     return render(request,'myAdmin/dashboard/view_campus_sub.html',{'records':campus_records})
 
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def facilitator_support(request):
-    return render(request,'myAdmin/dashboard/fac_support.html')    
+    if request.method =='POST':
+        id=request.POST.get('id')
+        query=Queries.objects.get(id=int(id))
+        replay=request.POST.get('replay')
+        query.replay=replay
+        query.save()
+        return JsonResponse("success",safe=False)
 
+    else:
+        queries=Queries.objects.all()
+        return render(request,'myAdmin/dashboard/fac_support.html',{'queries':queries})    
+
+
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def facilitator_orders(request):
     return render(request,'myAdmin/dashboard/fac_subscription.html')   
+
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def course_orders(request):
-    return render(request,'myAdmin/dashboard/course_orders.html') 
- 
+    orders=OrderCourses.objects.all()
+    return render(request,'myAdmin/dashboard/course_orders.html',{'orders':orders}) 
+
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def learner_support(request):
-    return render(request,'myAdmin/dashboard/learner_support.html')  
+    if request.method =='POST':
+        id=request.POST.get('id')
+        query=LQueries.objects.get(id=int(id))
+        replay=request.POST.get('replay')
+        query.replay=replay
+        query.save()
+        return JsonResponse("success",safe=False)
+
+    else:
+        queries=LQueries.objects.all()
+        return render(request,'myAdmin/dashboard/learner_support.html',{'queries':queries})  
 
        
 @login_required(login_url='/user/signin/')
@@ -181,5 +214,13 @@ def DeleteCouncellingContactUsData(request):
         obj=OnlineCounsellingDetails.objects.get(councelling_id=int(councelling)).delete()
         return JsonResponse({"success":True})
 
-
+def DeleteSupportQueires(request):
+    fquery=request.POST.get('fquery',None)
+    lquery=request.POST.get('lquery',None)
+    if fquery:
+        obj=Queries.objects.get(id=int(fquery)).delete()
+        return JsonResponse({"success":True})
+    else:
+        obj=LQueries.objects.get(id=int(lquery)).delete()
+        return JsonResponse({"success":True})
 

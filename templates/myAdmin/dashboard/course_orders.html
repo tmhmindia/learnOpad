@@ -55,13 +55,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           
+                                           {% for order in orders %}
                                             <tr>
-                                                <th>Mr learner</th>
-                                                <th>React js</th> 
-                                                <th>Vijay Gwala</th> 
-                                                <th>Rs.5000</th>
-                                                <th>Sep 12,20</th>
+                                                <th>{{order.order.customer.first_name}}</th>
+                                                <th>{{order.course.title}}</th> 
+                                                <th>{{order.course.offering.all.0.name}}</th> 
+                                                <th>Rs.{{order.order.price}}</th>
+                                                <th>{{order.order.date.date}}</th>
                                                 <th><span class="badge badge-success">Paid</span></th>
                                                 <th> 
                                                     <!-- <button type="button" class="btn btn-cyan btn-md mt-2">Send </button> -->
@@ -70,34 +70,8 @@
                                                 </th>
 
                                             </tr>
-                                            <tr>
-                                                <th>Mr learner</th>
-                                                <th>React js</th> 
-                                                <th>Vijay Gwala</th> 
-                                                <th>Rs.5000</th>
-                                                <th>Sep 12,20</th>
-                                                <th><span class="badge badge-warning">pending</span></th>
-                                                <th> 
-                                                    <!-- <button type="button" class="btn btn-cyan btn-md mt-2">Send </button> -->
-                                                    <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
-                                                    <button type="button"  class="btn btn-danger btn-sm">Delete </button>
-                                                </th>
-
-                                            </tr>
-                                            <tr>
-                                                <th>Mr learner</th>
-                                                <th>React js</th> 
-                                                <th>Vijay Gwala</th> 
-                                                <th>Rs.5000</th>
-                                                <th>Sep 12,20</th>
-                                                <th><span class="badge badge-danger">Cancelled</span></th>
-                                                <th> 
-                                                    <!-- <button type="button" class="btn btn-cyan btn-md mt-2">Send </button> -->
-                                                    <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
-                                                    <button type="button"  class="btn btn-danger btn-sm">Delete </button>
-                                                </th>
-
-                                            </tr>
+                                            {% endfor %}
+                                           
                                         </tbody>
                                        
                                     </table>

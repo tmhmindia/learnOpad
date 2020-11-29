@@ -54,20 +54,26 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           
+                                           {% for query in queries %}
                                             <tr>
-                                                <th>Mr Learner</th>
-                                                <th>Hello, I am not able to watch videos</th> 
-                                                <th><input type="text" name="reply" placeholder="Reply" class="form-control">
-                                                    <button type="button" class="btn btn-cyan btn-md mt-2">Send </button></th>
-                                                <th>Sep 12,20</th>
-                                                <th>Sep 13,20</th>
+                                                <th>{{query.Lid.name}}</th>
+                                                <th>{{query.query}}</th>
+                                                {% if query.replay %}
+                                                <th>{{query.replay}}</th>
+                                                {% else %} 
+                                                <th><input type="text" name="reply" placeholder="Reply" id="replay" class="form-control">
+                                                    <button type="button" onClick="send('{{query.id}}')" id="send"class="btn btn-cyan btn-md mt-2">Send </button></th>
+                                                {% endif %}
+                                                <th>{{query.added.date}}</th>
+                                                <th>{{query.updated.date}}</th>
+
                                                 <th> 
                                                     
                                                     <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
-                                                    <button type="button"  class="btn btn-danger btn-sm">Delete </button>
+                                                    <button type="button" onClick="Delete('{{query.id}}','lquery')" class="btn btn-danger btn-sm">Delete </button>
                                             </th>
                                             </tr>
+                                            {% endfor %}
                                            
                                            
                                         </tbody>
@@ -94,7 +100,70 @@
         <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
         <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
         <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
-       
+        <script>
+
+        function Delete(id,query){
+                var formData = new FormData();
+                    formData.append(query,id);
+
+        $.ajax({
+            url: "{% url 'Delete_support_queries' %}",
+            async: false,
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                           "X-CSRFTOKEN": "{{ csrf_token }}"
+                   },
+            type: 'POST',
+            cache: false,
+            
+            error: function(xhr, status, error) {
+            alert(error);
+            },
+            success: function(response) {
+            window.location.reload();
+            swal("Done!", "Delete Successfully", "success");
+            
+            }
+            });
+
+                
+            }
+            
+
+            function send(id){
+            
+            var formData = new FormData();
+            formData.append('replay',$('#replay').val());
+            formData.append('id',id);
+
+           
+            $.ajax({
+            url: "{% url 'admin_to_learner_support' %}",
+            async: false,
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                           "X-CSRFTOKEN": "{{ csrf_token }}"
+                   },
+            type: 'POST',
+            cache: false,
+            
+            error: function(xhr, status, error) {
+            alert(error);
+            },
+            success: function(response) {
+            window.location.reload();
+            swal("Done!", "Replied Successfully", "success");
+            
+            }
+            });
+            
+            
+            }
+               </script>
        
         <script>
             /****************************************
