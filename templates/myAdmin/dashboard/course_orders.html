@@ -109,6 +109,59 @@
                 </div>
                 <!-- ============================================================== -->
         
+            
+
+
+           
+                
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Course Subscription Revenue</h5>
+                                <div class="table-responsive">
+                                    <table id="zero_config2" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Course Name</th>
+                                                <th>Facilitator Name</th>
+                                                <th>Price</th>
+                                                <th>Fascilitator Revenue</th>
+                                                <th>Admin Revenue</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           
+                                            <tr>
+                                                <th>Mr learner</th>
+                                                <th>React js</th> 
+                                                <th>Vijay Gwala</th> 
+                                                <th>Rs.5000</th>
+                                                <th>Rs.4500</th>
+                                                <th>Rs.500</th>
+                                                <th><span class="badge badge-success">Paid</span></th>
+                                                <th> 
+                                                    <!-- <button type="button" class="btn btn-cyan btn-md mt-2">Send </button> -->
+                                                    <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
+                                                    <button type="button"  class="btn btn-success btn-sm" disabled>Paid </button>
+                                                </th>
+
+                                            </tr>
+                                            
+                                        </tbody>
+                                       
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+        
             </div>
          
     {% endblock content %}
@@ -129,6 +182,8 @@
              *       Basic Table                   *
              ****************************************/
             $('#zero_config').DataTable();
+            $('#zero_config2').DataTable();
+
         </script>
         {% endblock javascript%}
     

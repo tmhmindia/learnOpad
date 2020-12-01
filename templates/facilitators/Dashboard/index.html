@@ -16,14 +16,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="css2/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'LandingPage/css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'LandingPage/css/owl.theme.default.min.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    
+    
     <!-- Custom styles for this template-->
     <!-- <link href="{% static 'facilitators/css/main.css'%}" rel="stylesheet"> -->
     {% endblock header %}
 <!-- ------------------------------------------- -->
     {% block stylesheet %}
-
+   
     <style>
             .rate {
                 font-size: 37px;
@@ -286,14 +290,14 @@
                         </div>
                     </div>
                     {% else %}
-                    <div class="slider-area">
+                    <!-- <div class="slider-area">
                         <div class="container">
                             <div id="carouselExampleIndicators{{forloop.counter}}" class="carousel slide" data-ride="carousel">
                                 
                                 <ol class="carousel-indicators">
                                     <li data-target="#carouselExampleIndicators{{forloop.counter}}" data-slide-to="0" class="active"></li>
                                     {% for i in range %}
-                                    <li data-target="#carouselExampleIndicators{{forloop.parentloop.counter}}" data-slide-to={{ i }}></li>
+                                    <li data-target="#carouselExampleIndicators{{forloop.parentloop.counter}}" data-slide-to="{{ i }}"></li>
                                     {% endfor %}
                                 </ol>
                                 <div class='carousel-inner'>
@@ -314,7 +318,7 @@
                                                         </div>
                                                     </div>
                                                 </div> -->
-                                                <style>
+                                                <!-- <style>
                                                     .card-footer{
                                                         border-top: 1px solid #ececee;
                                                         background-color: #fff;
@@ -334,18 +338,18 @@
                                                     .course-card:hover .border{
                                                         box-shadow: 2px 2px 15px #7a7a7a;
                                                     }
-                                                </style>
+                                                </style> -->
                                                   
                                                 {% for i in courses|slice:"0:" %}
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
+                                                <!-- <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
                                                     <a class=" course-card"  href="{% url 'VideoPage' %}?Cid={{i.Cid}}">
-                                                        <div class="card border">
+                                                        <div class="card border"> -->
                                                             {% if i.thumbnail %}
-                                                            <img class="card-img-top" src={{ i.thumbnail.url }} alt="Card image cap" height="250px">
+                                                            <!-- <img class="card-img-top" src={{ i.thumbnail.url }} alt="Card image cap" height="250px"> -->
                                                             {% endif %}
                                                                 
                                                             <!-- background-color:gainsboro -->
-                                                            <div class="card-body" >
+                                                            <!-- <div class="card-body" >
                                                                 <h5 class="card-title" style="color:#4e73df;" >{{ i.title }}</h5>
                                                             </div>
                                                             <div class="card-footer">
@@ -361,19 +365,19 @@
                                                             </div>
                                                         </div>
                                                     </a>
-                                                </div>
+                                                </div> -->
                                                 {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
-                                                </div></div></div>
+                                                <!-- </div></div></div>
                                                 <div class='carousel-item'>
                                                 <div class='container'>
-                                                    <div class='row text-center'>
+                                                    <div class='row text-center'> -->
                                                 {% endif %}
                                                 {% endfor %}
-                                            </div>
+                                            <!-- </div>
                                         </div>
                                     </div>
                                 
-                                </div>
+                                </div> -->
                                 <!-- <a class="carousel-control-prev primary" href="#carouselExampleIndicators{{forloop.counter}}" role="button" data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Previous</span>
@@ -381,10 +385,51 @@
                                 <a class="carousel-control-next" href="#carouselExampleIndicators{{forloop.counter}}" role="button" data-slide="next" >
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Next</span>
-                                </a> -->
+                                </a>
                             </div>
                         </div>
+                    </div> --> 
+
+                    <div class="container">
+                        <div class="owl-carousel land_co ftco-owl"  id="owl-1">
+                       
+                            <div class="item">
+            
+                                    <a class=" course-card"  href="#">
+                                        <div class="card border">
+                                            <img class="card-img-top" src="" alt="Card image cap" height="150px">
+                                           
+                                                
+                                            <!-- background-color:gainsboro -->
+                                            <div class="card-body" >
+                                                <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
+                                                <div style="display: flex;justify-content: space-around;">
+                                                <span><i class="fa fa-star" aria-hidden="true"></i>5  </span>
+                                                <div class="course_info">
+                                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                    <span>50days</span>
+                                                </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="course_info">
+                                                    
+                                                    <p>Begginner </p>
+                                                </div>
+                                                <div class="course_price ml-auto">&#8377;  500 </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                
+                            </div>
+                          
                     </div>
+                    </div>
+                
+                    
+
+
                     {% endif %}
                 </div>
             </div>
@@ -397,12 +442,18 @@
                     
     <!-- Bootstrap core JavaScript-->
     <!-- <script src="{% static 'facilitators/vendor/jquery/jquery.min.js'%}"></script> -->
+  
+    {% endblock content %}
+<!-- ------------------------------------------------- -->
+    {% block javascript %}
     <script src="{% static 'facilitators/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="{% static 'facilitators/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+    <!-- <script src="{% static 'facilitators/vendor/jquery-easing/jquery.easing.min.js'%}"></script> -->
 
     <!-- Custom scripts for all pages-->
+    <script src="{% static '/LandingPage/LandingPage/js/owl.carousel.min.js' %}"></script>	
+
     <script src="{% static 'facilitators/js/sb-admin-2.min.js'%}"></script>
 
     <!-- Page level plugins -->
@@ -411,9 +462,7 @@
     <!-- Page level custom scripts -->
     <script src="{% static 'facilitators/js/demo/chart-area-demo.js'%}"></script>
     <script src="{% static 'facilitators/js/demo/chart-pie-demo.js'%}"></script>
-    {% endblock content %}
-<!-- ------------------------------------------------- -->
-    {% block javascript %}
+
     <script>
         const stars=document.querySelector(".rate").children;
          let rated = {{facilitator_rating | safe }};
@@ -425,5 +474,34 @@
            }
           }
   </script>
+   <script>
+    $("#owl-1").owlCarousel({
+        autoplay: true,
+        autoHeight: true,
+        // items:1,
+        margin: 30,
+        stagePadding: 0,
+        autoplayHoverPause:true,
+        nav: true,
+        dots: true,
+        autoplay:3000,
+        navText: ['<span class="ion-ios-arrow-back">', '<span class="ion-ios-arrow-forward">'],
+        responsive:{
+        0:{
+            items: 1
+        },
+        600:{
+            items: 2
+        },
+        768:{
+            items: 3
+        },
+        1200:{
+            items: 4
+        }
+        }
+        
+});
+</script>   
     {% endblock javascript%}
 

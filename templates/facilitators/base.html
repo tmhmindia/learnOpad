@@ -12,9 +12,13 @@
   <!-- endinject -->
   <!-- Plugin css for this page -->
   <link rel="stylesheet" href="{% static 'facilitators/assets/css/bootstrap-datepicker.min.css' %}">
+  <link rel="stylesheet" href="{% static 'facilitators/assets/css/dataTables.bootstrap4.css' %}">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
+  
   <link rel="stylesheet" href="{% static 'facilitators/assets/css/style.css' %}">
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
     {% block stylesheet %}
     {% endblock stylesheet %}
   </head>
@@ -98,6 +102,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{% url 'earnings' %}">
+                <i class="fa fa-globe"></i>
+                <span class="menu-title">My Earnings</span>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/experts/{{request.user.groups.all.2.id}}/">
                 <i class="fa fa-bar-chart "></i>
                 <span class="menu-title">talk with learners</span>
@@ -138,14 +148,18 @@
       <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
-    {% block javascript %}
-    {% endblock javascript%}
+  
     <!-- plugins:js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <script src="{% static 'facilitators/assets/js/vendor.bundle.base.js' %}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="{% static 'facilitators/assets/js/Chart.min.js' %}"></script>
     <script src="{% static 'facilitators/assets/js/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'facilitators/assets/js/jquery.dataTables.js'  %}"></script>
+    <script src="{% static 'facilitators/assets/js/dataTables.bootstrap4.js'  %}"></script>
+
     <!-- End plugin js for this page -->
     <!-- inject:js -->
     <script src="{% static 'facilitators/assets/js/off-canvas.js' %}"></script>
@@ -153,10 +167,13 @@
     <script src="{% static 'facilitators/assets/js/template.js' %}"></script>
     <script src="{% static 'facilitators/assets/js/settings.js' %}"></script>
     <script src="{% static 'facilitators/assets/js/todolist.js' %}"></script>
+    <script src="{% static 'facilitators/assets/js/data-table.js' %}"></script>
+
     <!-- endinject -->
     <!-- Custom js for this page-->
     <script src="{% static 'facilitators/assets/js/dashboard.js' %}"></script>
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <!-- End custom js for this page-->
+    {% block javascript %}
+    {% endblock javascript%}
   </body>
 </html>
