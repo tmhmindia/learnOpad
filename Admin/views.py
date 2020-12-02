@@ -16,7 +16,12 @@ from payment_gateway.models import OrderCourses
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def Dashboard(request):
-    return render(request,'myAdmin/dashboard/index.html')
+    dashboard_data={'learners':Learners.objects.all(),'facilitators':Facilitator.objects.all(),'total_applicants':Applicants.objects.filter(status='Due').count(),
+                    'total_courses':Course.objects.all().count(), 'total_active_queries':Queries.objects.filter(replay=None).count()+LQueries.objects.filter(replay=None).count(),
+                    'total_course_orders':OrderCourses.objects.all().count(),'total_traingings':CorporatesTalks.objects.all().count()+Campus.objects.all().count(),
+                    'enrollments':enrollment.objects.all()
+                        } 
+    return render(request,'myAdmin/dashboard/index.html',dashboard_data)
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def manage_facilitators(request):

@@ -30,3 +30,25 @@ class OrderCourses(models.Model):
     @property
     def get_total(self):
         return self.course.price
+
+class Revenue(models.Model):
+    STATUS=(
+        ('paid','Paid'),
+        ('pending','Pending')
+    )
+    admin_revenue=models.FloatField(null=True,blank=True)
+    facilitator_revenue=models.FloatField(null=True,blank=True)
+    revenue_item=models.ForeignKey(OrderCourses, on_delete=models.CASCADE,related_name='revenue')
+    status=models.CharField(max_length=100,choices=STATUS,null=True,blank=True)
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
+    def get_facilitator_revenue(self):
+        course_price=self.revenue_item.order.price
+        revenu=course_price*(95/100)
+        return revenu
+    def get_admin_revenue(self):
+        course_price=self.revenue_item.order.price
+        revenu=course_price*(5/100)
+        return revenu
+
+
