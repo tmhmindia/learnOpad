@@ -145,11 +145,12 @@
               Email
               <span><input type="text" name="email" placeholder="{{ email }}" disabled></span>
             </li>
+            {% if phone %}
             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 Phone
                 <span><input type="text" name="phone" placeholder="{{ phone }}" disabled></span>
               </li>
-           
+           {% endif %}
             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                <div class=" text-center">
               Intrest
@@ -159,11 +160,11 @@
               <div class="col-lg-12">
              <ul class="list-group">
              {% for cat in intrest %}
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    {{cat}}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{cat}}
     
-  </li>
-  {% endfor %}
+        </li>
+            {% endfor %}
   </ul>
               </div>
               </div>
@@ -181,7 +182,7 @@
            </div>
       </div>
          
-   <button id="rzp-button1" class="btn btn-block create-account">Checkout</button>       
+   <button id="rzp-button1" type="submit"class="btn btn-block create-account">Checkout</button>       
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 var options = {
@@ -193,11 +194,50 @@ var options = {
     "image": "{% static 'LandingPage/img/logotiny.png' %}",
     "order_id": "{{ order_id }}" , //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
     "handler": function (response){
-        setTimeout(function(){
-        swal("Done!", "Your Payment is Successfull!", "success");
-}, 6000);
         
-        window.location.href = 'payment_status/';
+    
+        
+
+        
+        swal("Done!", "Wait for Varifying the payment Process", "warning").then(function(){
+            $.ajax({
+            url: "{% url 'payment_verify' %}",
+            async: false,
+            data:  {
+        payment_id : response['razorpay_payment_id'],
+        order_id : response['razorpay_order_id'],
+        signature : response['razorpay_signature'],
+        plan:"{{my_order_id}}"
+    },
+            headers: {
+                           "X-CSRFTOKEN": "{{ csrf_token }}"
+                   },
+            type: 'POST',
+            cache: false,
+            
+            error: function(xhr, status, error) {
+            alert(error);
+            },
+            success: function(response) {
+            
+            if(response.success)
+            {    swal("Thank You!", "Your Payment is Successfull", "success").then(function(){
+                        window.location.href="{% url 'facilitator'%}"})
+            }
+            else{
+                swal("Something Went Wrong!", "Your Payment is Not Varified", "error").then(function(){
+                        window.location.reload()
+            })
+            }
+
+            
+            }
+            });
+
+        })
+
+        
+        //window.location.href = 'payment_status/';
 
      
     },
@@ -219,16 +259,7 @@ document.getElementById('rzp-button1').onclick = function(e){
     e.preventDefault();
 }
 </script>
-
-
-       
-      <!-- Card -->
-              
-            
-        
-             
-           
-        </form>
+</form>
         <div class="social-media">
             <h5></h5>
             <div class="social-icons">

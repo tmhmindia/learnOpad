@@ -83,7 +83,9 @@ def cartData(request):
     
         email = request.user.email
     
-        amount =order.get_cart_total
+        amount =order.get_cart_total # after calculating all items there is sum of total order
+        order.price=amount
+        order.save()
 
         order_amount = amount*100
         checkout=request.GET.get('checkout',None)

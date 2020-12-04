@@ -108,15 +108,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           
+                                           {% for revenue in revenues %}
                                             <tr>
-                                                <th>Mr learner</th>
-                                                <th>React js</th> 
-                                                <th>Vijay Gwala</th> 
-                                                <th>Rs.5000</th>
-                                                <th>Rs.4500</th>
-                                                <th>Rs.500</th>
-                                                <th><span class="badge badge-success">Paid</span></th>
+                                                <th>{{revenue.revenue_item.order.customer.get_full_name}}</th>
+                                                <th>{{revenue.revenue_item.course.title}}</th> 
+                                                <th>{{revenue.revenue_item.course.offering.all.0.name}}</th> 
+                                                <th>{{revenue.revenue_item.course.price}}</th>
+                                                <th>Rs.{{revenue.facilitator_revenue}}</th>
+                                                <th>Rs.{{revenue.admin_revenue}}</th>
+                                                <th><span class="badge badge-success">{{revenue.status}}</span></th>
                                                 <th> 
                                                     <!-- <button type="button" class="btn btn-cyan btn-md mt-2">Send </button> -->
                                                     <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
@@ -124,6 +124,7 @@
                                                 </th>
 
                                             </tr>
+                                            {% endfor %}
                                             
                                         </tbody>
                                        

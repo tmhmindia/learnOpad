@@ -158,10 +158,44 @@ var options = {
     "image": "{% static 'LandingPage/img/logotiny.png' %}",
     "order_id": "{{ order_id }}" , //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
     "handler": function (response){
-      swal("Done!", "Your Payment is Successfull!", "success");
-      setTimeout(function(){
-            window.location.href = '/payment/successfull/{{order.id}}/';
-         }, 2000);
+      swal("Done!", "Wait for Varifying the payment Process", "warning").then(function(){
+            $.ajax({
+            url: "{% url 'payment_verify' %}",
+            async: false,
+            data:  {
+        payment_id : response['razorpay_payment_id'],
+        order_id : response['razorpay_order_id'],
+        signature : response['razorpay_signature'],
+        my_order_id:'{{order.id}}'
+    },
+            headers: {
+                           "X-CSRFTOKEN": "{{ csrf_token }}"
+                   },
+            type: 'POST',
+            cache: false,
+            
+            error: function(xhr, status, error) {
+            alert(error);
+            },
+            success: function(response) {
+            
+            if(response.success)
+            {    swal("Thank You!", "Your Payment is Successfull", "success").then(function(){
+              window.location.href = '/payment/successfull/{{order.id}}/';
+            })
+            }
+            else{
+                swal("Something Went Wrong!", "Your Payment is Not Varified", "error").then(function(){
+                        window.location.reload()
+            })
+            }
+
+            
+            }
+            });
+
+        })
+      
         
     },
     "prefill": {

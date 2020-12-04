@@ -10,7 +10,7 @@ from campus.models import *
 from django.contrib.auth.decorators import login_required
 from myauth.decoraters import *
 from LandingPage.models import Queries
-from payment_gateway.models import OrderCourses
+from payment_gateway.models import *
 
 # Create your views here.
 @login_required(login_url='/user/signin/')
@@ -82,13 +82,15 @@ def facilitator_support(request):
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def facilitator_orders(request):
-    return render(request,'myAdmin/dashboard/fac_subscription.html')   
+    subscriptions=FacilitatorSubscriptions.objects.filter(status=True)
+    return render(request,'myAdmin/dashboard/fac_subscription.html',{'subscriptions':subscriptions})   
 
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def course_orders(request):
     orders=OrderCourses.objects.all()
-    return render(request,'myAdmin/dashboard/course_orders.html',{'orders':orders}) 
+    revenues=Revenue.objects.all()
+    return render(request,'myAdmin/dashboard/course_orders.html',{'orders':orders,'revenues':revenues}) 
 
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])

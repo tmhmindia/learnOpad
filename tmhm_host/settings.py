@@ -73,9 +73,7 @@ INSTALLED_APPS = [
     'payment_gateway',
     'mailing',
     # endVijay
-    'chat',
-    #amir
-    'wkhtmltopdf',
+    'chat'
 ]
 # for go
 # By vijay
