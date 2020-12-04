@@ -60,38 +60,18 @@ INSTALLED_APPS = [
     'learners',
     'campus',
     'corporates',
-    #'django.contrib.sites',
-    # By vijay
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.google',
     'widget_tweaks',
     'myauth',
     'channels',
     'rest_framework',
     'payment_gateway',
     'mailing',
-    # endVijay
     'chat'
 ]
-# for go
-# By vijay
-# SITE_ID = 1
-# LOGIN_REDIRECT_URL = '/'
-X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-# endvijay
+#X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-# REST_FRAMEWORK = {
-#    'DEFAULT_AUTHENTICATION_CLASSES': (
-#               'rest_framework.authentication.TokenAuthentication',
-#    ),
-#    'DEFAULT_PERMISSION_CLASSES':(
-#                'rest_framework.permissions.IsAuthenticated',
-#     ),
 
-# }
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -129,22 +109,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'tmhm_host.wsgi.application'
 ASGI_APPLICATION = "tmhm_host.routing.application"
 
-# By vijay
-''' for google authentication integration '''
-# AUTHENTICATION_BACKENDS = [
-    
-#     # Needed to login by username in Django admin, regardless of `allauth`
-#     'django.contrib.auth.backends.ModelBackend',
-
-#     # `allauth` specific authentication methods, such as login by e-mail
-#     'allauth.account.auth_backends.AuthenticationBackend',
-
-# ]
-# endVijay
-
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
 
@@ -214,34 +178,10 @@ USE_TZ = True
 
 AUTH_USER_MODEL = 'myauth.CustomUser'
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-#STATIC_TMP = os.path.join(BASE_DIR, 'static')
-#STATIC_URL = '/static/'
-#STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# managing media files
-#MEDIA_URL = '/media/'
-
-#os.makedirs(STATIC_TMP, exist_ok=True)
-#os.makedirs(STATIC_ROOT, exist_ok=True)
-
-
-
-# By Vijay
-#STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-#MEDIA_URL = '/media/'
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS=[os.path.join(BASE_DIR, 'static'),]
-#MEDIA_URL='/img/'
-#MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-#django_heroku.settings(locals())
-
 
 #By vijay
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

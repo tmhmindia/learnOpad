@@ -58,7 +58,12 @@ class Revenue(models.Model):
     status=models.CharField(max_length=100,choices=STATUS,null=True,blank=True)
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
-    
+    def get_total_admin_revenue(self):
+        revenues=Revenue.objects.all()
+        total=0
+        for revenue in revenues:
+            total+=revenue.admin_revenue
+        return total
 
 class FacilitatorSubscriptions(models.Model):
     PLAN=(

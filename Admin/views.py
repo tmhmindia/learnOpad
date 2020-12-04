@@ -16,10 +16,11 @@ from payment_gateway.models import *
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def Dashboard(request):
+    obj=Revenue()
     dashboard_data={'learners':Learners.objects.all(),'facilitators':Facilitator.objects.all(),'total_applicants':Applicants.objects.filter(status='Due').count(),
                     'total_courses':Course.objects.all().count(), 'total_active_queries':Queries.objects.filter(replay=None).count()+LQueries.objects.filter(replay=None).count(),
                     'total_course_orders':OrderCourses.objects.all().count(),'total_traingings':CorporatesTalks.objects.all().count()+Campus.objects.all().count(),
-                    'enrollments':enrollment.objects.all()
+                    'enrollments':enrollment.objects.all(),'total_revenue':obj.get_total_admin_revenue()
                         } 
     return render(request,'myAdmin/dashboard/index.html',dashboard_data)
 @login_required(login_url='/user/signin/')
@@ -231,3 +232,9 @@ def DeleteSupportQueires(request):
         obj=LQueries.objects.get(id=int(lquery)).delete()
         return JsonResponse({"success":True})
 
+def DeleteSubscription(request):
+    record=FacilitatorSubscriptions.objects.get(id=int(request.POST.get('id'))).delete()
+    return JsonResponse({"success":True})
+def DeleteOrderCourse(request):
+    record=OrderCourses.objects.get(id=int(request.POST.get('id'))).delete()
+    return JsonResponse({"success":True})

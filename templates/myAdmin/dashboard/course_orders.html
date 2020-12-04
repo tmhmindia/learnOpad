@@ -66,7 +66,7 @@
                                                 <th> 
                                                     <!-- <button type="button" class="btn btn-cyan btn-md mt-2">Send </button> -->
                                                     <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
-                                                    <button type="button"  class="btn btn-danger btn-sm">Delete </button>
+                                                    <button type="button" onClick="DeleteOrderCourse('{{order.id}}')"  class="btn btn-danger btn-sm">Delete </button>
                                                 </th>
 
                                             </tr>
@@ -150,7 +150,46 @@
         <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
         <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
         <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
-       
+        <script>
+            function DeleteOrderCourse(id)
+            {
+                swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this Order Data!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel plz!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+        function (isConfirm) {
+          if (isConfirm) {
+            $.ajax({
+              type: 'POST',
+              url: '{% url "delete_order_course" %}',
+              headers: {
+                           "X-CSRFTOKEN": "{{ csrf_token }}"
+                   },
+              data: {id : id},
+              success: function (data) {
+                swal("Deleted!", "Your record has been deleted.", "success");
+              },
+              error: function (data) {
+                swal("NOT Deleted!", "Something blew up.", "error");
+              }
+            });
+          } else {
+            swal("Cancelled", "Your record is safe :)", "error");
+          }
+        });
+    
+      return false;
+    
+    
+            }
+        </script>
        
         <script>
             /****************************************

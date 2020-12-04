@@ -1,1 +1,0 @@
-web: gunicorn tmhm_host.wsgi

@@ -151,7 +151,9 @@ class Course(models.Model):
         return self.title
     def getTotalLearners(self):
         return self.enroll.all().count()
-
+    def getOfferPrice(self):
+        price=self.price
+        return price *(125/100)
     
     
     class Meta:

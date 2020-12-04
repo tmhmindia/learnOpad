@@ -639,7 +639,7 @@ function getToken(name) {
                         <div class="sidebar">
                             <div align="center">
                                 <div class="card" style="width: 18rem;">
-                                    <div style="">
+                                    <div >
                                     <div class="embed-responsive embed-responsive-16by9">
                                     <iframe width="560" height="315" src="{{course.video.url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     </div> 
@@ -658,7 +658,7 @@ function getToken(name) {
                                     </div>
 
                                     <div class="card-body" style="margin-bottom:-30px">
-                                        <h5 class="card-title">$180 <span style="text-decoration-line: line-through;font-size: 15px;" class="text-muted">$500 </span><span style="font-size: 15px;"> 30% Off </span> </h5>
+                                        <h5 class="card-title">&#8377; {{course.price}} <span style="text-decoration-line: line-through;font-size: 15px;" class="text-muted">&#8377; {{course.getOfferPrice}} </span><span style="font-size: 15px;">  25% Off </span> </h5>
                                     </div>
                                     <button data-product="{{course.Cid}}" data-action="add" class="btn btn-primary update-cart" style="margin: 10px;">Buy Now</button>
                                     <button data-product="{{course.Cid}}" data-action="add" class="btn btn-outline-primary update-cart" style="margin: 10px">Add to cart</button>
@@ -668,13 +668,13 @@ function getToken(name) {
                                     <div align="center" style="margin-left: 20px;margin-right: 20px">
                                         <div class="feature d-flex flex-row align-items-center justify-content-start">
                                             <div class="feature_title"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Course Duration:</span></div>
-                                            <div class="feature_text ml-auto">{{course.day}}</div>
+                                            <div class="feature_text ml-auto">{{course.days}}</div>
                                         </div>
 
                                         <!-- Feature -->
                                         <div class="feature d-flex flex-row align-items-center justify-content-start">
-                                            <div class="feature_title"><i class="fa fa-file-text-o" aria-hidden="true"></i><span>Modules:</span></div>
-                                            <div class="feature_text ml-auto">5</div>
+                                            <div class="feature_title"><i class="fa fa-file-text-o" aria-hidden="true"></i><span>level:</span></div>
+                                            <div class="feature_text ml-auto">{{course.level}}</div>
                                         </div>
 
 
@@ -682,9 +682,7 @@ function getToken(name) {
 
                                     </div>
                                     <div class="card-body">
-                                        <hr>
-                                        <center><a href="#" class="card-link" style="font-weight: 300"><b>Apply</b></a></center>
-
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -693,7 +691,7 @@ function getToken(name) {
                                 <div class="sidebar_section_title">Facilitator</div>
                                 <div class="sidebar_teacher">
                                     <div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
-                                        <div class="teacher_image"><img src='{% static 'LandingPage/images/teacher.jpg'%}' alt=""></div>
+                                        <div class="teacher_image"><img src="{{facilitator.profile.url}}" alt=""></div>
                                         <div class="teacher_title">
                                             <div class="teacher_name"><a href="{% url 'aboutfacilitator' facilitator.Fid %}">{{facilitator.name}}</a></div>
                                             <div class="teacher_position">{{facilitator.user.intrest}}</div>
