@@ -13,12 +13,12 @@
     <meta name="author" content="">
     <!-- Custom fonts for this template-->
     <link href="{% static 'facilitators/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="css2/all.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{% static 'LandingPage/css/owl.carousel.css' %}">
     <link rel="stylesheet" href="{% static 'LandingPage/css/owl.theme.default.min.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     
     
@@ -88,6 +88,24 @@
                 padding: 20px 30px;
             }
         }
+        .card-footer{
+    display: flex;
+    justify-content: space-between;
+}
+/* .active .fa,.fa{
+    color: #000!important;
+} */
+.fa{
+    
+    margin-right: 0.125rem;
+    color:#5e2572;
+}
+.item .card-body{
+    padding: 10px;
+}
+a:hover{
+    text-decoration: none;
+}
     </style>
     {% endblock stylesheet %}
 <!-- ----------------------------------------------------- -->
@@ -391,7 +409,7 @@
                     </div> --> 
 
                     <div class="container">
-                        <div class="owl-carousel land_co ftco-owl"  id="owl-1">
+                        <div class="owl-carousel land_co ftco-owl"  id="owl">
                             {% for course in courses %}
                        
                             <div class="item">
@@ -404,7 +422,7 @@
                                             <!-- background-color:gainsboro -->
                                             <div class="card-body" >
                                                 <h5 class="card-title" style="color:#4e73df;" >{{course.title}}</h5>
-                                                <div style="display: flex;justify-content: space-around;">
+                                                <div style="display: flex;justify-content: space-between;">
                                                 <span><i class="fa fa-star" aria-hidden="true"></i>{{course.no_of_ratings}} </span>
                                                 <div class="course_info">
                                                     <i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -448,6 +466,8 @@
     {% endblock content %}
 <!-- ------------------------------------------------- -->
     {% block javascript %}
+    <script src="https://kit.fontawesome.com/da956b6924.js" crossorigin="anonymous"></script>
+
     <script src="{% static 'facilitators/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
 
     <!-- Core plugin JavaScript-->
@@ -477,10 +497,9 @@
           }
   </script>
    <script>
-    $("#owl-1").owlCarousel({
+    $("#owl").owlCarousel({
         autoplay: true,
         autoHeight: true,
-        // items:1,
         margin: 30,
         stagePadding: 0,
         autoplayHoverPause:true,

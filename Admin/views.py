@@ -89,6 +89,10 @@ def facilitator_orders(request):
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def course_orders(request):
+    return render(request,'myAdmin/dashboard/course_orders.html') 
+def myprofile(request):
+    return render(request,'myAdmin/dashboard/profile.html') 
+ 
     orders=OrderCourses.objects.all()
     revenues=Revenue.objects.all()
     return render(request,'myAdmin/dashboard/course_orders.html',{'orders':orders,'revenues':revenues}) 
