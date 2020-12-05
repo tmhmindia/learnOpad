@@ -54,49 +54,23 @@ Course subscription    {% endblock title %}
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           
+                                           {% for order in orders %}
                                             <tr>
-                                                <th>Mr learner</th>
-                                                <th>React js</th> 
-                                                <th>Vijay Gwala</th> 
-                                                <th>Rs.5000</th>
-                                                <th>Sep 12,20</th>
+                                                <th>{{order.order.customer.first_name}}</th>
+                                                <th>{{order.course.title}}</th> 
+                                                <th>{{order.course.offering.all.0.name}}</th> 
+                                                <th>Rs.{{order.order.price}}</th>
+                                                <th>{{order.order.date.date}}</th>
                                                 <th><span class="badge badge-success">Paid</span></th>
                                                 <th> 
                                                     <!-- <button type="button" class="btn btn-cyan btn-md mt-2">Send </button> -->
                                                     <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
-                                                    <button type="button"  class="btn btn-danger btn-sm">Delete </button>
+                                                    <button type="button" onClick="DeleteOrderCourse('{{order.id}}')"  class="btn btn-danger btn-sm">Delete </button>
                                                 </th>
 
                                             </tr>
-                                            <tr>
-                                                <th>Mr learner</th>
-                                                <th>React js</th> 
-                                                <th>Vijay Gwala</th> 
-                                                <th>Rs.5000</th>
-                                                <th>Sep 12,20</th>
-                                                <th><span class="badge badge-warning">pending</span></th>
-                                                <th> 
-                                                    <!-- <button type="button" class="btn btn-cyan btn-md mt-2">Send </button> -->
-                                                    <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
-                                                    <button type="button"  class="btn btn-danger btn-sm">Delete </button>
-                                                </th>
-
-                                            </tr>
-                                            <tr>
-                                                <th>Mr learner</th>
-                                                <th>React js</th> 
-                                                <th>Vijay Gwala</th> 
-                                                <th>Rs.5000</th>
-                                                <th>Sep 12,20</th>
-                                                <th><span class="badge badge-danger">Cancelled</span></th>
-                                                <th> 
-                                                    <!-- <button type="button" class="btn btn-cyan btn-md mt-2">Send </button> -->
-                                                    <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
-                                                    <button type="button"  class="btn btn-danger btn-sm">Delete </button>
-                                                </th>
-
-                                            </tr>
+                                            {% endfor %}
+                                           
                                         </tbody>
                                        
                                     </table>
@@ -133,15 +107,15 @@ Course subscription    {% endblock title %}
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           
+                                           {% for revenue in revenues %}
                                             <tr>
-                                                <th>Mr learner</th>
-                                                <th>React js</th> 
-                                                <th>Vijay Gwala</th> 
-                                                <th>Rs.5000</th>
-                                                <th>Rs.4500</th>
-                                                <th>Rs.500</th>
-                                                <th><span class="badge badge-success">Paid</span></th>
+                                                <th>{{revenue.revenue_item.order.customer.get_full_name}}</th>
+                                                <th>{{revenue.revenue_item.course.title}}</th> 
+                                                <th>{{revenue.revenue_item.course.offering.all.0.name}}</th> 
+                                                <th>{{revenue.revenue_item.course.price}}</th>
+                                                <th>Rs.{{revenue.facilitator_revenue}}</th>
+                                                <th>Rs.{{revenue.admin_revenue}}</th>
+                                                <th><span class="badge badge-success">{{revenue.status}}</span></th>
                                                 <th> 
                                                     <!-- <button type="button" class="btn btn-cyan btn-md mt-2">Send </button> -->
                                                     <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
@@ -149,6 +123,7 @@ Course subscription    {% endblock title %}
                                                 </th>
 
                                             </tr>
+                                            {% endfor %}
                                             
                                         </tbody>
                                        
@@ -174,7 +149,46 @@ Course subscription    {% endblock title %}
         <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
         <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
         <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
-       
+        <script>
+            function DeleteOrderCourse(id)
+            {
+                swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this Order Data!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel plz!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+        function (isConfirm) {
+          if (isConfirm) {
+            $.ajax({
+              type: 'POST',
+              url: '{% url "delete_order_course" %}',
+              headers: {
+                           "X-CSRFTOKEN": "{{ csrf_token }}"
+                   },
+              data: {id : id},
+              success: function (data) {
+                swal("Deleted!", "Your record has been deleted.", "success");
+              },
+              error: function (data) {
+                swal("NOT Deleted!", "Something blew up.", "error");
+              }
+            });
+          } else {
+            swal("Cancelled", "Your record is safe :)", "error");
+          }
+        });
+    
+      return false;
+    
+    
+            }
+        </script>
        
         <script>
             /****************************************

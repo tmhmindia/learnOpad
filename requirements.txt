@@ -1,0 +1,13 @@
+django
+djangorestframework
+django-admin-interface
+django-colorfield
+django-filter
+django-widget-tweaks
+Markdown
+Pillow
+pathlib
+razorpay
+requests
+channels
+channels-redis

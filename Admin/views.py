@@ -9,12 +9,20 @@ from corporates.models import *
 from campus.models import * 
 from django.contrib.auth.decorators import login_required
 from myauth.decoraters import *
+from LandingPage.models import Queries
+from payment_gateway.models import *
 
 # Create your views here.
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def Dashboard(request):
-    return render(request,'myAdmin/dashboard/index.html')
+    obj=Revenue()
+    dashboard_data={'learners':Learners.objects.all(),'facilitators':Facilitator.objects.all(),'total_applicants':Applicants.objects.filter(status='Due').count(),
+                    'total_courses':Course.objects.all().count(), 'total_active_queries':Queries.objects.filter(replay=None).count()+LQueries.objects.filter(replay=None).count(),
+                    'total_course_orders':OrderCourses.objects.all().count(),'total_traingings':CorporatesTalks.objects.all().count()+Campus.objects.all().count(),
+                    'enrollments':enrollment.objects.all(),'total_revenue':obj.get_total_admin_revenue()
+                        } 
+    return render(request,'myAdmin/dashboard/index.html',dashboard_data)
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def manage_facilitators(request):
@@ -56,18 +64,53 @@ def campus_training(request):
     campus_records=Campus.objects.all()
     return render(request,'myAdmin/dashboard/view_campus_sub.html',{'records':campus_records})
 
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def facilitator_support(request):
-    return render(request,'myAdmin/dashboard/fac_support.html')    
+    if request.method =='POST':
+        id=request.POST.get('id')
+        query=Queries.objects.get(id=int(id))
+        replay=request.POST.get('replay')
+        query.replay=replay
+        query.save()
+        return JsonResponse("success",safe=False)
 
+    else:
+        queries=Queries.objects.all()
+        return render(request,'myAdmin/dashboard/fac_support.html',{'queries':queries})    
+
+
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def facilitator_orders(request):
-    return render(request,'myAdmin/dashboard/fac_subscription.html')   
+    subscriptions=FacilitatorSubscriptions.objects.filter(status=True)
+    return render(request,'myAdmin/dashboard/fac_subscription.html',{'subscriptions':subscriptions})   
+
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def course_orders(request):
     return render(request,'myAdmin/dashboard/course_orders.html') 
 def myprofile(request):
     return render(request,'myAdmin/dashboard/profile.html') 
  
+    orders=OrderCourses.objects.all()
+    revenues=Revenue.objects.all()
+    return render(request,'myAdmin/dashboard/course_orders.html',{'orders':orders,'revenues':revenues}) 
+
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
 def learner_support(request):
-    return render(request,'myAdmin/dashboard/learner_support.html')  
+    if request.method =='POST':
+        id=request.POST.get('id')
+        query=LQueries.objects.get(id=int(id))
+        replay=request.POST.get('replay')
+        query.replay=replay
+        query.save()
+        return JsonResponse("success",safe=False)
+
+    else:
+        queries=LQueries.objects.all()
+        return render(request,'myAdmin/dashboard/learner_support.html',{'queries':queries})  
 
        
 @login_required(login_url='/user/signin/')
@@ -183,5 +226,19 @@ def DeleteCouncellingContactUsData(request):
         obj=OnlineCounsellingDetails.objects.get(councelling_id=int(councelling)).delete()
         return JsonResponse({"success":True})
 
+def DeleteSupportQueires(request):
+    fquery=request.POST.get('fquery',None)
+    lquery=request.POST.get('lquery',None)
+    if fquery:
+        obj=Queries.objects.get(id=int(fquery)).delete()
+        return JsonResponse({"success":True})
+    else:
+        obj=LQueries.objects.get(id=int(lquery)).delete()
+        return JsonResponse({"success":True})
 
-
+def DeleteSubscription(request):
+    record=FacilitatorSubscriptions.objects.get(id=int(request.POST.get('id'))).delete()
+    return JsonResponse({"success":True})
+def DeleteOrderCourse(request):
+    record=OrderCourses.objects.get(id=int(request.POST.get('id'))).delete()
+    return JsonResponse({"success":True})
