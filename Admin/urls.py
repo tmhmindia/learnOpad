@@ -22,6 +22,8 @@ urlpatterns = [
     path('learnopad/admin/facilitator/support/', views.facilitator_support, name='facilitator_support'),
     path('learnopad/admin/course/orders/', views.course_orders, name='course_orders'),
     path('learnopad/admin/facilitator/orders/', views.facilitator_orders, name='facilitator_orders'),
+    path('learnopad/admin/myprofile/', views.myprofile, name='myprofile'),
+
     
 
 

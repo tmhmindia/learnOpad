@@ -63,6 +63,8 @@ def facilitator_orders(request):
     return render(request,'myAdmin/dashboard/fac_subscription.html')   
 def course_orders(request):
     return render(request,'myAdmin/dashboard/course_orders.html') 
+def myprofile(request):
+    return render(request,'myAdmin/dashboard/profile.html') 
  
 def learner_support(request):
     return render(request,'myAdmin/dashboard/learner_support.html')  
