@@ -155,20 +155,24 @@ My Earnings|Facilitator
                                 <tr>
                                     <th width="10%" >S.No.</th>
                                     <th width="20%" >Courses</th>
-                                    <th width="25%" >Fees</th>
-                                    <th width="25%" >Revenue</th>
+                                    <th width="20%" >Fees</th>
+                                    <th width="20%" >Revenue</th>
                                     <th width="20%" >Admin Revenue</th>
+                                    <th width="10%" >Status</th>
+
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for revenue in revenues %}
                                 <tr>
-                                    <td scope="row">1.</td>
-                                    <td>Digital Marketing</td>
-                                    <td>$200.00</td>
-                                    <td>$1000.00</td>
-                                    <td>$1000.00</td>
+                                    <td scope="row">{{revenue.id}}</td>
+                                    <td>{{revenue.revenue_item.course.title}}</td>
+                                    <td> {{revenue.revenue_item.course.price}}</td>
+                                    <td>{{revenue.facilitator_revenue}}</td>
+                                    <td>{{revenue.admin_revenue}}</td>
+                                    <td>{{revenue.status}}</td>
                                 </tr>
-                               
+                               {% endfor %}
 
                             </tbody>
                         </table>

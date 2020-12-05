@@ -47,7 +47,7 @@
           
            
           </form>
-          <form action="{% url 'signup' %}" class="sign-up-form">
+          <form action="{% url 'signup' %}" method="POST"class="sign-up-form">
           	          	{% csrf_token %}
 
             <div style="padding-bottom: 30px; text-align: center;">

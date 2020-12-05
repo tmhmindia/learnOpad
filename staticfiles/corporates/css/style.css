@@ -1,0 +1,165 @@
+
+
+*
+{
+    padding:0cm;
+    margin: 0cm;
+    text-decoration: none;
+     
+}
+section #header
+{
+    padding:0;
+    margin:0;
+}
+ 
+.nav-link{
+
+    font-size:20px;
+    color:#000 !important;
+    padding-right: 10px;
+    
+    }
+.menu-bar .navbar ul li .nav-link button
+    {
+        border-radius: 0;
+         text-align: center;
+        background-color: #ffc2b3;
+        color:#fff;
+    }
+    .banner
+    {
+        height:fit-content;
+        background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,00.5)),url(../images/banner.jpg);
+        background-size: cover;
+        background-position: center;
+        color:#fff;
+        padding-top:10em;
+        padding-bottom: 4em;
+    }
+.banner .horizontal hr
+{
+    border:2px solid #ff471a;
+    width:5%;
+    padding-left:0;
+    margin-left:0;
+}
+.banner .quotes
+{
+    padding-bottom: 2em;
+}
+.banner .contact-us  .btn1
+{
+    width:10em;
+    background-color:#ff471a;
+    color: #fff;
+    margin-bottom: 20px;
+    border: 0cm;
+    
+}
+.banner .contact-us .btn2
+{
+    width:10em;
+    background-color:#fff;
+    color:#ff471a;
+    margin-bottom:20px;
+    border: 0cm;
+    
+}
+/*.contact-details .my-row .my-col
+{
+    border: 0.1px  #000;
+    text-align: center;
+    font-weight: bold;
+    color: blue;
+    border-bottom: 0.2px #fff;
+    box-shadow: 3px 3px 3px rgba(0,0,0,0.5) ;
+    padding-top:5px;
+    
+}
+.contact-details .my-row .my-col i
+{
+    color: #000;
+}*/
+.my-container{
+    margin-top:3em;
+    margin-bottom: 3em;
+}
+.my-container .my-row2
+{
+    border: 5px solid #fff;
+    box-shadow:3px 3px 3px 3px rgba(0,0,0,0.5) ;
+    height:fit-content;
+     
+}
+.my-container .my-row2 .my-col3
+{
+    text-align: center;
+}
+.my-container .my-row2 .my-col3 h4{
+    padding-top: 1em;
+    font-weight: bold;
+}
+  .my-center-row
+  {
+      background-color: #003cb3;
+      padding:2em;
+      height:fit-content;
+      margin-bottom:20px;
+      box-shadow:3px 3px 3px #9999ff;
+      margin-top:10em;
+  }
+  .my-center-row .my-center-col1
+  {
+      background-color:  #fff;
+      margin-bottom: 20px;
+  }
+  .my-center-row .my-center-col1-2
+  {
+      background-color:  #cc0052;
+      color:#fff;
+  }
+  .my-center-row .my-center-col1 ul{
+      list-style-type: square;
+      padding:2em;
+  }
+  .my-middle-row
+  {
+      margin-top:30px;
+      padding: 20px;
+      padding-top:8em;
+      padding-bottom:8em;
+  }
+  .my-middle-row div{
+      box-shadow: 3px 3px 3px #888;
+      margin-bottom: 20px;
+  }
+ 
+  .my-last-row
+  {
+      height: fit-content;
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,00.5)),url(../images/advisor-img.png); 
+    padding: 2em;    
+  }
+  .my-last-row .my-form-col
+  {
+      background-color: #fff;
+      padding:4em;
+      
+  }
+  .my-last-row .my-form-col  .horizontal hr
+  {
+      border:2px solid #ff471a;
+      width:5%;
+      padding-left:0;
+      margin-left:0;
+  }
+
+  form .form-control{
+      border-radius: 0cm;
+  }
+
+  form #btn{
+      border-radius: 0cm;
+      background-color:  #ff3300;
+  }

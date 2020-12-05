@@ -178,7 +178,7 @@ class GeneratePDF(View):
         certificate_name=None
         info={}
         try:
-            certificate_name=Certificate.objects.get(certificate_number=learner.name+str(learner.Lid)+str(course.Cid))
+            certificate_name=Certificate.objects.get(certificate_number=learner.name+str(learner.Lid)+str(course.Cid)+'.jpg')
         except:
             certificate_name=None
         if certificate_name is None:

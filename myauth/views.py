@@ -49,7 +49,7 @@ def signup(request):
             subscription=request.GET.get('subscription',None)
             if subscription is not None:
                 return redirect('/create_course')
-            if payment is not None:
+            if payment :
                 return redirect('/Courses/Cart/')
             return redirect('/')
         else:

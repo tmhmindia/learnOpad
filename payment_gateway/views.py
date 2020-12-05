@@ -158,6 +158,7 @@ def payment_verify(request):
         # VERIFYING SIGNATURE
         status = client.utility.verify_payment_signature(params_dict)
         if status:
+            print("false")
             return JsonResponse({'success':False})
         else:
             razor_obj=RazorPayDetails.objects.create(razorpay_payment_id=params_dict['razorpay_payment_id'],razorpay_order_id=params_dict['razorpay_order_id'],razorpay_signature=params_dict['razorpay_signature'])

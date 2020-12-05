@@ -40,6 +40,7 @@ from .mixins import AjaxFormMixin
 from django.utils.datastructures import MultiValueDictKeyError
 from myauth.decoraters import *
 from django.core.paginator import Paginator
+from payment_gateway.models import Revenue
 
 
 
@@ -120,8 +121,9 @@ def facilitator_Dashboard_Landing_page(request):
 
 @login_required(login_url='/facilitator/login/')
 @allowed_users(['Facilitators'])
-def facilitator_Dashboard_myearnings_page(request):
-    return render(request, 'facilitators/Dashboard/my_earnings.html')
+def facilitator_Dashboard_myearnings_page(request,pk):
+    revenues=Revenue.objects.filter(revenue_item__course__offering__Fid=pk)
+    return render(request, 'facilitators/Dashboard/my_earnings.html',{'revenues':revenues})
 
 
 @login_required(login_url='/facilitator/login/')
