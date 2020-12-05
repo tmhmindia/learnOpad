@@ -1,0 +1,49 @@
+.navbar-default{
+  background:#2c3e50;
+}
+
+html{
+  height:100%;
+}
+
+.bb
+{
+  text-align: center;
+  padding:2%;
+}
+
+.aa{
+  height:100%;
+}
+
+.row
+{
+  text-align: center;
+  padding:3%;
+}
+
+.column{
+  padding:19%;
+}
+
+.text
+{
+  padding-left: 50%;
+  padding-right:10%;
+  text-align: right;
+}
+
+.text1{
+  text-align:left;
+  padding-left:10%
+}
+
+.gg
+{
+text-align: center;
+}
+
+.ii,.jj,.kk
+{
+text-align: center;
+}
