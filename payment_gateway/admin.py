@@ -18,3 +18,5 @@ class OrderAdmin(admin.ModelAdmin):
  
 
 admin.site.register(Order,OrderAdmin)
+admin.site.register(Revenue)
+admin.site.register(RazorPayDetails)

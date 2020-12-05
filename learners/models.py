@@ -44,9 +44,11 @@ class enrollment(models.Model):
         return self.Lid.name
 
 class LQueries(models.Model):
+    STATUS=(('Resolved','Resolved'),('Doubt','Doubt'))
     Lid=models.ForeignKey(Learners,on_delete=models.CASCADE)
+    status=models.CharField(max_length=10,choices=STATUS,default="Doubt")
     query=models.TextField(max_length=500)
-    reply=models.TextField(max_length=500,blank=True, null=True)
+    replay=models.TextField(max_length=500,blank=True, null=True)
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
 

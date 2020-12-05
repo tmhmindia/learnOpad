@@ -100,6 +100,8 @@ class Course(models.Model):
     def no_of_ratings(self):
         ratings = Rating.objects.filter(course=self)
         return len(ratings)
+    def getURL(self):
+        return self.thumbnail.url
 
     def avg_rating(self):
         sum = 0
@@ -149,7 +151,9 @@ class Course(models.Model):
         return self.title
     def getTotalLearners(self):
         return self.enroll.all().count()
-
+    def getOfferPrice(self):
+        price=self.price
+        return price *(125/100)
     
     
     class Meta:
@@ -219,7 +223,7 @@ class offer(models.Model):
 class Queries(models.Model):
     Fid=models.ForeignKey(Facilitator, on_delete=models.CASCADE,null=True)
     query=models.TextField(max_length=500)
-    reply=models.TextField(max_length=500,blank=True, null=True)
+    replay=models.TextField(max_length=500,blank=True, null=True)
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     

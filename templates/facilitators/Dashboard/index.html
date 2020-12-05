@@ -392,22 +392,23 @@
 
                     <div class="container">
                         <div class="owl-carousel land_co ftco-owl"  id="owl-1">
+                            {% for course in courses %}
                        
                             <div class="item">
             
                                     <a class=" course-card"  href="#">
                                         <div class="card border">
-                                            <img class="card-img-top" src="" alt="Card image cap" height="150px">
+                                            <img class="card-img-top" src="{{course.thumbnail.url}}" alt="Card image cap" height="150px">
                                            
                                                 
                                             <!-- background-color:gainsboro -->
                                             <div class="card-body" >
-                                                <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
+                                                <h5 class="card-title" style="color:#4e73df;" >{{course.title}}</h5>
                                                 <div style="display: flex;justify-content: space-around;">
-                                                <span><i class="fa fa-star" aria-hidden="true"></i>5  </span>
+                                                <span><i class="fa fa-star" aria-hidden="true"></i>{{course.no_of_ratings}} </span>
                                                 <div class="course_info">
                                                     <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                    <span>50days</span>
+                                                    <span>{{course.days}}</span>
                                                 </div>
                                                 </div>
                                                 
@@ -415,14 +416,15 @@
                                             <div class="card-footer">
                                                 <div class="course_info">
                                                     
-                                                    <p>Begginner </p>
+                                                    <p>{{course.level}} </p>
                                                 </div>
-                                                <div class="course_price ml-auto">&#8377;  500 </div>
+                                                <div class="course_price ml-auto">&#8377;  {{course.price}} </div>
                                             </div>
                                         </div>
                                     </a>
                                 
                             </div>
+                            {% endfor %}
                           
                     </div>
                     </div>

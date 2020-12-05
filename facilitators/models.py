@@ -87,13 +87,15 @@ class Experience(models.Model):
     
 
 class FacilitatorQueries(models.Model):
-    STATUS=(('Resolved','Resolved'),('Doubt','Doubt'))
     Qid=models.AutoField(primary_key=True)
     query=models.TextField(blank=True,null=True)
-    status=models.CharField(max_length=10,choices=STATUS,default="Doubt")
+    replay=models.CharField(max_length=250)
     user= models.OneToOneField(Applicants, on_delete=models.CASCADE,null=True, related_name="queries")
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
+    
     def __str__(self):
-        return self.status
+        return self.user.name
 
 
     
@@ -101,10 +103,6 @@ class FacilitatorQueries(models.Model):
 class OTP(models.Model):
     sender = models.CharField(max_length=500)   
     value = models.CharField(max_length=500)
-    
-    
-    
-
     def __str__(self):
         return self.sender
 

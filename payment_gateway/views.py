@@ -12,7 +12,7 @@ client = razorpay.Client(auth=("rzp_test_0G5HtLCg0WpC26", "y8iPiSBFRf8w2Y1W0L6Q7
 from mailing.views import *
 from learners.models import *
 from chat.models import *
-
+import pdb
     
 #facilitator order subscription 
 def create_order(request):
@@ -22,20 +22,13 @@ def create_order(request):
         data={}
         data["name"]=request.user.first_name+" "+request.user.last_name
         data["email"]=request.user.email
-        
         data['course']=request.POST.getlist('course')
         data["plan"]=request.POST.get('plan')
-
-       
-        
-
-       
         course=data['course']
         catlist=[]
         for id in course:
             subcat=SubCategory.objects.get(subCat_id=id)
             catlist.append(subcat.name)
-        print(data['plan'])
         if(data['plan']=='1'):
             data['order_amount']=1
         elif(data['plan']=='2'):
@@ -47,7 +40,7 @@ def create_order(request):
         order_amount=data['order_amount']*100
         context['total']=order_amount/100
         data[order_amount]=context['total']
-        print("checkpoint 1")
+
         name=data['name']
         email=data['email']
         
@@ -57,9 +50,9 @@ def create_order(request):
         data['order_curruncy']=order_currency
         notes = {
             'Shipping address': 'Bommanahalli, Bangalore'}
-        print("checkpoint 2")
+        
         response = client.order.create(dict(amount=order_amount, currency=order_currency, receipt=order_receipt, notes=notes, payment_capture='0'))
-        print("checkpoint 3")
+        
         order_id = response['id']
         order_status = response['status']
         data['order_id']=order_id
@@ -79,8 +72,8 @@ def create_order(request):
             
             # data that'll be send to the razorpay for
             context['order_id'] = order_id
-            
-
+            my_order=FacilitatorSubscriptions.objects.create(user=request.user,plan= data['plan'])
+            context['my_order_id']=my_order.id
             return render(request, 'payment_gateway/confirm_order.html',context)
             
         return HttpResponse('<h1>Error in  create order function</h1>')
@@ -93,7 +86,6 @@ def create_order(request):
 
 def payment_status(request,order_id):
     order=Order.objects.get(id=order_id)
-    print(order)
     order.status=True
     order.save()
     order_c=order.order_course.all()
@@ -102,6 +94,8 @@ def payment_status(request,order_id):
     for enroll_course in order_c:
         learner.enrolled.add(enroll_course.course)
         learner.save()
+        #generate revenu for each course
+        revenue=Revenue.objects.create(admin_revenue=enroll_course.get_admin_revenue(),facilitator_revenue=enroll_course.get_facilitator_revenue(),revenue_item=enroll_course,status='pending')
         chatgroup=None
         try:
             chatgroup=ChatGroup.objects.get(name=learner.name+str(learner.Lid)+str(enroll_course.course.offering.all()[0].Fid))
@@ -140,23 +134,37 @@ def payment_status(request,order_id):
     
 
 #Razor pay payment status after successfull payment
-# def payment_status(request):
-#     print(request.POST)
-#     response = request.POST
+def payment_verify(request):
+    if request.method =='POST':
+        response = request.POST
+        print(response)
+        params_dict = {
+            'razorpay_payment_id' : response['payment_id'],
+            'razorpay_order_id' : response['order_id'],
+            'razorpay_signature' : response['signature']
+        }
+        Oid=response.get('my_order_id',None)
+        plan=response.get('plan',None)
 
-#     params_dict = {
-#         'razorpay_payment_id' : response['razorpay_payment_id'],
-#         'razorpay_order_id' : response['razorpay_order_id'],
-#         'razorpay_signature' : response['razorpay_signature']
-#     }
+        obj=None
 
-#     print("payment ho gai ")
-#     # VERIFYING SIGNATURE
-#     try:
-#         status = client.utility.verify_payment_signature(params_dict)
-#         #successOnRegistration(request.user.email,'Afterpayment.png')
-#         return render(request, 'payment_gateway/order_summary.html', {'status': 'Payment Successful'})
-#     except:
-#         return render(request, 'payment_gateway/order_summary.html', {'status': 'Payment Faliure!!!'})
+        if plan is not None:
+            obj=FacilitatorSubscriptions.objects.get(id=int(plan))
+        else:
+            obj=Order.objects.get(id=int(Oid))
 
+        
+
+        # VERIFYING SIGNATURE
+        status = client.utility.verify_payment_signature(params_dict)
+        if status:
+            return JsonResponse({'success':False})
+        else:
+            razor_obj=RazorPayDetails.objects.create(razorpay_payment_id=params_dict['razorpay_payment_id'],razorpay_order_id=params_dict['razorpay_order_id'],razorpay_signature=params_dict['razorpay_signature'])
+            obj.status=True
+            obj.razorpay=razor_obj
+            obj.save()
+            return JsonResponse({'success':True})
+
+        
 
