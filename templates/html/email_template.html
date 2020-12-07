@@ -452,7 +452,9 @@
 						  <tr>
 							<td class="content-cell">
 							  <div class="f-fallback">
+								{% if name %}
 								<h1>Hi {{name}},</h1>
+								{% endif %}
 								
 								<div style="text-align:cenetr;">
 										<p>{{msg}}</p>

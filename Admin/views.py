@@ -54,6 +54,8 @@ def Approved_courses(request):
         course=Course.objects.get(Cid=int(Cid))
         course.approve=True
         course.save()
+        CourseApprovalEmailToAdmin(course)
+        CourseApprovalEmailToFacilitator(course)
         return JsonResponse({"name":course.title})
     else:
         courses=Course.objects.filter(approve=True)

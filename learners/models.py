@@ -32,6 +32,7 @@ class Learners(models.Model):
         return enrollment.objects.filter(Lid=self).count()
     def GetCourses(self):
         return enrollment.objects.filter(Lid=self)
+    
 
 
 
@@ -40,6 +41,8 @@ class enrollment(models.Model):
     Cid = models.ForeignKey(Course, on_delete=models.CASCADE)
     addedenroll = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updatedenroll = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    status=models.BooleanField(default=True)
+
     def __str__(self):
         return self.Lid.name
 
