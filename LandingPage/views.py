@@ -238,7 +238,7 @@ def category(request):
         else:
             cat = SubCategory.objects.get(subCat_id=pk)
     
-        courses=Course.objects.filter(subCat_id=cat)
+        courses=Course.objects.filter(subCat_id=cat , approve=True)
         paginator=Paginator(courses,6,orphans=1)
         page_obj=paginator.get_page(page_number)
     else:
@@ -264,7 +264,7 @@ def VideoPage(request):
 def exploreCourses(request):
     cat=Category.objects.all()
     subcat=SubCategory.objects.all()
-    course=Course.objects.all()
+    course=Course.objects.filter(approve=True)
     query = request.GET.get('query')
     option=request.GET.get('categ')
     filter_level = request.GET.getlist('level')
@@ -275,7 +275,7 @@ def exploreCourses(request):
     # Categories
     if option!=None:
         if option == "All Categories":
-            course=Course.objects.all()
+            course=Course.objects.filter(approve=True)
         else:
             course=Course.objects.filter(Q(subCat_id__cat_id__name__icontains=option))
     # Search Filter

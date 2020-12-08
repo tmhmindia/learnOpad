@@ -12,7 +12,9 @@ from io import BytesIO
 from django.template.loader import get_template
 from django.views import View
 from learners.certificate.certificate import generateCertificate
-
+from django.core.exceptions import MultipleObjectsReturned,ObjectDoesNotExist
+import os
+from django.conf import settings
 
 
 # Create your views here.
@@ -138,7 +140,7 @@ def profile(request):
 #learners dashboard Account setting page
 @login_required(login_url='/learner_page')
 @allowed_users(['Learners'])
-def settings(request):
+def learner_settings(request):
     return render(request,'learners/dashboard/settings.html')
 
 
@@ -179,14 +181,17 @@ class GeneratePDF(View):
         info={}
         try:
             certificate_name=Certificate.objects.get(certificate_number=learner.name+str(learner.Lid)+str(course.Cid)+'.jpg')
-        except:
+        except ObjectDoesNotExist:
             certificate_name=None
+        except Certificate.MultipleObjectsReturned:
+            breakpoint()
+
         if certificate_name is None:
             info=generateCertificate(learner,course)
             certificate=Certificate(certificate_number=info['certificate_name'],learner=learner,status='issued',course=course)
             certificate.save()
         else:
-            info['path']=os.path.join(settings.MEDIA_ROOT,'certificates',certificate_name)
+            info['path']=os.path.join(settings.MEDIA_ROOT,'certificates',certificate_name.certificate_number)
 
         image_data = open(info['path'], "rb").read()
         return HttpResponse(image_data, content_type="image/jpeg")

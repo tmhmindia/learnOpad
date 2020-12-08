@@ -22,7 +22,13 @@ urlpatterns = [
     path('learnopad/admin/facilitator/support/', views.facilitator_support, name='facilitator_support'),
     path('learnopad/admin/course/orders/', views.course_orders, name='course_orders'),
     path('learnopad/admin/facilitator/orders/', views.facilitator_orders, name='facilitator_orders'),
+<<<<<<< HEAD
     path('learnopad/admin/myprofile/', views.myprofile, name='myprofile'),    
+=======
+    path('learnopad/admin/myprofile/', views.myprofile, name='myprofile'),
+
+    
+>>>>>>> 5cdf3820f5aa6a9bcc33a981183bdceb6cd926e0
     path('learnopad/admin/Delete/query/', views.DeleteSupportQueires, name='Delete_support_queries'),
     path('learnopad/admin/Delete/Subscription/', views.DeleteSubscription, name='delete_subscription'),
     path('learnopad/admin/Delete/Order/Course', views.DeleteOrderCourse, name='delete_order_course'),

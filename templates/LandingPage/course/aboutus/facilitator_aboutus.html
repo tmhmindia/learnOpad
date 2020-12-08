@@ -58,7 +58,7 @@ Fascilitator details
       <div class="row">
         <div class="col-sm-4 order-1 order-lg-2">
             <div align="center">
-             <img src='{% static 'LandingPage/images/teacher-5.jpg'%}' style="width: 200px;border-radius: 200px">
+             <img src='{{faci.profile.url}}' style="width: 200px;border-radius: 200px">
             </div>
         </div>
         <div class="col-sm-8 order-2 order-lg-1">
@@ -88,18 +88,7 @@ Fascilitator details
       <div class="row">
         <div class="col-sm-8">
             <h5 style="font-weight: 500;margin-top: 10px">About Me</h5>
-            <p><b>Sharing is who I am, and teaching is where I am at my best, because I've been on both sides of that equation, and getting to deliver useful training is my meaningful way to be a part of the creative community.
-
-                I've spent a long time watching others learn, and teach, to refine how I work with you to be efficient, useful and, most importantly, memorable. I want you to carry what I've shown you into a bright future.
-                
-                I have a wife (a lovely Irish girl) and kids. I have lived and worked in many places (as Kiwis tend to do) – but most of my 14+ years of creating and teaching has had one overriding theme: bringing others along for the ride as we all try to change the world with our stories, our labours of love and our art.
-                
-                I'm a certified Adobe instructor (ACI) in Ireland. I'm also an Adobe Certified Expert (ACE) and have completed the Adobe Certified Associate training (ACA). And I don't just do Adobe. Remember, media is a very broad term – digital blew out the borders, so we are all constantly learning.
-
-                I've been teaching for 14+ years. I come from being a media designer and content creator – so I understand exactly where you're at now. I've been there. I love this stuff. Print, digital publishing, web and video. I can see how it all connects. And I can see how we can share those connections.
-
-                
-                </b></p>
+            <p><b>{{faci.bio}}</b></p>
             {% comment %} <button onclick="myFunction()" id="myBtn" class="btn btn-info">Read more</button> {% endcomment %}
             
             <div class="courses_container">
@@ -109,12 +98,12 @@ Fascilitator details
 							<!-- Course -->
                             
   				            <!-- {% cycle "<div class='row courses_row'>" "" %} -->
-                                  <div class="row courses_row ">
+                   <div class="row courses_row ">
                                     {% for course in courses %}
                             
 		                    <div class="col-lg-6 course_col">
 								<div class="card course">
-									<div class="course_image"><img src='{% static 'LandingPage/images/course_8.jpg'%}' alt=""></div>
+									<div class="course_image"><img src='{{course.thumbnail.url}}' alt=""></div>
 									<div class="course_body">
 										<h3 class="course_title"> <a href='{% url 'course' course.Cid %}' class="stretched-link">{{course.title}}</a></h3>
 										

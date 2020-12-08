@@ -72,7 +72,7 @@
                                                 <th> 
                                                   
                                                     <button type="button" onclick="Approved('{{applicant.Aid}}')" id="btn_approve"class="btn btn-info btn-md">Approve</button>
-                                                    <button type="button" onclick="" id="btn_shortlist"class="btn btn-primary btn-md">Shortlist</button>
+                                                    <button type="button" onclick="Shortlist('{{applicant.user.id}}')" id="btn_approve"class="btn btn-primary btn-md">Shortlist</button>
                                                    
                                             </th>
                                             </tr>
@@ -111,7 +111,30 @@
     {% endblock content %}
 <!-- ------------------------------------------------- -->
     {% block javascript %}
-    
+    <script>
+        function Shortlist(id)
+        {
+           //preventDefault();
+
+
+            $.ajax({
+      type: "POST",
+      url: "{% url 'SHORTLIST'%}",
+      data:{"id":id},
+      headers: {
+                        "X-CSRFTOKEN": "{{ csrf_token }}"
+                },
+      success: function(data){
+        
+swal("Done!", data.name+" is Shortlisted", "success").then(function(){location.reload()});
+
+
+      }
+});
+ 
+        }
+    </script>
+
     <script>
         function Approved(id)
         {
