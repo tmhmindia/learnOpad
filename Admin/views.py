@@ -94,14 +94,10 @@ def course_orders(request):
     return render(request,'myAdmin/dashboard/course_orders.html') 
 def myprofile(request):
     return render(request,'myAdmin/dashboard/profile.html') 
-<<<<<<< HEAD
 
 def staff(request):
     return render(request,'myAdmin/dashboard/manage_staff.html') 
 
-=======
- 
->>>>>>> 5cdf3820f5aa6a9bcc33a981183bdceb6cd926e0
     orders=OrderCourses.objects.all()
     revenues=Revenue.objects.all()
     return render(request,'myAdmin/dashboard/course_orders.html',{'orders':orders,'revenues':revenues}) 
