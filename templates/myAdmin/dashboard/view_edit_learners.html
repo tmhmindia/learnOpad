@@ -50,6 +50,7 @@
                                     <li class="d-flex no-block border-top pb-3 pt-3">Address:<span class="pl-2 text-info">{% if learner.PAddress %}{{learner.PAddress}}{% endif %}</span></li>
                                     <li class="d-flex no-block border-top pb-3 pt-3">Status:<span class="pl-2 text-info">{{learner.status}}</span></li>                                    <li class="d-flex no-block border-top pb-3 pt-3">Total Spent :<span class="pl-2 text-info"></span></li>
                                 </ul>
+                                <a href="mailto:" > <button class="btn btn-primary"> Mail this Learner</button> </a>
                             </div>
                         </div>
                     </div>
@@ -144,6 +145,7 @@
                                                 <input type="number" class="form-control" id="zip" {% if learner.zip %}value="{{learner.zip}}"{% endif %}placeholder="Pincode Here">
                                         </div>
                                     </div>
+                                   
                                    
                                 </div>
                                 <div class="border-top">

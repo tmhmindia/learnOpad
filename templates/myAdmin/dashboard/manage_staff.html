@@ -2,7 +2,7 @@
 {% load static %}
 <!-- ---------------------------------------------- -->
     {% block title %}
-    Manage Learners
+    Manage Staff
     {% endblock title %}
 <!-- --------------------------------------------- -->
     {% block header %}
@@ -17,18 +17,18 @@
     {% endblock stylesheet %}
 <!-- ----------------------------------------------------- -->
     {% block content %}
-            <!-- ============================================================== -->
+                <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Manage fascilitators</h4>
+                        <h4 class="page-title">Manage Staff</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Manage fascilitators</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Manage Staff</li>
                                 </ol>
                             </nav>
                         </div>
@@ -42,47 +42,65 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
+
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+                            <form class="form-horizontal">
+                                <div class="card-body">
+                                    <h4 class="card-title">ADD Staff</h4>
+                                    <div class="form-group ">
+                                        <label for="fname" class=" text-right control-label col-form-label">Name</label>
+                                        <input type="text" class="form-control" id="fname" value=""placeholder="Name Here">
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="email" class=" text-right control-label col-form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" value=""placeholder="Email Here">
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="password" class=" text-right control-label col-form-label">password</label>
+                                        <input type="password" class="form-control" id="password" value=""placeholder="password Here">
+                                    </div>
+                                    <button class="btn btn-primary">Create</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Requested fascilitators</h5>
+                                <h5 class="card-title">Staff list</h5>
                                 <div class="table-responsive">
                                     <table id="zero_config" class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Phone number</th>
-                                                <th>Mail id</th>
-                                                <th>Added on</th>
+                                                <th>Email</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for applicant in applicants %}
+                                            {% for learner in learners %}
                                             <tr>
-                                                <th>{{applicant.name}}</th>
-                                                <th>{{applicant.phone}}</th>
-                                                <th>{{applicant.user.email}}</th>
-                                                <th>{{applicant.added.date}}</th>
+                                                <th>Vijay Gwala</th>
+                                                <th>vijay@gmail.com</th>
                                                 
                                                 <th> 
-                                                  
-                                                    <button type="button" onclick="Approved('{{applicant.Aid}}')" id="btn_approve"class="btn btn-info btn-md">Approve</button>
-                                                    <button type="button" onclick="" id="btn_shortlist"class="btn btn-primary btn-md">Shortlist</button>
-                                                   
+                                                    
+                                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
                                             </th>
+                                    
                                             </tr>
                                             {% endfor %}
-                                            
+                                           
                                             
                                         </tbody>
-                                        <tfoot>
-                                            
-                                        </tfoot>
+                                        
                                     </table>
                                 </div>
 
@@ -101,43 +119,15 @@
                 <!-- End Right sidebar -->
                 <!-- ============================================================== -->
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
            
     {% endblock content %}
 <!-- ------------------------------------------------- -->
     {% block javascript %}
-    
-    <script>
-        function Approved(id)
-        {
-           //preventDefault();
-
-
-            $.ajax({
-      type: "POST",
-      url: "{% url 'Approved_facilitators'%}",
-      data:{"Aid":id},
-      headers: {
-                        "X-CSRFTOKEN": "{{ csrf_token }}"
-                },
-      success: function(data){
-        
-swal("Done!", " is Approved", "success").then(function(){location.reload()});
-
-
-      }
-});
- 
-        }
-    </script>
+   
     <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
+    
    
     <script>
         /****************************************
