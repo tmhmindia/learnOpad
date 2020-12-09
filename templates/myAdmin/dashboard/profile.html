@@ -30,9 +30,12 @@
         <div class="col-md-4 col-12">
             <div class="d-flex justify-content-center align-items-center">
                 <div style="width: 70%; text-align: center;">
-                    <img src="{% static 'admin/assets/images/users/1.jpg' %}" alt="user" class="rounded-circle" style="width: 100%;">
-                    <button class="btn btn-primary m-5">Upload image</button>
-                </div>
+                    <img src="{% static 'admin/assets/images/users/1.jpg' %}" alt="user" id="avatarUploader" class="avatar-img rounded-circle" style="width: 100%;">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" onchange="loadFile(event)" id="customFile" name="myImage">
+                        <label class="custom-file-label" for="customFile">Choose</label>
+                    </div>               
+            </div>
                
                
             </div>
@@ -82,6 +85,12 @@
     <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
+    <script>
+        var loadFile = function(event) {
+            var image = document.getElementById('avatarUploader');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+        </script>
     <script>
         /****************************************
          *       Basic Table                   *

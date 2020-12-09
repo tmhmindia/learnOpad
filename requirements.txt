@@ -11,3 +11,4 @@ razorpay
 requests
 channels
 channels-redis
+asyncio

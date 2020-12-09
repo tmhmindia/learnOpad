@@ -40,7 +40,7 @@ def Approved_facilitators(request):
         group = Group.objects.get(name='Facilitators')
         applicant.user.groups.add(group)
         applicant.save()
-        #successOnRegistration(applicant.user)
+    
 
         return JsonResponse({"name":applicant.name})
     else:

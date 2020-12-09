@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 from ckeditor.fields import RichTextField
+from PIL import Image
 
 
 #this relation contains all the applicants who is registerd from facilitator registration form
@@ -53,6 +54,10 @@ class Facilitator(models.Model):
         verbose_name_plural='Approved Facilitators'
     def __str__(self):
         return self.name
+    def save(self, *args, **kwargs):
+        super(Facilitator, self).save(*args, **kwargs)
+        image = Image.open(self.profile.path)
+        image.save(self.profile.path,format="JPEG",quality=50,optimize=True)
     def getCourses(self):
         courses=self.offering.all()
         return courses

@@ -11,20 +11,21 @@ from django.template import Context
 import threading
 from django.http import HttpResponse ,JsonResponse
 from myauth.models import *
+import asyncio
 
 #speed up mails
-class EmailThread(threading.Thread):
-    def __init__(self,email):
-        self.email=email
-        threading.Thread.__init__(self)
-    def run(self):
-        self.email.send()
+# class EmailThread(threading.Thread):
+#     def __init__(self,email):
+#         self.email=email
+#         threading.Thread.__init__(self)
+#     def run(self):
+#         self.email.send()
 
 # the function for sending an email
-def send_email(subject, text_content, html_content=None, sender=None, recipient=None, image_path=None, image_name=None):
+async def send_email(subject, text_content, html_content=None, sender=None, recipient=None, image_path=None, image_name=None):
     email = EmailMultiAlternatives(subject=subject, body=text_content, from_email=sender, to=recipient if isinstance(recipient, list) else [recipient])
     email.attach_alternative(html_content, "text/html")
-    email.content_subtype = 'html'  # set the primary content to be text/html
+    email.content_subtype = 'html' # set the primary content to be text/html
     email.send()
     # EmailThread(email).start()
 # After successfull Registration
@@ -70,8 +71,7 @@ def RegistrationSuccessAdminEmail(name,catlist):
     text_message = f"Email with a nice embedded image {context.get('name')}."
    
     html_message=render_to_string('html/email_template.html',context)
-     
-    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+    asyncio.run(send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient))
 
 def CorporateCampusToAdminEmail(org):
     subject = 'About Training'
@@ -79,13 +79,13 @@ def CorporateCampusToAdminEmail(org):
     recipient = ['vijaygwala97@gmail.com',]
     context={
         'name':"Vijay Gwala",
-        'msg':org.campus+" has asked for the "+org.course.title+" course. Acknowledge their request and attach a payment link to it as a further step."
+        'msg':org.organization+" has asked for the "+org.course.title+" course. Acknowledge their request and attach a payment link to it as a further step."
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
    
     html_message=render_to_string('html/email_template.html',context)
      
-    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+    asyncio.run(send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient))
 # when course is created bt not approved
 def CourseCreationEmailToAdmin(Course):
     subject = 'About Course creation'
@@ -102,7 +102,9 @@ NOTE : The course code provided above is unique to his '''+ course.title +''' co
    
     html_message=render_to_string('html/email_template.html',context)
      
-    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+    asyncio.run(send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient))
+
+
 def CourseApprovalEmailToAdmin(Course):
     subject = 'About Course Approval'
     sender = settings.EMAIL_HOST_USER
@@ -118,7 +120,7 @@ NOTE : The course code provided above is unique to his '''+ course.title +''' co
    
     html_message=render_to_string('html/email_template.html',context)
      
-    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+    asyncio.run(send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient))
 
 def CourseApprovalEmailToFacilitator(Course):
     subject = 'About Course Creation'
@@ -135,7 +137,7 @@ NOTE : The course code provided above is unique to your '''+ course.title +''' c
    
     html_message=render_to_string('html/email_template.html',context)
      
-    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+    asyncio.run(send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient))
 
 
 # when course is created bt not approved 
@@ -154,7 +156,7 @@ NOTE : The course code provided above is unique to your '''+ course.title +''' c
    
     html_message=render_to_string('html/email_template.html',context)
      
-    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+    asyncio.run(send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient))
 
 # Successfull Facilitator Subscription 
 def FacilitatorSuccessfullSubscription(user):
@@ -169,7 +171,7 @@ def FacilitatorSuccessfullSubscription(user):
    
     html_message=render_to_string('html/email_template.html',context)
      
-    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+    asyncio.run(send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient))
 
 def SHORTLIST(request):
     id=request.POST.get('id',None)
