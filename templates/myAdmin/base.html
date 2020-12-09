@@ -1,4 +1,5 @@
 {% load static %}
+{% load has_group %}
 <!doctype html>
 <html>
   <head>
@@ -121,12 +122,13 @@
                       <!-- User profile and search -->
                       <!-- ============================================================== -->
                       <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{% static 'admin/assets/images/users/1.jpg' %}" alt="user" class="rounded-circle" width="31"></a>
+                          <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{staff.profile.url}}" alt="user" class="rounded-circle" width="31"></a>
                           <div class="dropdown-menu dropdown-menu-right user-dd animated">
                               <a class="dropdown-item" href="{% url 'myprofile'%}"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
-                 
+                              {% if request.user|has_group:"Admins" %} 
                               <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="{% url 'staff'%}"><i class="ti-settings m-r-5 m-l-5"></i> Manage Staff</a>
+                              {% endif %}
                               <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                               <div class="dropdown-divider"></div>
@@ -180,12 +182,15 @@
                                 <li class="sidebar-item"><a href="{% url 'admin_to_learner_support' %}" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">    Learner Support Queries  </span></a></li>
                             </ul>
                         </li>
+                        {% if request.user|has_group:"Admins" %} 
+
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-edit"></i><span class="hide-menu">Orders </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="{% url 'facilitator_orders'%}" class="sidebar-link"><i class="mdi mdi-account-alert"></i><span class="hide-menu">  Facilitators Subscription </span></a></li>
                                 <li class="sidebar-item"><a href="{% url 'course_orders' %}" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">   Course orders  </span></a></li>
                             </ul>
                         </li>
+                        {% endif %}
                   </ul>
               </nav>
               <!-- End Sidebar navigation -->

@@ -172,13 +172,13 @@ def user_logout(request):
 
 
 # for handling ajax request for change password form of setting section of profile
-@login_required(login_url='/facilitator/login/')
+@login_required(login_url='/')
 def ChangePassword(request):
     suc_res = ''
     err_res = ''
-    current = request.GET.get('currentPassword', None)
-    newp = request.GET.get('newPassword', None)
-    confirmp = request.GET.get('confirmNewPassword', None)
+    current = request.POST.get('currentPassword', None)
+    newp = request.POST.get('newPassword', None)
+    confirmp = request.POST.get('confirmNewPassword', None)
 
 
     try:

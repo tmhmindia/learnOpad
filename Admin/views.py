@@ -11,7 +11,8 @@ from django.contrib.auth.decorators import login_required
 from myauth.decoraters import *
 from LandingPage.models import Queries
 from payment_gateway.models import *
-
+from django.core.exceptions import ObjectDoesNotExist
+from .models import Staff
 # Create your views here.
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
@@ -91,17 +92,52 @@ def facilitator_orders(request):
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def course_orders(request):
-    return render(request,'myAdmin/dashboard/course_orders.html') 
-def myprofile(request):
-    return render(request,'myAdmin/dashboard/profile.html') 
-
-def staff(request):
-    return render(request,'myAdmin/dashboard/manage_staff.html') 
-
     orders=OrderCourses.objects.all()
     revenues=Revenue.objects.all()
     return render(request,'myAdmin/dashboard/course_orders.html',{'orders':orders,'revenues':revenues}) 
+def myprofile(request):
+    if request.method == 'POST':
+        staff=Staff.objects.get(user__email=request.POST.get('email',None))
+        staff.user.first_name=request.POST.get('name',None).split(' ')[0]
+        staff.user.last_name=request.POST.get('name',None).split(' ')[1]
+        staff.state=request.POST.get('state',None)
+        staff.country=request.POST.get('country',None)
+        staff.zipcode=request.POST.get('zip',None)
+        staff.PAddress=request.POST.get('address',None)
+        staff.phone=request.POST.get('phone',None)
+        staff.profile=request.FILES['profile']
+        staff.save()
+        return JsonResponse({'success':True})
 
+    else:
+        staff=Staff.objects.get(user=request.user)
+        return render(request,'myAdmin/dashboard/profile.html',{'staff':staff}) 
+
+def staff(request):
+    if request.method == 'POST':
+        user=None
+        try:
+            user=CustomUser.objects.get(email=request.POST.get('email',None))
+        except ObjectDoesNotExist:
+            user=CustomUser(first_name=request.POST.get('name',None).split(' ')[0],last_name=request.POST.get('name',None).split(' ')[1],email=request.POST.get('email',None))
+            user.set_password(request.POST.get('password',None))
+            user.is_active=True
+            user.save()
+
+        if user:
+            group=Group.objects.get(name="Staff")
+            user.groups.add(group)
+            user.save()
+            staff=Staff.objects.create(user=user)
+            return JsonResponse({'name':staff.user.first_name,'success':True})
+        else:
+            return JsonResponse({'name':staff.user.first_name,'success':False})
+
+    else:
+        staff=Staff.objects.all()
+        return render(request,'myAdmin/dashboard/manage_staff.html',{'staff':staff}) 
+
+    
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def learner_support(request):
