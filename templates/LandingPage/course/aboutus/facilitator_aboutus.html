@@ -46,6 +46,21 @@ Fascilitator details
 {% block stylesheet %}
     <style>
 #more {display: none;}
+
+.limit_desc{
+  width: 100%;
+  font-size: 17px;
+  line-height: 18px;
+  height: 125px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+}
+.course_image img {
+    max-width: 100%;
+    height: 150px;
+}
 </style>
 {% endblock stylesheet %}
 <!---------------------------- -->
@@ -65,7 +80,7 @@ Fascilitator details
             <div style="font-family: 'Raleway',sans-serif">
                         <div style="margin-top:20px" class="text-muted">FACILITATOR</div>
                         <h1 style="font-weight: 700">{{faci.name}}</h1>
-                        <h5 style="margin-top: -10px;font-weight: 500">{{faci.user.intrest}}</h5>
+                        <h5 style="margin-top: 10px;font-weight: 500">{{faci.user.intrest}}</h5>
                         <div style="margin-top: 20px">
                             <div class="container" style="margin-left: -18px;">
                               <div class="row">
@@ -88,7 +103,15 @@ Fascilitator details
       <div class="row">
         <div class="col-sm-8">
             <h5 style="font-weight: 500;margin-top: 10px">About Me</h5>
-            <p><b>{{faci.bio}}</b></p>
+            <p class="limit_desc">What is Lorem Ipsum?
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+              
+              Why do we use it?
+              It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+              
+              
+              Where does it come from?
+              Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
             {% comment %} <button onclick="myFunction()" id="myBtn" class="btn btn-info">Read more</button> {% endcomment %}
             
             <div class="courses_container">

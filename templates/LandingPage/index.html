@@ -197,7 +197,12 @@
 }
 .card-footer{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.card-footer p{
+    margin-bottom: 0;
 }
 a:hover{
     text-decoration: none;
@@ -442,7 +447,7 @@ a:hover{
                                                 <!-- background-color:gainsboro -->
                                                 <div class="card-body" >
                                                     <h5 class="card-title" style="color:#4e73df;" >{{course.title}}</h5>
-                                                    <div style="display: flex;justify-content: space-around;">
+                                                    <div class="p-3" style="display: flex;justify-content: space-between; ">
                                                     <span><i class="fa fa-star" aria-hidden="true"></i>{{course.no_of_ratings}} </span>
                                                     <div class="course_info">
                                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -456,7 +461,7 @@ a:hover{
                                                         
                                                         <p>{{course.level}} </p>
                                                     </div>
-                                                    <div class="course_price ml-auto">&#8377;  {{course.price}} </div>
+                                                    <div class="course_price "><span style="text-decoration-line: line-through;font-size: 15px;" class="text-muted">&#8377; {{course.getOfferPrice}} </span><span style="font-size: 20px;"> &#8377;  {{course.price}}  </span> </div>
                                                 </div>
                                             </div>
                                         </a>
