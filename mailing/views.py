@@ -28,7 +28,7 @@ def send_email(subject, text_content, html_content=None, sender=None, recipient=
     email.send()
     # EmailThread(email).start()
 # After successfull Registration
-def successOnRegistration(user,msg):
+def successOnRegistration(user):
     recipient = [user.email,]
     sender =settings.EMAIL_HOST_USER # 
     context={
