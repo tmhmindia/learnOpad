@@ -198,7 +198,8 @@ Create Courses
                     <div class="container-fluid " >
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class=" nav-item active"><a class="nav-link active" href="#createcourse" data-toggle="tab" role="tab" aria-controls="createcourse" aria-selected="true">Create course</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#updtcrs" data-toggle="tab" role="tab" aria-controls="updtcrs" aria-selected="false">Update/Delete course</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#updtcrs" data-toggle="tab" role="tab" aria-controls="updtcrs" aria-selected="false">Update/Delete course Video</a></li>
+                            <li class=" nav-item "><a class="nav-link " href="#updatecourse" data-toggle="tab" role="tab" aria-controls="updatecourse" aria-selected="false">Update course</a></li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div id="createcourse" class="tab-pane fade in active show" role="tabpanel" aria-labelledby="createcourse-tab">
@@ -351,6 +352,96 @@ Create Courses
                                     </ul>
                                 </div>
                             </div>
+                            <div id="updatecourse" class="tab-pane fade in " role="tabpanel" aria-labelledby="updatecourse-tab">
+                                <!-- <h1>Hello</h1> -->
+                                
+                                    <div class="container">
+                                        <div>
+                                            <h3 class="heading">Overview</h3>
+                                                <p>Please enter the necessary information and proceed forward for content creation. </p>
+                                        </div>
+                                        <div style="max-width: 500px;">
+                                            <select  id="course" class="form-control">
+                                                <option value="empty">Select</option>
+                                                {% for course in courses %}
+                                                <option value="{{course.Cid}}">{{course.title}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                       
+                                        <form action="" id="updatecourseForm" method="post" class="mt-5">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                  <label for="inputEmail4">Code</label>
+                                                  <input type="text" name="code"class="form-control" id="id_ccode" placeholder="code">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                  <label for="inputPassword4">Title</label>
+                                                  <input type="text" name="ctitle"class="form-control" id="id_ctitle" placeholder="Title">
+                                                </div>
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="inputAddress">Description</label>
+                                                <input type="text" class="form-control" id="id_cdescription" name="cdescription"placeholder="Description">
+                                              </div>
+                                              
+                                              <div class="form-row">
+                                                <!-- <div class="form-group col-md-6">
+                                                  <label for="inputCity">City</label>
+                                                  <input type="text" class="form-control" id="inputCity">
+                                                </div> -->
+                                                <div class="form-group col-md-6">
+                                                  <label for="inputState">Target Audience</label>
+                                                  <select id="id_caudience" class="form-control">
+                                                    {% for obj in audience_list %}
+                                                                <option value="{{obj.audience}}">{{obj.audience}}</option>
+                                                                {% endfor %}      
+                                                  </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label >Duration</label>
+                                                    <input type="text" name="cdays"class="form-control" placeholder="days" id="id_cdays">
+                                                </div>
+                                              </div>
+                                              <div class="form-row">
+                                                <div class="form-group col-md-4" style="
+                                                margin-top: auto;
+                                                margin-bottom: auto;
+                                            ">
+                                              
+                                                <select class="selectpicker " title="Choose Your Course" name="course" id="id_ccategory" multiple style="width: 100%;">
+
+                                                    {% for cat in category %}
+                                                    <optgroup label="{{cat.name}}">
+                                                        {% for sub in subcategory %}
+                                                        {% if sub.cat_id.cat_id == cat.cat_id %}
+                                                        <option value="{{sub.subCat_id}}">{{sub.name}}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    </optgroup>
+                                                    {% endfor %}
+                                                
+                                                </select>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleFormControlFile1">Course preview(limit 2 MB)</label>
+                                                    <input type="file" name="cvideo"class="form-control-file" id="id_cvideo">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleFormControlFile1">Course Image(limit 2 MB)</label>
+                                                    <input type="file" class="form-control-file" id="id_cthumbnail" name="thumbailup">
+                                                </div>
+                                            </div>
+                                               <div class="form-group">
+                                                            <label for="exampleFormControlTextarea1">Skills covered</label>
+                                                            <textarea class="form-control" name="takaway" id="id_ctakeaway" rows="3"></textarea>
+                                                </div>
+                                              <button type="submit" id="course_create" class="btn btn-primary">Submit</button>
+
+                                        </form>
+                                    </div>
+                                
+                            </div>
                         </div>
                     </div>
 
@@ -399,6 +490,17 @@ Create Courses
 
 {% block javascript %}
 <script>
+$(document).ready(function(){
+    $('#updatecourseForm').hide();
+    $('#course').change(function(){
+        
+        if($(this).val()!='empty'){
+            $('#updatecourseForm').show();
+        }
+    });
+});
+
+
 function validate()
 {
  var ddl = document.getElementById("select_course");
