@@ -175,4 +175,4 @@ def SHORTLIST(request):
     id=request.POST.get('id',None)
     user=CustomUser.objects.get(id=int(id))
     successOnShortlisted(user)
-    return JsonResponse({'name':user.get_full_name})
+    return JsonResponse({'name':user.get_full_name()})
