@@ -49,6 +49,7 @@ class CreateCourseApi(APIView):
         day=int(days % 30)
         months=str(month)+" month "+str(day)+" days"
         #collect all the details in one dictionry "course_detail"
+        course_detail['code']="LPD-"+str(request.user.user.facilitator.Fid)+str(request.user.id)
         course_detail['months']=months
         course_detail['video']=cvideo
         course_detail['thumbnail']=cthumbnail

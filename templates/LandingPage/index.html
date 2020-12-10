@@ -757,15 +757,15 @@ a:hover{
                         <form id="#csform"  method="POST" action="{% url 'councelling' %}"onSubmit="return check_ephone(this)" style="width: 20em">
                             {% csrf_token %}
                                 
-                                <input class="form-control mb-2" name="name"type="text" placeholder="Name">
+                                <input class="form-control mb-2" name="name"type="text" placeholder="Name*" required>
                                 
-                                <input type="email" class="form-control" name="email"  aria-describedby="emailHelp" placeholder="Enter email">
+                                <input type="email" class="form-control" name="email"  aria-describedby="emailHelp" placeholder="Enter email*" required>
                                 <div class="input-group mb-3 mt-2">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">+91</span>
                                     </div>
                                     
-                                <input type="tel" class="form-control" name="phone_number" placeholder="PhoneNumber" aria-label="PhoneNumber" aria-describedby="basic-addon1">
+                                <input type="tel" class="form-control" name="phone_number" placeholder="PhoneNumber" aria-label="PhoneNumber" aria-describedby="basic-addon1" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

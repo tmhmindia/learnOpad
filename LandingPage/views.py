@@ -223,9 +223,10 @@ def contact(request):
             form.save()
             messages.success(request,f"Details Submitted Succesfully")
             return redirect('contactus')
-    form=ContactUsForm()
-    context={'form':form}
-    return render(request, 'LandingPage/contactus/contact.html',context)
+    else:
+        form=ContactUsForm()
+        context={'form':form}
+        return render(request, 'LandingPage/contactus/contact.html',context)
 
 #Landing page categories page
 def category(request):

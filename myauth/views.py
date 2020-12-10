@@ -187,6 +187,8 @@ def ChangePassword(request):
     except:
         print('NO USER FOUND')
         # print(handler.verify(current, obj.password))
+    print(current)
+    print(obj.password)
     if handler.verify(current, obj.password):
         obj.set_password(confirmp)
         obj.save()
@@ -211,8 +213,6 @@ def ChangePassword(request):
 def forgot_password(request, pk=None):
     print('AYYYYYA')
     if request.method == 'GET':
-        print('GETTTTTTTTTTTT')
-        print(pk)
         u = CustomUser.objects.get(id=pk)
         print(u)
         #get_object_or_404(CustomUser, pk=pk)
