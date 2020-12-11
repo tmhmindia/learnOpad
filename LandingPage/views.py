@@ -22,7 +22,7 @@ from facilitators.api.views import CourseSerializers,offerSerializers
 from payment_gateway.models import *
 from django.core import serializers
 from .utils import *
-
+from mailing.views import ToAdminContactUsQuery
 
 
 # Landing  page
@@ -220,7 +220,8 @@ def contact(request):
     if request.method=='POST':
         form=ContactUsForm(request.POST)
         if form.is_valid():
-            form.save()
+            contactus=form.save()
+            ToAdminContactUsQuery(contactus)
             messages.success(request,f"Details Submitted Succesfully")
             return redirect('contactus')
     else:

@@ -114,7 +114,8 @@ class OnlineCouncelling(APIView):
     def post(self, request, *args, **kwargs):
         clForm=onlinecounsellingSerializer(data=request.data)
         if clForm.is_valid(raise_exception=True):
-            clForm.save()
+            co=clForm.save()
+            ToAdminCouncellingDetail(co)
             messages.success(self.request, 'Thank You For Choosing Us!')
             # redirect('/')
             return Response({'success':"Done"})

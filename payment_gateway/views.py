@@ -6,6 +6,8 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers.json import DjangoJSONEncoder
+from mailing.views import FacilitatorSuccessfullSubscription , ToAdminSuccessfullSubscriptionOfFacilitator,LearnerSuccessfullSubscription,ToAdminLearnerSuccessfullSubscription
+
 # razor pay account setup
 import razorpay
 client = razorpay.Client(auth=("rzp_test_0G5HtLCg0WpC26", "y8iPiSBFRf8w2Y1W0L6Q7F55"))
@@ -94,6 +96,11 @@ def payment_status(request,order_id):
     for enroll_course in order_c:
         learner.enrolled.add(enroll_course.course)
         learner.save()
+        #send mails to admin and learner
+        obj=enrollment.objects.get(Lid=learner.Lid,Cid=enroll_course.course.Cid)
+        LearnerSuccessfullSubscription(obj)
+        ToAdminLearnerSuccessfullSubscription(obj)
+
         #generate revenu for each course
         revenue=Revenue.objects.create(admin_revenue=enroll_course.get_admin_revenue(),facilitator_revenue=enroll_course.get_facilitator_revenue(),revenue_item=enroll_course,status='pending')
         chatgroup=None
@@ -150,6 +157,8 @@ def payment_verify(request):
 
         if plan is not None:
             obj=FacilitatorSubscriptions.objects.get(id=int(plan))
+            FacilitatorSuccessfullSubscription(obj.user)
+            ToAdminSuccessfullSubscriptionOfFacilitator(obj)
         else:
             obj=Order.objects.get(id=int(Oid))
 

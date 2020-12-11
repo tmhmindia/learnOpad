@@ -98,26 +98,26 @@
 
                                     <h6 class="text-cap small">Account</h6>
 
-                                    <!-- List -->
-                                    <ul class="nav nav-sub nav-sm nav-tabs nav-list-y-2 mb-4">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="index.html">
-                                                <i class="fas fa-id-card nav-icon"></i> Dashboard
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="Profile Info _ Front - Responsive Website Template.html">
-                                                <i class="fas fa-id-card nav-icon"></i> Personal info
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="Login & Security _ Front - Responsive Website Template.html">
-                                                <i class="fas fa-shield-alt nav-icon"></i> Login &amp; security
-                                            </a>
-                                        </li>
+                                   <!-- List -->
+                                   <ul class="nav nav-sub nav-sm nav-tabs nav-list-y-2 mb-4">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'learner_index'%}">
+                                            <i class="fas fa-id-card nav-icon"></i>Dashboard
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{% url 'learner_profile'%}">
+                                            <i class="fas fa-id-card nav-icon"></i> Personal info
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'learner_settings'%}">
+                                            <i class="fas fa-shield-alt nav-icon"></i> settings
+                                        </a>
+                                    </li>
 
-                                    </ul>
-                                    <!-- End List -->
+                                </ul>
+                                <!-- End List -->
 
 
                                 </div>

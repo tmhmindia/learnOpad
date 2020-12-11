@@ -5,6 +5,8 @@ from django.dispatch import receiver
 from django.utils import timezone
 from ckeditor.fields import RichTextField
 from PIL import Image
+from payment_gateway.models import Revenue
+
 
 
 #this relation contains all the applicants who is registerd from facilitator registration form
@@ -67,7 +69,19 @@ class Facilitator(models.Model):
     def getDOB(self):
         date=self.DOB.date()
         return date.strftime("%m/%d/%y")
-
+    def get_facilitator_monthly_revenue(self):
+        this_month = timezone.now().month
+        revenues = Revenue.objects.filter(revenue_item__course__offering__Fid=self.Fid,added__month=this_month)
+        total=0
+        for revenue in revenues:
+            total+=revenue.facilitator_revenue
+        return total
+    def get_facilitator_total_revenue(self):
+        revenues=Revenue.objects.filter(revenue_item__course__offering__Fid=self.Fid)
+        total=0
+        for revenue in revenues:
+            total+=revenue.facilitator_revenue
+        return total
         
 
 

@@ -129,6 +129,8 @@ def staff(request):
             user.groups.add(group)
             user.save()
             staff=Staff.objects.create(user=user)
+            ToAdminGiveStaffPrivilages(staff)
+            ToStaffGiveStaffPrivileges(staff)
             return JsonResponse({'name':staff.user.first_name,'success':True})
         else:
             return JsonResponse({'name':staff.user.first_name,'success':False})

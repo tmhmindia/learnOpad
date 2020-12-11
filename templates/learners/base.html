@@ -52,7 +52,7 @@
           
           <li class="nav-item nav-profile dropdown">
             <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="{% static 'learners/img/team-4.jpg' %}">
+                <img alt="Image placeholder" src="{{request.user.learner.profile.url}}">
              </span>
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                 

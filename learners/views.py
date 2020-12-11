@@ -15,7 +15,7 @@ from learners.certificate.certificate import generateCertificate
 from django.core.exceptions import MultipleObjectsReturned,ObjectDoesNotExist
 import os
 from django.conf import settings
-
+from mailing.views import ToLearnerForCertificate
 
 # Create your views here.
 
@@ -184,12 +184,12 @@ class GeneratePDF(View):
         except ObjectDoesNotExist:
             certificate_name=None
         except Certificate.MultipleObjectsReturned:
-            breakpoint()
-
+            pass 
         if certificate_name is None:
             info=generateCertificate(learner,course)
             certificate=Certificate(certificate_number=info['certificate_name'],learner=learner,status='issued',course=course)
             certificate.save()
+            ToLearnerForCertificate(certificate)
         else:
             info['path']=os.path.join(settings.MEDIA_ROOT,'certificates',certificate_name.certificate_number)
 

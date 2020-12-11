@@ -10,7 +10,7 @@ def corporate_landingPage(request):
         course=Course.objects.get(Cid=request.POST.get('courses'))
         corporate=CorporatesTalks(name=request.POST.get('name'),email=request.POST.get('email'),organization=request.POST.get('organization'),course=course)
         corporate.save()
-        CorporateCampusToAdminEmail(corporate)
+        CorporateCampusToAdminEmail(corporate,corporate.organization)
         return JsonResponse("success",safe=False)
     else:
         courses=Course.objects.all()

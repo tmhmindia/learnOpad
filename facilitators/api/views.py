@@ -27,7 +27,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from LandingPage.models import *
 from facilitators.api.serializers import *
-
+from mailing.views import CourseCreationEmailToAdmin ,CourseCreationEmailToFacilitator
 
 # Facilitator Register API
 class CreateCourseApi(APIView):
@@ -60,6 +60,8 @@ class CreateCourseApi(APIView):
             obj=course_obj.save()
             offering=offer.objects.create(Cid=obj,Fid=request.user.user.facilitator)
             offering.save()
+            CourseCreationEmailToFacilitator(Course)
+            CourseCreationEmailToAdmin(Course)
         return Response({'success':'recorded Video is created'},status=201)
         
         # print(subcat)

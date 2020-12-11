@@ -41,7 +41,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 from myauth.decoraters import *
 from django.core.paginator import Paginator
 from payment_gateway.models import Revenue
-
+from django.core import serializers
 
 
 #facilitator page
@@ -395,6 +395,7 @@ def GetVideos(request):
             return JsonResponse(data)
         else:
             video=CourseVideo.objects.get(Vid=Vid)
+            ToAdminDeleteCourseVideo(video)
             video.delete()
             data={'delete':'success'}
             return HttpResponseRedirect(reverse('createcourse'))
@@ -407,12 +408,50 @@ def UpdateVideos(request):
         Cid=request.POST.get('course_id')
         course=Course.objects.get(Cid=Cid)
         Course_video=CourseVideo(title=details.get('title'),description=details.get('description'),video=video,thumbnail=thumbnail,course=course)
-        Course_video.save()
-
+        course_video=Course_video.save()
+        ToAdminDeleteCourseVideo(course_video)
         return JsonResponse("success",safe=False)
     
         
+def UpdateCourse(request):
+    if request.method == "POST":
+        Cid=request.POST.get('Cid',None)
+        updated_data=request.POST
+        course=Course.objects.get(Cid=int(Cid))
+        course.title=updated_data.get('title',None)
+        course.description=updated_data.get('description',None)
+        course.level=updated_data.get('level',None)
+        course.language=updated_data.get('language',None)
+        course.price=updated_data.get('price',None)
+        if(course.days == updated_data.get('days',None)):
+            pass 
+        else:
+            days=int(updated_data.get('days',None))
+            month=days//30
+            day=int(days % 30)
+            months=str(month)+" month "+str(day)+" days" 
+            course.days=updated_data.get('days',None)
+            course.months=months
+        course.audience=updated_data.get('audience',None)
+        if request.FILES.get('video',None):
+            course.video=request.FILES['video']
+        if request.FILES.get('thumbnail',None):
+            course.thumbnail=request.FILES['thumbnail']
+        if course.subCat_id.subCat_id == int(updated_data.get('subCat_id',None)):
+            pass
+        else:
+            sub=SubCategory.objects.get(subCat_id=int(updated_data.get('subCat_id',None)))
+            course.subCat_id=sub
+        course.save()
+        return JsonResponse({"name":course.title})
 
+
+
+    else:
+        id=request.GET.get('id',None)
+        course=Course.objects.get(Cid=int(id))
+        serialized_object = serializers.serialize('python', [course,])
+        return JsonResponse(serialized_object,safe=False)
 
 
             

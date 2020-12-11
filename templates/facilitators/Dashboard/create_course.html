@@ -286,11 +286,11 @@ Create Courses
                             <div id="updtcrs" class="tab-pane fade in " role="tabpanel" aria-labelledby="updtcrs-tab">
                                 <!-- <h1>Hello world</h1> -->
                                 <div class="mt-3" >
-                                <form action="" method="post">
+                                <form action="" id="UpdateCourse" method="post">
                                     {% csrf_token %}
                                     <div class="form-group ">
                                         <label for="inputState">Courses</label>
-                                        <select id="select_course" class="form-control" required>
+                                        <select id="select_course"  class="form-control" required>
                                           <option value="empty">Choose...</option>
                                           {% for course in courses %}
                                           <option value="{{course.Cid}}">{{course.title}}</option>
@@ -361,7 +361,7 @@ Create Courses
                                                 <p>Please enter the necessary information and proceed forward for content creation. </p>
                                         </div>
                                         <div style="max-width: 500px;">
-                                            <select  id="course" class="form-control">
+                                            <select  id="UpdateCourseSelect" class="form-control">
                                                 <option value="empty">Select</option>
                                                 {% for course in courses %}
                                                 <option value="{{course.Cid}}">{{course.title}}</option>
@@ -370,29 +370,51 @@ Create Courses
                                         </div>
                                        
                                         <form action="" id="updatecourseForm" method="post" class="mt-5">
+                                            {% csrf_token %}
                                             <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                  <label for="inputEmail4">Code</label>
-                                                  <input type="text" name="code"class="form-control" id="id_ccode" placeholder="code">
-                                                </div>
+                                                
                                                 <div class="form-group col-md-6">
                                                   <label for="inputPassword4">Title</label>
-                                                  <input type="text" name="ctitle"class="form-control" id="id_ctitle" placeholder="Title">
+                                                  <input type="text" name="ctitle"class="form-control" id="update_title" placeholder="Title" required>
                                                 </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="inputEmail4">Price</label>
+                                                    <input type="number" name="update_price"class="form-control" id="update_price" placeholder="Price" required>
+                                                  </div>
                                               </div>
                                               <div class="form-group">
                                                 <label for="inputAddress">Description</label>
-                                                <input type="text" class="form-control" id="id_cdescription" name="cdescription"placeholder="Description">
+                                                <input type="text" class="form-control" id="update_description" name="update_description"placeholder="Description" required>
                                               </div>
-                                              
                                               <div class="form-row">
-                                                <!-- <div class="form-group col-md-6">
-                                                  <label for="inputCity">City</label>
-                                                  <input type="text" class="form-control" id="inputCity">
-                                                </div> -->
+                                               
+                                                <div class="form-group col-md-6">
+                                                  <label for="inputState">Course Level</label>
+                                                  <select id="update_level" class="form-control" required>
+                                                        <option value="Beginner">Beginner</option>
+                                                        <option value="Intermediate">Intermediate</option>
+
+                                                        <option value="Advance">Advance</option>
+
+                                                  </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="inputState">Course Level</label>
+                                                    <select id="update_language" class="form-control" required>
+                                                          <option value="Hindi">Hindi</option>
+                                                          <option value="English">English</option>
+                                                          <option value="English and Hindi">Hindi and English</option>
+
+
+                                                    </select>
+                                                  </div>
+                                               
+                                              </div>
+                                              <div class="form-row">
+                                               
                                                 <div class="form-group col-md-6">
                                                   <label for="inputState">Target Audience</label>
-                                                  <select id="id_caudience" class="form-control">
+                                                  <select id="update_audience" class="form-control" required>
                                                     {% for obj in audience_list %}
                                                                 <option value="{{obj.audience}}">{{obj.audience}}</option>
                                                                 {% endfor %}      
@@ -400,7 +422,7 @@ Create Courses
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label >Duration</label>
-                                                    <input type="text" name="cdays"class="form-control" placeholder="days" id="id_cdays">
+                                                    <input type="text" name="cdays"class="form-control" placeholder="days" id="update_days">
                                                 </div>
                                               </div>
                                               <div class="form-row">
@@ -409,7 +431,7 @@ Create Courses
                                                 margin-bottom: auto;
                                             ">
                                               
-                                                <select class="selectpicker " title="Choose Your Course" name="course" id="id_ccategory" multiple style="width: 100%;">
+                                                <select class="selectpicker " title="Choose Your Course" name="course" id="update_subcategory" multiple style="width: 100%;">
 
                                                     {% for cat in category %}
                                                     <optgroup label="{{cat.name}}">
@@ -425,18 +447,18 @@ Create Courses
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="exampleFormControlFile1">Course preview(limit 2 MB)</label>
-                                                    <input type="file" name="cvideo"class="form-control-file" id="id_cvideo">
+                                                    <input type="file" name="cvideo"class="form-control-file" id="update_video" >
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="exampleFormControlFile1">Course Image(limit 2 MB)</label>
-                                                    <input type="file" class="form-control-file" id="id_cthumbnail" name="thumbailup">
+                                                    <input type="file" class="form-control-file" id="update_thumbnail" name="thumbailup">
                                                 </div>
                                             </div>
                                                <div class="form-group">
                                                             <label for="exampleFormControlTextarea1">Skills covered</label>
-                                                            <textarea class="form-control" name="takaway" id="id_ctakeaway" rows="3"></textarea>
+                                                            <textarea class="form-control" name="takaway" id="update_takeaway" rows="3"></textarea>
                                                 </div>
-                                              <button type="submit" id="course_create" class="btn btn-primary">Submit</button>
+                                              <button type="submit" id="course_update_btn" class="btn btn-primary">Submit</button>
 
                                         </form>
                                     </div>
@@ -489,10 +511,105 @@ Create Courses
 {% endblock content %}
 
 {% block javascript %}
+
+<script>
+     $("#UpdateCourseSelect").change(function () {
+            var selectedText = $(this).find("option:selected").text();
+            var id = $(this).val();
+
+
+            $.ajax({
+    url: "{% url 'update_course' %}?id="+id,
+    async: false,
+    contentType: false,
+    processData: false,
+    type: 'GET',
+    cache: false,
+    
+    error: function(xhr, status, error) {
+        alert(error);
+    },
+    success: function(response) {
+        var course=response[0].fields
+        console.log(course)
+        $("#update_price").val(course['price']);
+        $("#update_title").val(course['title']);
+        $("#update_description").val(course['description']);
+        $("#update_days").val(course['days']);
+        $("#update_audience").val(course['audience']);
+        $("#update_subcategory").val(course['subCat_id']);
+        $("#update_level").val(course['level']);
+        $("#update_language").val(course['language']);
+        $("#update_takeaway").val(course['takeaway']);
+
+
+
+
+
+
+
+
+        
+                
+            
+    }
+});
+
+
+        });
+
+
+
+$("#updatecourseForm").submit(function (event) {
+    event.preventDefault();
+    var id = $("#UpdateCourseSelect").val();
+
+    var formData = new FormData();
+  formData.append('video',$('#update_video').get(0).files[0])
+  formData.append('price',$("#update_price").val())
+  formData.append('Cid',id)
+  formData.append('price',$("#update_price").val())
+  formData.append('title',$("#update_title").val())
+  formData.append('description',$("#update_description").val())
+  formData.append('days',$("#update_days").val())
+  formData.append('audience',$("#update_audience").val())
+  formData.append('subCat_id',$("#update_subcategory").val())
+  formData.append('level',$("#update_level").val())
+  formData.append('language',$("#update_language").val())
+  formData.append('takeaway',$("#update_takeaway").val())
+  formData.append('thumbnail',$('#update_thumbnail').get(0).files[0])
+
+ $.ajax({
+    url: "{% url 'update_course' %}",
+    async: false,
+    headers: {
+                        "X-CSRFTOKEN": "{{ csrf_token }}"
+                },
+    contentType: false,
+    processData: false,
+    data:formData,
+    type: 'POST',
+    cache: false,
+    
+    error: function(xhr, status, error) {
+        alert(error);
+    },
+    success: function(response) {
+                
+        swal("Done!", response.name+" is Updated Successfully ", "success").then(function(){
+            window.location.reload()
+        });
+ 
+    }
+});
+
+
+        });      
+</script>
 <script>
 $(document).ready(function(){
     $('#updatecourseForm').hide();
-    $('#course').change(function(){
+    $('#UpdateCourseSelect').change(function(){
         
         if($(this).val()!='empty'){
             $('#updatecourseForm').show();

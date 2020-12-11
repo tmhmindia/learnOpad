@@ -97,7 +97,7 @@ My Earnings|Facilitator
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class=" h5 text-center font-weight-bold text-primary  text-uppercase mb-1">INR1,590.02</div>
+                                            <div class=" h5 text-center font-weight-bold text-primary  text-uppercase mb-1">INR {{request.user.user.facilitator.get_facilitator_monthly_revenue}}</div>
                                             <div class="h5 mb-0 text-center font-weight-bold text-gray-800">Earning This Month</div>
                                         </div>
 
@@ -112,7 +112,7 @@ My Earnings|Facilitator
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class=" h5 text-center font-weight-bold text-success  text-uppercase mb-1">INR1,590.02</div>
+                                            <div class=" h5 text-center font-weight-bold text-success  text-uppercase mb-1">INR {{request.user.user.facilitator.get_facilitator_total_revenue}}</div>
                                             <div class="h5 mb-0 text-center font-weight-bold text-gray-800">Total Earnings</div>
                                         </div>
 
