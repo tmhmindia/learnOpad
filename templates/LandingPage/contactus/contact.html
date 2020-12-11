@@ -176,8 +176,7 @@ Contact Us
     <ul class="messages">
             {% for message in messages %}
             <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><script>
-                    alert('{{ message }}');
-                </script></li>
+            swal("Thank You !","{{message}}","success");                </script></li>
             {% endfor %}
     </ul>
     {% endif %}             

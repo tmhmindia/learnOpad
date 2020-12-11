@@ -24,13 +24,12 @@ def create_order(request):
         data={}
         data["name"]=request.user.first_name+" "+request.user.last_name
         data["email"]=request.user.email
-        data['course']=request.POST.getlist('course')
+        # data['course']=request.POST.getlist('course')
         data["plan"]=request.POST.get('plan')
-        course=data['course']
-        catlist=[]
-        for id in course:
-            subcat=SubCategory.objects.get(subCat_id=id)
-            catlist.append(subcat.name)
+        # course=data['course']
+        applicant=Applicants.objects.get(user=request.user)
+        catlist=applicant.intrest.split(',')
+        
         if(data['plan']=='1'):
             data['order_amount']=1
         elif(data['plan']=='2'):
@@ -74,7 +73,7 @@ def create_order(request):
             
             # data that'll be send to the razorpay for
             context['order_id'] = order_id
-            my_order=FacilitatorSubscriptions.objects.create(user=request.user,plan= data['plan'])
+            my_order=FacilitatorSubscriptions.objects.create(user=request.user,plan= str(data['plan']))
             context['my_order_id']=my_order.id
             return render(request, 'payment_gateway/confirm_order.html',context)
             

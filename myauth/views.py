@@ -203,6 +203,8 @@ def ChangePassword(request):
     data = {
             'msg': msg
         }
+    logout(request)
+
     return JsonResponse(data)
 
 

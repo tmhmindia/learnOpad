@@ -163,28 +163,7 @@
            </div>      
 
         
-    <div class="form-group">
-         <div class="form-group">
-                <select class="selectpicker" multiple title="Choose Your Course" name="course" id="choose-category" data-width="100%"data-live-search="true">
-
-                            {% for cat in category %}
-                            <optgroup label="{{cat.name}}">
-                                {% for sub in subcategory %}
-                                {% if sub.cat_id.cat_id == cat.cat_id %}
-                                <option value="{{sub.subCat_id}}">{{sub.name}}</option>
-                                {% endif %}
-                               {% endfor %}
-                            </optgroup>
-                            {% endfor %}
-                           
-                </select>     
-
-                    
-            </div>     
-
-                    
-            </div>
-        
+    
                   
             <div class="form-group">
                 {% if request.user.is_authenticated %}

@@ -76,6 +76,7 @@ class Course(models.Model):
         )
     Level=(
         ('Beginner','Beginner'),
+        ('Intermideate','Intermediate'),
         ('Advanced','Advanced')
     )
     Cid=models.AutoField(primary_key=True)

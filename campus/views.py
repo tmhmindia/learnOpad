@@ -14,6 +14,6 @@ def campus_page(request):
         CorporateCampusToAdminEmail(campus,campus.campus)
         return JsonResponse("success",safe=False)
     else:
-        courses=Course.objects.all()
+        courses=Course.objects.filter(approve=True)
         context={'courses':courses}
     return render(request,'campus/index.html',context)

@@ -212,20 +212,44 @@ Create Courses
                                             </div>
                                         <form action="" id="courseForm"method="post">
                                             <div class="form-row">
-                                                <!-- <div class="form-group col-md-6">
-                                                  <label for="inputEmail4">Code</label>
-                                                  <input type="text" name="code"class="form-control" id="id_ccode" placeholder="code" required>
-                                                </div> -->
+                                               
                                                 <div class="form-group col-md-6">
                                                   <label for="inputPassword4">Title</label>
                                                   <input type="text" name="ctitle"class="form-control" id="id_ctitle" placeholder="Title" required>
                                                 </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="inputEmail4">Price</label>
+                                                    <input type="number" name="price"class="form-control" id="id_cprice" placeholder="Price" required>
+                                                  </div>
                                               </div>
                                               <div class="form-group">
                                                 <label for="inputAddress">Description</label>
                                                 <input type="text" class="form-control" id="id_cdescription" name="cdescription"placeholder="Description" required>
                                               </div>
-                                              
+                                              <div class="form-row">
+                                               
+                                                <div class="form-group col-md-6">
+                                                  <label for="inputState">Course Level</label>
+                                                  <select id="id_clevel" class="form-control" required>
+                                                    <option value="Beginner">Beginner</option>
+                                                    <option value="Intermideate">Intermediate</option>
+
+                                                    <option value="Advanced">Advanced</option>
+
+                                                  </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="inputState">Course Level</label>
+                                                    <select id="id_clanguage" class="form-control" required>
+                                                          <option value="Hindi">Hindi</option>
+                                                          <option value="English">English</option>
+                                                          <option value="English and Hindi">Hindi and English</option>
+
+
+                                                    </select>
+                                                  </div>
+                                               
+                                              </div>
                                               <div class="form-row">
                                                 <!-- <div class="form-group col-md-6">
                                                   <label for="inputCity">City</label>
@@ -241,7 +265,7 @@ Create Courses
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label >Duration</label>
-                                                    <input type="text" name="cdays"class="form-control" placeholder="days" id="id_cdays" required>
+                                                    <input type="number" name="cdays"class="form-control" placeholder="days" id="id_cdays" required>
                                                 </div>
                                               </div>
                                               <div class="form-row">
@@ -392,9 +416,9 @@ Create Courses
                                                   <label for="inputState">Course Level</label>
                                                   <select id="update_level" class="form-control" required>
                                                         <option value="Beginner">Beginner</option>
-                                                        <option value="Intermediate">Intermediate</option>
+                                                        <option value="Intermideate">Intermediate</option>
 
-                                                        <option value="Advance">Advance</option>
+                                                        <option value="Advanced">Advanced</option>
 
                                                   </select>
                                                 </div>
@@ -762,7 +786,11 @@ $.ajax({
        "description":$('#id_cdescription').val(),
        "audience":$('#id_caudience').val(),
        "takeway":$('#id_ctakeway').val(),
-        "days":$('#cdays').val()
+        "days":$('#cdays').val(),
+        "level":$('#id_clevel').val(),
+        "language":$('#id_clanguage').val(),
+        "price":$('#id_cprice').val()
+
  
    };
    
