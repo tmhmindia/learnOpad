@@ -91,8 +91,11 @@ def payment_status(request,order_id):
     order.status=True
     order.save()
     order_c=order.order_course.all()
-    learner=Learners.objects.create(name=order.customer.first_name+" "+order.customer.last_name,user=order.customer)
-    learner.save()
+    try:
+        learner=Learners.objects.get(user=order.customer)
+    except:
+        learner=Learners.objects.create(name=order.customer.first_name+" "+order.customer.last_name,user=order.customer)
+        learner.save()
     for enroll_course in order_c:
         learner.enrolled.add(enroll_course.course)
         learner.save()

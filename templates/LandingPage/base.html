@@ -195,14 +195,16 @@ $(document).ready(function() {
                             <li><a class="dropdown-item dropdown-toggle" href="#"> {{ c.name }} </a>
                                 <ul class="submenu dropdown-menu">
                                     {% for subcat in c.subcategory_set.all %}
-                                    <!-- {% if subcat.course_set.all|length == 0 %}
-                                    <li><a class="dropdown-item" href="#">{{ subcat }}</a></li>
-                                    {% else %} -->
+                                    
                                     <li><a class="dropdown-item dropdown-toggle" href="#">{{ subcat.name }}</a>
-                                    <!-- {% endif %} -->
                                         <ul class="submenu dropdown-menu">
                                             {% for course in subcat.course_set.all %}
+                                            {% if course %}
                                             <li><a class="dropdown-item" href="{% url 'course' course.Cid %}">{{ course.title }}</a></li>
+                                          {% else %}
+                                          <li><a class="dropdown-item" href="#">NO Courses</a></li>
+
+                                            {% endif %}
                                             {% endfor %}
                                         </ul>
                                     </li>

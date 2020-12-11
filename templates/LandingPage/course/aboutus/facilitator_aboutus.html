@@ -4,7 +4,7 @@
 <!--------------------------------- -->
 
 {% block title %}
-Fascilitator details
+Facilitator details
 {% endblock title %}
 <!---------------------------------- -->
 
@@ -123,7 +123,6 @@ Fascilitator details
 										<h3 class="course_title"> <a href='{% url 'course' course.Cid %}' class="stretched-link">{{course.title}}</a></h3>
 										
 										<div class="course_text">
-											<p>{{course.description}}</p>
 										</div>
 									</div>
 									<div class="course_footer">
@@ -134,9 +133,9 @@ Fascilitator details
 											</div>
 											<div class="course_info">
 												<i class="fa fa-star" aria-hidden="true"></i>
-												<span>5 Ratings</span>
+												<span>{{course.no_of_ratings}} Ratings</span>
 											</div>
-											<div class="course_price ml-auto">$130</div>
+											<div class="course_price ml-auto">&#8377 {{course.price}}</div>
 										</div>
 									</div>
 								</div>
