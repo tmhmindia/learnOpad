@@ -94,6 +94,10 @@ def course_orders(request):
     return render(request,'myAdmin/dashboard/course_orders.html') 
 def myprofile(request):
     return render(request,'myAdmin/dashboard/profile.html') 
+def category(request):
+    return render(request,'myAdmin/dashboard/category.html')
+def subcategory(request):
+    return render(request,'myAdmin/dashboard/sub-category.html') 
 
 def staff(request):
     return render(request,'myAdmin/dashboard/manage_staff.html') 

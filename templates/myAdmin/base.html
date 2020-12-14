@@ -186,6 +186,12 @@
                                 <li class="sidebar-item"><a href="{% url 'course_orders' %}" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">   Course orders  </span></a></li>
                             </ul>
                         </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-edit"></i><span class="hide-menu">Manage Categories </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="{% url 'categorymanage'%}" class="sidebar-link"><i class="mdi mdi-account-alert"></i><span class="hide-menu"> Category</span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'subcategory' %}" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">  Sub Category  </span></a></li>
+                            </ul>
+                        </li>
                   </ul>
               </nav>
               <!-- End Sidebar navigation -->
