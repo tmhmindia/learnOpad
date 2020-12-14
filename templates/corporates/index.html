@@ -150,7 +150,14 @@
             box-shadow: 5px 10px 8px #888888;
         }
         
-        @media only screen and (max-width: 480px) {}
+        @media only screen and (max-width: 410px) {
+            .list_tab li{
+                font-size: 14px;
+            }
+            .list_tab li a{ 
+                padding: 10px!important;
+            }
+        }
     </style>
 {% endblock stylesheet %}
 <!-------------------------------- -->
@@ -214,22 +221,22 @@
                     <br>
 
                     <div class="row">
-                        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4images">
+                        <div class="col-lg-2 col-md-4 col-sm-4 col-4 images">
                             <img src="{% static 'corporates/images/company-logo1.jpg' %}">
                         </div>
-                        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 images">
+                        <div class="col-lg-2 col-md-4 col-sm-4 col-4 images">
                             <img src="{% static 'corporates/images/company-logo2.jpg' %}">
                         </div>
-                        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4images">
+                        <div class="col-lg-2 col-md-4 col-sm-4 col-4 images">
                             <img src="{% static 'corporates/images/company-logo3.jpg' %}">
                         </div>
-                        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4images">
+                        <div class="col-lg-2 col-md-4 col-sm-4 col-4 images">
                             <img src="{% static 'LandingPage/images/company-logo4.png' %}">
                         </div>
-                        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 images">
+                        <div class="col-lg-2 col-md-4 col-sm-4 col-4 images">
                             <img src="{% static 'corporates/images/company-logo3.jpg' %}">
                         </div>
-                        <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 images">
+                        <div class="col-lg-2 col-md-4 col-sm-4 col-4 images">
                             <img src="{% static 'LandingPage/images/company-logo4.png' %}">
                         </div>
                     </div>
@@ -240,7 +247,7 @@
         <div class="container  mb-5 ">
             <div class="row">
                 <div class="col-md-7 pt-5 col-12">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <ul class="nav nav-tabs list_tab" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="course-tab" data-toggle="tab" href="#course" role="tab" aria-controls="course" aria-selected="false">Course Features</a>
                           </li>
@@ -313,7 +320,8 @@
                 </div>
             </div>
         </div>
-            <div class="row justify-content-center justify-content-around my-center-row " style="background-color:rgb(64, 65, 68);color: #b0d2e6; ">
+        <div class="container-fluid">
+            <div class="row no-gutters justify-content-center justify-content-around my-center-row " style="background-color:rgb(64, 65, 68);color: #b0d2e6; ">
                 <div class="col-lg-6 col-md-4 col-sm-6 col-xs-8 my-center-col1 ">
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-6 my-center-col1-2 " style="font-size:1.5rem;color: #fff; ">
                         <br> Get your employee’s world-class training with us:
@@ -343,6 +351,8 @@
                     </ul>
                 </div>
             </div>
+        </div>
+            
             <br><br>
 
             <!-- content ends  -->

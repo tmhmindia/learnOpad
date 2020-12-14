@@ -223,11 +223,15 @@ a:hover{
             padding: 0;
 
         }
-        .card-body{
+        .land_co .card-body{
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             padding: 10px ;
+        }
+        .alumuni_card .item{
+            text-align: center;
+            justify-content: center;
         }
         #navbar-left{
             display: block;
@@ -371,6 +375,26 @@ a:hover{
 }
 .cor_slider{
     padding:0 100px;
+}
+.facil_card{
+    max-width: 500px;
+    margin: 0 auto;
+}
+.facil_card .item{
+    background:transparent;
+}
+.facil_card   .owl-dots .owl-dot {
+    width: 10px;
+    height: 10px;
+    margin: 5px;
+    border-radius: 50%;
+    background:rgb(0 0 0 / 52%);
+}
+ .facil_card .owl-dots .owl-dot.active{
+    background-color: blue;
+}
+.cor_slider .nav-link{
+    text-transform: uppercase;
 }
     </style>
     {% endblock stylesheet %}
@@ -725,16 +749,62 @@ a:hover{
         <div class="container-fluid" style="background-color:  #eeeeee; max-height: 80%;">
             <div class="container1">
                 <br>
-                <h1 class="text-center " style="color: #bdbdbd;font-size:2.5em;"><strong>Our Industry Partners</strong></h1>
-                <center>
+                <h1 class="text-center " style="color: #bdbdbd;font-size:2.5em;"><strong>Our Facilitators</strong></h1>
+                
                 <div style="max-width: 100%">
                     <p class="text-center text-justify mt-2" style="font-size: 1.2rem; color: black;">Our facilitators are industry experts in their respective category excited to share their experience,wisdom and
                         experienced tool with you. </p>
                     <hr style="background-color:#00ff2be0;height:2px;width:60px;">
                 </div>
-                <figure class="figure">
-                    <img src="{% static 'LandingPage/img/coming2.png' %}" class="figure-img img-fluid rounded" alt="">
-                </figure>
+
+                <div class="facil_card text-center  owl-carousel  ftco-owl text-center">
+                    <div class="item d-flex justify-content-center">
+                        <div class=" facil_det pt-3 ">
+                            <div class="text-center">
+                            <img class="card-img-top circle " src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                            </div>
+                                
+                            <!-- background-color:gainsboro -->
+                            <div class="card-body" >
+                                <h5 class="card-title" style="color:red;" >Kamal Pabba</h5>
+                                <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, vel architecto? Ipsam similique voluptatum dolor aut atque iusto id nobis reprehenderit, temporibus maxime? Deleniti ratione eveniet illo in vel laudantium! </p>
+                                <p>Company</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="item d-flex justify-content-center">
+                        <div class=" facil_det pt-3 ">
+                            <div class="text-center">
+                            <img class="card-img-top circle " src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                            </div>
+                                
+                            <!-- background-color:gainsboro -->
+                            <div class="card-body" >
+                                <h5 class="card-title" style="color:red;" >Vijay Gwala</h5>
+                                <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, vel architecto? Ipsam similique voluptatum dolor aut atque iusto id nobis reprehenderit, temporibus maxime? Deleniti ratione eveniet illo in vel laudantium! </p>
+                                <p>Company</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="item d-flex justify-content-center">
+                        <div class=" facil_det pt-3 ">
+                            <div class="text-center">
+                            <img class="card-img-top circle " src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                            </div>
+                                
+                            <!-- background-color:gainsboro -->
+                            <div class="card-body" >
+                                <h5 class="card-title" style="color:red;" >Nazia </h5>
+                                <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, vel architecto? Ipsam similique voluptatum dolor aut atque iusto id nobis reprehenderit, temporibus maxime? Deleniti ratione eveniet illo in vel laudantium! </p>
+                                <p>Company</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </div>
         
@@ -856,10 +926,38 @@ a:hover{
                         items: 1
                     },
                     768:{
-                        items: 2
+                        items: 1
                     },
                     1000:{
                         items: 2
+                    }
+                    }
+                    
+            });
+            $('.facil_card').owlCarousel({
+                    autoplay: true,
+                    autoHeight: true,
+                    // items:1,
+                    loop:true,
+                    margin: 30,
+                    stagePadding: 0,
+                    autoplayHoverPause:true,
+                    nav: true,
+                    dots: true,
+                    autoplay:3000,
+                    navText: ['<span class="ion-ios-arrow-back">', '<span class="ion-ios-arrow-forward">'],
+                    responsive:{
+                    0:{
+                        items: 1
+                    },
+                    600:{
+                        items: 1
+                    },
+                    768:{
+                        items: 1
+                    },
+                    1000:{
+                        items: 1
                     }
                     }
                     
