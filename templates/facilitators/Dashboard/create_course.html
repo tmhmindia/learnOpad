@@ -198,7 +198,7 @@ Create Courses
                     <div class="container-fluid " >
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class=" nav-item active"><a class="nav-link active" href="#createcourse" data-toggle="tab" role="tab" aria-controls="createcourse" aria-selected="true">Create course</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#updtcrs" data-toggle="tab" role="tab" aria-controls="updtcrs" aria-selected="false">Update/Delete course Video</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#updtcrs" data-toggle="tab" role="tab" aria-controls="updtcrs" aria-selected="false">Update/Delete Videos</a></li>
                             <li class=" nav-item "><a class="nav-link " href="#updatecourse" data-toggle="tab" role="tab" aria-controls="updatecourse" aria-selected="false">Update course</a></li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
@@ -316,7 +316,7 @@ Create Courses
                                         <label for="inputState">Courses</label>
                                         <select id="select_course"  class="form-control" required>
                                           <option value="empty">Choose...</option>
-                                          {% for course in courses %}
+                                          {% for course in request.user.user.facilitator.offering.all %}
                                           <option value="{{course.Cid}}">{{course.title}}</option>
                                           {% endfor %}
                                         </select>
@@ -357,11 +357,11 @@ Create Courses
                                             </div>
                                         </div>
                                             <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="online" value="online" required>
+                                            <input class="form-check-input" type="checkbox" id="online" value="online" >
                                             <label class="form-check-label" for="inlineCheckbox1">Course Video</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="live" value="live" required>
+                                            <input class="form-check-input" type="checkbox" id="live" value="live" >
                                             <label class="form-check-label" for="inlineCheckbox2">Live Video</label>
                                         </div>
                                         <div class="form-group mt-3">
@@ -387,7 +387,7 @@ Create Courses
                                         <div style="max-width: 500px;">
                                             <select  id="UpdateCourseSelect" class="form-control">
                                                 <option value="empty">Select</option>
-                                                {% for course in courses %}
+                                                {% for course in request.user.user.facilitator.offering.all %}
                                                 <option value="{{course.Cid}}">{{course.title}}</option>
                                                 {% endfor %}
                                             </select>
@@ -758,10 +758,7 @@ $.ajax({
     success: function(response) {
         
     swal("Done!", "Video is Updated Successfully ", "success");
-      setTimeout(function(){
-            window.location.href = '{% url "createcourse" %}';
-         }, 5000); 
-                
+     
             
     }
 });

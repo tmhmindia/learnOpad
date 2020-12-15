@@ -172,7 +172,7 @@
                                <!-- Body -->
                                <div class="card-body">
                                 <!-- Form -->
-                                <form id="changePassword" action="" >
+                                <form id="changePassword" method="POST"action="" >
                                    
                                     <!-- <div class="row form-group">
                                         <label for="currentPasswordLabel" class="col-sm-3 col-form-label input-label">Current password</label>
@@ -352,6 +352,7 @@
                       if (newPassword===confirmNewPassword) {
                               $.ajax({
                                   url: '{% url "changePassword" %}',
+                                  type:'POST',
                                   data: {
                                       'currentPassword': currentPassword,
                                       'newPassword': newPassword,

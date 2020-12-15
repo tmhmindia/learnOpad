@@ -44,12 +44,13 @@ class CreateCourseApi(APIView):
         subcat= subcategory_detail[0]
         subcategory_obj=SubCategory.objects.get(name=subcat)
         # calculate the duration in month + days
-        days=int(course_detail.get('days','50'))
+        days=int(course_detail.pop('days'))
         month=days//30
         day=int(days % 30)
         months=str(month)+" month "+str(day)+" days"
+
         #collect all the details in one dictionry "course_detail"
-        
+        course_detail['days']=days
         course_detail['months']=months
         course_detail['video']=cvideo
         course_detail['thumbnail']=cthumbnail

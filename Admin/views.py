@@ -95,6 +95,7 @@ def course_orders(request):
     orders=OrderCourses.objects.all()
     revenues=Revenue.objects.all()
     return render(request,'myAdmin/dashboard/course_orders.html',{'orders':orders,'revenues':revenues}) 
+
 def myprofile(request):
     if request.method == 'POST':
         staff=Staff.objects.get(user__email=request.POST.get('email',None))

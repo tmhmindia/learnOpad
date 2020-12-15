@@ -25,7 +25,7 @@ def learner_page(request):
 
 #learners dashboard certificate page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def certicate(request):
     enrolled_courses=enrollment.objects.filter(Lid=Learners.objects.get(user=request.user).Lid)
     completed=[]
@@ -51,13 +51,13 @@ def certicate(request):
     
 #learners dashboard talk to expert page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def chat(request):
     return render(request,'learners/dashboard/chat1.html')
 
 #learners dashboard Landing Page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners','Admins','Facilitator'])
+@allowed_Learners_Dashboard()
 def index(request):
     enrolled_courses=enrollment.objects.filter(Lid=Learners.objects.get(user=request.user).Lid)
     ongoing=[]
@@ -95,19 +95,19 @@ def index(request):
 
 #learners dashboard internship page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def internships(request):
     return render(request,'learners/dashboard/internships.html')
 
 #learners dashboard liveclasses page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def liveclasses(request):
     return render(request,'learners/dashboard/liveclasses.html')
 
 #learners dashboard certificate page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def profile(request):
     if request.method == 'GET':
         ourdata = Learners.objects.get(user=request.user)
@@ -139,14 +139,14 @@ def profile(request):
 
 #learners dashboard Account setting page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def learner_settings(request):
     return render(request,'learners/dashboard/settings.html')
 
 
 #learners dashboard support section page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def support(request):
     learner=Learners.objects.get(user=request.user)
     if request.method=='POST':
@@ -159,7 +159,7 @@ def support(request):
     return render(request,'learners/dashboard/Support.html',context)
 #learners dashboard talk to expert page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def tte(request):
     return render(request,'learners/dashboard/tte.html')
 
