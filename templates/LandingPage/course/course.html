@@ -660,8 +660,23 @@ function getToken(name) {
                                     <div class="card-body" style="margin-bottom:-30px">
                                         <h5 class="card-title">&#8377; {{course.price}} <span style="text-decoration-line: line-through;font-size: 15px;" class="text-muted">&#8377; {{course.getOfferPrice}} </span><span style="font-size: 15px;">  25% Off </span> </h5>
                                     </div>
+                                    {% if request.user|has_group:"Learners"%}
+                                    {% if course in request.user.learner.enrolled.all %}
+                                    <div class="card-title" style="margin-left: 20px;margin-top: 10px">
+                                        <span>Enrolled</span>
+                                    </div>
+                                    {% else %}
                                     <button data-product="{{course.Cid}}" data-action="add" class="btn btn-primary update-cart" style="margin: 10px;">Buy Now</button>
                                     <button data-product="{{course.Cid}}" data-action="add" class="btn btn-outline-primary update-cart" style="margin: 10px">Add to cart</button>
+                                   
+                                    {% endif %}
+                                    {% else %}
+                                    <button data-product="{{course.Cid}}" data-action="add" class="btn btn-primary update-cart" style="margin: 10px;">Buy Now</button>
+                                    <button data-product="{{course.Cid}}" data-action="add" class="btn btn-outline-primary update-cart" style="margin: 10px">Add to cart</button>
+                                   
+                                    {% endif %}
+
+                                   
                                     <div class="card-title" style="margin-left: 20px;margin-top: 10px">
                                         <h5>Course Feature</h5>
                                     </div>

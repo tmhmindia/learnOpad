@@ -63,25 +63,17 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Course Name</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Actions</th>
+                                        <th scope="col">Enrolled</th>
+                                        <th scope="col">End Enrollment</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% for course in learner.GetCourses %}
                                     <tr>
                                         <td>{{course.Cid.title}}</td>
-                                        <td class="text-success">Progress</td>
+                                        <td class="text-success">{{course.addedenroll.date}}</td>
                                         <td>
-                                            <div class="d-flex no-block align-items-center">
-                                                <span>81% </span>
-                                                <div class="ml-auto">
-                                                    <span>length</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar  bg-success" role="progressbar" style="width: 81%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
+                                           {{course.getEndEnrollmentDate}}
                                         </td>
                                     </tr>
                                     {% endfor %}
@@ -180,19 +172,15 @@
         function DeleteUser(id)
         {
             swal({
-    title: "Are you sure?",
-    text: "You will not be able to recover this Learner Data!",
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#DD6B55",
-    confirmButtonText: "Yes, delete it!",
-    cancelButtonText: "No, cancel plz!",
-    closeOnConfirm: false,
-    closeOnCancel: false
-  },
-    function (isConfirm) {
-      if (isConfirm) {
-        $.ajax({
+  title: "Are you sure?",
+  text: "You will not be able to recover this Learner Data!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    $.ajax({
           type: 'POST',
           url: '{% url "delete_user" %}',
           headers: {
@@ -200,19 +188,21 @@
                },
           data: {id : id},
           success: function (data) {
-            swal("Deleted!", "Your Learner  has been deleted.", "success");
+            swal("Deleted!", "Your course  has been deleted.","success").then(function(){
+                window.location.reload()
+            });
           },
           error: function (data) {
             swal("NOT Deleted!", "Something blew up.", "error");
           }
         });
-      } else {
-        swal("Cancelled", "Your Learner is safe :)", "success");
-      }
-    });
 
-  return false;
+  } else {
+    swal("Done !", "Your Data is Safe", "success");
 
+
+  }
+});
 
         }
     </script>

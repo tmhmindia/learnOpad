@@ -112,11 +112,11 @@ class user_login(View):
                         return redirect('/create_order')
                     if user.groups.filter(name='Facilitators').exists():
                         return HttpResponseRedirect(reverse('dashboard'))
-                    elif user.groups.filter(name='Learners').exists():
+                    if user.groups.filter(name='Learners').exists():
                         return HttpResponseRedirect(reverse('learner_index'))
-                    elif user.groups.filter(name='Admins').exists() or user.groups.filter(name='Admins').exists():
+                    if user.groups.filter(name='Admins').exists() or user.groups.filter(name='Staff').exists():
                         return HttpResponseRedirect(reverse('dashboard_admin'))
-                    else:
+                    if user.groups.filter(name='Visiters').exists():
                         return HttpResponseRedirect(reverse('home')) 
                         
                 else:

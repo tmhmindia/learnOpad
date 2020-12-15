@@ -89,7 +89,8 @@ Index
                                         <div class="progress-bar bg-success" role="progressbar" style="width: {{ perc }}%"
                                             aria-valuenow="{{perc}}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <a href="#" class="btn btn-primary" style="color: white;">Go to Course</a>
+                                    
+                                    <a href="{% url 'VideoPage' %}?Cid={{course.Cid}}" class="btn btn-primary" style="color: white;">Go to Course</a>
                                 </div>
                             </div>
                             {% endfor %}

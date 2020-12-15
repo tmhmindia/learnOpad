@@ -1,6 +1,7 @@
 {% extends 'LandingPage/base.html' %}
 {% load rest_framework %}
 {% load static %}
+{% load has_group %}
 
 <!--------------------------------------- -->    
     {% block title %}
@@ -437,6 +438,8 @@ a:hover{
                         
                         <div class="owl-carousel land_co ftco-owl"  id="owl-{{c.cat_id}}">
                             {% for course in c.course_set.all %}
+                            {% if request.user|has_group:"Learners"%}
+                            {% if course in request.user.learner.enrolled.all %}
                                 <div class="item">
                 
                                         <a class=" course-card"  href="#">
@@ -459,7 +462,7 @@ a:hover{
                                                 <div class="card-footer">
                                                     <div class="course_info">
                                                         
-                                                        <p>{{course.level}} </p>
+                                                        <p> Enrolled </p>
                                                     </div>
                                                     <div class="course_price "><span style="text-decoration-line: line-through;font-size: 15px;" class="text-muted">&#8377; {{course.getOfferPrice}} </span><span style="font-size: 20px;"> &#8377;  {{course.price}}  </span> </div>
                                                 </div>
@@ -467,6 +470,70 @@ a:hover{
                                         </a>
                                     
                                 </div>
+                                {% else %}
+                                <div class="item">
+                
+                                    <a class=" course-card"  href="#">
+                                        <div class="card border">
+                                            <img class="card-img-top" src="{{course.thumbnail.url}}" alt="Card image cap" height="150px">
+                                           
+                                                
+                                            <!-- background-color:gainsboro -->
+                                            <div class="card-body" >
+                                                <h5 class="card-title" style="color:#4e73df;" >{{course.title}}</h5>
+                                                <div class="p-3" style="display: flex;justify-content: space-between; ">
+                                                <span><i class="fa fa-star" aria-hidden="true"></i>{{course.no_of_ratings}} </span>
+                                                <div class="course_info">
+                                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                    <span>{{course.days}}</span>
+                                                </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="course_info">
+                                                    
+                                                    <p>{{course.level}} </p>
+                                                </div>
+                                                <div class="course_price "><span style="text-decoration-line: line-through;font-size: 15px;" class="text-muted">&#8377; {{course.getOfferPrice}} </span><span style="font-size: 20px;"> &#8377;  {{course.price}}  </span> </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                
+                            </div>
+                                {% endif %}
+                                {% else %}
+                                <div class="item">
+                
+                                    <a class=" course-card"  href="#">
+                                        <div class="card border">
+                                            <img class="card-img-top" src="{{course.thumbnail.url}}" alt="Card image cap" height="150px">
+                                           
+                                                
+                                            <!-- background-color:gainsboro -->
+                                            <div class="card-body" >
+                                                <h5 class="card-title" style="color:#4e73df;" >{{course.title}}</h5>
+                                                <div class="p-3" style="display: flex;justify-content: space-between; ">
+                                                <span><i class="fa fa-star" aria-hidden="true"></i>{{course.no_of_ratings}} </span>
+                                                <div class="course_info">
+                                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                    <span>{{course.days}}</span>
+                                                </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="course_info">
+                                                    
+                                                    <p>{{course.level}} </p>
+                                                </div>
+                                                <div class="course_price "><span style="text-decoration-line: line-through;font-size: 15px;" class="text-muted">&#8377; {{course.getOfferPrice}} </span><span style="font-size: 20px;"> &#8377;  {{course.price}}  </span> </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                
+                            </div>
+                            {% endif %}
                                {% endfor %}
                         </div>
                     <script>
@@ -754,7 +821,7 @@ a:hover{
                         <h2>Request for a free <br> Online Councelling</h2>
                     </div>
                     <div class="col-12" id="query">
-                        <form id="#csform"  method="POST" action="{% url 'councelling' %}"onSubmit="return check_ephone(this)" style="width: 20em">
+                        <form id="#form"  method="POST" action="{% url 'councelling' %}" style="width: 20em">
                             {% csrf_token %}
                                 
                                 <input class="form-control mb-2" name="name"type="text" placeholder="Name*" required>
@@ -765,7 +832,7 @@ a:hover{
                                         <span class="input-group-text" id="basic-addon1">+91</span>
                                     </div>
                                     
-                                <input type="tel" class="form-control" name="phone_number" placeholder="PhoneNumber" aria-label="PhoneNumber" aria-describedby="basic-addon1" required>
+                                <input type="number" class="form-control" name="phone_number" placeholder="PhoneNumber" aria-label="PhoneNumber" aria-describedby="basic-addon1" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
@@ -966,25 +1033,25 @@ $(document).ready(function() {
         });
 
 
-        function check_ephone(phno, email){
-            var regex = /^[0-9]{10}$/;
-            var regexe_email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if(regex.test(phno.yourphone.value) && regex_email.test(email.youremail.value)){
-                return true;
-                } else {
-                    if (!(regex.test(phno.yourphone.value)) ) {
-                        alert("This is not a valid phone number");
-                        return false;
-                    }
-                    if (!(regex.test(email.youreamil.value)) ) {
-                        alert("This is not a valid email id");
-                        return false;
-                    }
-                    if (!(regex.test(phno.yourphone.value) && regex_email.test(email.youremail.value)) ) {
-                        alert("This is not a valid phone number and email id");
-                        return false;
-                    }
-            }
-        }
+        // function check_ephone(phno, email){
+        //     var regex = /^[0-9]{10}$/;
+        //     var regexe_email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        //     if(regex.test(phno.yourphone.value) && regex_email.test(email.youremail.value)){
+        //         return true;
+        //         } else {
+        //             if (!(regex.test(phno.yourphone.value)) ) {
+        //                 alert("This is not a valid phone number");
+        //                 return false;
+        //             }
+        //             if (!(regex.test(email.youreamil.value)) ) {
+        //                 alert("This is not a valid email id");
+        //                 return false;
+        //             }
+        //             if (!(regex.test(phno.yourphone.value) && regex_email.test(email.youremail.value)) ) {
+        //                 alert("This is not a valid phone number and email id");
+        //                 return false;
+        //             }
+        //     }
+        // }
     </script>
 {% endblock javascript %}

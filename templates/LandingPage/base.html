@@ -251,12 +251,12 @@ $(document).ready(function() {
                         <a href="/learner/index/"><div class="d-flex"><div><img style="width:30px; height: 30px;"class="img-profile rounded-circle" src="{{request.user.learner.profile.url}}"></div>
                             <div><p class="text-info ml-1" style="margin-top:5px;">{{request.user.learner.name}}</p></div></div></a>
                         {% elif request.user|has_group:"Admins" %}
-                            <a href="{% url 'dashboard_admin'%}"><div class="d-flex"><div><img style="width:30px; height: 30px;"class="img-profile rounded-circle" src=""></div>
+                            <a href="{% url 'dashboard_admin'%}"><div class="d-flex"><div><img style="width:30px; height: 30px;"class="img-profile rounded-circle" src="{{request.user.staff_admin.profile.url}}"></div>
                             <div><p class="text-info ml-1" style="margin-top:5px;">{{request.user.first_name}}</p></div></div></a>
                         
                         {% else  %} 
 
-                        <a href=""><p class="text-info ml-1" style="margin-top:5px;">{{request.user.first_name}}</p></a>
+                        <a href=""><p class="text-info ml-1" style="margin-top:5px;"><i class="fas fa-user"></i> {{request.user.first_name}}</p></a>
                         {% endif %}                    
                     </li>
                     <li class="nav-item">

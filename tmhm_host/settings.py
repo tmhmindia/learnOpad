@@ -34,12 +34,12 @@ SECRET_KEY = '5w^7@844)#j4!=w*8_sd_mr(0!q42n3@3@)gab91r!opc32t^9'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 #production
-DEBUG = False
-ALLOWED_HOSTS = ['www.learnopad.com', 'learnopad.com', '127.0.0.1','139.59.73.78']
+# DEBUG = False
+# ALLOWED_HOSTS = ['www.learnopad.com', 'learnopad.com', '127.0.0.1','139.59.73.78']
 
 #Development
-# DEBUG = True
-# ALLOWED_HOSTS = ['128.199.219.129', '127.0.0.1','139.59.73.78']
+DEBUG = True
+ALLOWED_HOSTS = ['128.199.219.129', '127.0.0.1','139.59.73.78']
 
 # Application definition
 
@@ -149,27 +149,26 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-CHANNEL_LAYERS = {
-    'default': {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        'CONFIG': {
-            'hosts': [('127.0.0.1', 6379)],
-        }
-    }
-}
 # CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels.layers.InMemoryChannelLayer"
-#    }
+#     'default': {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         'CONFIG': {
+#             'hosts': [('127.0.0.1', 6379)],
+#         }
+#     }
 # }
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+   }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
-
+TIME_ZONE = 'Asia/Kolkata'
 USE_I18N = True
 
 USE_L10N = True

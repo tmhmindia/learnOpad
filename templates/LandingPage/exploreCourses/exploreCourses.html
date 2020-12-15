@@ -1,6 +1,6 @@
 {% extends 'LandingPage/base.html' %}
 {% load static %}
-<!---------------------------------- -->
+{% load has_group %}
 
 {% block title %}
 Explore Courses
@@ -411,7 +411,8 @@ Explore Courses
                             {% for crse in page_obj %}
                             {% cycle "<div class='row courses_row'>" "" %}
                                 <!-- Course -->
-                                
+                                {% if request.user|has_group:"Learners"%}
+                                {% if course in request.user.learner.enrolled.all %}
                                 <div class="col-lg-6 course_col">
                                     <div class="course">
                                         <div class="course_image"><img src="{{crse.thumbnail.url}}" /></div>
@@ -430,11 +431,63 @@ Explore Courses
                                                     <i class="fa fa-star" aria-hidden="true"></i>
                                                     <span>{{crse.no_of_ratings}} Ratings</span>
                                                 </div>
-                                                <div class="course_price ml-auto"><span>&#x20B9; 3000</span>&#x20B9; {{crse.price}}</div>
+                                                <div class="course_price ml-auto"><span></span> Enrolled</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                {% else%}
+                                <div class="col-lg-6 course_col">
+                                    <div class="course">
+                                        <div class="course_image"><img src="{{crse.thumbnail.url}}" /></div>
+                                        <div class="course_body">
+                                            <h3 class="course_title"><a href="{% url 'course' crse.Cid %}">{{ crse.title}}</a></h3>
+                                            <div class="course_teacher">{{ crse.offering.all.0.name }}</div>
+                                           
+                                        </div>
+                                        <div class="course_footer">
+                                            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+                                                <div class="course_info">
+                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                    <span>{{ crse.enroll.all | length }} Student</span>
+                                                </div>
+                                                <div class="course_info">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>{{crse.no_of_ratings}} Ratings</span>
+                                                </div>
+                                                <div class="course_price ml-auto"><span>&#x20B9; {{crse.getOfferPrice}}</span>&#x20B9; {{crse.price}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% else %}
+                                <div class="col-lg-6 course_col">
+                                    <div class="course">
+                                        <div class="course_image"><img src="{{crse.thumbnail.url}}" /></div>
+                                        <div class="course_body">
+                                            <h3 class="course_title"><a href="{% url 'course' crse.Cid %}">{{ crse.title}}</a></h3>
+                                            <div class="course_teacher">{{ crse.offering.all.0.name }}</div>
+                                           
+                                        </div>
+                                        <div class="course_footer">
+                                            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+                                                <div class="course_info">
+                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                    <span>{{ crse.enroll.all | length }} Student</span>
+                                                </div>
+                                                <div class="course_info">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>{{crse.no_of_ratings}} Ratings</span>
+                                                </div>
+                                                <div class="course_price ml-auto"><span>&#x20B9; {{crse.getOfferPrice}}</span>&#x20B9; {{crse.price}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                
+            
                                 {% cycle "" "</div>" %}
                                 {% endfor %}
                                 {% else %}

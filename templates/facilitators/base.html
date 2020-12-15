@@ -1,4 +1,6 @@
 {% load static %}
+{% load has_group %}
+
 <!doctype html>
 <html>
   <head>
@@ -125,7 +127,22 @@
                   <span class="menu-title">Support</span>
                 </a>
               </li>
-            
+              {% if request.user|has_group:"Admins" or request.user|has_group:"Staff" %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'dashboard_admin'%}">
+                    <i class="fa fa-heart "></i>
+                  <span class="menu-title">Switch to Admin</span>
+                </a>
+              </li>
+            {% endif %}
+            {% if request.user|has_group:"Learners" %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'learner_index'%}">
+                  <i class="fa fa-heart "></i>
+                <span class="menu-title">Switch to Learner</span>
+              </a>
+            </li>
+          {% endif %}
           </ul>
         </nav>
         <!-- partial -->

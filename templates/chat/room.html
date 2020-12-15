@@ -131,7 +131,6 @@
         </div>
         <div class="modal-body">
         <input id="file" class="form-control-file" type="file">
-        <input id="chat-text-input" type="text" placeholder="Write your message..." />
 
         <button id="chat-file-submit" class="submit"> <i class="fa fa-paper-plane" aria-hidden="true"></i>
         </button>
@@ -164,7 +163,7 @@ $(this).addClass("active").siblings().removeClass("active")
     var filename='';
 
     var chatSocket = new ReconnectingWebSocket(
-        'wss://' + window.location.host +
+        'ws://' + window.location.host +
         '/ws/chat/' + roomName + '/');
 
 
@@ -300,7 +299,7 @@ document.querySelector('#chat-file-submit').onclick = function(e) {
       var aTag = document.createElement('a');
       var imganchor= document.createElement('a');
       blobTag.classList.add('attImg');
-      imgTag.src = 'http://emilcarlsson.se/assets/mikeross.png';
+      imgTag.src = data.profile_url;
       msgListTag.appendChild(imgTag);
       msgListTag.appendChild(divp);
       filename=''

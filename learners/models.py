@@ -3,7 +3,7 @@ from myauth.models import *
 from facilitators.models import *
 from LandingPage.models import *
 from django.utils import timezone
-
+from datetime import  timedelta
 # Create your models here.
 class Learners(models.Model):
     Lid=models.AutoField(primary_key=True)
@@ -45,6 +45,8 @@ class enrollment(models.Model):
 
     def __str__(self):
         return self.Lid.name
+    def getEndEnrollmentDate(self):
+        return self.addedenroll.date() + timedelta(days=int(self.Cid.days))
 
 class LQueries(models.Model):
     STATUS=(('Resolved','Resolved'),('Doubt','Doubt'))

@@ -16,7 +16,7 @@ from django.core.exceptions import MultipleObjectsReturned,ObjectDoesNotExist
 import os
 from django.conf import settings
 from mailing.views import ToLearnerForCertificate
-
+import magic
 # Create your views here.
 
 #landing page's learners page
@@ -57,7 +57,7 @@ def chat(request):
 
 #learners dashboard Landing Page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_users(['Learners','Admins','Facilitator'])
 def index(request):
     enrolled_courses=enrollment.objects.filter(Lid=Learners.objects.get(user=request.user).Lid)
     ongoing=[]
@@ -194,7 +194,11 @@ class GeneratePDF(View):
             info['path']=os.path.join(settings.MEDIA_ROOT,'certificates',certificate_name.certificate_number)
 
         image_data = open(info['path'], "rb").read()
-        return HttpResponse(image_data, content_type="image/jpeg")
+        content_type = magic.from_buffer(image_data, mime=True)
+        response = HttpResponse(image_data, content_type=content_type)
+        response['Content-Disposition'] = 'attachment; filename="%s"' % os.path.basename(info['path'])
+        return response
+        # return HttpResponse(image_data, content_type="image/jpeg")
 
 
         

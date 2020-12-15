@@ -1,0 +1,41 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+        <li class="nav-item ">
+          <a class="nav-link" href="{% url 'learner_index' %}">
+            <i class="fas fa-id-card"></i>
+            <span class="menu-title">My Courses</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'learner_certi' %}">
+            <i class="fa fa-globe"></i>
+            <span class="menu-title">Certificates</span>
+          </a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" disabled="disabled" href="{% url 'learner_intern' %}">
+            <i class="fa fa-bar-chart "></i>
+            <span class="menu-title">Internships</span>
+          </a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/experts/{{request.user.groups.all.2.id}}/">
+            <i class="fa fa-globe "></i>
+            <span class="menu-title">Talk to Expert</span>
+          </a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="{% url 'freecontent' %}">
+            <i class="fa fa-globe "></i>
+            <span class="menu-title">FREE Content</span>
+          </a>
+        </li> -->
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'learner_support'%}">
+                <i class="fa fa-heart "></i>
+              <span class="menu-title">Support</span>
+            </a>
+          </li>
+        
+      </ul>
+  </nav>

@@ -35,12 +35,14 @@ function updateUserOrder(productId, action){
 		})
 		.then((data) => {
 			console.log(cart)
+			window.location.reload();
+
 			if (action == 'remove'){
 	
 		
-				
+				window.location.reload();
+
 				delete cart[productId];
-				console.log(cart)
 				
 				document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
 			}

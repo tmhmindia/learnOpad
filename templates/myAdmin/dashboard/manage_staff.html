@@ -92,7 +92,7 @@
                                                 
                                                 <th> 
                                                     
-                                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                                    <button type="button" onClick="DeleteUser('{{staff_user.user.id}}')" class="btn btn-danger btn-sm">Delete</button>
                                             </th>
                                     
                                             </tr>
@@ -128,6 +128,52 @@
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
     <script>
+
+function DeleteUser(id)
+        {
+
+            swal({
+  title: "Are you sure?",
+  text: "You will not be able to recover this Learner Data!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    $.ajax({
+          type: 'POST',
+          url: '{% url "delete_user" %}',
+          headers: {
+                       "X-CSRFTOKEN": "{{ csrf_token }}"
+               },
+          data: {id : id},
+          success: function (data) {
+            swal("Deleted!", "Your course  has been deleted.","success").then(function(){
+                window.location.reload()
+            });
+          },
+          error: function (data) {
+            swal("NOT Deleted!", "Something blew up.", "error");
+          }
+        });
+
+  } else {
+    swal("Done !", "Your Data is Safe", "success");
+
+
+  }
+});
+
+
+
+
+
+         
+        }
+
+
+
     $("#staffbtn").click(function(event){
         event.preventDefault();
         var formData = new FormData();

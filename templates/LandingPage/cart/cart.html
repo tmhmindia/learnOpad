@@ -114,7 +114,7 @@ footer {
                       </div>
                     </div>
                   </th>
-                  <td class="border-0 align-middle"><strong>{{item.course.price}}</strong></td>
+                  <td class="border-0 align-middle"><strong>&#8377; {{item.course.price}}</strong></td>
                   
                   <td class="border-0 align-middle"><button data-product="{{item.course.Cid}}" data-action="remove" class="btn btn-danger update-cart" style="margin: 10px">Remove</button></td>
                 </tr>
@@ -134,11 +134,11 @@ footer {
           <div class="p-4">
             <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
             <ul class="list-unstyled mb-4">
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>{{order.get_cart_total}}</strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>&#8377; {{order.get_cart_total}}</strong></li>
               
               <!-- <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$0.00</strong></li> -->
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                <h5 class="font-weight-bold">{{order.get_cart_total}}</h5>
+                <h5 class="font-weight-bold">&#8377; {{order.get_cart_total}}</h5>
               </li>
             </ul>
             <form >

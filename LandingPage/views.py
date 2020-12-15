@@ -292,7 +292,7 @@ def exploreCourses(request):
         course=Course.objects.filter(language__in=filter_lang) & course
     if filter_price:
         course=Course.objects.filter(price__in=filter_price) & course
-    paginator=Paginator(course.values(),6,orphans=1)
+    paginator=Paginator(course,6,orphans=1)
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)
     context={

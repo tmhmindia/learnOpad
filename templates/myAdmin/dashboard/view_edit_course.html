@@ -150,39 +150,35 @@
     <script>
         function DeleteCourse(id)
         {
+           
             swal({
-    title: "Are you sure?",
-    text: "You will not be able to recover this Course Data!",
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#DD6B55",
-    confirmButtonText: "Yes, delete it!",
-    cancelButtonText: "No, cancel plz!",
-    closeOnConfirm: false,
-    closeOnCancel: false
-  },
-    function (isConfirm) {
-      if (isConfirm) {
-        $.ajax({
+  title: "Are you sure?",
+  text: "You will not be able to recover this Course Data!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    $.ajax({
           type: 'POST',
           url: '{% url "delete_course" %}',
           headers: {
                        "X-CSRFTOKEN": "{{ csrf_token }}"
                },
-          data: {Cid : "{{course.Cid}}"},
+          data: {Cid : id},
           success: function (data) {
-            swal("Deleted!", "Your Course has been deleted.", "success");
+            swal("Deleted!", "Your Course has been deleted.", "success",function(){
+                window.location.reload();});
           },
           error: function (data) {
             swal("NOT Deleted!", "Something blew up.", "error");
           }
         });
-      } else {
-        swal("Cancelled", "Your course is safe :)", "error");
-      }
-    });
-
-  return false;
+  } else {
+    swal("Cancelled", "Your course is safe :)", "error");
+  }
+});
 
 
         }
