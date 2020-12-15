@@ -322,7 +322,7 @@ Support
     <form style="background: transparent;" action="{% url 'learner_support' %}" method="POST" role="form" class="php-email-form">
       {% csrf_token %}
       <div class="form-group">
-        <textarea class="form-control" name="message" rows="5" data-rule="required"
+        <textarea class="form-control" name="message" rows="15" cols="20" data-rule="required"
           data-msg="Please write something for us" placeholder="Message"></textarea>
         <div class="validate"></div>
       </div>

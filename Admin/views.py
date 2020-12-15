@@ -112,6 +112,11 @@ def myprofile(request):
     else:
         staff=Staff.objects.get(user=request.user)
         return render(request,'myAdmin/dashboard/profile.html',{'staff':staff}) 
+    return render(request,'myAdmin/dashboard/profile.html') 
+def category(request):
+    return render(request,'myAdmin/dashboard/category.html')
+def subcategory(request):
+    return render(request,'myAdmin/dashboard/sub-category.html') 
 
 def staff(request):
     if request.method == 'POST':
