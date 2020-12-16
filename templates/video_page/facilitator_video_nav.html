@@ -1,0 +1,35 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'dashboard' %}">
+          <i class="fas fa-id-card"></i>
+          <span class="menu-title">Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'createcourse' %}">
+          <i class="fa fa-globe"></i>
+          <span class="menu-title">Create courses</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'earnings' request.user.user.facilitator.Fid %}">
+          <i class="fa fa-bar-chart "></i>
+          <span class="menu-title">My Earnings</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'explorecourses' %}">
+          <i class="fa fa-globe "></i>
+          <span class="menu-title">Explore Courses</span>
+        </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{% url 'support'%}">
+              <i class="fa fa-heart "></i>
+            <span class="menu-title">Support</span>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>

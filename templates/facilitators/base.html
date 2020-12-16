@@ -110,7 +110,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/experts/{{request.user.groups.all.2.id}}/">
+              <a class="nav-link" onClick="experts()" href="#">
                 <i class="fa fa-bar-chart "></i>
                 <span class="menu-title">talk with learners</span>
               </a>
@@ -185,7 +185,24 @@
     <script src="{% static 'facilitators/assets/js/settings.js' %}"></script>
     <script src="{% static 'facilitators/assets/js/todolist.js' %}"></script>
     <script src="{% static 'facilitators/assets/js/data-table.js' %}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+
+
+    <script>
+      function experts()
+      {
+        var count="{{request.user.user.facilitator.get_total_learners}}";
+        console.log(count)
+        if(parseInt(count)>0)
+        {
+          window.location.href="/experts/{{request.user.user.facilitator.getintialGroup}}/"
+        }
+        else{
+          swal('Sorry !',"You have no Learners","success")
+        }
+      }
+    </script>
     <!-- endinject -->
     <!-- Custom js for this page-->
     <script src="{% static 'facilitators/assets/js/dashboard.js' %}"></script>

@@ -825,51 +825,25 @@ a:hover{
                 </div>
 
                 <div class="facil_card text-center  owl-carousel  ftco-owl text-center">
+                    {% for facilitator in facilitators %}
+                    {% if facilitator.Bio %}
                     <div class="item d-flex justify-content-center">
                         <div class=" facil_det pt-3 ">
                             <div class="text-center">
-                            <img class="card-img-top circle " src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                            <img class="card-img-top circle " src="{{facilitator.profile.url}}" alt="Card image cap" height="150px">
                             </div>
                                 
                             <!-- background-color:gainsboro -->
                             <div class="card-body" >
-                                <h5 class="card-title" style="color:red;" >Kamal Pabba</h5>
-                                <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, vel architecto? Ipsam similique voluptatum dolor aut atque iusto id nobis reprehenderit, temporibus maxime? Deleniti ratione eveniet illo in vel laudantium! </p>
-                                <p>Company</p>
+                                <h5 class="card-title" style="color:red;" >{{facilitator.name}}</h5>
+                                <p> {{facilitator.Bio}} </p>
+                                <p>Company TMHM</p>
                             </div>
                             
                         </div>
                     </div>
-                    <div class="item d-flex justify-content-center">
-                        <div class=" facil_det pt-3 ">
-                            <div class="text-center">
-                            <img class="card-img-top circle " src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
-                            </div>
-                                
-                            <!-- background-color:gainsboro -->
-                            <div class="card-body" >
-                                <h5 class="card-title" style="color:red;" >Vijay Gwala</h5>
-                                <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, vel architecto? Ipsam similique voluptatum dolor aut atque iusto id nobis reprehenderit, temporibus maxime? Deleniti ratione eveniet illo in vel laudantium! </p>
-                                <p>Company</p>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="item d-flex justify-content-center">
-                        <div class=" facil_det pt-3 ">
-                            <div class="text-center">
-                            <img class="card-img-top circle " src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
-                            </div>
-                                
-                            <!-- background-color:gainsboro -->
-                            <div class="card-body" >
-                                <h5 class="card-title" style="color:red;" >Nazia </h5>
-                                <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, vel architecto? Ipsam similique voluptatum dolor aut atque iusto id nobis reprehenderit, temporibus maxime? Deleniti ratione eveniet illo in vel laudantium! </p>
-                                <p>Company</p>
-                            </div>
-                            
-                        </div>
-                    </div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
                 
             </div>

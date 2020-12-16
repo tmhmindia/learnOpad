@@ -412,7 +412,7 @@ Explore Courses
                             {% cycle "<div class='row courses_row'>" "" %}
                                 <!-- Course -->
                                 {% if request.user|has_group:"Learners"%}
-                                {% if course in request.user.learner.enrolled.all %}
+                                {% if crse in request.user.learner.enrolled.all %}
                                 <div class="col-lg-6 course_col">
                                     <div class="course">
                                         <div class="course_image"><img src="{{crse.thumbnail.url}}" /></div>

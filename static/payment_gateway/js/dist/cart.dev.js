@@ -20,31 +20,51 @@ for (i = 0; i < updateBtns.length; i++) {
 function updateUserOrder(productId, action) {
   console.log('User is authenticated, sending data...');
   var url = "/update_item/";
-  fetch(url, {
-    method: 'POST',
+  $.ajax({
+    type: 'POST',
+    url: url,
     headers: {
       'Content-Type': 'application/json',
-      'X-CSRFToken': csrftoken
+      "X-CSRFTOKEN": csrftoken
     },
-    body: JSON.stringify({
+    data: JSON.stringify({
       'productId': productId,
       'action': action
-    })
-  }).then(function (response) {
-    return response.json();
-  }).then(function (data) {
-    console.log(cart);
-    window.location.reload();
-
-    if (action == 'remove') {
-      window.location.reload();
-      delete cart[productId];
-      document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/";
+    }),
+    success: function success(data) {
+      if (data.action) {
+        window.location.href = "/Courses/Cart/?checkout='true'"; //document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+      } else {
+        console.log(data.action + " " + "deleted");
+        delete cart[data.product_id]; //window.location.reload();
+      }
+    },
+    error: function error(data) {
+      swal("NOT Deleted!", "Something blew up.", "error");
     }
-
-    console.log(cart);
-    window.location.href = "/Courses/Cart/?checkout='true'";
-  });
+  }); // fetch(url, {
+  // 	method:'POST',
+  // 	headers:{
+  // 		'Content-Type':'application/json',
+  // 		'X-CSRFToken':csrftoken,
+  // 	}, 
+  // 	body:JSON.stringify({'productId':productId, 'action':action})
+  // })
+  // .then((response) => {
+  // 	console.log(response)
+  //    return response.json();
+  // })
+  // .then((data) => {
+  // 	if (data.action){
+  // 		window.location.href="/Courses/Cart/?checkout='true'";
+  // 		//document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+  // 	}
+  // 	else{
+  // 		console.log(data.action+" "+"deleted")
+  // 		delete cart[data.product_id];
+  // 		//window.location.reload();
+  // 	}
+  // });
 }
 
 function addCookieItem(productId, action) {

@@ -48,7 +48,7 @@ def successOnShortlisted(user):
     context={
         'name':user.first_name+" "+user.last_name,
         'msg':"We are pleased to inform you that we have reviewed your profile and shortlisted you as a facilitator. We are extremely pleased with this collaboration and look forward to your long-term commitment to our organization. ",
-        'link':'https://www.learnopad.com/create_order'
+        
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
    
@@ -323,6 +323,18 @@ def ToAdminCouncellingDetail(councelling):
      
     send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
 
+def FacilitatorApprovalWithoutSubscription(applicant):
+    sender = settings.EMAIL_HOST_USER
+    recipient = [applicant.user.email,]
+    context={
+        'name':applicant.name,
+        'msg':"Congratulations. Let's begin your journey with LearnOpad Platform. You are approved to access the facilitator dashboard and create your courses."
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
 
 
 

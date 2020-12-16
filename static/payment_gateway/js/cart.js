@@ -19,37 +19,39 @@ function updateUserOrder(productId, action){
 	console.log('User is authenticated, sending data...')
 
 		var url="/update_item/"
-
-		
-
-		fetch(url, {
-			method:'POST',
-			headers:{
-				'Content-Type':'application/json',
-				'X-CSRFToken':csrftoken,
-			}, 
-			body:JSON.stringify({'productId':productId, 'action':action})
-		})
-		.then((response) => {
-		   return response.json();
-		})
-		.then((data) => {
-			console.log(cart)
-			window.location.reload();
-
-			if (action == 'remove'){
-	
-		
-				window.location.reload();
-
-				delete cart[productId];
+		$.ajax({
+			type: 'POST',
+			url: url,
+			headers: {
+						'Content-Type':'application/json',
+						 "X-CSRFTOKEN": csrftoken
+				 },
+			data: JSON.stringify({'productId':productId, 'action':action}),
+			success: function (data) {
+				if (data.action){
 				
-				document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+					window.location.href="/Courses/Cart/?checkout='true'";
+
+					
+				}
+				else{
+					console.log(data.action+" "+"deleted")
+					delete cart[data.product_id];
+					document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+
+					window.location.reload();
+				}
+				window.location.href="/Courses/Cart/?checkout='true'";
+
+			},
+			error: function (data) {
+			  swal("NOT Deleted!", "Something blew up.", "error");
 			}
-			console.log(cart)
-			window.location.href="/Courses/Cart/?checkout='true'";
-			
-		});
+		  });
+  
+		
+
+		
 }
 
 function addCookieItem(productId, action){
@@ -72,5 +74,5 @@ function addCookieItem(productId, action){
 	console.log('CART:', cart)
 	document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
 	
-	window.location.href='/Courses/Cart/'
+	window.location.href="/Courses/Cart/?checkout='true'"
 }

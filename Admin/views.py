@@ -41,7 +41,7 @@ def Approved_facilitators(request):
         group = Group.objects.get(name='Facilitators')
         applicant.user.groups.add(group)
         applicant.save()
-    
+        FacilitatorApprovalWithoutSubscription(applicant)
 
         return JsonResponse({"name":applicant.name})
     else:
@@ -115,9 +115,36 @@ def myprofile(request):
         return render(request,'myAdmin/dashboard/profile.html',{'staff':staff}) 
     return render(request,'myAdmin/dashboard/profile.html') 
 def category(request):
-    return render(request,'myAdmin/dashboard/category.html')
+    if request.method =='POST':
+        print(request.POST)
+
+        cate=request.POST.get('name',None)
+        if cate:
+            cat=Category(name=cate)
+            cat.save()
+        else:
+            return JsonResponse({'success':False})
+        return JsonResponse({'name':cat.name,'success':True})
+    else:
+        categories=Category.objects.all()
+    return render(request,'myAdmin/dashboard/category.html',{'categories':categories})
 def subcategory(request):
-    return render(request,'myAdmin/dashboard/sub-category.html') 
+    if request.method =='POST':
+        cate=request.POST.get('cate',None)
+        ctg=Category.objects.get(cat_id=int(cate))
+        name=request.POST.get('name',None)
+
+
+        if name:
+            cat=SubCategory(name=name,cat_id=ctg)
+            cat.save()
+        else:
+            return JsonResponse({'success':False})
+        return JsonResponse({'name':cat.name,'success':True})
+    else:
+        categories=Category.objects.all()
+        subcategory=SubCategory.objects.all()
+    return render(request,'myAdmin/dashboard/sub-category.html',{'categories':categories,'subcategory':subcategory}) 
 
 def staff(request):
     if request.method == 'POST':
@@ -290,4 +317,12 @@ def DeleteSubscription(request):
     return JsonResponse({"success":True})
 def DeleteOrderCourse(request):
     record=OrderCourses.objects.get(id=int(request.POST.get('id'))).delete()
+    return JsonResponse({"success":True})
+def DeleteCategorySubcategory(request):
+    category=request.POST.get('category',None)
+    subcategory=request.POST.get('subcategory',None)
+    if category:
+        record=Category.objects.get(cat_id=int(category)).delete()
+    else:
+        record=SubCategory.objects.get(subCat_id=int(subcategory)).delete()
     return JsonResponse({"success":True})

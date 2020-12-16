@@ -27,8 +27,8 @@ from mailing.views import ToAdminContactUsQuery
 
 # Landing  page
 def home(request):
-    
-    return render(request,'LandingPage/index.html')
+    facilitators=Facilitator.objects.all()
+    return render(request,'LandingPage/index.html',{'facilitators':facilitators})
 
 def cart(request):
     context = cartData(request)
@@ -40,8 +40,8 @@ def UpdateCart(request):
     data = json.loads(request.body)
     productId = data['productId']
     action = data['action']
-    CreateOrder(request,productId,action)
-    return JsonResponse('Item was added', safe=False)
+    response=CreateOrder(request,productId,action)
+    return JsonResponse(response)
 
 def searchbar(request):
     context={}

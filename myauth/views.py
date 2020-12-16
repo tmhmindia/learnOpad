@@ -50,7 +50,7 @@ def signup(request):
             if subscription is not None:
                 return redirect('/create_course')
             if payment :
-                return redirect('/Courses/Cart/')
+                return redirect("/Courses/Cart/?checkout='true'")
             return redirect('/')
         else:
             exist=True
@@ -110,12 +110,16 @@ class user_login(View):
                     subscription=request.GET.get('subscription',None)
                     if subscription is not None:
                         return redirect('/create_order')
+                    payment=request.GET.get('payment',None)
+                    if payment :
+                        return redirect("/Courses/Cart/?checkout='true'")
+                    if user.groups.filter(name='Admins').exists() or user.groups.filter(name='Staff').exists():
+                        return HttpResponseRedirect(reverse('dashboard_admin'))
                     if user.groups.filter(name='Facilitators').exists():
                         return HttpResponseRedirect(reverse('dashboard'))
                     if user.groups.filter(name='Learners').exists():
                         return HttpResponseRedirect(reverse('learner_index'))
-                    if user.groups.filter(name='Admins').exists() or user.groups.filter(name='Staff').exists():
-                        return HttpResponseRedirect(reverse('dashboard_admin'))
+                   
                     if user.groups.filter(name='Visiters').exists():
                         return HttpResponseRedirect(reverse('home')) 
                         

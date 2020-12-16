@@ -6,6 +6,8 @@ from django.utils import timezone
 from ckeditor.fields import RichTextField
 from PIL import Image
 from payment_gateway.models import Revenue
+from learners.models import enrollment
+
 
 
 
@@ -82,6 +84,15 @@ class Facilitator(models.Model):
         for revenue in revenues:
             total+=revenue.facilitator_revenue
         return total
+    def getintialGroup(self):
+        groups=self.user.user.groups.all().exclude(id__in=[1,2,3,4,9])
+        try:
+            return groups[0].id
+        except:
+            return 0
+    def get_total_learners(self):
+        total=enrollment.objects.filter(Cid__offering__Fid=self.Fid)
+        return total.count()
         
 
 
