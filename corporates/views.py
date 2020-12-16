@@ -13,7 +13,7 @@ def corporate_landingPage(request):
         CorporateCampusToAdminEmail(corporate,corporate.organization)
         return JsonResponse("success",safe=False)
     else:
-        courses=Course.objects.all()
+        courses=Course.objects.filter(approve=True)
         context={'courses':courses}
 
     return render(request,'corporates/index.html',context)

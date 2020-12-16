@@ -33,3 +33,18 @@
       
     </ul>
   </nav>
+
+  <script>
+    function experts()
+    {
+      var count="{{request.user.user.facilitator.get_total_learners}}";
+      console.log(count)
+      if(parseInt(count)>0)
+      {
+        window.location.href="/experts/{{request.user.user.facilitator.getintialGroup}}/"
+      }
+      else{
+        swal('Sorry !',"You have no Learners","success")
+      }
+    }
+  </script>

@@ -32,7 +32,12 @@ class Learners(models.Model):
         return enrollment.objects.filter(Lid=self).count()
     def GetCourses(self):
         return enrollment.objects.filter(Lid=self)
-    
+    def getInitialGroup(self):
+        groups=self.learner.groups.all().exclude(id__in=[1,2,3,4,9])
+        try:
+            return groups[0].id
+        except:
+            return 0
 
 
 

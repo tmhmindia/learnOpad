@@ -39,6 +39,7 @@ def allowed_Facilitator_Dashboard():
 				
 		return wrapper_func
 	return decorator
+	
 def allowed_Learners_Dashboard():
 	def decorator(view_func):
 		def wrapper_func(request, *args, **kwargs):
