@@ -180,19 +180,15 @@
         function DeleteUser(id)
         {
             swal({
-    title: "Are you sure?",
-    text: "You will not be able to recover this Facilitator Data!",
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#DD6B55",
-    confirmButtonText: "Yes, delete it!",
-    cancelButtonText: "No, cancel plz!",
-    closeOnConfirm: false,
-    closeOnCancel: false
-  },
-    function (isConfirm) {
-      if (isConfirm) {
-        $.ajax({
+  title: "Are you sure?",
+  text: "You will not be able to recover this Facilitator Data!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    $.ajax({
           type: 'POST',
           url: '{% url "delete_user" %}',
           headers: {
@@ -206,13 +202,10 @@
             swal("NOT Deleted!", "Something blew up.", "error");
           }
         });
-      } else {
-        swal("Cancelled", "Your Facilitator is safe :)", "success");
-      }
-    });
-
-  return false;
-
+  } else {
+    swal("Cancelled", "Your Facilitator is safe :)", "success");
+  }
+});
 
         }
     </script>

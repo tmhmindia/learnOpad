@@ -304,7 +304,7 @@ function getToken(name) {
                             <div class="course_title" style="margin-top: 30px">{{course.title}}</div>
                             <h5 style="color: white">{{course.description}}</h5>
                             
-                            <button class="btn btn-info btn-sm" style="margin-right: 10px">Highest rated</button><span id='avg_rating_card'>{{avg_rating}}</span>
+                            <button class="btn btn-info btn-sm" style="margin-right: 10px">Highest rated</button><span id='avg_rating_card'> {{avg_rating}}</span>
                             <span class="rating_r rating_r_{{int_avg_rating}}"><i></i><i></i><i></i><i></i><i></i></span>(<span id='total_rating_card'>{{ total_rating}}</span> ratings) {{total_leaners_for_this_course}} students
                             <h6 style="color: white;margin-top: 10px">Created by <a href="#" style="color:#14bdee">{{facilitator.name}}</a></h6>
                             <h6 style="color: white;margin-top: 10px"><i class="fa fa-globe" aria-hidden="true"></i> {{course.language}} </h6>
@@ -660,8 +660,23 @@ function getToken(name) {
                                     <div class="card-body" style="margin-bottom:-30px">
                                         <h5 class="card-title">&#8377; {{course.price}} <span style="text-decoration-line: line-through;font-size: 15px;" class="text-muted">&#8377; {{course.getOfferPrice}} </span><span style="font-size: 15px;">  25% Off </span> </h5>
                                     </div>
+                                    {% if request.user|has_group:"Learners"%}
+                                    {% if course in request.user.learner.enrolled.all %}
+                                    <div class="card-title" style="margin-left: 20px;margin-top: 10px">
+                                        <span>Enrolled</span>
+                                    </div>
+                                    {% else %}
                                     <button data-product="{{course.Cid}}" data-action="add" class="btn btn-primary update-cart" style="margin: 10px;">Buy Now</button>
                                     <button data-product="{{course.Cid}}" data-action="add" class="btn btn-outline-primary update-cart" style="margin: 10px">Add to cart</button>
+                                   
+                                    {% endif %}
+                                    {% else %}
+                                    <button data-product="{{course.Cid}}" data-action="add" class="btn btn-primary update-cart" style="margin: 10px;">Buy Now</button>
+                                    <button data-product="{{course.Cid}}" data-action="add" class="btn btn-outline-primary update-cart" style="margin: 10px">Add to cart</button>
+                                   
+                                    {% endif %}
+
+                                   
                                     <div class="card-title" style="margin-left: 20px;margin-top: 10px">
                                         <h5>Course Feature</h5>
                                     </div>
@@ -706,7 +721,7 @@ function getToken(name) {
                                         <!-- Teacher Review -->
                                         <div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
                                             <div class="teacher_meta_title">Comments:</div>
-                                            <div class="teacher_meta_text ml-auto"><span>12k</span><i class="fa fa-comment" aria-hidden="true"></i></div>
+                                            <div class="teacher_meta_text ml-auto"><span>{{reviews|length}}</span><i class="fa fa-comment" aria-hidden="true"></i></div>
                                         </div>
                                         <!-- Teacher Quizzes -->
                                         <div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
@@ -733,11 +748,11 @@ function getToken(name) {
                                     {% for courses in similer %}
                                     <div class="latest d-flex flex-row align-items-start justify-content-start">
                                         <div class="latest_image">
-                                            <div><img src='{% static 'LandingPage/images/course_4.jpg' %}' alt=""></div>
+                                            <div><img src="{{courses.thumbnail.url}}" alt=""></div>
                                         </div>
                                         <div class="latest_content">
-                                            <div class="latest_title"><a href='{% url 'course' course.Cid %}' class="stretched-link">{{course.title}}</a></div>
-                                            <div class="latest_price">Free</div>
+                                            <div class="latest_title"><a href='{% url 'course' courses.Cid %}' class="stretched-link">{{course.title}}</a></div>
+                                            <div class="latest_price">&#8377; {{courses.price}}</div>
                                         </div>
                                     </div>
                                     {% endfor %}

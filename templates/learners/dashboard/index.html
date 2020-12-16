@@ -70,8 +70,7 @@ Index
                         <ul class="nav nav-tabs" id="nav-tab" role="tablist">
                             <li class="nav-item" ><a class=" nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
                                 aria-controls="nav-home" aria-selected="true">Ongoing</a></li>
-                            <li class="nav-item" ><a class=" nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-                                aria-controls="nav-profile" aria-selected="false">Upcoming</a></li>
+                            
                             <li class="nav-item" ><a class=" nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
                                 aria-controls="nav-contact" aria-selected="false">Completed</a></li>
                         </ul>
@@ -84,14 +83,14 @@ Index
                                 <img class="card-img-top"
                                     src="{{ course.thumbnail.url }}"
                                     alt="Card image cap">
-                                <div class="card-body">
+                                <div class="card-body text-center">
                                     <h5 class="card-title" style="font-size: large;">{{ course.title }}</h5>
-                                    <p class="card-text">{{ course.description }}</p>
                                     <div class="progress" style="height: 20px;">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: {{ perc }}%"
                                             aria-valuenow="{{perc}}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <a href="#" class="btn btn-primary" style="color: white;">Go to Course</a>
+                                    
+                                    <a href="{% url 'VideoPage' %}?Cid={{course.Cid}}" class="btn btn-primary" style="color: white;">Go to Course</a>
                                 </div>
                             </div>
                             {% endfor %}
@@ -99,22 +98,7 @@ Index
                         </div>
                         
         
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <!-- <div class="card" style="max-width: 18rem; margin: 10px 10px 10px 0;">
-                                <img class="card-img-top" src="https://img-a.udemycdn.com/course/750x422/1382702_a351.jpg"
-                                    alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title" style="font-size: large;">Course Title</h5>
-                                    <p class="card-text">Course Description. Some quick example text to build on the card title
-                                        and make up content.</p>
-                                    <div class="progress" style="height: 20px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 0%;"
-                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-                                    </div>
-                                    <a href="#" class="btn btn-primary" style="color: white;">Go to course</a>
-                                </div>
-                            </div> -->
-                        </div>
+                        
 
                         
                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
@@ -123,9 +107,8 @@ Index
                             <div class="card" style="max-width: 18rem; margin: 10px 10px 10px 0;">
                                 <img class="card-img-top" src="{{ course.thumbnail.url }}"
                                     alt="Card image cap">
-                                <div class="card-body">
+                                <div class="card-body text-center">
                                     <h5 class="card-title" style="font-size: large;">{{ course.title }}</h5>
-                                    <p class="card-text">{{ course.description }}</p>
                                     <div class="progress" style="height: 20px;">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: 100%;"
                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>

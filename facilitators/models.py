@@ -4,6 +4,11 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 from ckeditor.fields import RichTextField
+from PIL import Image
+from payment_gateway.models import Revenue
+from learners.models import enrollment
+
+
 
 
 #this relation contains all the applicants who is registerd from facilitator registration form
@@ -53,6 +58,10 @@ class Facilitator(models.Model):
         verbose_name_plural='Approved Facilitators'
     def __str__(self):
         return self.name
+    def save(self, *args, **kwargs):
+        super(Facilitator, self).save(*args, **kwargs)
+        image = Image.open(self.profile.path)
+        image.save(self.profile.path,format="JPEG",quality=50,optimize=True)
     def getCourses(self):
         courses=self.offering.all()
         return courses
@@ -62,7 +71,28 @@ class Facilitator(models.Model):
     def getDOB(self):
         date=self.DOB.date()
         return date.strftime("%m/%d/%y")
-
+    def get_facilitator_monthly_revenue(self):
+        this_month = timezone.now().month
+        revenues = Revenue.objects.filter(revenue_item__course__offering__Fid=self.Fid,added__month=this_month)
+        total=0
+        for revenue in revenues:
+            total+=revenue.facilitator_revenue
+        return total
+    def get_facilitator_total_revenue(self):
+        revenues=Revenue.objects.filter(revenue_item__course__offering__Fid=self.Fid)
+        total=0
+        for revenue in revenues:
+            total+=revenue.facilitator_revenue
+        return total
+    def getintialGroup(self):
+        groups=self.user.user.groups.all().exclude(id__in=[1,2,3,4,9])
+        try:
+            return groups[0].id
+        except:
+            return 0
+    def get_total_learners(self):
+        total=enrollment.objects.filter(Cid__offering__Fid=self.Fid)
+        return total.count()
         
 
 

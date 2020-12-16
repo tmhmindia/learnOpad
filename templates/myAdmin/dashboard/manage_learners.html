@@ -68,7 +68,7 @@
                                                 <th>{{learner.name}}</th>
                                                 <th>{{learner.phone}}</th>
                                                 <th>{{learner.user.email}}</th>
-                                                <th>{{learner.DOB}}</th>
+                                                <th>{{learner.added.date}}</th>
                                                 <th>{{learner.CountCourses}}</th>
                                                 <th> 
                                                     <a href="{% url 'view_edit_learners'  %}?Lid={{learner.Lid}}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
@@ -81,16 +81,7 @@
                                            
                                             
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Phone number</th>
-                                                <th>Mail id</th>
-                                                <th>Enrollment date</th>
-                                                <th>Number of Enrolled Course's</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </tfoot>
+                                        
                                     </table>
                                 </div>
 
@@ -120,20 +111,17 @@
     <script>
         function DeleteUser(id)
         {
+
             swal({
-    title: "Are you sure?",
-    text: "You will not be able to recover this Learner Data!",
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#DD6B55",
-    confirmButtonText: "Yes, delete it!",
-    cancelButtonText: "No, cancel plz!",
-    closeOnConfirm: false,
-    closeOnCancel: false
-  },
-    function (isConfirm) {
-      if (isConfirm) {
-        $.ajax({
+  title: "Are you sure?",
+  text: "You will not be able to recover this Learner Data!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    $.ajax({
           type: 'POST',
           url: '{% url "delete_user" %}',
           headers: {
@@ -141,20 +129,27 @@
                },
           data: {id : id},
           success: function (data) {
-            swal({title:"Deleted!", text:"Your course  has been deleted.",type: "success"},function (){ window.location.reload()});
+            swal("Deleted!", "Your course  has been deleted.","success").then(function(){
+                window.location.reload()
+            });
           },
           error: function (data) {
             swal("NOT Deleted!", "Something blew up.", "error");
           }
         });
-      } else {
-        swal("Cancelled", "Your course is safe :)", "error");
-      }
-    });
 
-  return false;
+  } else {
+    swal("Done !", "Your Data is Safe", "success");
 
 
+  }
+});
+
+
+
+
+
+         
         }
     </script>
    

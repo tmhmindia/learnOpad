@@ -5,10 +5,8 @@ from  LandingPage.models import *
 class ContactUsForm(ModelForm):
     class Meta:
         model=ContactUs
-        fields=['name','email','categories','mobile','message']
-        widgets = {
-            'categories': forms.Select(attrs={'class':'custom-select'}),
-        }
+        fields=['name','email','mobile','message']
+        
     def __init__(self, *args, **kwargs):
         super(ContactUsForm, self).__init__(*args, **kwargs)
         self.fields['name'].widget.attrs.update({'placeholder': 'Your Name','class':'contact_input contact_input_name inpt'})

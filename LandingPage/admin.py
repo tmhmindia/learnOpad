@@ -52,7 +52,7 @@ class AudienceAdmin(admin.ModelAdmin):
 class QueryAdmin(admin.ModelAdmin):
     list_display=('Fid','query','reply')
 class ContactAdmin(admin.ModelAdmin):
-    list_display=('name','email','categories','mobile','message')
+    list_display=('name','email','mobile','message')
 class CorporateTalksAdmin(admin.ModelAdmin):
     list_display=('name','email','mobile','company_name','training_need','message','city','state','check')
 

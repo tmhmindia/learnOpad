@@ -15,8 +15,8 @@ from learners.certificate.certificate import generateCertificate
 from django.core.exceptions import MultipleObjectsReturned,ObjectDoesNotExist
 import os
 from django.conf import settings
-
-
+from mailing.views import ToLearnerForCertificate
+import magic
 # Create your views here.
 
 #landing page's learners page
@@ -25,7 +25,7 @@ def learner_page(request):
 
 #learners dashboard certificate page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def certicate(request):
     enrolled_courses=enrollment.objects.filter(Lid=Learners.objects.get(user=request.user).Lid)
     completed=[]
@@ -51,13 +51,13 @@ def certicate(request):
     
 #learners dashboard talk to expert page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def chat(request):
     return render(request,'learners/dashboard/chat1.html')
 
 #learners dashboard Landing Page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def index(request):
     enrolled_courses=enrollment.objects.filter(Lid=Learners.objects.get(user=request.user).Lid)
     ongoing=[]
@@ -95,19 +95,19 @@ def index(request):
 
 #learners dashboard internship page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def internships(request):
     return render(request,'learners/dashboard/internships.html')
 
 #learners dashboard liveclasses page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def liveclasses(request):
     return render(request,'learners/dashboard/liveclasses.html')
 
 #learners dashboard certificate page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def profile(request):
     if request.method == 'GET':
         ourdata = Learners.objects.get(user=request.user)
@@ -139,14 +139,14 @@ def profile(request):
 
 #learners dashboard Account setting page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def learner_settings(request):
     return render(request,'learners/dashboard/settings.html')
 
 
 #learners dashboard support section page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def support(request):
     learner=Learners.objects.get(user=request.user)
     if request.method=='POST':
@@ -159,7 +159,7 @@ def support(request):
     return render(request,'learners/dashboard/Support.html',context)
 #learners dashboard talk to expert page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_Learners_Dashboard()
 def tte(request):
     return render(request,'learners/dashboard/tte.html')
 
@@ -184,17 +184,21 @@ class GeneratePDF(View):
         except ObjectDoesNotExist:
             certificate_name=None
         except Certificate.MultipleObjectsReturned:
-            breakpoint()
-
+            pass 
         if certificate_name is None:
             info=generateCertificate(learner,course)
             certificate=Certificate(certificate_number=info['certificate_name'],learner=learner,status='issued',course=course)
             certificate.save()
+            ToLearnerForCertificate(certificate)
         else:
             info['path']=os.path.join(settings.MEDIA_ROOT,'certificates',certificate_name.certificate_number)
 
         image_data = open(info['path'], "rb").read()
-        return HttpResponse(image_data, content_type="image/jpeg")
+        content_type = magic.from_buffer(image_data, mime=True)
+        response = HttpResponse(image_data, content_type=content_type)
+        response['Content-Disposition'] = 'attachment; filename="%s"' % os.path.basename(info['path'])
+        return response
+        # return HttpResponse(image_data, content_type="image/jpeg")
 
 
         

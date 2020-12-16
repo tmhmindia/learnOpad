@@ -64,7 +64,7 @@
                                                 <th> 
                                                     <a href="mailto:{{record.email}}"><button type="button" class="btn btn-cyan btn-md">Mail</button></a>
                                                     <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
-                                                    <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
+                                                    <button type="button" onClick="DeleteQueries('{{record.councelling_id}}',false)" class="btn btn-danger btn-sm">Delete</button>
                                             </th>
                                             </tr>
                                             {% endfor %}
@@ -137,7 +137,7 @@
                                                      
                                                     <a href="mailto:{{record.email}}"><button type="button" class="btn btn-cyan btn-md">Mail</button></a>
                                                     <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
-                                                    <a href=""><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
+                                                    <button type="button" onClick="DeleteQueries('{{record.id}}',true)"class="btn btn-danger btn-sm">Delete</button>
                                             </th>
                                             </tr>
                                             {% endfor %}
@@ -163,7 +163,55 @@
 <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
 <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
 <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
+<script>
+    function DeleteQueries(id,flag)
+    {
+        var data={};
+        if(flag)
+        {
+            data['contactus']=id;
+        }
+        else{
+            data['councelling']=id;
+        }
 
+
+        swal({
+title: "Are you sure?",
+text: "You will not be able to recover this training Data!",
+icon: "warning",
+buttons: true,
+dangerMode: true,
+})
+.then((willDelete) => {
+if (willDelete) {
+$.ajax({
+      type: 'POST',
+      url: '{% url "delete_contactus_councelling" %}',
+      headers: {
+                   "X-CSRFTOKEN": "{{ csrf_token }}"
+           },
+      data: data,
+      success: function (data) {
+        swal("Deleted!", "Your Training Data  has been deleted.", "success").then(function(){
+            window.location.reload();
+
+        })
+      },
+      error: function (data) {
+        swal("Cancelled", "Your Training Data is safe :)", "success");
+      }
+    });
+
+    } else {
+        swal("Cancelled", "Your Training Data is safe :)", "success");
+        }
+});
+    
+    
+     
+}
+</script>
 <script>
     /****************************************
         *       Basic Table                   *

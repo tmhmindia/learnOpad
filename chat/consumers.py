@@ -73,21 +73,28 @@ class ChatConsumer(WebsocketConsumer):
         return result
 
     def message_to_json(self, message):
+        if message.author.groups.filter(name="Learners").exists():
+            url=message.author.learner.profile.url
+        else:
+            url=message.author.user.facilitator.profile.url
         if message.blob :
             return {
             'author': message.author.email,
             'content': message.content,
             'timestamp': str(timezone.localtime(message.timestamp)),
             'blob':message.blob.url,
-            'group_id':message.chatgroup.id
+            'group_id':message.chatgroup.id,
+            'profile_url':url
         }
         else:
+            print(str(timezone.localtime(message.timestamp)))
             return {
             'author': message.author.email,
             'content': message.content,
             'timestamp': str(timezone.localtime(message.timestamp)),
             'blob':'null',
-            'group_id':message.chatgroup.id
+            'group_id':message.chatgroup.id,
+            'profile_url':url
         }
 
     commands = {

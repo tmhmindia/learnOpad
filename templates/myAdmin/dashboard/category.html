@@ -40,12 +40,13 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Category Form</h5>
-                                <form action="" method="post">
+                                <form id="category" >
+                                    {% csrf_token %}
                                     <div class="form-group">
                                         <label for="catname">Category Name</label>
-                                        <input type="text" id="catname" class="form-control">
+                                        <input type="text" id="cname" class="form-control" required>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="submit"  class="btn btn-primary">Save</button>
                                 </form>
                             </div>
                         </div>
@@ -67,14 +68,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
+                                            {% for category in categories %}
                                             <tr>
-                                                <th>Information Technology</th>
+                                                <th>{{category.name}}</th>
                                                
                                                 <th> 
-                                                    <button type="button"  class="btn btn-danger btn-sm">Delete</button>
+                                                    <button type="button" onClick="DeleteCatSubcat('{{category.cat_id}}',true)" class="btn btn-danger btn-sm">Delete</button>
                                                 </th>
                                             </tr>
+                                            {% endfor %}
                                            
                                             
                                         </tbody>
@@ -101,7 +103,81 @@
         <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
         <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
         <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
+        <script>
+    $("#category").submit(function(event){
+                event.preventDefault();
+                
+    $.ajax({
+      url: "{% url 'categorymanage'%}",
+      data:{name:$('#cname').val()},
+      type: 'POST',
+
+      headers: {
+                        "X-CSRFTOKEN": "{{ csrf_token }}"
+                },
+    
+      success: function(data){
+        if(data.success){
+        swal("Done!", data.name+" is Created", "success").then(function(){ window.location.reload();})
+        }
+        else{
+            swal("Oops!", 'Something Went Wrong', "error")
+
+        }
+
+        }   
+     });
+      });
+
+
+
+      function DeleteCatSubcat(id,flag)
+            {
+                var data={};
+                if(flag)
+                {
+                    data['category']=id;
+                }
+                else{
+                    data['subcategory']=id;
+                }
+                
+            
+                swal({
+  title: "Are you sure?",
+  text: "You will not be able to recover this Category Data!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    $.ajax({
+              type: 'POST',
+              url: '{% url "delete_CatSubcat" %}',
+              headers: {
+                           "X-CSRFTOKEN": "{{ csrf_token }}"
+                   },
+              data: data,
+              success: function (data) {
+                swal("Deleted!", "Your category  has been deleted.", "success").then(function(){
+                    window.location.reload();
+
+                })
+              },
+              error: function (data) {
+                swal("Cancelled", "Your category Data is safe :)", "success");
+              }
+            });
+
+            } else {
+                swal("Cancelled", "Your Category Data is safe :)", "success");
+                }
+});
+    
+     }
         
+      </script>
        
         <script>
             /****************************************

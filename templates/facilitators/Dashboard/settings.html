@@ -51,7 +51,7 @@
 
                     <div class="col-auto">
                         <div class="d-none d-lg-block">
-                            <a class="btn btn-sm btn-primary" href="#">Log out</a>
+                            <a class="btn btn-sm btn-primary" href="{% url 'logout'%}">Log out</a>
                         </div>
 
                         <!-- Responsive Toggle Button -->
@@ -106,7 +106,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{% url 'profile' 1 %}">
+                                            <a class="nav-link" href="{% url 'profile' request.user.user.facilitator.Fid %}">
                                                 <i class="fas fa-id-card nav-icon"></i> Personal info
                                             </a>
                                         </li>
@@ -543,11 +543,15 @@
                       if (newPassword===confirmNewPassword) {
                               $.ajax({
                                   url: '{% url "changePassword" %}',
+                                  type: "POST",
                                   data: {
                                       'currentPassword': currentPassword,
                                       'newPassword': newPassword,
                                       'confirmNewPassword': confirmNewPassword
                                   },
+                                  headers: {
+                        "X-CSRFTOKEN": "{{ csrf_token }}"
+                },
                                   dataType: 'json',
                                   success: function (data) {
                                       if (data.msg.suc_res) {

@@ -196,15 +196,21 @@ $(document).ready(function() {
                                 
                                 <ul class="submenu dropdown-menu">
                                     {% for subcat in c.subcategory_set.all %}
-                                    <!-- {% if subcat.course_set.all|length == 0 %}
-                                    <li><a class="dropdown-item" href="#">{{ subcat }}</a></li>
-                                    {% else %} -->
+                                    
                                     <li><a class="dropdown-item dropdown-toggle" href="#">{{ subcat.name }}</a>
+<<<<<<< HEAD
                                     <!-- {% endif %} -->
                                         
+=======
+>>>>>>> 946ebef488e6048179590f2e48686fb40cc54f90
                                         <ul class="submenu dropdown-menu">
                                             {% for course in subcat.course_set.all %}
+                                            {% if course %}
                                             <li><a class="dropdown-item" href="{% url 'course' course.Cid %}">{{ course.title }}</a></li>
+                                          {% else %}
+                                          <li><a class="dropdown-item" href="#">NO Courses</a></li>
+
+                                            {% endif %}
                                             {% endfor %}
                                         </ul>
                                     </li>
@@ -251,12 +257,12 @@ $(document).ready(function() {
                         <a href="/learner/index/"><div class="d-flex"><div><img style="width:30px; height: 30px;"class="img-profile rounded-circle" src="{{request.user.learner.profile.url}}"></div>
                             <div><p class="text-info ml-1" style="margin-top:5px;">{{request.user.learner.name}}</p></div></div></a>
                         {% elif request.user|has_group:"Admins" %}
-                            <a href="{% url 'dashboard_admin'%}"><div class="d-flex"><div><img style="width:30px; height: 30px;"class="img-profile rounded-circle" src=""></div>
+                            <a href="{% url 'dashboard_admin'%}"><div class="d-flex"><div><img style="width:30px; height: 30px;"class="img-profile rounded-circle" src="{{request.user.staff_admin.profile.url}}"></div>
                             <div><p class="text-info ml-1" style="margin-top:5px;">{{request.user.first_name}}</p></div></div></a>
                         
                         {% else  %} 
 
-                        <a href=""><p class="text-info ml-1" style="margin-top:5px;">{{request.user.first_name}}</p></a>
+                        <a href=""><p class="text-info ml-1" style="margin-top:5px;"><i class="fas fa-user"></i> {{request.user.first_name}}</p></a>
                         {% endif %}                    
                     </li>
                     <li class="nav-item">
@@ -275,7 +281,7 @@ $(document).ready(function() {
 
                 </ul>
                  <div class="cart">
-                <a href='{% url 'cart' %}?checkout='true''><i class="fas fa-shopping-cart"> {% if order.get_cart_items > 0 %}<span class="cart-qty">{{order.get_cart_items}}</span>{% endif %}</i></a>
+                <a href="{% url 'cart' %}?checkout='true'"><i class="fas fa-shopping-cart"> {% if order.get_cart_items > 0 %}<span class="cart-qty">{{order.get_cart_items}}</span>{% endif %}</i></a>
                 </div>
 
                 

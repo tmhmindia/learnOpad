@@ -106,19 +106,15 @@
                 
             
                 swal({
-        title: "Are you sure?",
-        text: "You will not be able to recover this training Data!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel plz!",
-        closeOnConfirm: false,
-        closeOnCancel: false
-      },
-        function (isConfirm) {
-          if (isConfirm) {
-            $.ajax({
+  title: "Are you sure?",
+  text: "You will not be able to recover this training Data!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    $.ajax({
               type: 'POST',
               url: '{% url "delete_training" %}',
               headers: {
@@ -126,19 +122,20 @@
                    },
               data: data,
               success: function (data) {
-                swal("Deleted!", "Your Training Data  has been deleted.", "success");
-                window.location.reload();
+                swal("Deleted!", "Your Training Data  has been deleted.", "success").then(function(){
+                    window.location.reload();
+
+                })
               },
               error: function (data) {
-                swal("NOT Deleted!", "Something blew up.", "error");
+                swal("Cancelled", "Your Training Data is safe :)", "success");
               }
             });
-          } else {
-            swal("Cancelled", "Your Training Data is safe :)", "success");
-          }
-        });
-    
-      return false;
+
+            } else {
+                swal("Cancelled", "Your Training Data is safe :)", "success");
+                }
+});
     
      }
         </script>

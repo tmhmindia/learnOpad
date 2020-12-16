@@ -1,5 +1,4 @@
 from django.db import models
-from LandingPage.models import Course
 from myauth.models import CustomUser
 import datetime
 class RazorPayDetails(models.Model): 
@@ -46,6 +45,7 @@ class OrderCourses(models.Model):
         course_price=self.course.price
         revenu=course_price*(5/100)
         return revenu
+    
 
 class Revenue(models.Model):
     STATUS=(
@@ -64,6 +64,7 @@ class Revenue(models.Model):
         for revenue in revenues:
             total+=revenue.admin_revenue
         return total
+    
 
 class FacilitatorSubscriptions(models.Model):
     PLAN=(

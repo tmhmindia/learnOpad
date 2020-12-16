@@ -1,5 +1,6 @@
 {% extends 'LandingPage/base.html' %}
 {% load static %}
+{% load has_group %}
 <!------------------------------------ -->
 
 {% block title %}
@@ -296,35 +297,96 @@ Categories
                              {% for course in courses %}
   				            {% cycle "<div class='row courses_row'>" "" %}
     			                
-                                <!-- Course -->
-                                <div class="col-lg-6 course_col">
-                                    <a href='{% url 'course' course.Cid %}' class="stretched-link">
-                                    <div class="course">
-                                        <div class="course_image"><img src="{{course.thumbnail.url}}" alt=""></div>
-                                        <div class="course_body">
-                                            <h3 class="course_title"><a href="{% url 'course' course.Cid %}" class="stretched-link">{{course.title}}</a></h3>
-                                            <div class="course_teacher">{{course.offering.all.0.name}}</div>
-                                            <div class="course_text">
-                                                <p>{{course.level}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="course_footer">
-                                            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-                                                <div class="course_info">
-                                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                    <span>{{ course.enroll.all | length }}</span>
-                                                </div>
-                                                <div class="course_info">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>{{course.no_of_ratings}} Ratings</span>
-                                                </div>
-                                                <div class="course_price ml-auto">{{course.price}}</div>
-                                            </div>
+                               {% if request.user|has_group:"Learners" %}
+                               {% if course in request.user.learner.enrolled.all %}
+                               <div class="col-lg-6 course_col">
+                                <a href='{% url 'course' course.Cid %}' class="stretched-link">
+                                <div class="course">
+                                    <div class="course_image"><img src="{{course.thumbnail.url}}" alt=""></div>
+                                    <div class="course_body">
+                                        <h3 class="course_title"><a href="{% url 'course' course.Cid %}" class="stretched-link">{{course.title}}</a></h3>
+                                        <div class="course_teacher">{{course.offering.all.0.name}}</div>
+                                        <div class="course_text">
+                                            <p>{{course.level}}</p>
                                         </div>
                                     </div>
-                                    </a>
+                                    <div class="course_footer">
+                                        <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+                                            <div class="course_info">
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                <span>{{ course.enroll.all | length }}</span>
+                                            </div>
+                                            <div class="course_info">
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <span>{{course.no_of_ratings}} Ratings</span>
+                                            </div>
+                                            <div class="course_price ml-auto">Enrolled</div>
+                                        </div>
+                                    </div>
                                 </div>
+                                </a>
+                            </div>
 
+                               {% else %}
+                               <div class="col-lg-6 course_col">
+                                <a href='{% url 'course' course.Cid %}' class="stretched-link">
+                                <div class="course">
+                                    <div class="course_image"><img src="{{course.thumbnail.url}}" alt=""></div>
+                                    <div class="course_body">
+                                        <h3 class="course_title"><a href="{% url 'course' course.Cid %}" class="stretched-link">{{course.title}}</a></h3>
+                                        <div class="course_teacher">{{course.offering.all.0.name}}</div>
+                                        <div class="course_text">
+                                            <p>{{course.level}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="course_footer">
+                                        <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+                                            <div class="course_info">
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                <span>{{ course.enroll.all | length }}</span>
+                                            </div>
+                                            <div class="course_info">
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <span>{{course.no_of_ratings}} Ratings</span>
+                                            </div>
+                                            <div class="course_price ml-auto"><span>&#x20B9; {{course.getOfferPrice}}</span>&#x20B9; {{course.price}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </a>
+                            </div>
+
+                               {% endif %}
+                               {% else %}
+                               <div class="col-lg-6 course_col">
+                                <a href='{% url 'course' course.Cid %}' class="stretched-link">
+                                <div class="course">
+                                    <div class="course_image"><img src="{{course.thumbnail.url}}" alt=""></div>
+                                    <div class="course_body">
+                                        <h3 class="course_title"><a href="{% url 'course' course.Cid %}" class="stretched-link">{{course.title}}</a></h3>
+                                        <div class="course_teacher">{{course.offering.all.0.name}}</div>
+                                        <div class="course_text">
+                                            <p>{{course.level}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="course_footer">
+                                        <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+                                            <div class="course_info">
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                <span>{{ course.enroll.all | length }}</span>
+                                            </div>
+                                            <div class="course_info">
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <span>{{course.no_of_ratings}} Ratings</span>
+                                            </div>
+                                            <div class="course_price ml-auto"><span>&#x20B9; {{course.getOfferPrice}}</span>&#x20B9; {{course.price}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </a>
+                            </div>
+
+                               {% endif %}
                             {% cycle "" "</div>" %}
                             
                             {% endfor %}

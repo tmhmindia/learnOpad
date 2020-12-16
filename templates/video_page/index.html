@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     {% load static %}
+    {% load has_group %}
 
 <head>
     <meta charset="UTF-8">
@@ -181,29 +182,45 @@
           
         </ul>
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href="index.html"><img src="{% static 'facilitators/assets/images/logotiny.png' %}" alt="logo" style="width: 70px; height: auto;"/>&nbsp; LearnOpad</a>
-          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{% static 'facilitators/assets/images/logotiny.png' %}" alt="logo" style="width: 70px; height: auto;"/>&nbsp;LearnOpad</a>
+          <a class="navbar-brand brand-logo" href="/home"><img src="{% static 'facilitators/assets/images/logotiny.png' %}" alt="logo" style="width: 70px; height: auto;"/>&nbsp; LearnOpad</a>
+          <a class="navbar-brand brand-logo-mini" href="/home"><img src="{% static 'facilitators/assets/images/logotiny.png' %}" alt="logo" style="width: 70px; height: auto;"/>&nbsp;LearnOpad</a>
         </div>
         <ul class="navbar-nav navbar-nav-right">
           
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <span class="nav-profile-name">Vishal Gupta</span>
+              <span class="nav-profile-name">{{request.user.get_full_name}}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="">
+              {% if request.user|has_group:"Learners" %}
+
+              <a class="dropdown-item" href="{% url 'learner_profile' %}">
                 <i class="fas fa-user-circle text-primary"></i>
                 Profile
               </a>
-              <a class="dropdown-item" href="">
+              <a class="dropdown-item" href="{% url 'learner_settings' %}">
                 <i class="fas fa-user-cog text-primary"></i>
-                Settings
+                Login & security
               </a>
-              <a class="dropdown-item" href="">
+              <a class="dropdown-item" href="{% url 'logout' %}">
                 <i class="mdi mdi-logout text-primary"></i>
                 Logout
               </a>
+              {% else %}
+              <a class="dropdown-item" href="{% url 'profile' request.user.user.facilitator.Fid %}">
+                <i class="fas fa-user-circle text-primary"></i>
+                Profile
+              </a>
+              <a class="dropdown-item" href="{% url 'settings'%}">
+                <i class="fas fa-user-cog text-primary"></i>
+                Settings
+              </a>
+              <a class="dropdown-item" href="{% url 'logout' %}">
+                <i class="mdi mdi-logout text-primary"></i>
+                Logout
+              </a>
+              {% endif %}
             </div>
           </li>
           
@@ -220,41 +237,12 @@
       <!-- partial:partials/_settings-panel.html -->
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'dashboard' %}">
-              <i class="fas fa-id-card"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'createcourse' %}">
-              <i class="fa fa-globe"></i>
-              <span class="menu-title">Create courses</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'earnings' %}">
-              <i class="fa fa-bar-chart "></i>
-              <span class="menu-title">My Earnings</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'explorecourses' %}">
-              <i class="fa fa-globe "></i>
-              <span class="menu-title">Explore Courses</span>
-            </a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="{% url 'support'%}">
-                  <i class="fa fa-heart "></i>
-                <span class="menu-title">Support</span>
-              </a>
-            </li>
-          
-        </ul>
-      </nav>
+      {% if request.user|has_group:"Facilitators" %}
+      {% include "video_page/facilitator_video_nav.html" %}
+      {% else %}
+      {% include "video_page/learner_video_nav.html" %}
+
+      {% endif %}
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">

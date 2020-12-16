@@ -102,18 +102,18 @@
                                     <!-- List -->
                                     <ul class="nav nav-sub nav-sm nav-tabs nav-list-y-2 mb-4">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="index.html">
+                                            <a class="nav-link" href="{% url 'learner_index'%}">
                                                 <i class="fas fa-id-card nav-icon"></i>Dashboard
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="Profile Info _ Front - Responsive Website Template.html">
+                                            <a class="nav-link active" href="{% url 'learner_profile'%}">
                                                 <i class="fas fa-id-card nav-icon"></i> Personal info
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="Login & Security _ Front - Responsive Website Template.html">
-                                                <i class="fas fa-shield-alt nav-icon"></i> Login &amp; security
+                                            <a class="nav-link" href="{% url 'learner_settings'%}">
+                                                <i class="fas fa-shield-alt nav-icon"></i> settings
                                             </a>
                                         </li>
 
@@ -151,7 +151,7 @@
                                             <div class="media-body">
                                                 <div class="btn btn-sm btn-primary file-attachment-btn mb-2 mb-sm-0 mr-2">Upload Photo
                                                     <input type="file" name="profile" class="js-file-attach file-attachment-btn-label" id="avatarUploader" data-hs-file-attach-options="{
-                                    &quot;textTarget&quot;: &quot;#avatarImg&quot;,
+                                    &quot;textTarget&quot;: &quot;.avatar-img&quot;,
                                     &quot;mode&quot;: &quot;image&quot;,
                                     &quot;targetAttr&quot;: &quot;src&quot;
                                  }">
@@ -193,7 +193,7 @@
                         &quot;container&quot;: &quot;#addPhoneFieldContainer&quot;,
                         &quot;defaultCreated&quot;: 0
                       }">
-                                    <label for="phoneLabel" class="col-sm-3 col-form-label input-label">Phone <span class="input-label-secondary">(Optional)</span></label>
+                                    <label for="phoneLabel" class="col-sm-3 col-form-label input-label">Phone </label>
 
                                     <div class="col-sm-9">
                                         <div class="input-group align-items-center">
@@ -208,7 +208,7 @@
                                 <div class="row form-group">
                                     <label for="dob" class="col-sm-3 col-form-label input-label">DOB</label>
                                     <div class="col-sm-9">
-                                        <input type="date" class="form-control" name="dob" aria-label="dob" value="{{ourdata.DOB}}">
+                                        <input type="date" class="form-control" name="dob" aria-label="dob" value="{{ourdata.DOB|date:'Y-m-d'}}">
                                     </div>
                                 </div>
                                 <!-- End Form Group -->

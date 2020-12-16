@@ -13,8 +13,7 @@ class OnlineCounsellingDetails(models.Model):
     councelling_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50,null=True,blank=True)
     email = models.CharField(max_length=30,null=False,blank=False)
-    phone_regex = RegexValidator(regex=r'^[6-9]\d{9}$', message="enter valid phone number")
-    phone_number = models.CharField(validators=[phone_regex], max_length=15, blank=True) 
+    phone_number = models.CharField(max_length=15, blank=True) 
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     def __str__(self):
@@ -76,6 +75,7 @@ class Course(models.Model):
         )
     Level=(
         ('Beginner','Beginner'),
+        ('Intermideate','Intermediate'),
         ('Advanced','Advanced')
     )
     Cid=models.AutoField(primary_key=True)
@@ -234,19 +234,9 @@ class Queries(models.Model):
 
 
 class ContactUs(models.Model):
-    Categories=(
-        ('Categories','Categories..'),
-        ('Learners','Learners'),
-        ('Facilitators','Facilitators'),
-        ('Corporates','Corporates'),
-        ('Campus','Campus'),
-        ('Others','Others'),
-        
-
-    )
+   
     name=models.CharField(max_length=50)
     email=models.EmailField(max_length=100)
-    categories=models.CharField(max_length=100,choices=Categories)
     mobile=models.CharField(max_length=10)
     message=models.TextField(max_length=200)
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)

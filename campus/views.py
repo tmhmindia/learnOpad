@@ -11,9 +11,9 @@ def campus_page(request):
         course=Course.objects.get(Cid=request.POST.get('courses'))
         campus=Campus(name=request.POST.get('name'),email=request.POST.get('email'),campus=request.POST.get('campus'),course=course)
         campus.save()
-        CorporateCampusToAdminEmail(campus)
+        CorporateCampusToAdminEmail(campus,campus.campus)
         return JsonResponse("success",safe=False)
     else:
-        courses=Course.objects.all()
+        courses=Course.objects.filter(approve=True)
         context={'courses':courses}
     return render(request,'campus/index.html',context)

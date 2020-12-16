@@ -22,13 +22,13 @@ from facilitators.api.views import CourseSerializers,offerSerializers
 from payment_gateway.models import *
 from django.core import serializers
 from .utils import *
-
+from mailing.views import ToAdminContactUsQuery
 
 
 # Landing  page
 def home(request):
-    
-    return render(request,'LandingPage/index.html')
+    facilitators=Facilitator.objects.all()
+    return render(request,'LandingPage/index.html',{'facilitators':facilitators})
 
 def cart(request):
     context = cartData(request)
@@ -40,8 +40,8 @@ def UpdateCart(request):
     data = json.loads(request.body)
     productId = data['productId']
     action = data['action']
-    CreateOrder(request,productId,action)
-    return JsonResponse('Item was added', safe=False)
+    response=CreateOrder(request,productId,action)
+    return JsonResponse(response)
 
 def searchbar(request):
     context={}
@@ -220,12 +220,14 @@ def contact(request):
     if request.method=='POST':
         form=ContactUsForm(request.POST)
         if form.is_valid():
-            form.save()
+            contactus=form.save()
+            ToAdminContactUsQuery(contactus)
             messages.success(request,f"Details Submitted Succesfully")
             return redirect('contactus')
-    form=ContactUsForm()
-    context={'form':form}
-    return render(request, 'LandingPage/contactus/contact.html',context)
+    else:
+        form=ContactUsForm()
+        context={'form':form}
+        return render(request, 'LandingPage/contactus/contact.html',context)
 
 #Landing page categories page
 def category(request):
@@ -290,7 +292,7 @@ def exploreCourses(request):
         course=Course.objects.filter(language__in=filter_lang) & course
     if filter_price:
         course=Course.objects.filter(price__in=filter_price) & course
-    paginator=Paginator(course.values(),6,orphans=1)
+    paginator=Paginator(course,6,orphans=1)
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)
     context={

@@ -50,7 +50,7 @@ def signup(request):
             if subscription is not None:
                 return redirect('/create_course')
             if payment :
-                return redirect('/Courses/Cart/')
+                return redirect("/Courses/Cart/?checkout='true'")
             return redirect('/')
         else:
             exist=True
@@ -110,13 +110,17 @@ class user_login(View):
                     subscription=request.GET.get('subscription',None)
                     if subscription is not None:
                         return redirect('/create_order')
+                    payment=request.GET.get('payment',None)
+                    if payment :
+                        return redirect("/Courses/Cart/?checkout='true'")
+                    if user.groups.filter(name='Admins').exists() or user.groups.filter(name='Staff').exists():
+                        return HttpResponseRedirect(reverse('dashboard_admin'))
                     if user.groups.filter(name='Facilitators').exists():
                         return HttpResponseRedirect(reverse('dashboard'))
-                    elif user.groups.filter(name='Learners').exists():
+                    if user.groups.filter(name='Learners').exists():
                         return HttpResponseRedirect(reverse('learner_index'))
-                    elif user.groups.filter(name='Admins').exists() or user.groups.filter(name='Admins').exists():
-                        return HttpResponseRedirect(reverse('dashboard_admin'))
-                    else:
+                   
+                    if user.groups.filter(name='Visiters').exists():
                         return HttpResponseRedirect(reverse('home')) 
                         
                 else:
@@ -172,13 +176,13 @@ def user_logout(request):
 
 
 # for handling ajax request for change password form of setting section of profile
-@login_required(login_url='/facilitator/login/')
+@login_required(login_url='/')
 def ChangePassword(request):
     suc_res = ''
     err_res = ''
-    current = request.GET.get('currentPassword', None)
-    newp = request.GET.get('newPassword', None)
-    confirmp = request.GET.get('confirmNewPassword', None)
+    current = request.POST.get('currentPassword', None)
+    newp = request.POST.get('newPassword', None)
+    confirmp = request.POST.get('confirmNewPassword', None)
 
 
     try:
@@ -187,6 +191,8 @@ def ChangePassword(request):
     except:
         print('NO USER FOUND')
         # print(handler.verify(current, obj.password))
+    print(current)
+    print(obj.password)
     if handler.verify(current, obj.password):
         obj.set_password(confirmp)
         obj.save()
@@ -201,6 +207,8 @@ def ChangePassword(request):
     data = {
             'msg': msg
         }
+    logout(request)
+
     return JsonResponse(data)
 
 
@@ -211,8 +219,6 @@ def ChangePassword(request):
 def forgot_password(request, pk=None):
     print('AYYYYYA')
     if request.method == 'GET':
-        print('GETTTTTTTTTTTT')
-        print(pk)
         u = CustomUser.objects.get(id=pk)
         print(u)
         #get_object_or_404(CustomUser, pk=pk)

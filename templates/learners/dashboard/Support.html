@@ -338,23 +338,22 @@ Support
     {% for i in data %}
     <div class="card border-success mb-3">
       <div class="card-header" style="text-align: left"><strong>{{ i.Lid.name }}</strong></div>
-      <div class="card-body" style="text-align: left">
+      <div class="card-body" style="text-align: left; padding:1.125rem;">
         <p class="card-text"></p>Query: {{ i.query }}</p>
       </div>
-      {% if i.reply == None %}
+      {% if i.replay == None %}
       <div class="card-footer" style="text-align: left">No replies yet</div>
       {% else %}
-      <div class="card-footer" style="text-align: left">Reply: {{ i.reply }}</div>
+      <div class="card-footer" style="text-align: left">Reply: {{ i.replay }}</div>
       {% endif %}
     </div>
     <br>
     {% endfor %}
   </div>
 
-  </div>
-
-  </div>
+  
 </section>
+
 
 
     <!-- Argon Scripts -->

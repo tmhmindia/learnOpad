@@ -40,16 +40,18 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Sub Category Form</h5>
-                                <form action="" method="post">
+                                <form action="" id="scategory" method="post">
                                     <div class="form-group">
                                         <label for="cat">Category</label>
-                                        <select name="cat" id="cat" class="form-control">
-                                            <option value="1">Information Technology</option>
+                                        <select name="cat" id="cate" class="form-control">
+                                            {% for cat in categories %}
+                                            <option value="{{cat.cat_id}}">{{cat.name}}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="subcatname">Sub Category Name</label>
-                                        <input type="text" id="subcatname" class="form-control">
+                                        <input type="text" id="sname" class="form-control">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </form>
@@ -68,20 +70,21 @@
                                     <table id="zero_config" class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
+                                                <th>SubCategory Name</th>
                                                 <th>Category Name</th>
-                                                <th>Sub Category Name</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
+                                            {% for subcat in subcategory %}
                                             <tr>
-                                                <th>Information Technology</th>
-                                                <th>Web development</th>
+                                                <th>{{subcat.name}}</th>
+                                                <th>{{subcat.cat_id.name}}</th>
                                                 <th> 
-                                                    <button type="button"  class="btn btn-danger btn-sm">Delete</button>
+                                                    <button type="button" onClick="DeleteCatSubcat('{{subcat.subCat_id}}',false)" class="btn btn-danger btn-sm">Delete</button>
                                                 </th>
                                             </tr>
+                                            {% endfor %}
                                            
                                             
                                         </tbody>
@@ -108,7 +111,83 @@
         <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
         <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
         <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
-        
+        <script>
+$("#scategory").submit(function(event){
+                event.preventDefault();
+                console.log($('#sname').val()+" "+$('#cate').val())
+                
+    $.ajax({
+      url: "{% url 'subcategory'%}",
+      data:{name:$('#sname').val(),cate:$('#cate').val()},
+      type: 'POST',
+
+      headers: {
+                        "X-CSRFTOKEN": "{{ csrf_token }}"
+                },
+    
+      success: function(data){
+        if(data.success){
+        swal("Done!", data.name+" is Created", "success").then(function(){ window.location.reload();})
+        }
+        else{
+            swal("Oops!", 'Something Went Wrong', "error")
+
+        }
+
+        }   
+     });
+      });
+
+
+
+
+
+            function DeleteCatSubcat(id,flag)
+            {
+                var data={};
+                if(flag)
+                {
+                    data['category']=id;
+                }
+                else{
+                    data['subcategory']=id;
+                }
+                
+            
+                swal({
+  title: "Are you sure?",
+  text: "You will not be able to recover this Category Data!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    $.ajax({
+              type: 'POST',
+              url: '{% url "delete_CatSubcat" %}',
+              headers: {
+                           "X-CSRFTOKEN": "{{ csrf_token }}"
+                   },
+              data: data,
+              success: function (data) {
+                swal("Deleted!", "Your category  has been deleted.", "success").then(function(){
+                    window.location.reload();
+
+                })
+              },
+              error: function (data) {
+                swal("Cancelled", "Your category Data is safe :)", "success");
+              }
+            });
+
+            } else {
+                swal("Cancelled", "Your Category Data is safe :)", "success");
+                }
+});
+    
+     }
+        </script>
        
         <script>
             /****************************************

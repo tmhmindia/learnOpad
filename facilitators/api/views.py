@@ -27,7 +27,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from LandingPage.models import *
 from facilitators.api.serializers import *
-
+from mailing.views import CourseCreationEmailToAdmin ,CourseCreationEmailToFacilitator
 
 # Facilitator Register API
 class CreateCourseApi(APIView):
@@ -44,11 +44,14 @@ class CreateCourseApi(APIView):
         subcat= subcategory_detail[0]
         subcategory_obj=SubCategory.objects.get(name=subcat)
         # calculate the duration in month + days
-        days=int(course_detail.get('days','50'))
+        print(course_detail)
+        days=int(course_detail.pop('days'))
         month=days//30
         day=int(days % 30)
         months=str(month)+" month "+str(day)+" days"
+
         #collect all the details in one dictionry "course_detail"
+        course_detail['days']=days
         course_detail['months']=months
         course_detail['video']=cvideo
         course_detail['thumbnail']=cthumbnail
@@ -57,8 +60,12 @@ class CreateCourseApi(APIView):
         course_obj = CourseSerializers(data=course_detail)
         if course_obj.is_valid(raise_exception=True):
             obj=course_obj.save()
+            obj.code="LPD-"+str(request.user.user.facilitator.Fid)+str(obj.Cid)
+            obj.save()
             offering=offer.objects.create(Cid=obj,Fid=request.user.user.facilitator)
             offering.save()
+            CourseCreationEmailToFacilitator(obj)
+            CourseCreationEmailToAdmin(obj)
         return Response({'success':'recorded Video is created'},status=201)
         
         # print(subcat)

@@ -2,6 +2,8 @@ from payment_gateway.models import *
 from LandingPage.models import *
 import json
 import razorpay
+from django.http import JsonResponse
+
 client = razorpay.Client(auth=("rzp_test_0G5HtLCg0WpC26", "y8iPiSBFRf8w2Y1W0L6Q7F55"))
 def CreateOrder(request,productId,action=None):
     customer = request.user
@@ -11,10 +13,16 @@ def CreateOrder(request,productId,action=None):
     if action == 'add':
         orderItem.save()
         request.session['order_id']=order.id
+        return {'action':True}
     if action == 'remove':
         #print(orderItem)
+        try:
+            del request.session['order_id']
+        except:
+            pass
         orderItem.delete()
-        del request.session['order_id']
+        return {'action':False,'product_id':product.Cid}
+
         #print(orderItem)
         
         

@@ -6,6 +6,8 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers.json import DjangoJSONEncoder
+from mailing.views import FacilitatorSuccessfullSubscription , ToAdminSuccessfullSubscriptionOfFacilitator,LearnerSuccessfullSubscription,ToAdminLearnerSuccessfullSubscription
+
 # razor pay account setup
 import razorpay
 client = razorpay.Client(auth=("rzp_test_0G5HtLCg0WpC26", "y8iPiSBFRf8w2Y1W0L6Q7F55"))
@@ -22,13 +24,12 @@ def create_order(request):
         data={}
         data["name"]=request.user.first_name+" "+request.user.last_name
         data["email"]=request.user.email
-        data['course']=request.POST.getlist('course')
+        # data['course']=request.POST.getlist('course')
         data["plan"]=request.POST.get('plan')
-        course=data['course']
-        catlist=[]
-        for id in course:
-            subcat=SubCategory.objects.get(subCat_id=id)
-            catlist.append(subcat.name)
+        # course=data['course']
+        applicant=Applicants.objects.get(user=request.user)
+        catlist=applicant.intrest.split(',')
+        
         if(data['plan']=='1'):
             data['order_amount']=1
         elif(data['plan']=='2'):
@@ -72,7 +73,7 @@ def create_order(request):
             
             # data that'll be send to the razorpay for
             context['order_id'] = order_id
-            my_order=FacilitatorSubscriptions.objects.create(user=request.user,plan= data['plan'])
+            my_order=FacilitatorSubscriptions.objects.create(user=request.user,plan= str(data['plan']))
             context['my_order_id']=my_order.id
             return render(request, 'payment_gateway/confirm_order.html',context)
             
@@ -89,11 +90,19 @@ def payment_status(request,order_id):
     order.status=True
     order.save()
     order_c=order.order_course.all()
-    learner=Learners.objects.create(name=order.customer.first_name+" "+order.customer.last_name,user=order.customer)
-    learner.save()
+    try:
+        learner=Learners.objects.get(user=order.customer)
+    except:
+        learner=Learners.objects.create(name=order.customer.first_name+" "+order.customer.last_name,user=order.customer)
+        learner.save()
     for enroll_course in order_c:
         learner.enrolled.add(enroll_course.course)
         learner.save()
+        #send mails to admin and learner
+        obj=enrollment.objects.get(Lid=learner.Lid,Cid=enroll_course.course.Cid)
+        LearnerSuccessfullSubscription(obj)
+        ToAdminLearnerSuccessfullSubscription(obj)
+
         #generate revenu for each course
         revenue=Revenue.objects.create(admin_revenue=enroll_course.get_admin_revenue(),facilitator_revenue=enroll_course.get_facilitator_revenue(),revenue_item=enroll_course,status='pending')
         chatgroup=None
@@ -150,6 +159,8 @@ def payment_verify(request):
 
         if plan is not None:
             obj=FacilitatorSubscriptions.objects.get(id=int(plan))
+            FacilitatorSuccessfullSubscription(obj.user)
+            ToAdminSuccessfullSubscriptionOfFacilitator(obj)
         else:
             obj=Order.objects.get(id=int(Oid))
 

@@ -27,7 +27,7 @@ def send_email(subject, text_content, html_content=None, sender=None, recipient=
     email.content_subtype = 'html'  # set the primary content to be text/html
     EmailThread(email).start()
 # After successfull Registration
-def successOnRegistration(user,msg):
+def successOnRegistration(user):
     recipient = [user.email,]
     sender =settings.EMAIL_HOST_USER # 
     context={
@@ -48,7 +48,7 @@ def successOnShortlisted(user):
     context={
         'name':user.first_name+" "+user.last_name,
         'msg':"We are pleased to inform you that we have reviewed your profile and shortlisted you as a facilitator. We are extremely pleased with this collaboration and look forward to your long-term commitment to our organization. ",
-        'link':'https://www.learnopad.com/create_order'
+        
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
    
@@ -59,7 +59,6 @@ def successOnShortlisted(user):
 
 # inform about facilitator registration
 def RegistrationSuccessAdminEmail(name,catlist):
-    subject = 'About collaboration'
     sender = settings.EMAIL_HOST_USER
     recipient = ['vijaygwala97@gmail.com',]
     context={
@@ -72,13 +71,12 @@ def RegistrationSuccessAdminEmail(name,catlist):
      
     send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
 
-def CorporateCampusToAdminEmail(org):
-    subject = 'About Training'
+def CorporateCampusToAdminEmail(org,orgname):
     sender = settings.EMAIL_HOST_USER
     recipient = ['vijaygwala97@gmail.com',]
     context={
         'name':"Vijay Gwala",
-        'msg':org.organization+" has asked for the "+org.course.title+" course. Acknowledge their request and attach a payment link to it as a further step."
+        'msg':orgname+" has asked for the "+org.course.title+" course. Acknowledge their request and attach a payment link to it as a further step."
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
    
@@ -86,13 +84,13 @@ def CorporateCampusToAdminEmail(org):
      
     send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
 # when course is created bt not approved
-def CourseCreationEmailToAdmin(Course):
+def CourseCreationEmailToAdmin(course):
     subject = 'About Course creation'
     sender = settings.EMAIL_HOST_USER
     recipient = ['vijaygwala97@gmail.com',]
     context={
         'name':"vijay Gwala",
-        'msg':'''The course '''+course.offering.all[0].name + '''have created on the LearnOpad Platform is successfully uploaded and therefore open to interested aspirants to enroll.
+        'msg':'''The course '''+course.offering.all()[0].name + '''have created on the LearnOpad Platform is successfully uploaded and therefore open to interested aspirants to enroll.
 Course name : '''+course.title+'''
 Course code : '''+course.code+'''
 NOTE : The course code provided above is unique to his '''+ course.title +''' course, you can use that unique code to edit your course. Don't share it with anyone.'''
@@ -108,7 +106,7 @@ def CourseApprovalEmailToAdmin(Course):
     recipient = ['vijaygwala97@gmail.com',]
     context={
         'name':"vijay Gwala",
-        'msg':'''The course '''+course.offering.all[0].name + '''have created on the LearnOpad Platform is successfully Approved therefore open to interested aspirants to enroll.
+        'msg':'''The course '''+course.offering.all()[0].name + '''have created on the LearnOpad Platform is successfully Approved therefore open to interested aspirants to enroll.
 Course name : '''+course.title+'''
 Course code : '''+course.code+'''
 NOTE : The course code provided above is unique to his '''+ course.title +''' course, you can use that unique code to edit your course. Don't share it with anyone.'''
@@ -119,16 +117,16 @@ NOTE : The course code provided above is unique to his '''+ course.title +''' co
      
     send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
 
-def CourseApprovalEmailToFacilitator(Course):
-    subject = 'About Course Creation'
+def CourseApprovalEmailToFacilitator(course):
     sender = settings.EMAIL_HOST_USER
-    recipient = [course.offering.all[0].user.user.email,]
+    recipient = [course.offering.all()[0].user.user.email,]
     context={
-        'name':course.offering.all[0].name,
+        'name':course.offering.all()[0].name,
         'msg':'''The course you have created on the LearnOpad Platform is successfully Approved and therefore open to interested aspirants to enroll.
 Course name : '''+course.title+'''
 Course code : '''+course.code+'''
-NOTE : The course code provided above is unique to your '''+ course.title +''' course, you can use that unique code to edit your course. Don't share it with anyone.'''
+NOTE : Your request for course approval is accepted and now your course is live on our learnOpad platform and open for the enrolment. 
+Please be ready with the schedule and the required PPTs/documents.'''
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
    
@@ -138,12 +136,11 @@ NOTE : The course code provided above is unique to your '''+ course.title +''' c
 
 
 # when course is created bt not approved 
-def CourseCreationEmailToFacilitator(Course):
-    subject = 'About Course Creation'
+def CourseCreationEmailToFacilitator(course):
     sender = settings.EMAIL_HOST_USER
-    recipient = [course.offering.all[0].user.user.email,]
+    recipient = [course.offering.all()[0].user.user.email,]
     context={
-        'name':course.offering.all[0].name,
+        'name':course.offering.all()[0].name,
         'msg':'''The course you have created on the LearnOpad Platform is successfully uploaded and therefore open to interested aspirants to enroll.
 Course name : '''+course.title+'''
 Course code : '''+course.code+'''
@@ -157,7 +154,6 @@ NOTE : The course code provided above is unique to your '''+ course.title +''' c
 
 # Successfull Facilitator Subscription 
 def FacilitatorSuccessfullSubscription(user):
-    subject = 'Thank You for Subscription'
     sender = settings.EMAIL_HOST_USER
     recipient = [user.email,]
     context={
@@ -170,8 +166,182 @@ def FacilitatorSuccessfullSubscription(user):
      
     send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
 
+def ToAdminSuccessfullSubscriptionOfFacilitator(subscription_plan):
+    sender = settings.EMAIL_HOST_USER
+    recipient = ['vijaygwala97@gmail.com',]
+    context={
+        'name':"vijay"+" "+"Gwala",
+        'msg':subscription_plan.user.get_full_name()+" has successfully subscribed for this "+subscription_plan.plan+" and can access the facilitator dashboard."
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+
+def CourseRejection(course):
+    sender = settings.EMAIL_HOST_USER
+    recipient = [course.offering.all()[0].user.user.email,]
+    context={
+        'name':course.offering.all()[0].name,
+        'msg':'''Thank you for showing efforts and requesting for '''+ course.title +'''course creation.
+However, we can't approve your course because we already have similar courses on our platform. Please review your courses and submit again.'''
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+def ToAdminDeleteCourseVideo(video):
+    sender = settings.EMAIL_HOST_USER
+    recipient = ['vijaygwala97@gmail.com',]
+    context={
+        'name':"vijay"+" "+"Gwala",
+        'msg':video.course.offering.all()[0].name+" has deleted "+ video.title +" video from "+ video.course.title+ " course."
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+def ToAdminUploadCourseVideo(video):
+    sender = settings.EMAIL_HOST_USER
+    recipient = ['vijaygwala97@gmail.com',]
+    context={
+        'name':"vijay"+" "+"Gwala",
+        'msg':video.course.offering.all()[0].name+" has Uploaded "+ video.title +" video from "+ video.course.title+ " course."
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+
+def LearnerSuccessfullSubscription(enroll):
+    sender = settings.EMAIL_HOST_USER
+    recipient = [enroll.Lid.user.email,]
+    context={
+        'name':enroll.Lid.name,
+        'msg':'''Congratulations on enrolling in '''+ enroll.Cid.title +''' Good to see your inclination towards learning and enhancing your skill set. Hope you enjoy the course and learning with us!
+                            you can use to open your course on your Learner's dashboard.'''
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+
+
+def ToAdminLearnerSuccessfullSubscription(enroll):
+    sender = settings.EMAIL_HOST_USER
+    recipient = ["vijaygwala97@gmail.com",]
+    context={
+        'name':"vijay gwala",
+        'msg':enroll.Lid.name+''' has successfully enrolled for '''+ enroll.Cid.title +'''course of '''+enroll.Cid.offering.all()[0].name
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+
+def ToAdminContactUsQuery(contactus):
+    sender = settings.EMAIL_HOST_USER
+    recipient = ["vijaygwala97@gmail.com",]
+    context={
+        'name':"vijay gwala",
+        'msg':'''Below is query we got from '''+contactus.name +''' 
+        '''+ contactus.message 
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+
+def ToAdminGiveStaffPrivilages(staff):
+    sender = settings.EMAIL_HOST_USER
+    recipient = ["vijaygwala97@gmail.com",]
+    context={
+        'name':"vijay gwala",
+        'msg':"You have approved "+staff.get_full_name() +" to access the admin panel and use the privileges."
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+
+def ToStaffGiveStaffPrivileges(staff):
+    sender = settings.EMAIL_HOST_USER
+    recipient = [staff.user.email,]
+    context={
+        'name':staff.user.get_full_name(),
+        'msg':'''Congratulations you have been approved to access the admin privileges.
+Below is your Credentials.
+email : '''+staff.user.email+'''
+password : '''+staff.user.password
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+def ToLearnerForCertificate(certificate):
+    sender = settings.EMAIL_HOST_USER
+    recipient = [certificate.learner.user.email,]
+    context={
+        'name':certificate.learner.name,
+        'msg':'''Congratulations! You’ve successfully completed '''+ certificate.course.title +''' On behalf of LearnOpad we are pleased to issue your official Introduction to CSS3 Certificate.
+    Now that you’ve earned your Certificate, why not share it with your network?
+    Ways to share:
+    Add your '''+certificate.course.title+''' Certificate directly to your LinkedIn profile
+Download PDF to print or share
+Share on social media and your LinkedIn Feed
+Once again, congratulations on your achievement.
+Keep it up, '''
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+
+def ToAdminCouncellingDetail(councelling):
+    sender = settings.EMAIL_HOST_USER
+    recipient = ["vijaygwala97@gmail.com",]
+    context={
+        'name':"vijay gwala",
+        'msg':'''There is a request for counselling. Below are the details refer them and proceed accordingly.
+              name :  '''+councelling.name+ '''
+              phone : '''+councelling.phone_number+'''
+              email : '''+councelling.email
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+
+def FacilitatorApprovalWithoutSubscription(applicant):
+    sender = settings.EMAIL_HOST_USER
+    recipient = [applicant.user.email,]
+    context={
+        'name':applicant.name,
+        'msg':"Congratulations. Let's begin your journey with LearnOpad Platform. You are approved to access the facilitator dashboard and create your courses."
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+
+
+
+
+
 def SHORTLIST(request):
     id=request.POST.get('id',None)
     user=CustomUser.objects.get(id=int(id))
     successOnShortlisted(user)
-    return JsonResponse({'name':user.get_full_name})
+    return JsonResponse({'name':user.get_full_name()})

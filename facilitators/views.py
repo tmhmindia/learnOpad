@@ -41,7 +41,8 @@ from django.utils.datastructures import MultiValueDictKeyError
 from myauth.decoraters import *
 from django.core.paginator import Paginator
 from payment_gateway.models import Revenue
-
+from django.core import serializers
+from mailing.views import *
 
 
 #facilitator page
@@ -50,7 +51,7 @@ def facilitator_page(request):
 
     
 @login_required(login_url='/facilitator/login/')
-@allowed_users(['Facilitators'])
+@allowed_Facilitator_Dashboard()
 def facilitator_Dashboard_Landing_page(request):
    #by saurabh
     print(request.user)
@@ -120,14 +121,14 @@ def facilitator_Dashboard_Landing_page(request):
 
 
 @login_required(login_url='/facilitator/login/')
-@allowed_users(['Facilitators'])
+@allowed_Facilitator_Dashboard()
 def facilitator_Dashboard_myearnings_page(request,pk):
     revenues=Revenue.objects.filter(revenue_item__course__offering__Fid=pk)
     return render(request, 'facilitators/Dashboard/my_earnings.html',{'revenues':revenues})
 
 
 @login_required(login_url='/facilitator/login/')
-@allowed_users(['Facilitators'])
+@allowed_Facilitator_Dashboard()
 def facilitator_Dashboard_explore_courses_page(request):   
     # r=requests.get('http://127.0.0.1:8000/facilitator/api/dashboard/explore')
     # data=json.loads(r.text)
@@ -163,7 +164,7 @@ def facilitator_Dashboard_explore_courses_page(request):
 
 
 @login_required(login_url='/facilitator/login/')
-@allowed_users(['Facilitators'])
+@allowed_Facilitator_Dashboard()
 def facilitator_Dashboard_support_page(request):
     appli=Applicants.objects.get(user=request.user)
     faci=Facilitator.objects.get(user=appli)
@@ -180,7 +181,7 @@ def facilitator_Dashboard_support_page(request):
 
 
 @login_required(login_url='/facilitator/login/')
-@allowed_users(['Facilitators'])
+@allowed_Facilitator_Dashboard()
 def facilitator_Dashboard_create_course_page(request):
     audience_list=Audience.objects.values('audience')
     category=Category.objects.all()
@@ -195,7 +196,7 @@ def facilitator_Dashboard_create_course_page(request):
     return render(request, 'facilitators/Dashboard/create_course.html',context)
 
 @login_required(login_url='/facilitator/login/')
-@allowed_users(['Facilitators'])
+@allowed_Facilitator_Dashboard()
 def facilitator_Dashboard_settings_page(request):
     return render(request, 'facilitators/Dashboard/settings.html')
 
@@ -204,7 +205,7 @@ def facilitator_Dashboard_settings_page(request):
 
 
 @login_required(login_url='/facilitator/login/')
-@allowed_users(['Facilitators'])
+@allowed_Facilitator_Dashboard()
 @api_view(['GET', 'POST'])
 def facilitator_Profile_page(request,pk):
 
@@ -222,8 +223,7 @@ def facilitator_Profile_page(request,pk):
         #for i in request.FILES:
         if request.FILES:
             ourdata.profile=request.FILES['profile']
-        else:
-            ourdata.profile='default/profile.png'
+        
         firstname = request.POST.get('firstName')
         lastname = request.POST.get('lastName')
         ourdata.name=str(firstname)+" "+str(lastname)
@@ -250,7 +250,7 @@ def facilitator_Profile_page(request,pk):
 
 # for handling ajax request for change password form of setting section of profile
 @login_required(login_url='/facilitator/login/')
-@allowed_users(['Facilitators'])
+@allowed_Facilitator_Dashboard()
 def ChangePassword(request):
     suc_res = ''
     err_res = ''
@@ -318,7 +318,7 @@ def aboutfacilitator(request,pk):
 
 
 #forgot password view ------------------------------- By Saurabh Gujjar
-@allowed_users(['Facilitators','Visiters','Learners'])
+@allowed_Facilitator_Dashboard()
 def forgot_password(request, pk=None):
     if request.method == 'GET':
         print(pk)
@@ -395,8 +395,10 @@ def GetVideos(request):
             return JsonResponse(data)
         else:
             video=CourseVideo.objects.get(Vid=Vid)
+            ToAdminDeleteCourseVideo(video)
             video.delete()
             data={'delete':'success'}
+
             return HttpResponseRedirect(reverse('createcourse'))
 
 def UpdateVideos(request):
@@ -407,12 +409,49 @@ def UpdateVideos(request):
         Cid=request.POST.get('course_id')
         course=Course.objects.get(Cid=Cid)
         Course_video=CourseVideo(title=details.get('title'),description=details.get('description'),video=video,thumbnail=thumbnail,course=course)
-        Course_video.save()
-
+        course_video=Course_video.save()
         return JsonResponse("success",safe=False)
     
         
+def UpdateCourse(request):
+    if request.method == "POST":
+        Cid=request.POST.get('Cid',None)
+        updated_data=request.POST
+        course=Course.objects.get(Cid=int(Cid))
+        course.title=updated_data.get('title',None)
+        course.description=updated_data.get('description',None)
+        course.level=updated_data.get('level',None)
+        course.language=updated_data.get('language',None)
+        course.price=updated_data.get('price',None)
+        if(course.days == updated_data.get('days',None)):
+            pass 
+        else:
+            days=int(updated_data.get('days',None))
+            month=days//30
+            day=int(days % 30)
+            months=str(month)+" month "+str(day)+" days" 
+            course.days=updated_data.get('days',None)
+            course.months=months
+        course.audience=updated_data.get('audience',None)
+        if request.FILES.get('video',None):
+            course.video=request.FILES['video']
+        if request.FILES.get('thumbnail',None):
+            course.thumbnail=request.FILES['thumbnail']
+        if course.subCat_id.subCat_id == int(updated_data.get('subCat_id',None)):
+            pass
+        else:
+            sub=SubCategory.objects.get(subCat_id=int(updated_data.get('subCat_id',None)))
+            course.subCat_id=sub
+        course.save()
+        return JsonResponse({"name":course.title})
 
+
+
+    else:
+        id=request.GET.get('id',None)
+        course=Course.objects.get(Cid=int(id))
+        serialized_object = serializers.serialize('python', [course,])
+        return JsonResponse(serialized_object,safe=False)
 
 
             

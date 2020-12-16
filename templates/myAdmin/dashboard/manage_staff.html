@@ -54,17 +54,17 @@
                                     <h4 class="card-title">ADD Staff</h4>
                                     <div class="form-group ">
                                         <label for="fname" class=" text-right control-label col-form-label">Name</label>
-                                        <input type="text" class="form-control" id="fname" value=""placeholder="Name Here">
+                                        <input type="text" class="form-control" id="name" placeholder="Name Here">
                                     </div>
                                     <div class="form-group ">
                                         <label for="email" class=" text-right control-label col-form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" value=""placeholder="Email Here">
+                                        <input type="email" class="form-control" id="email" placeholder="Email Here">
                                     </div>
                                     <div class="form-group ">
                                         <label for="password" class=" text-right control-label col-form-label">password</label>
-                                        <input type="password" class="form-control" id="password" value=""placeholder="password Here">
+                                        <input type="password" class="form-control" id="password" placeholder="password Here">
                                     </div>
-                                    <button class="btn btn-primary">Create</button>
+                                    <button id="staffbtn" class="btn btn-primary">Create</button>
                                 </div>
                             </form>
                         </div>
@@ -85,14 +85,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for learner in learners %}
+                                            {% for staff_user in staff %}
                                             <tr>
-                                                <th>Vijay Gwala</th>
-                                                <th>vijay@gmail.com</th>
+                                                <th>{{staff_user.user.get_full_name }}</th>
+                                                <th>{{staff_user.user.email }}</th>
                                                 
                                                 <th> 
                                                     
-                                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                                    <button type="button" onClick="DeleteUser('{{staff_user.user.id}}')" class="btn btn-danger btn-sm">Delete</button>
                                             </th>
                                     
                                             </tr>
@@ -127,8 +127,92 @@
     <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
-    
-   
+    <script>
+
+function DeleteUser(id)
+        {
+
+            swal({
+  title: "Are you sure?",
+  text: "You will not be able to recover this Learner Data!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    $.ajax({
+          type: 'POST',
+          url: '{% url "delete_user" %}',
+          headers: {
+                       "X-CSRFTOKEN": "{{ csrf_token }}"
+               },
+          data: {id : id},
+          success: function (data) {
+            swal("Deleted!", "Your course  has been deleted.","success").then(function(){
+                window.location.reload()
+            });
+          },
+          error: function (data) {
+            swal("NOT Deleted!", "Something blew up.", "error");
+          }
+        });
+
+  } else {
+    swal("Done !", "Your Data is Safe", "success");
+
+
+  }
+});
+
+
+
+
+
+         
+        }
+
+
+
+    $("#staffbtn").click(function(event){
+        event.preventDefault();
+        var formData = new FormData();
+        formData.append('name',$('#name').val());
+        formData.append('email',$('#email').val());
+        formData.append('password',$('#password').val());
+       
+        $.ajax({
+        url: "{% url 'staff' %}",
+        async: false,
+        data: formData,
+        contentType: false,
+        processData: false,
+        headers: {
+                       "X-CSRFTOKEN": "{{ csrf_token }}"
+               },
+        type: 'POST',
+        cache: false,
+        
+        error: function(xhr, status, error) {
+        alert(error);
+        },
+        success: function(response) {
+            if(response.success){
+                    swal("Done!", "Staff User is Successfully Created", "success").then(function(){
+                        window.location.reload();
+                    });
+            }
+            else{
+                swal("Oops!", "Staff User is Not Created", "error");
+
+            }
+        
+        }
+        });
+        
+        
+        });
+           </script>
     <script>
         /****************************************
          *       Basic Table                   *

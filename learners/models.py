@@ -3,7 +3,7 @@ from myauth.models import *
 from facilitators.models import *
 from LandingPage.models import *
 from django.utils import timezone
-
+from datetime import  timedelta
 # Create your models here.
 class Learners(models.Model):
     Lid=models.AutoField(primary_key=True)
@@ -17,7 +17,7 @@ class Learners(models.Model):
     state=models.CharField(max_length=100,blank=True,null=True)
     zipcode=models.CharField(max_length=7,blank=True,null=True)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,null=True,related_name='learner')
-    enrolled=models.ManyToManyField(Course, through='enrollment',related_name = 'enroll')
+    enrolled=models.ManyToManyField('LandingPage.Course', through='enrollment',related_name = 'enroll')
     status=models.CharField(max_length=100,null=True,blank=True,default='Active')
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
@@ -32,19 +32,26 @@ class Learners(models.Model):
         return enrollment.objects.filter(Lid=self).count()
     def GetCourses(self):
         return enrollment.objects.filter(Lid=self)
-    
+    def getInitialGroup(self):
+        groups=self.user.groups.all().exclude(id__in=[1,2,3,4,9])
+        try:
+            return groups[0].id
+        except:
+            return 0
 
 
 
 class enrollment(models.Model):
     Lid = models.ForeignKey(Learners, on_delete=models.CASCADE)
-    Cid = models.ForeignKey(Course, on_delete=models.CASCADE)
+    Cid = models.ForeignKey('LandingPage.Course', on_delete=models.CASCADE)
     addedenroll = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updatedenroll = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     status=models.BooleanField(default=True)
 
     def __str__(self):
         return self.Lid.name
+    def getEndEnrollmentDate(self):
+        return self.addedenroll.date() + timedelta(days=int(self.Cid.days))
 
 class LQueries(models.Model):
     STATUS=(('Resolved','Resolved'),('Doubt','Doubt'))
@@ -63,7 +70,7 @@ class LQueries(models.Model):
 
 # Reviews of Courses
 class Reviews(models.Model):
-    Cid=models.ForeignKey(Course,on_delete=models.CASCADE)
+    Cid=models.ForeignKey('LandingPage.Course',on_delete=models.CASCADE)
     Lid=models.ForeignKey(Learners,on_delete=models.CASCADE)
     reviews=models.CharField(max_length=1000)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -87,5 +94,5 @@ class Certificate(models.Model):
     certificate_number=models.CharField(max_length=100,blank=True,null=True)
     learner=models.ForeignKey(Learners, on_delete=models.CASCADE,null=True,related_name='learner_certificate')
     status=models.CharField(max_length=100,blank=True,null=True)
-    course=models.ForeignKey(Course, on_delete=models.CASCADE,null=True,related_name='course_certificate')
+    course=models.ForeignKey('LandingPage.Course', on_delete=models.CASCADE,null=True,related_name='course_certificate')
     

@@ -72,6 +72,8 @@
                                                 
                                                 <th> 
                                                     <a href=""><button type="button" onclick="Approved('{{course.Cid}}')" class="btn btn-info btn-md">Approve</button></a>
+                                                        <button type="button" onclick="DeleteCourse('{{course.Cid}}')" class="btn btn-danger btn-md">Reject</button>
+                                                        
                                                 </th>
                                             </tr>
                                             {% endfor %}
@@ -112,6 +114,39 @@
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
     <script>
+        function DeleteCourse(id)
+        {
+            swal({
+  title: "Are you sure?",
+  text: "You will not be able to recover this Course Data!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    $.ajax({
+          type: 'POST',
+          url: '{% url "delete_course" %}',
+          headers: {
+                       "X-CSRFTOKEN": "{{ csrf_token }}"
+               },
+          data: {Cid : id},
+          success: function (data) {
+            swal("Deleted!", "Your Course has been deleted.", "success",function(){
+                window.location.reload();});
+          },
+          error: function (data) {
+            swal("NOT Deleted!", "Something blew up.", "error");
+          }
+        });
+  } else {
+    swal("Cancelled", "Your course is safe :)", "success");
+  }
+});
+
+
+}
         function Approved(id)
         {
             $.ajax({
@@ -122,11 +157,9 @@
                         "X-CSRFTOKEN": "{{ csrf_token }}"
                 },
       success: function(data){
-        //$("#btn_approve").removeClass("btn-info");
-
-        //$("#btn_approve").addClass("btn-danger");
-        swal("Done!", data.name+" is Approved", "success");
-        window.location.reload();
+        
+        swal("Done!", data.name+" is Approved", "success").then(function(){ window.location.reload();
+});
 
 
 

@@ -30,9 +30,12 @@
         <div class="col-md-4 col-12">
             <div class="d-flex justify-content-center align-items-center">
                 <div style="width: 70%; text-align: center;">
-                    <img src="{% static 'admin/assets/images/users/1.jpg' %}" alt="user" class="rounded-circle" style="width: 100%;">
-                    <button class="btn btn-primary m-5">Upload image</button>
-                </div>
+                    <img src="{{staff.profile.url}}" alt="user" id="avatarUploader" class="avatar-img rounded-circle" style="width: 100%;">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" onchange="loadFile(event)" id="customFile" name="myImage">
+                        <label class="custom-file-label" for="customFile">Choose</label>
+                    </div>               
+            </div>
                
                
             </div>
@@ -44,30 +47,54 @@
                     <form action="" method="post">
                         <div class="form-group">
                             <label for="name">Name </label>
-                            <input type="text " class="form-control" id="name" placeholder="Name"/>
+                            <input type="text " class="form-control"  value="{{staff.user.get_full_name}}" id="name" placeholder="Name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">DOB </label>
+                            <input type="date" class="form-control" {% if staff.DOB %} value="{{staff.DOB.date | date:'Y-m-d'}}" {% endif %} id="DOB" placeholder="Date"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Phone </label>
+                            <input type="text" class="form-control" {% if staff.phone %} value="{{staff.phone}}" {% endif %} id="phone" placeholder="Phone"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Country </label>
+                            <input type="text" class="form-control" {% if staff.country %} value="{{staff.country}}" {% endif %} id="country" placeholder="Country"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">State </label>
+                            <input type="text" class="form-control" {% if staff.state %} value="{{staff.state}}" {% endif %} id="state" placeholder="State"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Zip </label>
+                            <input type="text" class="form-control" {% if staff.zipcode %} value="{{staff.zipcode}}" {% endif %} id="zip" placeholder="Zip"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Address </label>
+                            <input type="text" class="form-control" {% if staff.PAddress %} value="{{staff.PAddress}}" {% endif %} id="address" placeholder="Address"/>
                         </div>
                         <div class="form-group">
                             <label for="email">email </label>
-                            <input type="email " class="form-control" id="email" placeholder="email"/>
+                            <input type="email" class="form-control" value="{{staff.user.email}}"  readonly id="email" placeholder="email"/>
                         </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" id="UpdateProfile" class="btn btn-primary">Save</button>
                     </form>
 
                     <h3 class="card-title mt-5">Change Password</h3>
-                    <form action="" method="">
+                    <form action="" method="POST">
                         <div class="form-group">
                             <label for="oldpassword">Old Password </label>
-                            <input type="password " class="form-control" id="oldpassword" placeholder="Old Password"/>
+                            <input type="password " class="form-control" id="currentPassword" placeholder="Old Password"/>
                         </div>
                         <div class="form-group">
                             <label for="password">New Password </label>
-                            <input type="password " class="form-control" id="password" placeholder="New Password"/>
+                            <input type="password " class="form-control" id="newPassword" placeholder="New Password"/>
                         </div>
                         <div class="form-group">
                             <label for="cnfrmpass">Confirm Password </label>
-                            <input type="password " class="form-control" id="cnfrmpass" placeholder="Confirm New Password"/>
+                            <input type="password " class="form-control" id="confirmPassword" placeholder="Confirm New Password"/>
                         </div>
-                        <button type="submit" class="btn btn-primary">Change Password</button>
+                        <button type="submit" id="changePassword"class="btn btn-primary">Change Password</button>
                     </form>
                 </div>
             </div>
@@ -82,6 +109,103 @@
     <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
+    <script>
+        $("#UpdateProfile").click(function(event){
+            event.preventDefault();
+            var formData = new FormData();
+            formData.append('name',$('#name').val());
+            formData.append('DOB',$('#DOB').val());
+            formData.append('phone',$('#phone').val());
+            formData.append('country',$('#country').val());
+            formData.append('state',$('#state').val());
+            formData.append('zip',$('#zip').val());
+            formData.append('address',$('#address').val());
+            formData.append('profile',$('#customFile').get(0).files[0]);
+            formData.append('email',$('#email').val());
+
+
+
+
+
+           
+            $.ajax({
+            url: "{% url 'myprofile' %}",
+            async: false,
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                           "X-CSRFTOKEN": "{{ csrf_token }}"
+                   },
+            type: 'POST',
+            cache: false,
+            
+            error: function(xhr, status, error) {
+            alert(error);
+            },
+            success: function(response) {
+                if(response.success){
+                        swal("Done!", "profile is successfully updated", "success").then(function(){
+                            window.location.reload();
+                        });
+                }
+                else{
+                    swal("Oops!", "Profile is Not updated", "error");
+    
+                }
+            
+            }
+            });
+            
+            
+            });
+        </script>
+    <script>
+        $("#changePassword").click(function(event){
+            event.preventDefault();
+            var formData = new FormData();
+            formData.append('currentPassword',$('#currentPassword').val());
+            formData.append('newPassword',$('#newPassword').val());
+            formData.append('confirmNewPassword',$('#confirmPassword').val());
+           
+            $.ajax({
+            url: "{% url 'changePassword' %}",
+            async: false,
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                           "X-CSRFTOKEN": "{{ csrf_token }}"
+                   },
+            type: 'POST',
+            cache: false,
+            
+            error: function(xhr, status, error) {
+            alert(error);
+            },
+            success: function(response) {
+                if(response.success){
+                        swal("Done!", "Staff User is Successfully Created", "success").then(function(){
+                            window.location.reload();
+                        });
+                }
+                else{
+                    swal("Oops!", "Staff User is Not Created", "error");
+    
+                }
+            
+            }
+            });
+            
+            
+            });
+        </script>
+    <script>
+        var loadFile = function(event) {
+            var image = document.getElementById('avatarUploader');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+        </script>
     <script>
         /****************************************
          *       Basic Table                   *
