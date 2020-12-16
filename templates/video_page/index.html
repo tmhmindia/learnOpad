@@ -78,7 +78,7 @@
         }
 
         .tab-style5 .tab-content {
-            padding: 30px;
+            padding: 10px 30px;
             
             border: 2px solid #ececec;
 
@@ -91,7 +91,7 @@
             height: auto;
         }
         .tab-style5{
-            margin-top: 60px;
+            /* margin-top: 60px; */
         }
         a{
             text-decoration: none;
@@ -278,7 +278,7 @@
                                                 <video
                                                 id="my-video-{{video.Vid}}"
                                                 class="video-js vjs-big-play-centered  vjs-default-skin  vjs-fluid  "
-                                                poster="1.jpg"
+                                                poster="{{video.thumbnail.url}}"
                                                 preload="none"
                                                 data-setup='{
                                                     "playbackRates" : [0.7, 0.8, 0.9, 1, 1.2, 1.5],

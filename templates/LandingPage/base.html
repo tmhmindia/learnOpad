@@ -198,11 +198,6 @@ $(document).ready(function() {
                                     {% for subcat in c.subcategory_set.all %}
                                     
                                     <li><a class="dropdown-item dropdown-toggle" href="#">{{ subcat.name }}</a>
-<<<<<<< HEAD
-                                    <!-- {% endif %} -->
-                                        
-=======
->>>>>>> 946ebef488e6048179590f2e48686fb40cc54f90
                                         <ul class="submenu dropdown-menu">
                                             {% for course in subcat.course_set.all %}
                                             {% if course %}
