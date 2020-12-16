@@ -33,7 +33,7 @@ class Learners(models.Model):
     def GetCourses(self):
         return enrollment.objects.filter(Lid=self)
     def getInitialGroup(self):
-        groups=self.learner.groups.all().exclude(id__in=[1,2,3,4,9])
+        groups=self.user.groups.all().exclude(id__in=[1,2,3,4,9])
         try:
             return groups[0].id
         except:
