@@ -163,7 +163,7 @@ $(this).addClass("active").siblings().removeClass("active")
     var filename='';
 
     var chatSocket = new ReconnectingWebSocket(
-        'ws://' + window.location.host +
+        'wss://' + window.location.host +
         '/ws/chat/' + roomName + '/');
 
 

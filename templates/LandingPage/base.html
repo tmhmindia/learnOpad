@@ -197,8 +197,8 @@ $(document).ready(function() {
                                 <ul class="submenu dropdown-menu">
                                     {% for subcat in c.subcategory_set.all %}
                                         
-                                    <li><a class="dropdown-item dropdown-toggle" href="#">{{ subcat.name }}</a>
-                                        {% if subcat.course_set.all|length > 0 %}
+                                    <li><a class="dropdown-item " href='{% url 'category' %}?id={{subcat.subCat_id | urlencode}}'>{{ subcat.name }}</a>
+                                        <!-- {% if subcat.course_set.all|length > 0 %}
                                         <ul class="submenu dropdown-menu">
                                             {% for course in subcat.course_set.all %}
                                             {% if course %}
@@ -209,7 +209,7 @@ $(document).ready(function() {
                                             {% endif %}
                                             {% endfor %}
                                         </ul>
-                                        {% endif %}
+                                        {% endif %} -->
 
                                     </li>
                                     {% endfor %}
@@ -217,7 +217,7 @@ $(document).ready(function() {
                             </li>
                             {% endfor %}
                             {% else %}
-                            <li><a class="dropdown-item dropdown-toggle" href="#"> No Courses  </a>
+                            <li><a class="dropdown-item dropdown-toggle" href="#"> No Courses  </a></li>
 
                             {% endif %}
                         </ul>
