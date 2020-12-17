@@ -3,10 +3,10 @@ import os
 from django.conf import settings
 from datetime import date
 def generateCertificate(learner,course):
-    font_name = ImageFont.truetype('arial.ttf',50)
-    font_course = ImageFont.truetype('arial.ttf',30)
-    font_date = ImageFont.truetype('arial.ttf',20)
-    font_founder = ImageFont.truetype('arial.ttf',20)
+    font_name = ImageFont.truetype('./arial.ttf',50)
+    font_course = ImageFont.truetype('./arial.ttf',30)
+    font_date = ImageFont.truetype('./arial.ttf',20)
+    font_founder = ImageFont.truetype('./arial.ttf',20)
     path_file = os.path.join(settings.MEDIA_ROOT,'certificates','certificate.jpg')
     img = Image.open(path_file)
     draw = ImageDraw.Draw(img)
