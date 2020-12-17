@@ -174,7 +174,7 @@ $(document).ready(function() {
     <nav class="navbar navbar-expand-lg navbar-light" style="background: #f7f7f7;">
         <div class="container-fluid">
             <!-- <figure class="figure" style="margin-right: 11px;margin-top: 18px;margin-bottom: 11px;margin-left: 15px;"> -->
-                <a href=""><img src="{% static 'LandingPage/img/logotiny.png' %}" class="figure-img logo_img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;">
+                <a href="/home"><img src="{% static 'LandingPage/img/logotiny.png' %}" class="figure-img logo_img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;">
                 <p class="figure-caption text-center logo-text">LearnOpad</p></a>
             <!-- </figure> -->
             <a class="navbar-brand" href="/home"></a>
@@ -193,6 +193,7 @@ $(document).ready(function() {
                             {% if cat %}
                             {% for c in cat %}
                             <li><a class="dropdown-item dropdown-toggle" href="#"> {{ c.name }} </a>
+                                
                                 <ul class="submenu dropdown-menu">
                                     {% for subcat in c.subcategory_set.all %}
                                         
