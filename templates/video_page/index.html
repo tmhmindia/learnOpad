@@ -259,6 +259,7 @@
                         <div class="col-md-12 col-sm-12 center-col">
                             <div class="tab-style5">
                                 <div class="row">
+                                  {% if videos %}
                                     <div class="tabs-left col-lg-2 col-md-3 col-sm-4 col-12">
                                         <!-- tab navigation -->
                                         <ul class="nav list nav-tabs  pull-left" role="tablist">
@@ -272,7 +273,7 @@
                                     <div class="tabs-right col-lg-10 col-md-9 col-sm-8 col-12">
                                         <div class="tab-content position-relative overflow-hidden">
                                             <!-- tab content -->
-                                            {% if videos %}
+                                            
                                             {% for video in videos %}
                                             <div class="tab-pane med-text fade in " id="tab5_sec1-{{video.Vid}}">
                                                 <video
@@ -329,22 +330,34 @@
                                             </div>
                                             {% endfor %}
                                             {% else %}
-                                            <div class="text-center">
-                                            <h3>No Videos are Available !</h3>
+                                            
+                                            
                                           </div>
-                                            {% endif %}
+                                            
                                             
                                             <!-- end tab content -->
                                         </div>
                                         <!-- end tab content section -->
                                     </div>
                                 </div>
+                                <div class="col-12">
+                                  <div class="text-center">
+                                    <div style="max-width: 300px;margin-left: auto; margin-right: auto;">
+                                      <img src="{% static 'LandingPage/img/learnopad.png' %}" alt="" style="width: 100%;">
+                                    </div>
+                                    
+                                    <h3 >No Videos are Available !</h3>
+
+                                </div>
+
+                                {% endif %}
                             </div>
                         </div>
                         <!-- end tab -->
                     </div>
             </section>
-            </div>
+            
+          
       
         
      

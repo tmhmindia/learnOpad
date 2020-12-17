@@ -211,7 +211,9 @@ a:hover{
 .land-cards{
     margin:0 50px;
 }
-
+.section-a img{
+    /* max-width: 450px; */
+}
     @media (max-width: 768px) {
         .land-cards{
         margin:0 20px;
@@ -263,9 +265,9 @@ a:hover{
         .section-a{
             margin-bottom: 32px;
         }
-        .section-a img{
+        /* .section-a img{
             margin: 32px;
-        }
+        } */
         .section-a #section-a-learn h2,h3{
             font-size: 31px;
         }
@@ -406,11 +408,11 @@ a:hover{
     <div class="section-a">
         <div class="container mt-4">
             <div class="row">
-                <div class="col-md-6 col-sm-12" style="padding: 0 !important;">
+                <div class="col-md-5 col-sm-12" style="padding: 0 !important;">
                     <img src="{% static 'LandingPage/img/landing page used.png' %}" class="figure-img img-fluid" width="700px" height="450px">
                 </div>
                 <br>
-                <div class="col-md-6 col-sm-12 text-center" style="margin-top: 4rem;" id="section-a-learn">
+                <div class="col-md-7 col-sm-12 text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;" id="section-a-learn">
                     <h2><span style="color:blue">Live</span> Classes & <span style="color:blue">Recorded</span> Videos </h2>
                     <h3>for your Careerhood</h3>
                     <h4 id="effect" style="translate:Y(300%);"></h4>

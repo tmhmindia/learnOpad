@@ -409,14 +409,14 @@ a:hover{
                        
                             <div class="item">
             
-                                    <a class=" course-card"  href="#">
+                                    <a class=" course-card"  href="{% url 'VideoPage'%}?Cid={{course.Cid}}">
                                         <div class="card border">
                                             <img class="card-img-top" src="{{course.thumbnail.url}}" alt="Card image cap" height="150px">
                                            
                                                 
                                             <!-- background-color:gainsboro -->
                                             <div class="card-body" >
-                                                <h5 class="card-title" style="color:#4e73df;" ><a href="{% url 'VideoPage'%}?Cid={{course.Cid}}" >{{course.title}}</a>
+                                                <h5 class="card-title" style="color:#4e73df;" >{{course.title}}
                                                    </h5>
                                                 <div style="display: flex;justify-content: space-between;">
                                                 <span><i class="fa fa-star" aria-hidden="true"></i>{{course.no_of_ratings}} </span>
