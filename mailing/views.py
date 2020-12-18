@@ -63,7 +63,7 @@ def RegistrationSuccessAdminEmail(name,catlist):
     recipient = ['vijaygwala97@gmail.com',]
     context={
         'name':"Vijay Gwala",
-        'msg':"This is to notify "+ name +" ,registration process for "+ catlist +" on LearnOpad has been successfully completed. Please check the facilitator 's profile and revert back to the facilitator."
+        'msg':"This is to notify that "+ name +" has completed the registration process and the interested areas are "+ catlist +". Please check the facilitator 's profile and revert back to the facilitator."
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
    
@@ -76,7 +76,7 @@ def CorporateCampusToAdminEmail(org,orgname):
     recipient = ['vijaygwala97@gmail.com',]
     context={
         'name':"Vijay Gwala",
-        'msg':orgname+" has asked for the "+org.course.title+" course. Acknowledge their request and attach a payment link to it as a further step."
+        'msg':orgname+" has requested for the "+org.course.title+" course. Acknowledge their request and attach a payment link to it as a further step."
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
    
@@ -237,7 +237,7 @@ def ToAdminLearnerSuccessfullSubscription(enroll):
     recipient = ["vijaygwala97@gmail.com",]
     context={
         'name':"vijay gwala",
-        'msg':enroll.Lid.name+''' has successfully enrolled for '''+ enroll.Cid.title +'''course of '''+enroll.Cid.offering.all()[0].name
+        'msg':enroll.Lid.name+''' has successfully enrolled for '''+ enroll.Cid.title +''' course of '''+enroll.Cid.offering.all()[0].name
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
    
@@ -250,8 +250,8 @@ def ToAdminContactUsQuery(contactus):
     recipient = ["vijaygwala97@gmail.com",]
     context={
         'name':"vijay gwala",
-        'msg':'''Below is query we got from '''+contactus.name +''' 
-        '''+ contactus.message 
+        'msg':contactus.name +''' has filled ContactUs form and the query is   
+        " '''+contactus.message+''' " ''' 
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
    

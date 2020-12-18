@@ -1,0 +1,10 @@
+List of Doubts:
+1)In the campus page i m confused about the three cards what type of courses we need to show here
+2)what is the next action for the career link we dont have any page for these  
+3)In the categories and explore courses pages there are the dummy tags for implementing tags i need to confirm with you what type of tags we can use here bcoz based on category or subcategory we already filter the courses so the my concept is ki we will  link tags manually with the courses and if the particuler tag appear in search then the list of filterd courses are shown here
+4)what is the next interface when we click on the view button in Freecontent page and where we need to add content which anjana provide us
+5)what about corporate page is this final bcoz ananya told me about the page is worng so they make it from scratch or we just add the same navbar or footer. no need further changes
+6)what happend when i click on this button(buckle up) in learners page is there  any section in this page or the new page or interface is here
+7)when the  person click on "Enroll now" button in campus page so according to me the person is land on the explore courses page am i right ??
+8)when any person click on "Program Home" btn in learners dashboard -->my course page, then  where the person will land or one more question is ki we have policy of life time access so the person can access the courses after the end of enrollment
+9)in the learners dashboard--> ongoing classes,there only those courses classes are shown which the learner enrolled or the learner can see all the live ongoing classes which curruntly running irrespective their enrollmen

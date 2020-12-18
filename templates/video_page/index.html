@@ -55,8 +55,7 @@
             margin: 0;
             text-align: left;
             border-bottom: 0;
-            line-height: 40px;
-            padding: 0 20px;
+            padding:20px;
             width: 100%;
             display: block;
             background-color: #fff;
@@ -260,7 +259,7 @@
                             <div class="tab-style5">
                                 <div class="row">
                                   {% if videos %}
-                                    <div class="tabs-left col-lg-2 col-md-3 col-sm-4 col-12">
+                                    <div class="tabs-left col-lg-3 col-md-3 col-sm-4 col-12">
                                         <!-- tab navigation -->
                                         <ul class="nav list nav-tabs  pull-left" role="tablist">
                                             {% for video in videos %}
@@ -270,7 +269,7 @@
                                         <!-- end tab navigation -->
                                         <!-- tab content section -->
                                     </div>
-                                    <div class="tabs-right col-lg-10 col-md-9 col-sm-8 col-12">
+                                    <div class="tabs-right col-lg-9 col-md-9 col-sm-8 col-12">
                                         <div class="tab-content position-relative overflow-hidden">
                                             <!-- tab content -->
                                             
@@ -281,6 +280,8 @@
                                                 class="video-js vjs-big-play-centered  vjs-default-skin  vjs-fluid  "
                                                 poster="{{video.thumbnail.url}}"
                                                 preload="none"
+                                                width="400"
+                                                height="400"
                                                 data-setup='{
                                                     "playbackRates" : [0.7, 0.8, 0.9, 1, 1.2, 1.5],
                                                     "preload":"auto"
