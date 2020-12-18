@@ -29,7 +29,7 @@ def get_participants(group_id=None, group_obj=None, user=None):
 def room(request, group_id):
     if request.user.groups.filter(id=group_id).exists():
         chatgroup = ChatGroup.objects.get(id=group_id)
-        users=CustomUser.objects.filter(groups__name=chatgroup.name)
+        users=chatgroup.user_set.all()
         if request.user.email == users[0].email:
             sender=users[0]
             receiver=users[1]
