@@ -27,7 +27,7 @@ class ChatGroup(Group):
         from django.urls import reverse
         return reverse('chat:room', args=[str(self.id)])
     def get_group_receiver(self):
-        users=CustomUser.objects.filter(groups__name=self.name)
+        users=self.user_set.all()
         request = RequestMiddleware(get_response=None)
         request = request.thread_local.current_request
 
@@ -39,7 +39,7 @@ class ChatGroup(Group):
             receiver=users[0]
         return receiver.first_name+" "+receiver.last_name
     def get_group_receiver_id(self):
-        users=CustomUser.objects.filter(groups__name=self.name)
+        users=self.user_set.all()
         request = RequestMiddleware(get_response=None)
         request = request.thread_local.current_request
 
@@ -51,7 +51,7 @@ class ChatGroup(Group):
             receiver=users[0]
         return receiver.id
     def get_group_receiver_profileUrl(self):
-        users=CustomUser.objects.filter(groups__name=self.name)
+        users=self.user_set.all()
         request = RequestMiddleware(get_response=None)
         request = request.thread_local.current_request
 
@@ -68,7 +68,7 @@ class ChatGroup(Group):
             url=receiver.user.facilitator.profile.url
         return url
     def get_group_sender_profileUrl(self):
-        users=CustomUser.objects.filter(groups__name=self.name)
+        users=self.user_set.all()
         request = RequestMiddleware(get_response=None)
         request = request.thread_local.current_request
 
