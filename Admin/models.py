@@ -1,6 +1,7 @@
 from django.db import models
 from myauth.models import *
 
+
 # Create your models here.
 class Staff(models.Model):
     DOB=models.DateTimeField(blank=True,null=True)

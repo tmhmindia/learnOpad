@@ -114,7 +114,8 @@ Facilitator details
                             
   				            <!-- {% cycle "<div class='row courses_row'>" "" %} -->
                    <div class="row courses_row ">
-                                    {% for course in courses %}
+                     {% if courses %}
+                     {% for course in courses %}
                             
 		                    <div class="col-lg-6 course_col">
 								<div class="card course">
@@ -143,6 +144,11 @@ Facilitator details
                             
                          <!-- {% cycle "" "</div>" %} -->
                          {% endfor %}
+                         {% else %}
+                         <div style="width: 100%; text-align: center;  ">
+                          <div class="text-center" style="max-width: 450px; margin:0 auto;"><img src="{% static 'LandingPage/img/no_courses.svg'%}" alt=""></div>
+                      </div> 
+                         {% endif %}
                         </div>
                         
                         
