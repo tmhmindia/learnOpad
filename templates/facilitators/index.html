@@ -231,34 +231,40 @@ footer #social i:hover{
                           {% if cat %}
                           {% for c in cat %}
                           <li><a class="dropdown-item dropdown-toggle" href="#"> {{ c.name }} </a>
+                              
                               <ul class="submenu dropdown-menu">
                                   {% for subcat in c.subcategory_set.all %}
-                                  <!-- {% if subcat.course_set.all|length == 0 %}
-                                  <li><a class="dropdown-item" href="#">{{ subcat }}</a></li>
-                                  {% else %} -->
-                                  <li><a class="dropdown-item dropdown-toggle" href="#">{{ subcat }}</a>
-                                  <!-- {% endif %} -->
+                                      
+                                  <li><a class="dropdown-item " href='{% url 'category' %}?id={{subcat.subCat_id | urlencode}}'>{{ subcat.name }}</a>
+                                      <!-- {% if subcat.course_set.all|length > 0 %}
                                       <ul class="submenu dropdown-menu">
                                           {% for course in subcat.course_set.all %}
-                                          <li><a class="dropdown-item" href="{% url 'course' course.Cid %}">{{ course }}</a></li>
+                                          {% if course %}
+                                          <li><a class="dropdown-item" href="{% url 'course' course.Cid %}">{{ course.title }}</a></li>
+                                        {% else %}
+                                        <li><a class="dropdown-item" href="#">NO Courses</a></li>
+
+                                          {% endif %}
                                           {% endfor %}
                                       </ul>
+                                      {% endif %} -->
+
                                   </li>
                                   {% endfor %}
                               </ul>
                           </li>
                           {% endfor %}
                           {% else %}
-                          <li><a class="dropdown-item dropdown-toggle" href="#"> No Courses  </a>
+                          <li><a class="dropdown-item dropdown-toggle" href="#"> No Courses  </a></li>
 
                           {% endif %}
                       </ul>
                   </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="/Free">
                         Free Content
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
 
                 <ul class="nav justify-content-end text-sm-left" id="navbar-left">
@@ -1020,16 +1026,7 @@ footer #social i:hover{
 
               <hr class="w-100 clearfix d-md-none">
 
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 social" id="footer-left">
-              <h6 class="text-uppercase font-weight-bold">Our App</h6>
-              <hr class="mb-2 mt-0 d-inline-block mx-auto" style="width: 20px;">
-              <p>
-              <a href="https://www.apple.com/ios/app-store/"><i class="icofont-brand-apple" style="font-size: 20px;"></i> IOS Store</a>
-              </p>
-              <p>
-              <a href="https://play.google.com/store"><img class="mr-1" src="{% static 'LandingPage/img/play-store.svg' %}" width="20px" height="20px"> Andriod Store</a>
-              </p>
-          </div>
+          
 
       </div>
 
