@@ -19,6 +19,10 @@
       .file-input input {
         display: none;
       }
+
+      a,a:hover{
+        text-decoration: none;
+      }
     </style>
   </head>
 
@@ -99,8 +103,13 @@
         
         <p>{{ receiver.first_name }} {{receiver.last_name}}</p> 
        <div id="mystatus"></div>
-        <div class="social-media">
-         
+        <div class="social-media pr-3">
+          {% if request.user|has_group:"Learners" %}
+          <a href="{% url 'learner_index'%}" class="d-flex align-items-center"> <i class="fa fa-arrow-circle-left m-1" aria-hidden="true"></i>Dashboard</a>
+          {% else %}
+          <a href="{% url 'dashboard'%}" class="d-flex align-items-center"> <i class="fa fa-arrow-circle-left m-1" aria-hidden="true"></i>Dashboard</a>
+
+          {% endif %}
         </div>
       </div>
       <div id="message" class="messages">
@@ -130,10 +139,12 @@
           </button>
         </div>
         <div class="modal-body">
+          <div class="d-flex">
         <input id="file" class="form-control-file" type="file">
 
-        <button id="chat-file-submit" class="submit"> <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        <button id="chat-file-submit" class="submit btn btn-primary"> <i class="fa fa-paper-plane" aria-hidden="true"></i>
         </button>
+      </div>
         </div>
           
         </div>
@@ -163,7 +174,7 @@ $(this).addClass("active").siblings().removeClass("active")
     var filename='';
 
     var chatSocket = new ReconnectingWebSocket(
-        'ws://' + window.location.host +
+        'wss://' + window.location.host +
         '/ws/chat/' + roomName + '/');
 
 
@@ -177,6 +188,8 @@ document.querySelector('#chat-file-submit').onclick = function(e) {
         chatSocket.send(file.name);
         chatSocket.binaryType = "blob";
         chatSocket.send(file);
+        $('.bd-example-modal-sm').modal('hide');
+
   // var messageInputDom = document.getElementById('chat-text-input');
   // var text = messageInputDom.value;
   // filename=null
@@ -311,13 +324,13 @@ document.querySelector('#chat-file-submit').onclick = function(e) {
       if (['jpg','jpeg','png'].indexOf(ext)>=0)
       {
 
-      blobTag.src='http://127.0.0.1:8000'+data.blob
-      imganchor.href='http://127.0.0.1:8000'+data.blob
+      blobTag.src='https://www.learnopad.com'+data.blob
+      imganchor.href='https://www.learnopad.com'+data.blob
       imganchor.appendChild(blobTag)
       pTag.appendChild(imganchor);
       }
       else{
-          aTag.href='http://127.0.0.1:8000'+data.blob
+          aTag.href='https://www.learnopad.com'+data.blob
         aTag.textContent=filename;
         pTag.appendChild(i);
         pTag.appendChild(aTag);

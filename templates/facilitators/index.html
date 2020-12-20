@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+{% load has_group %}
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -268,12 +269,37 @@ footer #social i:hover{
                         <button class="btn my-sm-0" type="submit" style="color: black;"><i class="fa fa-search"></i></button>
                     </form>
                 </li>
-                   
+                  {% if request.user.is_authenticated %}
+                  <li class="nav-item ">
+                    {% if request.user|has_group:"Facilitators" %} 
+                    
+                    <a href="/facilitator/dashboard/"><div class="d-flex"><div><img style="width:30px; height: 30px;"class="img-profile rounded-circle" src="{{request.user.user.facilitator.profile.url}}"></div>
+                        <div><p class="text-info ml-1" style="margin-top:5px;">{{request.user.user.facilitator.name}}</p></div></div></a>
+                
+                    {% elif request.user|has_group:"Learners" %}
+                    <a href="/learner/index/"><div class="d-flex"><div><img style="width:30px; height: 30px;"class="img-profile rounded-circle" src="{{request.user.learner.profile.url}}"></div>
+                        <div><p class="text-info ml-1" style="margin-top:5px;">{{request.user.learner.name}}</p></div></div></a>
+                    {% elif request.user|has_group:"Admins" %}
+                        <a href="{% url 'dashboard_admin'%}"><div class="d-flex"><div><img style="width:30px; height: 30px;"class="img-profile rounded-circle" src="{{request.user.staff_admin.profile.url}}"></div>
+                        <div><p class="text-info ml-1" style="margin-top:5px;">{{request.user.first_name}}</p></div></div></a>
+                    
+                    {% else  %} 
+
+                    <a href=""><p class="text-info ml-1" style="margin-top:5px;"><i class="fas fa-user"></i> {{request.user.first_name}}</p></a>
+                    {% endif %}                    
+                </li>
+                <li class="nav-item">
+                  
+                    <a href='{% url 'logout' %}' class="btn btn-primary rounded ml-3" style="color: white">Log out</a>
+                    
+                </li>
+                  {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" style="padding-left: 0;">Login</a>
+                </li>
+                  {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" style="padding-left: 0;">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href='{% url 'facilitator-register' %}' class="btn btn-primary rounded" style="color: white">Register <i class="icofont-circled-right"></i></a>
+                        <a href='{% url 'facilitator-register' %}' class="btn btn-primary rounded ml-4" style="color: white">Register <i class="icofont-circled-right"></i></a>
                     </li>
                    
                 </ul>

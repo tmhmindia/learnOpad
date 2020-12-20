@@ -9,7 +9,7 @@ from corporates.models import *
 from campus.models import * 
 from django.contrib.auth.decorators import login_required
 from myauth.decoraters import *
-from LandingPage.models import Queries
+from LandingPage.models import *
 from payment_gateway.models import *
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Staff

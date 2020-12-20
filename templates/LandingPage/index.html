@@ -399,6 +399,9 @@ a:hover{
 .cor_slider .nav-link{
     text-transform: uppercase;
 }
+#myTab .nav-item .nav-link{
+    font-size: 13px;
+}
     </style>
     {% endblock stylesheet %}
 <!------------------------------------------>
@@ -408,11 +411,11 @@ a:hover{
     <div class="section-a">
         <div class="container mt-4">
             <div class="row">
-                <div class="col-md-5 col-sm-12" style="padding: 0 !important;">
-                    <img src="{% static 'LandingPage/img/landing page used.png' %}" class="figure-img img-fluid" width="700px" height="450px">
+                <div class="col-md-4 col-sm-12" style="padding: 0 !important;">
+                    <img src="{% static 'LandingPage/img/landing page.png' %}" class="figure-img img-fluid" width="700px" height="450px">
                 </div>
                 <br>
-                <div class="col-md-7 col-sm-12 text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;" id="section-a-learn">
+                <div class="col-md-8 col-sm-12 text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;" id="section-a-learn">
                     <h2><span style="color:blue">Live</span> Classes & <span style="color:blue">Recorded</span> Videos </h2>
                     <h3>for your Careerhood</h3>
                     <h4 id="effect" style="translate:Y(300%);"></h4>
@@ -461,8 +464,9 @@ a:hover{
                   <div class="tab-content" id="myTabContent">
                       {% for c in cat %}
                     <div class="tab-pane fade " id="c-{{c.cat_id}}" role="tabpanel" aria-labelledby="{{c.name}}">
-                        
+                        {% if c.course_set.all %}
                         <div class="owl-carousel land_co ftco-owl"  id="owl-{{c.cat_id}}">
+                           
                             {% for course in c.course_set.all %}
                             {% if request.user|has_group:"Learners"%}
                             {% if course in request.user.learner.enrolled.all %}
@@ -561,7 +565,13 @@ a:hover{
                             </div>
                             {% endif %}
                                {% endfor %}
+                              
                         </div>
+                        {% else %}
+                        <div style="width: 100%; text-align: center;  ">
+                         <div class="text-center" style="max-width: 450px; margin:0 auto;"><img src="{% static 'LandingPage/img/no_courses.svg'%}" alt=""></div>
+                     </div> 
+                        {% endif %}
                     <script>
                         $("#owl-{{c.cat_id}}").owlCarousel({
                             autoplay: true,
@@ -737,7 +747,7 @@ a:hover{
                 </div>
             </div>
         </div>
-        <div class="container">
+        <!-- <div class="container">
             <div class="text-center">
                 <h1>Where our alumni work?</h1>
                 </div>
@@ -770,7 +780,6 @@ a:hover{
                                 <img class="card-img-top circle " src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
                                 </div>
                                     
-                                <!-- background-color:gainsboro -->
                                 <div class="card-body" >
                                     <h5 class="card-title" style="color:red;" >Kamal Pabba</h5>
                                     <p>Designation </p>
@@ -785,7 +794,6 @@ a:hover{
                                 <img class="card-img-top circle " src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
                                 </div>
                                     
-                                <!-- background-color:gainsboro -->
                                 <div class="card-body" >
                                     <h5 class="card-title" style="color:red;" >Vijay Gwala</h5>
                                     <p>Designation </p>
@@ -800,7 +808,6 @@ a:hover{
                                 <img class="card-img-top circle " src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
                                 </div>
                                     
-                                <!-- background-color:gainsboro -->
                                 <div class="card-body" >
                                     <h5 class="card-title" style="color:red;" >Nazia </h5>
                                     <p>Designation </p>
@@ -813,7 +820,7 @@ a:hover{
 
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="container-fluid" style="background-color:  #eeeeee; max-height: 80%;">
             <div class="container1">
@@ -832,14 +839,15 @@ a:hover{
                     <div class="item d-flex justify-content-center">
                         <div class=" facil_det pt-3 ">
                             <div class="text-center">
-                            <img class="card-img-top circle " src="{{facilitator.profile.url}}" alt="Card image cap" height="150px">
+                            <a href="{% url 'aboutfacilitator' facilitator.Fid %}"><img class="card-img-top circle " src="{{facilitator.profile.url}}" alt="Card image cap" height="150px"></a>
                             </div>
                                 
                             <!-- background-color:gainsboro -->
                             <div class="card-body" >
                                 <h5 class="card-title" style="color:red;" >{{facilitator.name}}</h5>
-                                <p> {{facilitator.Bio}} </p>
-                                <p>Company TMHM</p>
+                                <p style="font-size:12px;"> {{facilitator.Bio}} </p>
+                               
+                                <a class="stretched-link" href="{% url 'aboutfacilitator' facilitator.Fid %}"> <p>Company TMHM</p></a>
                             </div>
                             
                         </div>

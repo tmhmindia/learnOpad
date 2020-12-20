@@ -164,6 +164,10 @@ $(document).ready(function() {
     .logo-text{
         margin-bottom: 0;
     }
+    .course_image img {
+    width: 100%;
+    height: 170px;
+}
     </style>
 </head>
 
@@ -196,8 +200,9 @@ $(document).ready(function() {
                                 
                                 <ul class="submenu dropdown-menu">
                                     {% for subcat in c.subcategory_set.all %}
-                                    
-                                    <li><a class="dropdown-item dropdown-toggle" href="#">{{ subcat.name }}</a>
+                                        
+                                    <li><a class="dropdown-item " href='{% url 'category' %}?id={{subcat.subCat_id | urlencode}}'>{{ subcat.name }}</a>
+                                        <!-- {% if subcat.course_set.all|length > 0 %}
                                         <ul class="submenu dropdown-menu">
                                             {% for course in subcat.course_set.all %}
                                             {% if course %}
@@ -208,13 +213,15 @@ $(document).ready(function() {
                                             {% endif %}
                                             {% endfor %}
                                         </ul>
+                                        {% endif %} -->
+
                                     </li>
                                     {% endfor %}
                                 </ul>
                             </li>
                             {% endfor %}
                             {% else %}
-                            <li><a class="dropdown-item dropdown-toggle" href="#"> No Courses  </a>
+                            <li><a class="dropdown-item dropdown-toggle" href="#"> No Courses  </a></li>
 
                             {% endif %}
                         </ul>
@@ -409,16 +416,7 @@ swal('Sorry!','This credential are Not Valid Try to Register Please !','error')
 
             <hr class="w-100 clearfix d-md-none">
 
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 social" id="footer-left">
-            <h6 class="text-uppercase font-weight-bold">Our App</h6>
-            <hr class="mb-2 mt-0 d-inline-block mx-auto" style="width: 20px;">
-            <p>
-            <a href="https://www.apple.com/ios/app-store/"><i class="fab fa-apple mr-1" style="font-size: 20px;"></i> IOS Store</a>
-            </p>
-            <p>
-            <a href="https://play.google.com/store"><img class="mr-1" src="{% static 'LandingPage/img/play-store.svg' %}" width="20px" height="20px"> Andriod Store</a>
-            </p>
-        </div>
+        
 
     </div>
 
@@ -438,11 +436,7 @@ swal('Sorry!','This credential are Not Valid Try to Register Please !','error')
             <div class="text-center text-md-right text-sm-left" id="social">
 
             <ul class="list-unstyled list-inline">
-                <li class="list-inline-item">
-                <a href='https://www.tmhmindia.wordpress.com' class="btn-floating btn-sm rgba-white-slight mx-1">
-                    <i class="fab fa-wordpress-simple"></i>
-                </a>
-                </li>
+               
                 <li class="list-inline-item">
                 <a  href="https://www.youtube.com/JaagoTalent"class="btn-floating btn-sm rgba-white-slight mx-1">
                     <i class="fab fa-youtube"></i>
