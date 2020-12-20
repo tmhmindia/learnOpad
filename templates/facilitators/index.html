@@ -31,7 +31,148 @@
   <link href="{% static 'facilitators/css/fontawesome.css'%}" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-  
+  <script>
+    $(document).ready(function() {
+      // jQuery code
+    
+      //////////////////////// Prevent closing from click inside dropdown
+        $(document).on('click', '.dropdown-menu', function (e) {
+          e.stopPropagation();
+        });
+    
+        // make it as accordion for smaller screens
+        
+            if ($(window).width() < 992) {
+                $('.dropdown-menu a').click(function(e){
+                    e.preventDefault();
+                    if($(this).next('.submenu').length){
+                        $(this).next('.submenu').toggle();
+                    }
+                    $('.dropdown').on('hide.bs.dropdown', function () {
+                    $(this).find('.submenu').hide();
+                    })
+                });
+                //document.getElementsByClassName(".dropdown-toggle").setAttribute("data-toggle","dropdown");
+                $(".parent-toggle").attr("data-toggle","dropdown");
+            }
+            else{
+                $(".parent-toggle").attr("data-toggle","");
+            }
+        $( window ).resize(function() {
+            if ($(window).width() < 992) {
+                $(".parent-toggle").attr("data-toggle","dropdown");
+            }
+            else{
+                $(".parent-toggle").attr("data-toggle","");
+            }
+        });
+      
+    }); // jquery end
+        </script>
+  <style>
+  .cart{
+    padding: 0 20px;
+   
+}
+.cart .fas{
+    font-size: 30px;
+    color: #000 ;
+    position: relative;
+    padding:  10px;
+
+}
+.cart .cart-qty{
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    background-color: #007bff  ;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 50%;
+    padding: 5px 7px;
+
+}
+@media (min-width: 992px){
+.dropdown-menu .dropdown-toggle:after{
+border-top: .3em solid transparent;
+border-right: 0;
+border-bottom: .3em solid transparent;
+border-left: .3em solid;
+}
+
+.dropdown-menu .dropdown-menu{
+margin-left:0; margin-right: 0;
+}
+
+.dropdown-menu li{
+position: relative;
+}
+.nav-item .submenu{ 
+display: none;
+position: absolute;
+left:100%; top:-7px;
+}
+.nav-item .submenu-left{ 
+right:100%; left:auto;
+}
+.dropdown-item{
+    border-bottom: 1.5px solid #f1f1f1;
+}
+.dropdown-item:hover{
+    background-color: #007bff;
+    color: #fff;
+}
+.dropdown-menu > li:hover{ background-color: #dddbdb }
+.dropdown-menu > li:hover > .submenu{
+display: block;
+}
+.nav-item >.dropdown-menu{ display: none; }
+
+.nav-item:hover >.dropdown-menu{ display: block; }
+ .dropdown-menu{
+    padding: 0;
+ }
+ .dropdown-toggle::after{
+    vertical-align: middle;
+ }
+}
+@media (max-width: 992px){
+.dropdown-toggle::after{
+    vertical-align: middle;
+    right: 0;
+ }
+}
+.input-group-addon {
+padding: .5rem .75rem;
+margin-bottom: 0;
+font-size: 1rem;
+font-weight: 400;
+line-height: 1.25;
+color: #495057;
+text-align: center;
+background-color: #e9ecef;
+border: 1px solid rgba(0,0,0,.15);
+border-radius: .25rem;
+}
+footer {
+background-image: linear-gradient(to bottom right, #f7f7f7, #eafbff);
+color: #757575;
+font-size: 13px;
+line-height: 1.2;
+}
+.logo_img{
+width:70px;
+height: 40px;
+}
+.logo-text{
+margin-bottom: 0;
+}
+.course_image img {
+width: 100%;
+height: 170px;
+}
+</style>
   <style>
 body,html {
     margin: 0;
@@ -261,6 +402,11 @@ footer #social i:hover{
                           {% endif %}
                       </ul>
                   </li>
+
+
+
+
+                  
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="/Free">
                         Free Content
@@ -310,6 +456,9 @@ footer #social i:hover{
                     </li>
                    
                 </ul>
+                <div class="cart">
+                  <a href="{% url 'cart' %}?checkout='true'"><i class="fas fa-shopping-cart"> {% if order.get_cart_items > 0 %}<span class="cart-qty">{{order.get_cart_items}}</span>{% endif %}</i></a>
+                  </div>
             </div>
         </div>
     </nav>
@@ -1093,6 +1242,8 @@ footer #social i:hover{
   <script src="{% static 'facilitators/vendor/aos/aos.js'%}"></script>
   <script src="{% static 'facilitators/js/main.js'%}"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
   <script>
     AOS.init();
   </script>
