@@ -65,7 +65,7 @@
                                         <tbody>
                                             {% for learner in learners %}
                                             <tr>
-                                                <th>{{learner.name}}</th>
+                                                <th>{{learner.user.get_full_name}}</th>
                                                 <th>{{learner.phone}}</th>
                                                 <th>{{learner.user.email}}</th>
                                                 <th>{{learner.added.date}}</th>

@@ -106,9 +106,9 @@ def CourseApprovalEmailToAdmin(Course):
     recipient = ['vijaygwala97@gmail.com',]
     context={
         'name':"vijay Gwala",
-        'msg':'''The course '''+course.offering.all()[0].name + '''have created on the LearnOpad Platform is successfully Approved therefore open to interested aspirants to enroll.
-Course name : '''+course.title+'''<br>
-Course code : '''+course.code
+        'msg':'''The course '''+Course.offering.all()[0].name + '''have created on the LearnOpad Platform is successfully Approved therefore open to interested aspirants to enroll.
+Course name : '''+Course.title+'''<br>
+Course code : '''+Course.code
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
    

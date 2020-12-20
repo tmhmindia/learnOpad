@@ -94,7 +94,7 @@
                     <tbody>
                         {% for learner in course.enroll.all %}
                         <tr>
-                            <td>{{learner.name}}</td>
+                            <td>{{learner.user.get_full_name}}</td>
                             <td>
                                 <div class="d-flex no-block align-items-center">
                                     {% if learner|check_learner_status:course.Cid %} 
