@@ -32,7 +32,7 @@ def successOnRegistration(user):
     sender =settings.EMAIL_HOST_USER # 
     context={
         'name':user.first_name+" "+user.last_name,
-        'msg':"This is to inform you that your registration process with the LearnOpad E-learning platform has been successful. Our team will send you an email shortly, if you are shortlisted, after checking your profile, which will allow you to access and explore the Facilitators dashboard."
+        'msg':"This is to inform you that your registration process with the LearnOpad has been successful. Our team will send you an email shortly, if you are shortlisted, after checking your profile, which will allow you to access and explore the Facilitators dashboard."
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
    
@@ -263,7 +263,7 @@ def ToAdminGiveStaffPrivilages(staff):
     recipient = ["vijaygwala97@gmail.com",]
     context={
         'name':"vijay gwala",
-        'msg':"You have approved "+staff.get_full_name() +" to access the admin panel and use the privileges."
+        'msg':"You have approved "+staff.user.get_full_name() +" to access the admin panel and use the privileges."
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
    
