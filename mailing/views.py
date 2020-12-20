@@ -60,9 +60,9 @@ def successOnShortlisted(user):
 # inform about facilitator registration
 def RegistrationSuccessAdminEmail(name,catlist):
     sender = settings.EMAIL_HOST_USER
-    recipient = ['vijaygwala97@gmail.com',]
+    recipient = ['kamal.edutrainer@gmail.com',]
     context={
-        'name':"Vijay Gwala",
+        'name':"kamal pabba",
         'msg':"This is to notify that "+ name +" has completed the registration process and the interested areas are "+ catlist +". Please check the facilitator 's profile and revert back to the facilitator."
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
@@ -73,9 +73,9 @@ def RegistrationSuccessAdminEmail(name,catlist):
 
 def CorporateCampusToAdminEmail(org,orgname):
     sender = settings.EMAIL_HOST_USER
-    recipient = ['vijaygwala97@gmail.com',]
+    recipient = ['kamal.edutrainer@gmail.com',]
     context={
-        'name':"Vijay Gwala",
+        'name':"kamal pabba",
         'msg':orgname+" has requested for the "+org.course.title+" course. Acknowledge their request and attach a payment link to it as a further step."
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
@@ -87,9 +87,9 @@ def CorporateCampusToAdminEmail(org,orgname):
 def CourseCreationEmailToAdmin(course):
     subject = 'About Course creation'
     sender = settings.EMAIL_HOST_USER
-    recipient = ['vijaygwala97@gmail.com',]
+    recipient = ['kamal.edutrainer@gmail.com',]
     context={
-        'name':"vijay Gwala",
+        'name':"kamal pabba",
         'msg':'''The course '''+course.offering.all()[0].name + '''have created on the LearnOpad Platform is successfully uploaded and therefore open to interested aspirants to enroll.
 Course name : '''+course.title+'''
 Course code : '''+course.code+'''
@@ -103,9 +103,9 @@ NOTE : The course code provided above is unique to his '''+ course.title +''' co
 def CourseApprovalEmailToAdmin(Course):
     subject = 'About Course Approval'
     sender = settings.EMAIL_HOST_USER
-    recipient = ['vijaygwala97@gmail.com',]
+    recipient = ['kamal.edutrainer@gmail.com',]
     context={
-        'name':"vijay Gwala",
+        'name':"kamal pabba",
         'msg':'''The course '''+Course.offering.all()[0].name + '''have created on the LearnOpad Platform is successfully Approved therefore open to interested aspirants to enroll.
 Course name : '''+Course.title+'''<br>
 Course code : '''+Course.code
@@ -167,9 +167,9 @@ def FacilitatorSuccessfullSubscription(user):
 
 def ToAdminSuccessfullSubscriptionOfFacilitator(subscription_plan):
     sender = settings.EMAIL_HOST_USER
-    recipient = ['vijaygwala97@gmail.com',]
+    recipient = ['kamal.edutrainer@gmail.com',]
     context={
-        'name':"vijay"+" "+"Gwala",
+        'name':"kamal pabba",
         'msg':subscription_plan.user.get_full_name()+" has successfully subscribed for this "+subscription_plan.plan+" and can access the facilitator dashboard."
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
@@ -193,9 +193,9 @@ However, we can't approve your course because we already have similar courses on
     send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
 def ToAdminDeleteCourseVideo(video):
     sender = settings.EMAIL_HOST_USER
-    recipient = ['vijaygwala97@gmail.com',]
+    recipient = ['kamal.edutrainer@gmail.com',]
     context={
-        'name':"vijay"+" "+"Gwala",
+        'name':"kamal pabba",
         'msg':video.course.offering.all()[0].name+" has deleted "+ video.title +" video from "+ video.course.title+ " course."
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
@@ -205,9 +205,9 @@ def ToAdminDeleteCourseVideo(video):
     send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
 def ToAdminUploadCourseVideo(video):
     sender = settings.EMAIL_HOST_USER
-    recipient = ['vijaygwala97@gmail.com',]
+    recipient = ['kamal.edutrainer@gmail.com',]
     context={
-        'name':"vijay"+" "+"Gwala",
+        'name':"kamal pabba",
         'msg':video.course.offering.all()[0].name+" has Uploaded "+ video.title +" video from "+ video.course.title+ " course."
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
@@ -233,9 +233,9 @@ def LearnerSuccessfullSubscription(enroll):
 
 def ToAdminLearnerSuccessfullSubscription(enroll):
     sender = settings.EMAIL_HOST_USER
-    recipient = ["vijaygwala97@gmail.com",]
+    recipient = ["kamal.edutrainer@gmail.com",]
     context={
-        'name':"vijay gwala",
+        'name':"kamal pabba",
         'msg':enroll.Lid.name+''' has successfully enrolled for '''+ enroll.Cid.title +''' course of '''+enroll.Cid.offering.all()[0].name
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
@@ -246,9 +246,9 @@ def ToAdminLearnerSuccessfullSubscription(enroll):
 
 def ToAdminContactUsQuery(contactus):
     sender = settings.EMAIL_HOST_USER
-    recipient = ["vijaygwala97@gmail.com",]
+    recipient = ["kamal.edutrainer@gmail.com",]
     context={
-        'name':"vijay gwala",
+        'name':"kamal pabba",
         'msg':contactus.name +''' has filled ContactUs form and the query is   
         " '''+contactus.message+''' " ''' 
      }
@@ -260,9 +260,9 @@ def ToAdminContactUsQuery(contactus):
 
 def ToAdminGiveStaffPrivilages(staff):
     sender = settings.EMAIL_HOST_USER
-    recipient = ["vijaygwala97@gmail.com",]
+    recipient = ["kamal.edutrainer@gmail.com",]
     context={
-        'name':"vijay gwala",
+        'name':"kamal pabba",
         'msg':"You have approved "+staff.user.get_full_name() +" to access the admin panel and use the privileges."
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
@@ -308,9 +308,9 @@ Keep it up, '''
 
 def ToAdminCouncellingDetail(councelling):
     sender = settings.EMAIL_HOST_USER
-    recipient = ["vijaygwala97@gmail.com",]
+    recipient = ["kamal.edutrainer@gmail.com",]
     context={
-        'name':"vijay gwala",
+        'name':"kamal pabba",
         'msg':'''There is a request for counselling. Below are the details refer them and proceed accordingly.
               name :  '''+councelling.name+ '''
               phone : '''+councelling.phone_number+'''
