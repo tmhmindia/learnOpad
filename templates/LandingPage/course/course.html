@@ -310,7 +310,7 @@ function getToken(name) {
                             <h6 style="color: white;margin-top: 10px"><i class="fa fa-globe" aria-hidden="true"></i> {{course.language}} </h6>
                             <div style="margin-top: 10px">
                                 <!-- <button data-product="{{course.Cid}}" data-action="add" class="btn btn-outline-info update-cart" style="margin-right: 30px">Wishlist <i class="fa fa-heart" aria-hidden="true"></i></button> -->
-                                <button type="button" class="btn btn-outline-info">Share <i class="fa fa-share" aria-hidden="true"></i></button>
+                                <!-- <button type="button" class="btn btn-outline-info">Share <i class="fa fa-share" aria-hidden="true"></i></button> -->
                             </div>
 
                         </div>
@@ -353,7 +353,7 @@ function getToken(name) {
                             </div>
 
                             <!-- Course Image -->
-                            <div class="course_image"><img src='{% static 'LandingPage/images/course_image.jpg'%}' alt=""></div>
+                            <div class="course_image"><img src='{{course.thumbnail.url}}' style="height: auto;" alt=""></div>
                         
                             <!-- Course Tabs -->
                             <div class="course_tabs_container">
