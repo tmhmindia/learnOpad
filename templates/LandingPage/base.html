@@ -196,29 +196,21 @@ $(document).ready(function() {
                         <ul class="dropdown-menu">
                             {% if cat %}
                             {% for c in cat %}
+                            
                             <li><a class="dropdown-item dropdown-toggle" href="#"> {{ c.name }} </a>
-                                
+                                {% if c.subcategory_set.all %}
                                 <ul class="submenu dropdown-menu">
                                     {% for subcat in c.subcategory_set.all %}
                                         
                                     <li><a class="dropdown-item " href='{% url 'category' %}?id={{subcat.subCat_id | urlencode}}'>{{ subcat.name }}</a>
-                                        <!-- {% if subcat.course_set.all|length > 0 %}
-                                        <ul class="submenu dropdown-menu">
-                                            {% for course in subcat.course_set.all %}
-                                            {% if course %}
-                                            <li><a class="dropdown-item" href="{% url 'course' course.Cid %}">{{ course.title }}</a></li>
-                                          {% else %}
-                                          <li><a class="dropdown-item" href="#">NO Courses</a></li>
-
-                                            {% endif %}
-                                            {% endfor %}
-                                        </ul>
-                                        {% endif %} -->
+                                       
 
                                     </li>
                                     {% endfor %}
                                 </ul>
+                                {% endif %}
                             </li>
+                            
                             {% endfor %}
                             {% else %}
                             <li><a class="dropdown-item dropdown-toggle" href="#"> No Courses  </a></li>

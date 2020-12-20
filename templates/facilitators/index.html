@@ -231,7 +231,7 @@ footer #social i:hover{
                           {% if cat %}
                           {% for c in cat %}
                           <li><a class="dropdown-item dropdown-toggle" href="#"> {{ c.name }} </a>
-                              
+                            {% if c.subcategory_set.all %}
                               <ul class="submenu dropdown-menu">
                                   {% for subcat in c.subcategory_set.all %}
                                       
@@ -252,6 +252,7 @@ footer #social i:hover{
                                   </li>
                                   {% endfor %}
                               </ul>
+                              {% endif %}
                           </li>
                           {% endfor %}
                           {% else %}
