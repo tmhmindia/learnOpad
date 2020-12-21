@@ -1,5 +1,8 @@
-<!doctype html>
+{% load static %}
 {% load widget_tweaks %}
+<!doctype html>
+
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -311,19 +314,19 @@ body {
 
         <fieldset class="rs">
          <div class="text-center">
-         <h3 class="  mb-1 ">Course Categories</h3>
+         <h3 class="  mb-1 ">Interested Areas</h3>
          </div>
         
                    <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
                     <input type="button" name="next" id="nextc" class="next action-button btn-primary" value="Next"/>
                     <div class="text-center mt-5">
          
-                    <h6 class=" mb-3" style="color: #757575">Choose your course</h6>
+                    <!-- <h6 class=" mb-3" style="color: #757575">Choose your Interests</h6> -->
              </div> 
                    <div class="form-group mt-auto">
                     
                     
-                        <select class="selectpicker" multiple title="Choose Your Course" name="course" id="choose-category" data-live-search="true">
+                        <select class="selectpicker" multiple title="Choose Your interests" name="course" id="choose-category" data-live-search="true">
 
                             {% for cat in category %}
                             <optgroup label="{{cat.name}}">
