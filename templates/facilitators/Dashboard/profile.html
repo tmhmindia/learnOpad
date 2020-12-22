@@ -160,7 +160,6 @@
                                  }">
                                                 </div>
 
-                                                <a class="btn btn-sm btn-white mb-2 mb-sm-0" href="javascript:;">Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -173,8 +172,8 @@
 
                                     <div class="col-sm-9">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="firstName" id="firstNameLabel" placeholder="Clarice" aria-label="Clarice" value="{{firstname}}">
-                                            <input type="text" class="form-control" name="lastName" id="lastNameLabel" placeholder="Boone" aria-label="Boone" value="{{lastname}}">
+                                            <input type="text" class="form-control" name="firstName" id="firstNameLabel" placeholder="Clarice" aria-label="Clarice" value="{{firstname}}" required>
+                                            <input type="text" class="form-control" name="lastName" id="lastNameLabel" placeholder="Boone" aria-label="Boone" value="{{lastname}}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -268,7 +267,7 @@
 
                                 <!-- Form Group -->
                                 <div class="row form-group">
-                                    <label class="col-sm-3 col-form-label input-label" for="bio">BIO</label>
+                                    <label class="col-sm-3 col-form-label input-label" for="bio">BIO (less then 100 words)</label>
                                     <div class="col-sm-9">
                                         <!-- Quill -->
                                         <div class="quill-custom">

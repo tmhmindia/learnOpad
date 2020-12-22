@@ -274,17 +274,13 @@ Create Courses
                                                 margin-bottom: auto;
                                             ">
                                               
-                                                <select class="selectpicker " title="Choose Your Course" name="course" id="id_ccategory" multiple style="width: 100%;" required>
+                                                <select class="selectpicker "  title="Choose Your Course subcategory" name="course" id="id_ccategory"  style="width: 100%;" required>
 
-                                                    {% for cat in category %}
-                                                    <optgroup label="{{cat.name}}">
+                                                    
                                                         {% for sub in subcategory %}
-                                                        {% if sub.cat_id.cat_id == cat.cat_id %}
                                                         <option value="{{sub.subCat_id}}">{{sub.name}}</option>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                    </optgroup>
-                                                    {% endfor %}
+                                                        {% endfor %}
+                                            
                                                 
                                                 </select>
                                                 </div>
@@ -455,17 +451,13 @@ Create Courses
                                                 margin-bottom: auto;
                                             ">
                                               
-                                                <select class="selectpicker " title="Choose Your Course" name="course" id="update_subcategory" multiple style="width: 100%;">
+                                                <select class="selectpicker " title="Choose Your Course" name="course" id="update_subcategory"  style="width: 100%;">
 
-                                                    {% for cat in category %}
-                                                    <optgroup label="{{cat.name}}">
+                                                    
                                                         {% for sub in subcategory %}
-                                                        {% if sub.cat_id.cat_id == cat.cat_id %}
                                                         <option value="{{sub.subCat_id}}">{{sub.name}}</option>
-                                                        {% endif %}
                                                     {% endfor %}
-                                                    </optgroup>
-                                                    {% endfor %}
+                                                   
                                                 
                                                 </select>
                                                 </div>

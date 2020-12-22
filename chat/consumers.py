@@ -18,7 +18,6 @@ User = get_user_model()
 class ChatConsumer(WebsocketConsumer):
    
     def fetch_messages(self, data):
-        print("fetch msgs")
         group=ChatGroup.objects.get(id=self.room_name)
         messages = Message.last_10_messages(group)
         content = {
@@ -42,18 +41,14 @@ class ChatConsumer(WebsocketConsumer):
         return receiver
 
     def new_message(self, data):
-        print("new_msg")
         author = data['from']
         author_user = CustomUser.objects.filter(email=author)[0]
         chatgroup=ChatGroup.objects.get(id=self.room_name)
         if data['message']:
-            print("asd")
             message = Message.objects.create(
             author=author_user, 
             content=data['message'],chatgroup=chatgroup)
-            print("txt msg")
         else:
-            print("blob sa")
             message = Message()
             message.author=author_user
             message.chatgroup=chatgroup
@@ -87,7 +82,6 @@ class ChatConsumer(WebsocketConsumer):
             'profile_url':url
         }
         else:
-            print(str(timezone.localtime(message.timestamp)))
             return {
             'author': message.author.email,
             'content': message.content,
@@ -138,9 +132,7 @@ class ChatConsumer(WebsocketConsumer):
         chatgroup=ChatGroup.objects.get(id=self.room_name)
         receiver=self.get_group_receiver(chatgroup)
         flag=receiver.profile.status
-        # print(flag)
-        # print(receiver.username)
-        #html_status = render_to_string("chat/disconnect.html", {'flag': flag})
+       
         status=None
         if flag:
             status='offline'
