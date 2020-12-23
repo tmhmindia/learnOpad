@@ -226,8 +226,20 @@ def view_edit_courses(request):
         course=Course.objects.get(Cid=int(Cid))
         course.title=request.POST.get('title')
         course.description=request.POST.get('description')
-        course.days=request.POST.get('days')
-        course.months= request.POST.get('months')
+        if(course.days == request.POST.get('days',None)):
+            pass 
+        else:
+            days=int(request.POST.get('days',None))
+            month=days//30
+            day=int(days % 30)
+            months=str(month)+" month "+str(day)+" days" 
+            course.days=request.POST.get('days',None)
+            course.months=months
+        if int(request.POST.get('subcat'))!=course.subCat_id.subCat_id:
+            subcat=SubCategory.objects.get(subCat_id=int(request.POST.get('subcat')))
+            course.subCat_id=subcat
+            
+
         course.price= request.POST.get('price')
         course.save()
         return JsonResponse({"success":"success"})
@@ -235,7 +247,8 @@ def view_edit_courses(request):
         Cid=request.GET.get('Cid',None)
         if Cid is not None:
             course=Course.objects.get(Cid=Cid)
-        return render(request,'myAdmin/dashboard/view_edit_course.html',{'course':course})
+        subcat=SubCategory.objects.all()
+        return render(request,'myAdmin/dashboard/view_edit_course.html',{'course':course,'subcat':subcat})
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def manage_learners(request):
@@ -276,12 +289,19 @@ def view_edit_learners(request):
 def DeleteCourse(request):
     Cid=request.POST.get('Cid',None)
     course=Course.objects.get(Cid=int(Cid))
-    course.delete()
+    course.approve=False
+    course.save()
     return JsonResponse({"success":True})
 def DeleteUser(request):
     id=request.POST.get('id',None)
+    flag=request.POST.get('flag',None)
+    if flag == "true":
+        flag=True
+    else:
+        flag=False
     user=CustomUser.objects.get(id=int(id))
-    user.delete()
+    user.is_active=flag
+    user.save()   
     return JsonResponse({"success":True})
 def DeleteTrainingData(request):
     campus=request.POST.get('campus',None)

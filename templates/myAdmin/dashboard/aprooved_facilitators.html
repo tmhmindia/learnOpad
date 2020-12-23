@@ -67,14 +67,21 @@
                                             {% for facilitator in facilitators %}
                                             <tr>
                                                 <th>{{facilitator.name}}</th>
-                                                <th>{{facilitator.phone}}</th>
+                                                <th>{{facilitator.phone}} </th>
                                                 <th>{{facilitator.user.user.email}}</th>
                                                 <th>{{facilitator.added.date}}</th>
                                                 <th>{{facilitator.getCoursesCount}}</th>
                                                 <th> 
                                                     <a href="{% url 'view_edit_facilitators' %}?Fid={{facilitator.Fid}}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
-                                                    <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a>
-                                                    <button type="button" onclick="DeleteUser('{{facilitator.user.user.id}}')" class="btn btn-danger btn-sm">Delete</button></a>
+                                                    {% if facilitator.user.user.is_active %}
+                                                    <button type="button" class="btn btn-success btn-sm">Active</button>
+                                                    <button type="button" onclick="DeleteUser('{{facilitator.user.user.id}}',false)" class="btn btn-warning btn-sm">Deactivate</a>
+
+                                                    {% else %}
+                                                    <button type="button" class="btn btn-danger btn-sm">Inactive</button>
+                                                    <button type="button" onclick="DeleteUser('{{facilitator.user.user.id}}',true)" class="btn btn-warning btn-sm">Activate</button></a>
+
+                                                    {% endif %}
                                             </th>
                                             </tr>
                                             {% endfor %}
@@ -115,12 +122,20 @@
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
     <script>
-        function DeleteUser(id)
+        function DeleteUser(id,flag)
         {
 
+            var signal;
+            if(flag)
+            {
+                 signal="Activated";
+            }
+            else{
+                signal="Deactivated";
+            }
             swal({
   title: "Are you sure?",
-  text: "You will not be able to recover this Facilitator Data!",
+  text: "You wanted to  "+signal+" this Facilitator!",
   icon: "warning",
   buttons: true,
   dangerMode: true,
@@ -133,16 +148,16 @@
           headers: {
                        "X-CSRFTOKEN": "{{ csrf_token }}"
                },
-          data: {id : id},
+          data: {id : id,flag:flag},
           success: function (data) {
-            swal("Deleted!", "Your Facilitator  has been deleted.", "success");
+            swal(signal, "Your Facilitator  has been  "+signal+".", "success").then(function(){ window.location.reload()});
           },
           error: function (data) {
-            swal("NOT Deleted!", "Something blew up.", "error");
+            swal("NOT  "+signal+"!", "Something blew up.", "error");
           }
         });
   } else {
-    swal("Cancelled", "Your Facilitator is safe :)", "success");
+    swal("Cancelled", "Your Facilitator is still  "+signal+":)", "success");
   }
 });
 

@@ -51,6 +51,7 @@ class enrollment(models.Model):
     def __str__(self):
         return self.Lid.name
     def getEndEnrollmentDate(self):
+        
         return self.addedenroll.date() + timedelta(days=int(self.Cid.days))
 
 class LQueries(models.Model):

@@ -97,7 +97,7 @@ def facilitator_Dashboard_Landing_page(request):
     # My courses
     appli=Applicants.objects.get(user=request.user)
     faci=Facilitator.objects.get(user=appli)
-    course=offer.objects.filter(Fid=faci.Fid)
+    course=offer.objects.filter(Fid=faci.Fid,Cid__approve=True)
     if len(course)==0:
         context.update({'count':0})
         return render(request,'facilitators/Dashboard/index.html',context)
@@ -229,6 +229,9 @@ def facilitator_Profile_page(request,pk):
         ourdata.name=str(firstname)+" "+str(lastname)
         ourdata.phone = request.POST.get('phone')
         ourdata.country = request.POST.get('country')
+        if request.POST.get('dob'):
+            ourdata.DOB=request.POST.get('dob')
+
         ourdata.state = request.POST.get('state')
         ourdata.PAddress = request.POST.get('addressLine1')
         ourdata.TAddress = request.POST.get('addressLine2')

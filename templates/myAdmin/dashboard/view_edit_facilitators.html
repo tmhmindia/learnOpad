@@ -43,7 +43,7 @@
                                 <h3 class="card-title">Vijay Gwala</h3>
                                 <ul class="list-style-none">
                                     <li  class="d-flex no-block border-top pb-3 pt-3">Fid:<span class="pl-2 text-info">{{facilitator.Fid}}</span></li>
-                                    <li class="d-flex no-block border-top pb-3 pt-3">DOB:<span class="pl-2 text-info">{% if facilitator.DOB %}{{facilitator.DOB}}{% endif %}</span></li>
+                                    <li class="d-flex no-block border-top pb-3 pt-3">DOB:<span class="pl-2 text-info">{% if facilitator.DOB %}{{facilitator.DOB.date}}{% endif %}</span></li>
                                     <li class="d-flex no-block border-top pb-3 pt-3">Email: <span class="pl-2 text-info"> {{facilitator.user.user.email}}</span></li>
                                     <li class="d-flex no-block border-top pb-3 pt-3">Phone No:<span class="pl-2 text-info"></span></li>
                                 
@@ -101,7 +101,7 @@
                                     <div class="form-group ">
                                         <label for="dob" class=" text-right control-label col-form-label">DOB</label>
                                         
-                                            <input type="date" class="form-control" id="DOB" name="DOB" value="{{facilitator.DOB.date|date:'Y-m-d'}}">
+                                            <input type="date" class="form-control" id="DOB" name="DOB" value="{{facilitator.DOB|date:'Y-m-d'}}">
                                         
                                     </div>
                                    
@@ -157,7 +157,7 @@
                     </div>
                 </div>
                 <div style="text-align: right;width: 100%;">
-                    <button type="button" onclick="DeleteUser('{{facilitator.user.user.id}}')"class="btn btn-danger btn-lr">Delete this Facilitator</button>
+                    <button type="button" onclick="DeleteUser('{{facilitator.user.user.id}}',false)"class="btn btn-warning btn-lr">Deactivate this Facilitator</button>
                 </div>
             </div>
             <!-- ============================================================== -->
@@ -177,11 +177,23 @@
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
     <script>
-        function DeleteUser(id)
+        function DeleteUser(id,flag)
         {
+            var signal;
+            if(flag)
+            {
+                 signal="Activated";
+            }
+            else{
+                signal="Deactivated";
+            }
+            
+            
+            
+            
             swal({
   title: "Are you sure?",
-  text: "You will not be able to recover this Facilitator Data!",
+  text: "You wanted to "+signal+" this facilitator",
   icon: "warning",
   buttons: true,
   dangerMode: true,
@@ -194,16 +206,16 @@
           headers: {
                        "X-CSRFTOKEN": "{{ csrf_token }}"
                },
-          data: {id : id},
+          data: {id : id,flag:flag},
           success: function (data) {
-            swal("Deleted!", "Your Facilitator  has been deleted.", "success");
+            swal(signal, "Your Facilitator  has been "+signal+"", "success");
           },
           error: function (data) {
-            swal("NOT Deleted!", "Something blew up.", "error");
+            swal("NOT "+signal+"!", "Something blew up.", "error");
           }
         });
   } else {
-    swal("Cancelled", "Your Facilitator is safe :)", "success");
+    swal("Cancelled", "Your Facilitator is Still "+signal+"", "success");
   }
 });
 

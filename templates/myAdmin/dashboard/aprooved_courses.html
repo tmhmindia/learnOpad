@@ -75,7 +75,7 @@
                                                 <th> 
                                                     <a href="{% url 'view_edit_courses' %}?Cid={{course.Cid}}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
                                                     <button type="button" class="btn btn-success btn-sm">Active</button>
-                                                    <button type="button" onClick="DeleteCourse('{{course.Cid}}')" class="btn btn-danger btn-sm">Delete</button>        
+                                                    <button type="button" onClick="DeleteCourse('{{course.Cid}}')" class="btn btn-danger btn-sm">Disapprove</button>        
                                                 </th>
                                             </tr>
                                             {% endfor %}
@@ -118,11 +118,12 @@
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
    
     <script>
- function DeleteCourse(id)
+  function DeleteCourse(id)
         {
+           
             swal({
   title: "Are you sure?",
-  text: "You will not be able to recover this Course Data!",
+  text: "You want to disapproved this course !",
   icon: "warning",
   buttons: true,
   dangerMode: true,
@@ -137,21 +138,20 @@
                },
           data: {Cid : id},
           success: function (data) {
-            swal("Deleted!", "Your Course has been deleted.", "success",function(){
+            swal("Disapprove!", "Course has been disapproved", "success",function(){
                 window.location.reload();});
           },
           error: function (data) {
-            swal("NOT Deleted!", "Something blew up.", "error");
+            swal("NOT Desapproved!", "Something blew up.", "error");
           }
         });
   } else {
-    swal("Cancelled", "Your course is safe :)", "error");
+    swal("Cancelled", "This course is still approved :)", "error");
   }
 });
 
 
-}
-
+        }
 
         /****************************************
          *       Basic Table                   *

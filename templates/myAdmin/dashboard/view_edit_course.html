@@ -57,8 +57,20 @@
                     <ul class="list-style-none align-items-center  " style="width: 555px; padding: 30px;">
                         <li class="d-flex no-block  pb-3 pt-3">Audience:<span class="pl-2 text-info">{{course.audience}}</span></li>
                         <li class="d-flex no-block border-top pb-3 pt-3">Sub category:
-                            <input type="text" class="form-control ml-2" id="subcat" value="{{course.subCat_id}}" placeholder="sub category Here">
-                        </li>
+                            <select class="form-control " title="Choose Your Course" name="course" id="update_subcategory"  style="width: 100%;">
+
+                                                    
+                                {% for sub in subcat %}
+                                {% if sub.subCat_id == course.subCat_id.subCat_id %}
+                                <option selected value="{{sub.subCat_id}}">{{sub.name}}</option>
+
+                                {% else %}
+                                <option value="{{sub.subCat_id}}">{{sub.name}}</option>
+                                {% endif %}
+                            {% endfor %}
+                           
+                        
+                        </select>                        </li>
                         <li class="d-flex no-block border-top pb-3 pt-3">Price:
                             <input type="text" class="form-control ml-2" id="price" value="{{course.price}}" placeholder="Price Here">
                         </li>
@@ -66,7 +78,7 @@
                         <li class="d-flex no-block border-top pb-3 pt-3">added on:<span class="pl-2 text-info">{{course.added.date}}</span></li>
                         <li class="d-flex no-block border-top pb-3 pt-3">Last updated on:<span class="pl-2 text-info">{{course.updated.date}}</span></li>
                        
-                        <li class="d-flex no-block border-top pb-3 pt-3">Total Revenue earned :<span class="pl-2 text-info"></span></li>
+                        <li class="d-flex no-block border-top pb-3 pt-3">Total Revenue earned :<span class="pl-2 text-info">{{course.getTotalRevenueOfThisCourse}}</span></li>
                     
                     </ul>
                     
@@ -129,7 +141,7 @@
     </div>
    
     <div style="text-align: right;width: 100%;">
-    <button type="button" onclick="DeleteCourse('{{course.Cid}}')" class="btn btn-danger btn-lr">Delete this Course</button>
+    <button type="button" onclick="DeleteCourse('{{course.Cid}}')" class="btn btn-danger btn-lr">Disapprove this Course</button>
     </div>
 </div>
         
@@ -153,7 +165,7 @@
            
             swal({
   title: "Are you sure?",
-  text: "You will not be able to recover this Course Data!",
+  text: "You want to disapproved this course !",
   icon: "warning",
   buttons: true,
   dangerMode: true,
@@ -168,15 +180,15 @@
                },
           data: {Cid : id},
           success: function (data) {
-            swal("Deleted!", "Your Course has been deleted.", "success",function(){
+            swal("Disapprove!", "Course has been disapproved", "success",function(){
                 window.location.reload();});
           },
           error: function (data) {
-            swal("NOT Deleted!", "Something blew up.", "error");
+            swal("NOT Desapproved!", "Something blew up.", "error");
           }
         });
   } else {
-    swal("Cancelled", "Your course is safe :)", "error");
+    swal("Cancelled", "This course is still approved :)", "error");
   }
 });
 
@@ -193,7 +205,7 @@
         formData.append('days',$('#days').val());
         formData.append('description',$('#description').val());
         formData.append('price',$('#price').val());
-        formData.append('subcat',$('#subcat').val());
+        formData.append('subcat',$('#update_subcategory').val());
 
     $.ajax({
         url: "{% url 'view_edit_courses' %}",

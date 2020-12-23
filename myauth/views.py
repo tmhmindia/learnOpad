@@ -97,13 +97,13 @@ class user_login(View):
                 context={'user':u}
                 return render(request, 'facilitators/index.html', context)
 
-            user = authenticate(request,email=email1, password=password)
             message=None
-
            
-            if user:
+            if u:
                     
-                if user.is_active:
+                if u.is_active:
+                    user = authenticate(request,email=email1, password=password)
+
                     login(request, user)
                     # if request.GET.get('next', None):
                     #     return HttpResponseRedirect(request.GET['next'])
@@ -124,24 +124,18 @@ class user_login(View):
                         return HttpResponseRedirect(reverse('home')) 
                         
                 else:
-                    notification = "Account is Not Active"
+                    notification = "your Account is Not Active"
+                    print(notification)
                     context = { 'notification': notification,
-                            'clss': 'alert-danger'
+                            'clss': 'alert-danger',
+                            
                             }
-                    subscription=request.GET.get('subscription',None)
-                    if subscription is not None:
-                        return redirect('/create_order')
-                    if user.groups.filter(name='Facilitators').exists():
-                        return render(request, 'facilitators/index.html', context)
-                    elif user.groups.filter(name='Learners').exists():
-                       return render(request, 'learners/index.html', context)
-                    else:
-                        return render(request, 'LandingPage/index.html', context)
+                   
+                    return render(request, 'LandingPage/index.html', context)
                         
                     
                         # return HttpResponse("Account not active")
             else:
-                print("Not registered! login failed")
                 context = {
                         'notification': 'Not registered! login failed',
                         'uemail': u.pk

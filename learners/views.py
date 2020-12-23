@@ -64,7 +64,7 @@ def index(request):
     completed=[]
     for enroll in enrolled_courses:   
         time=enroll.addedenroll
-        course=Course.objects.get(title=enroll.Cid)
+        course=Course.objects.get(Cid=enroll.Cid.Cid)
         try:
             month=int(course.months[0:2])
         except:
@@ -127,7 +127,8 @@ def profile(request):
         lastname = request.POST.get('lastName')
         ourdata.name=str(firstname)+" "+str(lastname)
         ourdata.phone = request.POST.get('phone')
-        ourdata.DOB = request.POST.get('dob')
+        if request.POST.get('dob'):
+            ourdata.DOB = request.POST.get('dob')
         ourdata.state = request.POST.get('state')
         ourdata.country = request.POST.get('country')
         ourdata.Paddress = request.POST.get('addressLine1')

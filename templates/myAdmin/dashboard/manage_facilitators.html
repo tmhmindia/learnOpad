@@ -1,5 +1,6 @@
 {% extends '../base.html' %}
 {% load static %}
+{% load has_group %}
 <!-- ---------------------------------------------- -->
     {% block title %}
     Manage Learners
@@ -72,7 +73,7 @@
                                                 <th> 
                                                   
                                                     <button type="button" onclick="Approved('{{applicant.Aid}}')" id="btn_approve-{{applicant.Aid}}" class="btn btn-info btn-md">Approve</button>
-                                                    <button type="button" onclick="Shortlist('{{applicant.user.id}}')" id="btn_shortlist-{{applicant.user.id}}"class="btn btn-danger btn-md">Shortlist</button>
+                                                    <button type="button" onclick="Shortlist('{{applicant.user.id}}')" id="btn_shortlist-{{applicant.user.id}}" {% if applicant.shortlist %} class="btn btn-success btn-md"{% else %}class="btn btn-danger btn-md"{% endif %} >{% if applicant.shortlist %}Shortlisted{% else %}Shortlist{% endif %}</button>
                                                    
                                             </th>
                                             </tr>
@@ -127,10 +128,7 @@
       success: function(data){
         
 swal("Done!", data.name+" is Shortlisted", "success").then(function(){ 
-        $("#btn_shortlist-"+id).removeClass("btn-danger"); 
-
-        $("#btn_shortlist-"+id).addClass("btn-success");
-
+        window.location.reload();
 });
 
 

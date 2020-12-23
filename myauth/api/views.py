@@ -39,7 +39,7 @@ class FacilitatorRegisterAPI(APIView):
         expform = ExperienceSerializer(data=exp_form)
         form = RegisterSerializer(data=personal_detail)
         phone=personal_detail.get('phone')
-        fquery=FacilitatorQueriesFormSerializer(data=facilitator_query)
+        #fquery=FacilitatorQueriesFormSerializer(data=facilitator_query)
         course=personal_detail.get('course')
         
         catlist=""
@@ -67,7 +67,7 @@ class FacilitatorRegisterAPI(APIView):
         applicant=Applicants.objects.create(name=personal_detail['first_name']+" "+personal_detail['last_name'],phone=phone,user=user,intrest=catlist,portfolio=file,status="Due")
         applicant.save()
         exp_form["facilitator"]=applicant.Aid
-        facilitator_query['user']=applicant.Aid
+        
   
         
         if expform.is_valid(raise_exception=True):
@@ -75,33 +75,16 @@ class FacilitatorRegisterAPI(APIView):
         else:
             messages.error(request, ('Invalid Experience Deatails !'))
             return redirect('register')
-        if fquery!=None:
-            if fquery.is_valid(raise_exception=True):
-                fquery.save()
-            else:
-                messages.error(request, ('Invalid Query Deatails !'))
-                return redirect('register')
-        
+        if facilitator_query:
+            facilitator_query['user']=user
+            ToAdminFacilitatorRegistrationQuery(facilitator_query)
 
-
-
-       
-       
-
-      
-       
-
-
-       
 
         
-
-
         successOnRegistration(user)
 
         RegistrationSuccessAdminEmail(personal_detail['first_name']+" "+personal_detail['last_name'],catlist)
 
-        messages.success(request, ('Your profile was successfully Created!'))
         return Response({'redirect':'{% url "facilitator-register" %}'},status=201)
 
 

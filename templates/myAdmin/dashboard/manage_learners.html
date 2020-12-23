@@ -72,8 +72,16 @@
                                                 <th>{{learner.CountCourses}}</th>
                                                 <th> 
                                                     <a href="{% url 'view_edit_learners'  %}?Lid={{learner.Lid}}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
-                                                    <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a>
-                                                    <button type="button" onclick="DeleteUser('{{learner.user.id}}')" class="btn btn-danger btn-sm">Delete</button>
+                                                    {% if learner.user.is_active %}
+                                                    <button type="button" onclick="DeleteUser('{{learner.user.id}}',false)" class="btn btn-warning btn-sm">Deactivate</button>
+
+                                                    <button type="button" class="btn btn-success btn-sm">Active</button>
+                                                    {% else %}
+                                                    <button type="button" class="btn btn-danger btn-sm">Inactive</button>
+                                                    <button type="button" onclick="DeleteUser('{{learner.user.id}}',true)" class="btn btn-warning btn-sm">Activate</button>
+
+
+                                                    {% endif %}
                                             </th>
                                     
                                             </tr>
@@ -109,12 +117,21 @@
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
     <script>
-        function DeleteUser(id)
+        function DeleteUser(id,flag)
         {
+            var signal;
+            if(flag)
+            {
+                 signal="Activated";
+            }
+            else{
+                signal="Deactivated";
+            }
+            
 
             swal({
   title: "Are you sure?",
-  text: "You will not be able to recover this Learner Data!",
+  text: "You wanted to  "+signal+" this learner!",
   icon: "warning",
   buttons: true,
   dangerMode: true,
@@ -127,19 +144,19 @@
           headers: {
                        "X-CSRFTOKEN": "{{ csrf_token }}"
                },
-          data: {id : id},
+          data: {id : id,flag:flag},
           success: function (data) {
-            swal("Deleted!", "Your course  has been deleted.","success").then(function(){
+            swal(signal, "Your learner  has been  "+signal+".","success").then(function(){
                 window.location.reload()
             });
           },
           error: function (data) {
-            swal("NOT Deleted!", "Something blew up.", "error");
+            swal("NOT  "+signal+"!", "Something blew up.", "error");
           }
         });
 
   } else {
-    swal("Done !", "Your Data is Safe", "success");
+    swal("Cancelled", "Your learner is Still  "+signal+"", "success");
 
 
   }

@@ -290,10 +290,10 @@ swal('Sorry!','This credential are Not Valid Try to Register Please !','error')
 </script>
 {% endif %}
 {% if notification %}
-
+{% if uemail %}
 <script>swal({
     title: "Oops!",
-    text: "Incorrect Email or Password!",
+    text: "email or password is incorrect",
     icon: "error",
     buttons: ["Try again", "Forgot Password?"],
     dangerMode: false,
@@ -313,6 +313,12 @@ swal('Sorry!','This credential are Not Valid Try to Register Please !','error')
       $("#exampleModal").modal();
     }  
   });</script>
+
+{% else %}
+<script>
+    swal("Sorry !","{{notification}}","warning");
+</script>
+{% endif %}
 {% endif %}
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="font-size: 13px;">

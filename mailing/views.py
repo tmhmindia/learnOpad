@@ -11,6 +11,7 @@ from django.template import Context
 import threading
 from django.http import HttpResponse ,JsonResponse
 from myauth.models import *
+from facilitators.models import Applicants
 
 #speed up mails
 class EmailThread(threading.Thread):
@@ -39,6 +40,24 @@ def successOnRegistration(user):
     html_message=render_to_string('html/email_template.html',context)
     
     send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+
+def ToAdminFacilitatorRegistrationQuery(query):
+    sender = settings.EMAIL_HOST_USER
+    recipient = ["kamal.edutrainer@gmail.com",]
+    context={
+        'name':"kamal pabba",
+        'msg':query['user'].get_full_name() +''' has Registerd for Become a collobrator and have the following Query    
+        " '''+query['query']+''' " ''' 
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+
+
+
+
 
 # After shortlisting an applicant
 def successOnShortlisted(user):
@@ -342,5 +361,8 @@ def FacilitatorApprovalWithoutSubscription(applicant):
 def SHORTLIST(request):
     id=request.POST.get('id',None)
     user=CustomUser.objects.get(id=int(id))
+    applicant=Applicants.objects.get(user=user)
+    applicant.shortlist=True
+    applicant.save()
     successOnShortlisted(user)
     return JsonResponse({'name':user.get_full_name()})

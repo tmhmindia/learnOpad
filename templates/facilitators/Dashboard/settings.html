@@ -230,7 +230,7 @@
                     </div>
                     <!-- End Card -->
 
-
+                    
                     <!-- Card -->
                     <div class="card mb-3 mb-lg-5">
                         <div class="card-header">
@@ -451,7 +451,7 @@
                                   dataType: 'json',
                                   success: function (data) {
                                       if (data.msg.suc_res) {
-                                       swal("Hurray!", data.msg.suc_res, "success").then(function(){ window.location.href='/home'});
+                                       swal("Hurray!", data.msg.suc_res+" your session expired", "success").then(function(){ window.location.href='/home'});
                                       }
                                       else {
                                         swal("Sorry!", data.msg.err_res, "error").then(function(){ window.location.href='/home'});

@@ -116,6 +116,9 @@ Create Courses
         a:hover{
             text-decoration: none;
         }
+        select.form-control{
+            color:#000
+        }
         /* .uploadform,.deletevid{
             display : none;
         } */
@@ -274,7 +277,7 @@ Create Courses
                                                 margin-bottom: auto;
                                             ">
                                               
-                                                <select class="selectpicker "  title="Choose Your Course subcategory" name="course" id="id_ccategory"  style="width: 100%;" required>
+                                                <select class="form-control "  title="Choose Your Course subcategory" name="course" id="id_ccategory"  style="width: 100%;" required>
 
                                                     
                                                         {% for sub in subcategory %}
@@ -451,7 +454,7 @@ Create Courses
                                                 margin-bottom: auto;
                                             ">
                                               
-                                                <select class="selectpicker " title="Choose Your Course" name="course" id="update_subcategory"  style="width: 100%;">
+                                                <select class="form-control " title="Choose Your Course" name="course" id="update_subcategory"  style="width: 100%;">
 
                                                     
                                                         {% for sub in subcategory %}
