@@ -92,9 +92,16 @@ def facilitator_orders(request):
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def course_orders(request):
-    orders=OrderCourses.objects.all().order_by('-added')
-    revenues=Revenue.objects.all().order_by('-added')
-    return render(request,'myAdmin/dashboard/course_orders.html',{'orders':orders,'revenues':revenues}) 
+    if request.method == 'POST':
+        id=request.POST.get('id',None)
+        revenue=Revenue.objects.get(id=int(id))
+        revenue.status='paid'
+        revenue.save()
+        return JsonResponse("success",safe=False)
+    else:
+        orders=OrderCourses.objects.all().order_by('-date_added')
+        revenues=Revenue.objects.all().order_by('-added')
+        return render(request,'myAdmin/dashboard/course_orders.html',{'orders':orders,'revenues':revenues}) 
 
 def myprofile(request):
     if request.method == 'POST':
@@ -111,7 +118,7 @@ def myprofile(request):
         return JsonResponse({'success':True})
 
     else:
-        staff=Staff.objects.get(user=request.user).order_by('-added')
+        staff=Staff.objects.get(user=request.user)
         return render(request,'myAdmin/dashboard/profile.html',{'staff':staff}) 
     return render(request,'myAdmin/dashboard/profile.html') 
 def category(request):
@@ -291,17 +298,28 @@ def DeleteCourse(request):
     course=Course.objects.get(Cid=int(Cid))
     course.approve=False
     course.save()
+    MailOnDeactivateCourseToAdmin(course)
+    MailOnDeactivateCourseToUser(course)
     return JsonResponse({"success":True})
 def DeleteUser(request):
     id=request.POST.get('id',None)
     flag=request.POST.get('flag',None)
     if flag == "true":
         flag=True
+
     else:
         flag=False
+        
     user=CustomUser.objects.get(id=int(id))
     user.is_active=flag
-    user.save()   
+    user.save()
+    if flag:
+        MailToActiveUsers(user)
+        MailOnActivateUserToAdmin(user)
+
+    else:
+        MailToDeactivateUsers(user)
+        MailOnDeactivateUserToAdmin(user)   
     return JsonResponse({"success":True})
 def DeleteTrainingData(request):
     campus=request.POST.get('campus',None)

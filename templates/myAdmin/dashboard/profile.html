@@ -184,15 +184,11 @@
             alert(error);
             },
             success: function(response) {
-                if(response.success){
-                        swal("Done!", "Staff User is Successfully Created", "success").then(function(){
-                            window.location.reload();
+                
+                        swal("Done!", "Your Session is expired ", "success").then(function(){
+                            window.location.href='/home'
                         });
-                }
-                else{
-                    swal("Oops!", "Staff User is Not Created", "error");
-    
-                }
+               
             
             }
             });

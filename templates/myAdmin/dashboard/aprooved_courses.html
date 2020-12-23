@@ -118,8 +118,7 @@
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
    
     <script>
-  function DeleteCourse(id)
-        {
+  function DeleteCourse(id){
            
             swal({
   title: "Are you sure?",
@@ -138,7 +137,7 @@
                },
           data: {Cid : id},
           success: function (data) {
-            swal("Disapprove!", "Course has been disapproved", "success",function(){
+            swal("Disapprove!", "Course has been disapproved", "success").then(function(){
                 window.location.reload();});
           },
           error: function (data) {

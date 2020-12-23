@@ -180,20 +180,22 @@
         function DeleteUser(id,flag)
         {
             var signal;
+            var cancel;
             if(flag)
             {
-                 signal="Activated";
+                 signal="Active";
+                 cancel="Deactivated";
             }
             else{
                 signal="Deactivated";
+                cancel="Active";
             }
-            
             
             
             
             swal({
   title: "Are you sure?",
-  text: "You wanted to "+signal+" this facilitator",
+  text: "You want to "+signal+" this facilitator",
   icon: "warning",
   buttons: true,
   dangerMode: true,
@@ -208,14 +210,14 @@
                },
           data: {id : id,flag:flag},
           success: function (data) {
-            swal(signal, "Your Facilitator  has been "+signal+"", "success");
+            swal(signal, "Your Facilitator  is "+signal+"", "success");
           },
           error: function (data) {
             swal("NOT "+signal+"!", "Something blew up.", "error");
           }
         });
   } else {
-    swal("Cancelled", "Your Facilitator is Still "+signal+"", "success");
+    swal("Cancelled", "Your Facilitator is "+cancel, "success");
   }
 });
 

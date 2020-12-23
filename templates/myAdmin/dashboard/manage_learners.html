@@ -120,18 +120,21 @@
         function DeleteUser(id,flag)
         {
             var signal;
+            var cancel;
             if(flag)
             {
-                 signal="Activated";
+                 signal="Active";
+                 cancel="Deactivated";
             }
             else{
                 signal="Deactivated";
+                cancel="Active";
             }
             
 
             swal({
   title: "Are you sure?",
-  text: "You wanted to  "+signal+" this learner!",
+  text: "You want to  "+signal+" this learner!",
   icon: "warning",
   buttons: true,
   dangerMode: true,
@@ -146,7 +149,7 @@
                },
           data: {id : id,flag:flag},
           success: function (data) {
-            swal(signal, "Your learner  has been  "+signal+".","success").then(function(){
+            swal(signal, "Your learner  is  "+signal+".","success").then(function(){
                 window.location.reload()
             });
           },
@@ -156,7 +159,7 @@
         });
 
   } else {
-    swal("Cancelled", "Your learner is Still  "+signal+"", "success");
+    swal("Cancelled", " your learner is "+cancel, "success");
 
 
   }

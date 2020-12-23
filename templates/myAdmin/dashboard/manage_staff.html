@@ -90,10 +90,20 @@
                                                 <th>{{staff_user.user.get_full_name }}</th>
                                                 <th>{{staff_user.user.email }}</th>
                                                 
-                                                <th> 
-                                                    
-                                                    <button type="button" onClick="DeleteUser('{{staff_user.user.id}}')" class="btn btn-danger btn-sm">Delete</button>
-                                            </th>
+                                                <th>
+                                                    {% if staff_user.user.is_active %} 
+                                                    <button type="button" class="btn btn-success btn-sm">Active</button>
+
+                                                    <button type="button" onClick="DeleteUser('{{staff_user.user.id}}',false)" class="btn btn-warning btn-sm">Deactivate</button>
+                                                    {% else %}
+                                                    <button type="button" class="btn btn-danger btn-sm">Inactive</button>
+
+                                                    <button type="button" onClick="DeleteUser('{{staff_user.user.id}}',true)" class="btn btn-warning btn-sm">Activate</button>
+
+                                                    {% endif %}
+                                           
+                                           
+                                                </th>
                                     
                                             </tr>
                                             {% endfor %}
@@ -129,12 +139,23 @@
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
     <script>
 
-function DeleteUser(id)
+function DeleteUser(id,flag)
         {
 
+            var signal;
+            var cancel;
+            if(flag)
+            {
+                 signal="Active";
+                 cancel="Deactivated";
+            }
+            else{
+                signal="Deactivated";
+                cancel="Active";
+            }
             swal({
   title: "Are you sure?",
-  text: "You will not be able to recover this Learner Data!",
+  text: "You want to  "+signal+" this Staff!",
   icon: "warning",
   buttons: true,
   dangerMode: true,
@@ -147,21 +168,16 @@ function DeleteUser(id)
           headers: {
                        "X-CSRFTOKEN": "{{ csrf_token }}"
                },
-          data: {id : id},
+          data: {id : id,flag:flag},
           success: function (data) {
-            swal("Deleted!", "Your course  has been deleted.","success").then(function(){
-                window.location.reload()
-            });
+            swal(signal, "Your Staff  is  "+signal+".", "success").then(function(){ window.location.reload()});
           },
           error: function (data) {
-            swal("NOT Deleted!", "Something blew up.", "error");
+            swal("NOT  "+signal+"!", "Something blew up.", "error");
           }
         });
-
   } else {
-    swal("Done !", "Your Data is Safe", "success");
-
-
+    swal("Cancelled", " your staff is "+cancel, "success");
   }
 });
 
@@ -169,9 +185,11 @@ function DeleteUser(id)
 
 
 
-         
-        }
 
+
+          
+
+        }
 
 
     $("#staffbtn").click(function(event){

@@ -126,16 +126,19 @@
         {
 
             var signal;
+            var cancel;
             if(flag)
             {
-                 signal="Activated";
+                 signal="Active";
+                 cancel="Deactivated";
             }
             else{
                 signal="Deactivated";
+                cancel="Active";
             }
             swal({
   title: "Are you sure?",
-  text: "You wanted to  "+signal+" this Facilitator!",
+  text: "You want to  "+signal+" this Facilitator!",
   icon: "warning",
   buttons: true,
   dangerMode: true,
@@ -150,14 +153,14 @@
                },
           data: {id : id,flag:flag},
           success: function (data) {
-            swal(signal, "Your Facilitator  has been  "+signal+".", "success").then(function(){ window.location.reload()});
+            swal(signal, "Your Facilitator  is  "+signal+".", "success").then(function(){ window.location.reload()});
           },
           error: function (data) {
             swal("NOT  "+signal+"!", "Something blew up.", "error");
           }
         });
   } else {
-    swal("Cancelled", "Your Facilitator is still  "+signal+":)", "success");
+    swal("Cancelled", " your facilitator is "+cancel, "success");
   }
 });
 

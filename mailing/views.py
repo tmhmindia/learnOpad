@@ -355,9 +355,79 @@ def FacilitatorApprovalWithoutSubscription(applicant):
     send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
 
 
+def MailToDeactivateUsers(user):
+    sender = settings.EMAIL_HOST_USER
+    recipient = [user.email,]
+    context={
+        'name':user.get_full_name(),
+        'msg':"We would like to inform you that you have lost your privileges to access the dashboard. For further queries please write us on this email.<br> kamal.edutrainer@gmail.com"
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+def MailToActiveUsers(user):
+    sender = settings.EMAIL_HOST_USER
+    recipient = [user.email,]
+    context={
+        'name':user.get_full_name(),
+        'msg':"We are very excited to inform you that you got back all your privileges to access the dashboard and use the benefits of it. So please login into your dashboard and let's begin your journey again."
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+def MailOnDeactivateUserToAdmin(user):
+    sender = settings.EMAIL_HOST_USER
+    recipient = ["kamal.edutrainer@gmail.com",]
+    context={
+        'name':"kamal pabba",
+        'msg':"You have deactivated the "+user.get_full_name()+" account and lost the privileges to access the dashboard."
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+def MailOnActivateUserToAdmin(user):
+    sender = settings.EMAIL_HOST_USER
+    recipient = ["kamal.edutrainer@gmail.com",]
+    context={
+        'name':"kamal pabba",
+        'msg':"You have reactivated the "+user.get_full_name()+" account and gave the privileges back to access the dashboard."
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
 
-
-
+def MailOnDeactivateCourseToUser(course):
+    sender = settings.EMAIL_HOST_USER
+    recipient = [course.offering.all()[0].user.user.email,]
+    context={
+        'name':course.offering.all()[0].name,
+        'msg':"We regret informing you that your course "+course.title+" has been deactivated from our platform which means you will not get any new Learner's for that course. This will not effect your existing Learner's of that course.For further queries please write us on this email <br> kamal.edutrainer@gmail.com"
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+def MailOnDeactivateCourseToAdmin(course):
+    sender = settings.EMAIL_HOST_USER
+    recipient = ["kamal.edutrainer@gmail.com",]
+    context={
+        'name':"kamal pabba",
+        'msg':"You have deactivated the course "+course.title+" of facilitator "+course.offering.all()[0].name+" from our platform which means we will not get any new Learner's for that course. This will not effect our existing Learner's of that course."
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
 def SHORTLIST(request):
     id=request.POST.get('id',None)
     user=CustomUser.objects.get(id=int(id))
