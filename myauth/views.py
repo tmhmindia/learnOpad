@@ -98,11 +98,12 @@ class user_login(View):
                 return render(request, 'facilitators/index.html', context)
 
             message=None
+            user = authenticate(request,email=email1, password=password)
+
            
-            if u:
+            if u.is_active:
                     
-                if u.is_active:
-                    user = authenticate(request,email=email1, password=password)
+                if user:
 
                     login(request, user)
                     # if request.GET.get('next', None):
@@ -124,24 +125,25 @@ class user_login(View):
                         return HttpResponseRedirect(reverse('home')) 
                         
                 else:
-                    notification = "your Account is Not Active"
-                    print(notification)
-                    context = { 'notification': notification,
-                            'clss': 'alert-danger',
-                            
-                            }
-                   
-                    return render(request, 'LandingPage/index.html', context)
-                        
-                    
-                        # return HttpResponse("Account not active")
-            else:
-                context = {
+                    context = {
                         'notification': 'Not registered! login failed',
                         'uemail': u.pk
                     }
                 
+                    return render(request, 'LandingPage/index.html', context)
+                
+                    
+                        # return HttpResponse("Account not active")
+            else:
+                notification = "your Account is Not Active"
+                print(notification)
+                context = { 'notification': notification,
+                            'clss': 'alert-danger',
+                            
+                            }
+                   
                 return render(request, 'LandingPage/index.html', context)
+                        
                 
         #     # else:
         #     #     return HttpResponse("you are not authorized")
