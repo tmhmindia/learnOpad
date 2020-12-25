@@ -31,6 +31,9 @@ urlpatterns = [
     path('learnopad/admin/staff/', views.staff, name='staff'),
     path('learnopad/admin/Delete/Category/', views.DeleteCategorySubcategory, name='delete_CatSubcat'),
     path('learnopad/admin/Delete/Rejected/Course/', views.DeleteRejectedCourse, name='delete_rejected_course'),
+    path('learnopad/admin/Update/Category/', views.UpdateCategory, name='update_category'),
+    path('learnopad/admin/Update/SubCategory/', views.UpdateSubCategory, name='update_subcategory'),
+
 
 
 

@@ -78,10 +78,18 @@
                                         <tbody>
                                             {% for subcat in subcategory %}
                                             <tr>
-                                                <th>{{subcat.name}}</th>
-                                                <th>{{subcat.cat_id.name}}</th>
+                                                <th><p id="p-{{subcat.subCat_id}}">{{subcat.name}}</p> <input type="text" value="{{subcat.name}}" class="inputs" id="subcat-{{subcat.subCat_id}}"></th>
+                                                <th><p id="p-{{subcat.cat_id.cat_id}}">{{subcat.cat_id.name}}</p>
+                                                    <select name="catcat" id="cat-{{subcat.cat_id.cat_id}}" class="cats form-control">
+                                                    {% for cat in categories %}
+                                                    <option value="{{cat.cat_id}}">{{cat.name}}</option>
+                                                    {% endfor %}
+                                                </select></th>
                                                 <th> 
                                                     <button type="button" onClick="DeleteCatSubcat('{{subcat.subCat_id}}',false)" class="btn btn-danger btn-sm">Delete</button>
+                                                    <button type="button" onClick="Edit('{{subcat.subCat_id}}','{{subcat.cat_id.cat_id}}')" class="btn btn-warning btn-sm">Edit</button>
+                                                    <button type="button" onClick="save('{{subcat.subCat_id}}','{{subcat.cat_id.cat_id}}')" id="save-{{subcat.subCat_id}}" class="save btn btn-success btn-sm">Save</button>
+
                                                 </th>
                                             </tr>
                                             {% endfor %}
@@ -111,6 +119,64 @@
         <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
         <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
         <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
+        <script>
+            $(document).ready(function(){
+            
+            $('.inputs').hide();
+            $('.save').hide();
+            $('.cats').hide();
+
+            
+            
+            });
+            function Edit(sid,cid){
+                $('#p-'+cid).hide();
+                $('#p-'+sid).hide();
+
+                $('#cat-'+cid).show();
+                $('#subcat-'+sid).show();
+
+                $('#save-'+sid).show();
+            
+            }
+            function save(sid,cid){
+                var formData = new FormData();
+              formData.append('name', $('#subcat-'+sid).val());
+              formData.append('sid',sid);
+              formData.append('cid',$('#cat-'+cid).val());
+
+            
+              
+            
+            
+             
+            $.ajax({
+                url: "{% url 'update_subcategory' %}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                headers: {
+                                    "X-CSRFTOKEN": "{{ csrf_token }}"
+                            },
+                type: 'POST',
+                cache: false,
+                
+                error: function(xhr, status, error) {
+                    alert(error);
+                },
+                success: function(response) {
+                    
+                swal("Done!", "Edit Successfully ", "success").then(function(){
+                   
+                window.location.reload();
+                });
+            }
+            });
+            
+            }
+                
+                </script>
+            
         <script>
 $("#scategory").submit(function(event){
                 event.preventDefault();

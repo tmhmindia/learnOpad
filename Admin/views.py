@@ -371,3 +371,29 @@ def DeleteCategorySubcategory(request):
     else:
         record=SubCategory.objects.get(subCat_id=int(subcategory)).delete()
     return JsonResponse({"success":True})
+def UpdateCategory(request):
+    name=request.POST.get('name',None)
+    id=request.POST.get('id',None)
+    if id:
+        category=Category.objects.get(cat_id=int(id))
+        category.name=name
+        category.save()
+    
+    return JsonResponse({"success":True})
+def UpdateSubCategory(request):
+    name=request.POST.get('name',None)
+    cid=request.POST.get('cid',None)
+    sid=request.POST.get('sid',None)
+
+    if sid:
+        subcat=SubCategory.objects.get(subCat_id=int(sid))
+        subcat.name=name
+        subcat.save()
+        if cid and subcat.cat_id.cat_id != cid:
+            category=Category.objects.get(cat_id=int(cid))
+            subcat.cat_id=category
+            subcat.save()
+
+
+    
+    return JsonResponse({"success":True})
