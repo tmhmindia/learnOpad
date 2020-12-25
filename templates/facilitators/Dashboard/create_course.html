@@ -53,6 +53,13 @@ Create Courses
    
     {% block stylesheet %}
     <style>
+        .form-control-file{
+            overflow: hidden;
+        }
+        .form-check .form-check-label{
+            display: inline-block;
+            margin-left:0;
+        }
         .bootstrap-select>.dropdown-toggle {
             border: 1px solid;
         }
@@ -166,30 +173,7 @@ Create Courses
   {% endif %}
     
   <script type="text/javascript">
-    window.onload = function() {
-        document.getElementById('uploadform').style.display = 'none';
-        document.getElementById('deletevid').style.display = 'none';
-    }
-    function videoupdtdel() {
-        
-        if ($('#updvid').is(':checked')) {
-            $('#uploadform').show();
-            $('#deletevid').hide();
-            // document.getElementById('dltvid').removeAttribute("checked");
-            // document.getElementById('dltvid').checked = false;
-
-        }
-        else if( $('#dltvid').is(':checked')){ 
-            $('#deletevid').show();
-            $('#uploadform').hide();
-            // document.getElementById('updvid').removeAttribute("checked");
-            // document.getElementById('updvid').checked = false;
-        }
-        // else{
-        //     document.getElementById('uploadform').style.display = 'none';
-        //     document.getElementById('deletevid').style.display = 'none';
-        // }
-    }
+   
     
 </script>
   
@@ -288,11 +272,11 @@ Create Courses
                                                 </select>
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label for="exampleFormControlFile1">Course preview(limit 2 MB)</label>
+                                                    <label for="exampleFormControlFile1">Course preview(limit 500 MB)</label>
                                                     <input type="file" name="cvideo"class="form-control-file" id="id_cvideo" required>
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label for="exampleFormControlFile1">Course Image(limit 2 MB)</label>
+                                                    <label for="exampleFormControlFile1">Course Image(limit resolution 1280*768)</label>
                                                     <input type="file" class="form-control-file" id="id_cthumbnail" name="thumbailup" required>
                                                 </div>
                                             </div>
@@ -300,9 +284,9 @@ Create Courses
                                                             <label for="exampleFormControlTextarea1">Skills covered</label>
                                                             <textarea class="form-control" name="takaway" id="id_ctakeaway" rows="3" required></textarea>
                                                 </div>
-                                                <p id="wait_course_form"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
+                                               
 
-                                              <button type="submit" id="course_create" class="btn btn-primary">Submit</button>
+                                              <button type="submit" id="course_create" class="btn btn-primary">Submit <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></button>
 
                                         </form>
                                     </div>
@@ -367,10 +351,10 @@ Create Courses
                                             <input class="form-check-input" type="checkbox" id="live" value="live" >
                                             <label class="form-check-label" for="inlineCheckbox2">Live Video</label>
                                         </div>
-                                        <p id="wait_video_upload"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
+                                       
 
                                         <div class="form-group mt-3">
-                                            <button type="submit" id="video_create"class="btn btn-primary">Submit</button>
+                                            <button type="submit" id="video_create"class="btn btn-primary">Submit <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></button>
                                         </div>
                                         
                                     </form>
@@ -473,11 +457,11 @@ Create Courses
                                                 </select>
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label for="exampleFormControlFile1">Course preview(limit 2 MB)</label>
+                                                    <label for="exampleFormControlFile1">Course preview(limit 500 MB)</label>
                                                     <input type="file" name="cvideo"class="form-control-file" id="update_video" >
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label for="exampleFormControlFile1">Course Image(limit 2 MB)</label>
+                                                    <label for="exampleFormControlFile1">Course Image(limit resolution 1280*768)</label>
                                                     <input type="file" class="form-control-file" id="update_thumbnail" name="thumbailup">
                                                 </div>
                                             </div>
@@ -485,9 +469,8 @@ Create Courses
                                                             <label for="exampleFormControlTextarea1">Skills covered</label>
                                                             <textarea class="form-control" name="takaway" id="update_takeaway" rows="3"></textarea>
                                                 </div>
-                                                <p id="wait_update_course"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
 
-                                              <button type="submit" id="course_update_btn" class="btn btn-primary">Submit</button>
+                                              <button type="submit" id="course_update_btn" class="btn btn-primary">Submit <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></button>
 
                                         </form>
                                     </div>
@@ -547,7 +530,7 @@ Create Courses
             var id = $(this).val();
 
 
-            $.ajax({
+    $.ajax({
     url: "{% url 'update_course' %}?id="+id,
     async: false,
     contentType: false,
@@ -618,10 +601,10 @@ $("#updatecourseForm").submit(function (event) {
     data:formData,
     type: 'POST',
     beforeSend: function() { 
-      $('#wait_update_course').show(); 
+      $('#course_update_btn .fa').show(); 
   },
     complete: function() { 
-      $('#wait_update_course').hide(); 
+      $('#course_update_btn .fa').hide(); 
 
     },
     
@@ -643,8 +626,10 @@ $("#updatecourseForm").submit(function (event) {
 <script>
 $(document).ready(function(){
     $('#updatecourseForm').hide();
-    $('#wait_video_upload').hide(); 
-    $('#wait_update_course').hide(); 
+     
+    $('#video_create .fa').hide(); 
+
+    $('#course_update_btn .fa').hide();
 
 
 
@@ -656,6 +641,31 @@ $(document).ready(function(){
     });
 });
 
+window.onload = function() {
+    document.getElementById('uploadform').style.display = 'none';
+    document.getElementById('deletevid').style.display = 'none';
+}
+    function videoupdtdel() {
+        
+        if ($('#updvid').is(':checked')) {
+            $('#uploadform').show();
+            $('#deletevid').hide();
+            // document.getElementById('dltvid').removeAttribute("checked");
+            // document.getElementById('dltvid').checked = false;
+
+        }
+        else if( $('#dltvid').is(':checked')){ 
+            $('#deletevid').show();
+            $('#uploadform').hide();
+            // document.getElementById('updvid').removeAttribute("checked");
+            // document.getElementById('updvid').checked = false;
+        }
+        // else{
+        //     document.getElementById('uploadform').style.display = 'none';
+        //     document.getElementById('deletevid').style.display = 'none';
+        // }
+    }
+
 
 function validate()
 {
@@ -664,9 +674,6 @@ function validate()
     if (selectedValue == "empty")
    {
         alert("You have not selected any Course");
-
-
-
         return false;
    }
    return true;
@@ -722,6 +729,8 @@ $("input[name='check_video']").change(function(){
    else{
     $("input[name='check_video']").attr("checked", false);
 
+    $('#uploadform').hide();
+            $('#deletevid').hide();
        return false;
    }
 });
@@ -765,10 +774,10 @@ $.ajax({
                 },
     type: 'POST',
     beforeSend: function() { 
-      $('#wait_video_upload').show(); 
+      $('#video_create .fa').show(); 
   },
     complete: function() { 
-      $('#wait_video_upload').hide(); 
+      $('#video_create .fa').hide(); 
 
     },
     
@@ -790,8 +799,8 @@ $.ajax({
  <script>
  
     $(document).ready(function(){
-        $('#wait_course_form').hide(); 
-
+        // $('#wait_course_form').hide(); 
+        $('#course_create .fa').hide(); 
     
     $("#courseForm").submit(function(event){
         event.preventDefault(); 
@@ -842,10 +851,10 @@ $.ajax({
                 },
     type: 'POST',
     beforeSend: function() { 
-      $('#wait_course_form').show(); 
+      $('#course_create .fa').show(); 
   },
     complete: function() { 
-      $('#wait_course_form').hide(); 
+      $('#course_create .fa').hide(); 
 
     },
     
