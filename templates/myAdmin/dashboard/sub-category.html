@@ -78,7 +78,7 @@
                                         <tbody>
                                             {% for subcat in subcategory %}
                                             <tr>
-                                                <th><p id="p-{{subcat.subCat_id}}">{{subcat.name}}</p> <input type="text" value="{{subcat.name}}" class="inputs" id="subcat-{{subcat.subCat_id}}"></th>
+                                                <th><p id="p-{{subcat.subCat_id}}">{{subcat.name}}</p> <input type="text" value="{{subcat.name}}" class="inputs form-control" id="subcat-{{subcat.subCat_id}}"></th>
                                                 <th><p id="p-{{subcat.cat_id.cat_id}}">{{subcat.cat_id.name}}</p>
                                                     <select name="catcat" id="cat-{{subcat.cat_id.cat_id}}" class="cats form-control">
                                                     {% for cat in categories %}
