@@ -201,12 +201,12 @@
                         </li>
                         {% endif %}
                         {% if request.user|has_group:"Facilitators"  %}
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'dashboard'%}" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Switch to Facilitator</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'dashboard'%}" aria-expanded="false"><i class="fas fa-toggle-on"></i><span class="hide-menu">Switch to Facilitator</span></a></li>
 
                         
                       {% endif %}
                       {% if request.user|has_group:"Learners" %}
-                      <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'learner_index'%}" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Switch to Learners</span></a></li>
+                      <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'learner_index'%}" aria-expanded="false"><i class="fas fa-toggle-on"></i><span class="hide-menu">Switch to Learners</span></a></li>
 
                      
                     {% endif %}

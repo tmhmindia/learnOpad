@@ -50,12 +50,12 @@ def searchbar(request):
         cat = Category.objects.all()
         subcat = SubCategory.objects.all()
         course = Course.objects.filter(Q(title__icontains=query) or Q(
-            subCat_id__name__icontains=query)).order_by('Cid')
+            subCat_id__name__icontains=query),approve=True).order_by('Cid')
         # selected_cat = option
         course = Course.objects.filter(
-            Q(subCat_id__cat_id__name__icontains=query)) or course
-        course = Course.objects.filter(subCat_id__name__in=query) or course
-        course = Course.objects.filter(language__in=query) or course
+            Q(subCat_id__cat_id__name__icontains=query),approve=True) or course
+        course = Course.objects.filter(subCat_id__name__in=query,approve=True) or course
+        course = Course.objects.filter(language__in=query,approve=True) or course
         paginator = Paginator(course.values(), 6, orphans=1)
         page_number = 1
         page_obj = paginator.get_page(page_number)
@@ -89,7 +89,6 @@ def CoursePage(request,pk):
         total_rating = course.no_of_ratings()
 
     star_list = course.star_count()
-    print('LALALA',int(course.avg_rating()))
     
     facilitator=course.offering.all()[0]
     all_course_of_facilitator = facilitator.offering.all()
@@ -101,8 +100,7 @@ def CoursePage(request,pk):
 
     month =course.updated.strftime('%b')
     year=course.updated.strftime('%Y')
-    similer=Course.objects.filter(subCat_id=course.subCat_id.subCat_id).exclude(Cid=course.Cid)[:3]
-    print(similer)
+    similer=Course.objects.filter(subCat_id=course.subCat_id.subCat_id,approve=True).exclude(Cid=course.Cid)[:2]
     val=[]
     try:
         val=course.rating_by_me(request.user.learner)
@@ -144,7 +142,6 @@ def CoursePage(request,pk):
     except:
         pass
     rev=request.POST.get('reply1')
-    print(rev)
     if rev!=None:
         freply=request.POST.get('reply')
         data=Reply.objects.create(Rid=Reviews.objects.get(pk=int(rev)),replies=freply)
@@ -156,12 +153,10 @@ def CoursePage(request,pk):
     return render(request, 'LandingPage/course/course.html',context)
 
 def rate_course(request, pk=None):
-    print('AAAAAAAAYYYYYYYYYYYYYYYAAAAAAAAAA')
     succ = False
     strs = request.GET.get('star', None)
     print(strs)
     crse = Course.objects.get(pk=pk)
-    print(crse)
     #similer=Course.objects.filter(subCat_id=crse.subCat_id).exclude(Cid=crse.Cid)[:3]
     # context={'course':crse,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer}
     try:
@@ -279,19 +274,19 @@ def exploreCourses(request):
         if option == "All Categories":
             course=Course.objects.filter(approve=True)
         else:
-            course=Course.objects.filter(Q(subCat_id__cat_id__name__icontains=option))
+            course=Course.objects.filter(Q(subCat_id__cat_id__name__icontains=option),approve=True)
     # Search Filter
     if query is not None:
-        course = Course.objects.filter(Q(title__icontains=query) or Q(subCat_id__name__icontains= query)).order_by('Cid')
+        course = Course.objects.filter(Q(title__icontains=query) or Q(subCat_id__name__icontains= query),approve=True).order_by('Cid')
     # Side Filters
     if filter_level:
-        course=Course.objects.filter(level__in=filter_level) & course
+        course=Course.objects.filter(level__in=filter_level,approve=True) & course
     if filter_subcat:
-        course=Course.objects.filter(subCat_id__name__in=filter_subcat) & course
+        course=Course.objects.filter(subCat_id__name__in=filter_subcat,approve=True) & course
     if filter_lang:
-        course=Course.objects.filter(language__in=filter_lang) & course
+        course=Course.objects.filter(language__in=filter_lang,approve=True) & course
     if filter_price:
-        course=Course.objects.filter(price__in=filter_price) & course
+        course=Course.objects.filter(price__in=filter_price,approve=True) & course
     paginator=Paginator(course,6,orphans=1)
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)

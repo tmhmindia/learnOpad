@@ -160,7 +160,6 @@
                                  }">
                                                 </div>
 
-                                                <a class="btn btn-sm btn-white mb-2 mb-sm-0" href="javascript:;">Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -173,8 +172,8 @@
 
                                     <div class="col-sm-9">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="firstName" id="firstNameLabel" placeholder="Clarice" aria-label="Clarice" value="{{firstname}}">
-                                            <input type="text" class="form-control" name="lastName" id="lastNameLabel" placeholder="Boone" aria-label="Boone" value="{{lastname}}">
+                                            <input type="text" class="form-control" name="firstName" id="firstNameLabel" placeholder="Clarice" aria-label="Clarice" value="{{firstname}}" required>
+                                            <input type="text" class="form-control" name="lastName" id="lastNameLabel" placeholder="Boone" aria-label="Boone" value="{{lastname}}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -189,7 +188,12 @@
                                     </div>
                                 </div>
                                 <!-- End Form Group -->
-
+                                <div class="row form-group">
+                                    <label for="dob" class="col-sm-3 col-form-label input-label">DOB</label>
+                                    <div class="col-sm-9">
+                                        <input type="date" class="form-control" name="dob" aria-label="dob" value="{{ourdata.DOB|date:'Y-m-d'}}" %}>
+                                    </div>
+                                </div>
                                 <!-- Form Group -->
                                 <div class="js-add-field row form-group" data-hs-add-field-options="{
                         &quot;template&quot;: &quot;#addPhoneFieldTemplate&quot;,
@@ -200,13 +204,11 @@
 
                                     <div class="col-sm-9">
                                         <div class="input-group align-items-center">
-                                            <input type="text" class="js-masked-input form-control" name="phone" id="phoneLabel"  aria-label="+x(xxx)xxx-xx-xx" {% if ourdata.phone %} value="{{ourdata.phone}}" {% endif %}data-hs-mask-options="{
-                               &quot;template&quot;: &quot;+0(000)000-00-00&quot;
-                             }" maxlength="16">
+                                            <input type="text" class="form-control" name="phone" id="phoneLabel" placeholder="mobile number"  {% if ourdata.phone %} value="{{ourdata.phone}}" {% endif %} maxlength="10">
 
                                             <div class="input-group-append">
                                                 <!-- Select -->
-                                                <select class="js-custom-select custom-select dropdown-toggle select2-hidden-accessible" name="phoneSelect" data-hs-select2-options="{
+                                                <!-- <select class="js-custom-select custom-select dropdown-toggle select2-hidden-accessible" name="phoneSelect" data-hs-select2-options="{
                                 &quot;minimumResultsForSearch&quot;: &quot;Infinity&quot;,
                                 &quot;customClass&quot;: &quot;custom-select&quot;,
                                 &quot;dropdownAutoWidth&quot;: true,
@@ -217,7 +219,7 @@
                           <option value="Work" data-select2-id="5">Work</option>
                           <option value="Fax" data-select2-id="6">Fax</option>
                           <option value="Direct" data-select2-id="7">Direct</option>
-                        </select>
+                        </select> -->
                                                 <span class="dropdown-wrapper" aria-hidden="true"></span></span>
                                                 <!-- End Select -->
                                             </div>
@@ -226,9 +228,9 @@
                                         <!-- Container For Input Field -->
                                         <div id="addPhoneFieldContainer"></div>
 
-                                        <a href="javascript:;" class="js-create-field form-link btn btn-xs btn-no-focus btn-ghost-primary">
+                                        <!-- <a href="javascript:;" class="js-create-field form-link btn btn-xs btn-no-focus btn-ghost-primary">
                                             <i class="fas fa-plus mr-1"></i> Add phone
-                                        </a>
+                                        </a> -->
                                     </div>
                                 </div>
                                 <!-- End Form Group -->
@@ -268,7 +270,7 @@
 
                                 <!-- Form Group -->
                                 <div class="row form-group">
-                                    <label class="col-sm-3 col-form-label input-label" for="bio">BIO</label>
+                                    <label class="col-sm-3 col-form-label input-label" for="bio">BIO (less then 100 words) <p id="bio_text"></p> </label>
                                     <div class="col-sm-9">
                                         <!-- Quill -->
                                         <div class="quill-custom">
@@ -719,6 +721,7 @@
         $(document).on('ready', function() {
             // initialization of header
             var header = new HSHeader($('#header')).init();
+            console.log($('#bio').val().length)
 
             // initialization of mega menu
             var megaMenu = new HSMegaMenu($('.js-mega-menu'), {
@@ -780,7 +783,12 @@
             const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             quill.on('text-change', function(delta, oldDelta, source) {
                 /* console.log(quill.container.firstChild.innerHTML) */
-                var text = quill.getText(0, 500)
+                
+                var text = quill.getText(0, 500);
+                //console.log(text.length);​​
+                          
+   
+
                 
                 /* $('#bio').val(quill.container.firstChild.innerHTML); */
                 $.ajax({

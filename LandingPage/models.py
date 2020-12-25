@@ -7,6 +7,7 @@ from django.core.validators import RegexValidator
 from facilitators.models import Facilitator
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
+from payment_gateway.models import Revenue
 
 #this table contain all the councelling releted details
 class OnlineCounsellingDetails(models.Model):
@@ -154,6 +155,12 @@ class Course(models.Model):
     def getOfferPrice(self):
         price=self.price
         return price *(125/100)
+    def getTotalRevenueOfThisCourse(self):
+        revenues=Revenue.objects.filter(revenue_item__course__Cid=self.Cid)
+        total=0
+        for revenue in revenues:
+            total+=revenue.admin_revenue
+        return total
     
     
     class Meta:

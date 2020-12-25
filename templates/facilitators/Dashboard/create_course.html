@@ -116,6 +116,9 @@ Create Courses
         a:hover{
             text-decoration: none;
         }
+        select.form-control{
+            color:#000
+        }
         /* .uploadform,.deletevid{
             display : none;
         } */
@@ -214,8 +217,8 @@ Create Courses
                                             <div class="form-row">
                                                
                                                 <div class="form-group col-md-6">
-                                                  <label for="inputPassword4">Title</label>
-                                                  <input type="text" name="ctitle"class="form-control" id="id_ctitle" placeholder="Title" required>
+                                                  <label for="inputPassword4">Course title</label>
+                                                  <input type="text" name="ctitle"class="form-control" id="id_ctitle" placeholder="Course name" required>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="inputEmail4">Price</label>
@@ -239,7 +242,7 @@ Create Courses
                                                   </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <label for="inputState">Course Level</label>
+                                                    <label for="inputState">Course Languages</label>
                                                     <select id="id_clanguage" class="form-control" required>
                                                           <option value="Hindi">Hindi</option>
                                                           <option value="English">English</option>
@@ -260,7 +263,7 @@ Create Courses
                                                   <select id="id_caudience" class="form-control" required>
                                                     {% for obj in audience_list %}
                                                                 <option value="{{obj.audience}}">{{obj.audience}}</option>
-                                                                {% endfor %}      
+                                                    {% endfor %}      
                                                   </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
@@ -274,17 +277,13 @@ Create Courses
                                                 margin-bottom: auto;
                                             ">
                                               
-                                                <select class="selectpicker " title="Choose Your Course" name="course" id="id_ccategory" multiple style="width: 100%;" required>
+                                                <select class="form-control "  title="Choose Your Course subcategory" name="course" id="id_ccategory"  style="width: 100%;" required>
 
-                                                    {% for cat in category %}
-                                                    <optgroup label="{{cat.name}}">
+                                                    
                                                         {% for sub in subcategory %}
-                                                        {% if sub.cat_id.cat_id == cat.cat_id %}
                                                         <option value="{{sub.subCat_id}}">{{sub.name}}</option>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                    </optgroup>
-                                                    {% endfor %}
+                                                        {% endfor %}
+                                            
                                                 
                                                 </select>
                                                 </div>
@@ -301,6 +300,8 @@ Create Courses
                                                             <label for="exampleFormControlTextarea1">Skills covered</label>
                                                             <textarea class="form-control" name="takaway" id="id_ctakeaway" rows="3" required></textarea>
                                                 </div>
+                                                <p id="wait_course_form"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
+
                                               <button type="submit" id="course_create" class="btn btn-primary">Submit</button>
 
                                         </form>
@@ -317,7 +318,9 @@ Create Courses
                                         <select id="select_course"  class="form-control" required>
                                           <option value="empty">Choose...</option>
                                           {% for course in request.user.user.facilitator.offering.all %}
-                                          <option value="{{course.Cid}}">{{course.title}}</option>
+                                          {% if course.approve %}
+                                        <option value="{{course.Cid}}">{{course.title}}</option>
+                                            {% endif %}
                                           {% endfor %}
                                         </select>
                                       </div>
@@ -364,6 +367,8 @@ Create Courses
                                             <input class="form-check-input" type="checkbox" id="live" value="live" >
                                             <label class="form-check-label" for="inlineCheckbox2">Live Video</label>
                                         </div>
+                                        <p id="wait_video_upload"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
+
                                         <div class="form-group mt-3">
                                             <button type="submit" id="video_create"class="btn btn-primary">Submit</button>
                                         </div>
@@ -388,7 +393,9 @@ Create Courses
                                             <select  id="UpdateCourseSelect" class="form-control">
                                                 <option value="empty">Select</option>
                                                 {% for course in request.user.user.facilitator.offering.all %}
+                                                    {% if course.approve %}
                                                 <option value="{{course.Cid}}">{{course.title}}</option>
+                                                    {% endif %}
                                                 {% endfor %}
                                             </select>
                                         </div>
@@ -455,17 +462,13 @@ Create Courses
                                                 margin-bottom: auto;
                                             ">
                                               
-                                                <select class="selectpicker " title="Choose Your Course" name="course" id="update_subcategory" multiple style="width: 100%;">
+                                                <select class="form-control " title="Choose Your Course" name="course" id="update_subcategory"  style="width: 100%;">
 
-                                                    {% for cat in category %}
-                                                    <optgroup label="{{cat.name}}">
+                                                    
                                                         {% for sub in subcategory %}
-                                                        {% if sub.cat_id.cat_id == cat.cat_id %}
                                                         <option value="{{sub.subCat_id}}">{{sub.name}}</option>
-                                                        {% endif %}
                                                     {% endfor %}
-                                                    </optgroup>
-                                                    {% endfor %}
+                                                   
                                                 
                                                 </select>
                                                 </div>
@@ -482,6 +485,8 @@ Create Courses
                                                             <label for="exampleFormControlTextarea1">Skills covered</label>
                                                             <textarea class="form-control" name="takaway" id="update_takeaway" rows="3"></textarea>
                                                 </div>
+                                                <p id="wait_update_course"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
+
                                               <button type="submit" id="course_update_btn" class="btn btn-primary">Submit</button>
 
                                         </form>
@@ -605,7 +610,6 @@ $("#updatecourseForm").submit(function (event) {
 
  $.ajax({
     url: "{% url 'update_course' %}",
-    async: false,
     headers: {
                         "X-CSRFTOKEN": "{{ csrf_token }}"
                 },
@@ -613,7 +617,13 @@ $("#updatecourseForm").submit(function (event) {
     processData: false,
     data:formData,
     type: 'POST',
-    cache: false,
+    beforeSend: function() { 
+      $('#wait_update_course').show(); 
+  },
+    complete: function() { 
+      $('#wait_update_course').hide(); 
+
+    },
     
     error: function(xhr, status, error) {
         alert(error);
@@ -633,6 +643,11 @@ $("#updatecourseForm").submit(function (event) {
 <script>
 $(document).ready(function(){
     $('#updatecourseForm').hide();
+    $('#wait_video_upload').hide(); 
+    $('#wait_update_course').hide(); 
+
+
+
     $('#UpdateCourseSelect').change(function(){
         
         if($(this).val()!='empty'){
@@ -742,7 +757,6 @@ var formData = new FormData();
  
 $.ajax({
     url: "{% url 'update_videos' %}",
-    async: false,
     data: formData,
     contentType: false,
     processData: false,
@@ -750,14 +764,21 @@ $.ajax({
                         "X-CSRFTOKEN": "{{ csrf_token }}"
                 },
     type: 'POST',
-    cache: false,
+    beforeSend: function() { 
+      $('#wait_video_upload').show(); 
+  },
+    complete: function() { 
+      $('#wait_video_upload').hide(); 
+
+    },
     
     error: function(xhr, status, error) {
         alert(error);
     },
     success: function(response) {
         
-    swal("Done!", "Video is Updated Successfully ", "success");
+    swal("Done!", "You successfully uploaded the video", "success").then(function(){ $("#video_create_form")[0].reset()
+});
      
             
     }
@@ -769,11 +790,13 @@ $.ajax({
  <script>
  
     $(document).ready(function(){
-  
+        $('#wait_course_form').hide(); 
+
     
     $("#courseForm").submit(function(event){
-        event.preventDefault()  
-         var cat_list = $('#id_ccategory option:selected').toArray().map(item => item.text);      
+        event.preventDefault(); 
+         var cat_list = $('#id_ccategory option:selected').toArray().map(item => item.value); 
+         console.log(cat_list);     
 
    var $video;
    var data = {};
@@ -809,10 +832,8 @@ var formData = new FormData();
   formData.append('cthumbnail',$thumbnail)
   formData.append('data',JSON.stringify(data))
 
- $.ajaxSetup({async: false});
 $.ajax({
     url: "{% url 'createcourseapi' %}",
-    async: false,
     data: formData,
     contentType: false,
     processData: false,
@@ -820,23 +841,26 @@ $.ajax({
                         "X-CSRFTOKEN": "{{ csrf_token }}"
                 },
     type: 'POST',
-    cache: false,
+    beforeSend: function() { 
+      $('#wait_course_form').show(); 
+  },
+    complete: function() { 
+      $('#wait_course_form').hide(); 
+
+    },
     
     error: function(xhr, status, error) {
         alert(error);
     },
     success: function(response) {
         
-    swal("Done!", "Course is Created Successfully ", "success");
-      setTimeout(function(){
-            window.location.href = '{% url "createcourse" %}';
-         }, 5000); 
+    swal("Done!", "Course Creation request sent", "success").then(function(){$("#courseForm")[0].reset() });
+      
                 
             
     }
 });
 
-$.ajaxSetup({async: true}); 
 
 });
 });

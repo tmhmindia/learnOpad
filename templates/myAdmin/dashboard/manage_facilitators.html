@@ -1,5 +1,6 @@
 {% extends '../base.html' %}
 {% load static %}
+{% load has_group %}
 <!-- ---------------------------------------------- -->
     {% block title %}
     Manage Learners
@@ -49,7 +50,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Requested fascilitators</h5>
+                                <h5 class="card-title">Requested facilitators</h5>
                                 <div class="table-responsive">
                                     <table id="zero_config" class="table table-striped table-bordered">
                                         <thead>
@@ -71,8 +72,8 @@
                                                 
                                                 <th> 
                                                   
-                                                    <button type="button" onclick="Approved('{{applicant.Aid}}')" id="btn_approve"class="btn btn-info btn-md">Approve</button>
-                                                    <button type="button" onclick="Shortlist('{{applicant.user.id}}')" id="btn_approve"class="btn btn-primary btn-md">Shortlist</button>
+                                                    <button type="button" onclick="Approved('{{applicant.Aid}}')" id="btn_approve-{{applicant.Aid}}" class="btn btn-info btn-md">Approve</button>
+                                                    <button type="button" onclick="Shortlist('{{applicant.user.id}}')" id="btn_shortlist-{{applicant.user.id}}" {% if applicant.shortlist %} class="btn btn-success btn-md"{% else %}class="btn btn-danger btn-md"{% endif %} >{% if applicant.shortlist %}Shortlisted{% else %}Shortlist{% endif %}</button>
                                                    
                                             </th>
                                             </tr>
@@ -126,7 +127,9 @@
                 },
       success: function(data){
         
-swal("Done!", data.name+" is Shortlisted", "success");
+swal("Done!", data.name+" is Shortlisted", "success").then(function(){ 
+        window.location.reload();
+});
 
 
       }

@@ -119,7 +119,12 @@ Course subscription    {% endblock title %}
                                                 <th> 
                                                     <!-- <button type="button" class="btn btn-cyan btn-md mt-2">Send </button> -->
                                                     <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
-                                                    <button type="button"  class="btn btn-success btn-sm" disabled>Paid </button>
+                                                    {% if revenue.status == "pending" %}
+                                                    <button type="button" onClick="PaidRevenue('{{revenue.id}}')"  class="btn btn-danger btn-sm" >Pay </button>
+                                                    {% else %}
+                                                    <button type="button"   class="btn btn-success btn-sm" disabled>Paid </button>
+
+                                                    {% endif %}
                                                 </th>
 
                                             </tr>
@@ -184,6 +189,30 @@ Course subscription    {% endblock title %}
 
 
     
+            }
+
+
+
+
+
+          function PaidRevenue(id){
+
+            $.ajax({
+              type: 'POST',
+              url: '{% url "course_orders" %}',
+              headers: {
+                           "X-CSRFTOKEN": "{{ csrf_token }}"
+                   },
+              data: {id : id},
+              success: function (data) {
+                swal("Done!", "Revenue is Updated", "success").then(function(){ window.location.reload()});
+              },
+              error: function (data) {
+                swal("NOT Updated!", "Something blew up.", "error");
+              }
+            });
+
+
             }
         </script>
        

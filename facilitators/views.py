@@ -54,7 +54,6 @@ def facilitator_page(request):
 @allowed_Facilitator_Dashboard()
 def facilitator_Dashboard_Landing_page(request):
    #by saurabh
-    print(request.user)
     instance = CustomUser.objects.get(email=request.user)
     # o = instance.learner.all()
     # print('leaner', o)
@@ -71,6 +70,7 @@ def facilitator_Dashboard_Landing_page(request):
     # print(total_queries)
     pro = instance.user
     offr = offer.objects.filter(Fid=obj.Fid)
+    approve_course=offer.objects.filter(Fid=obj.Fid,Cid__approve=True).count()
     # print(offr)
     total_course = offr.count()
     total_learners = 0
@@ -93,11 +93,12 @@ def facilitator_Dashboard_Landing_page(request):
         'active_learners': active_learners,
         'total_queries': total_queries,
         'facilitator_rating': int(facilitator_rating),
+        'approve_course':approve_course
     }
     # My courses
     appli=Applicants.objects.get(user=request.user)
     faci=Facilitator.objects.get(user=appli)
-    course=offer.objects.filter(Fid=faci.Fid)
+    course=offer.objects.filter(Fid=faci.Fid,Cid__approve=True)
     if len(course)==0:
         context.update({'count':0})
         return render(request,'facilitators/Dashboard/index.html',context)
@@ -130,36 +131,7 @@ def facilitator_Dashboard_myearnings_page(request,pk):
 @login_required(login_url='/facilitator/login/')
 @allowed_Facilitator_Dashboard()
 def facilitator_Dashboard_explore_courses_page(request):   
-    # r=requests.get('http://127.0.0.1:8000/facilitator/api/dashboard/explore')
-    # data=json.loads(r.text)
-    # print(request.user.id)
-    # data=Facilitator.objects.get(email=request.user)
-    # appli=Applicants.objects.get(user=request.user)
-    # faci=Facilitator.objects.get(user=appli)
-    # course=offer.objects.all()
-    # course1=[]
-    # context={}
-    # if len(course)==0:
-    #     context.update({'count':0})
-    #     return render(request,'facilitators/Dashboard/explore_courses.html',context)
-    # for i in range(0,len(course)):
-    #     subcategory=SubCategory.objects.get(name=course[i].Cid.subCat_id)
-    #     context.setdefault('subcategory',set()).add(subcategory)
-    #     course1.append(course[i].Cid)
-    # category=[]
-    # for cat in context['subcategory']:
-    #     val=Course.objects.filter(subCat_id=cat.subCat_id)
-    #     val1=[]
-    #     for c in val:
-    #         if c in course1:
-    #             val1.append(c)
-    #     n=len(val1)
-    #     nSlides=(n//3)+ceil(n/3-n//3)
-    #     l=[val1,range(1,nSlides),n]
-    #     category.append(l)
-    # print(context)
-    # context.update({'category':category})
-    # return render(request, 'facilitators/Dashboard/explore_courses.html',context)
+    
     return redirect('Lexplorecourses')
 
 
@@ -229,6 +201,9 @@ def facilitator_Profile_page(request,pk):
         ourdata.name=str(firstname)+" "+str(lastname)
         ourdata.phone = request.POST.get('phone')
         ourdata.country = request.POST.get('country')
+        if request.POST.get('dob'):
+            ourdata.DOB=request.POST.get('dob')
+
         ourdata.state = request.POST.get('state')
         ourdata.PAddress = request.POST.get('addressLine1')
         ourdata.TAddress = request.POST.get('addressLine2')
@@ -298,6 +273,7 @@ def aboutfacilitator(request,pk):
         facilitator_rating = 0
     exp = faci.user.experience
     courses=faci.offering.all().order_by('Cid')
+    courses=courses.filter(approve=True)
     total_learners=0
     for course in courses:
         total_learners+=course.enroll.all().count()

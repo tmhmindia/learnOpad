@@ -22,6 +22,7 @@ class Applicants(models.Model):
     status = models.CharField(max_length=50, null=True, blank=True)
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
+    shortlist=models.BooleanField(default=False)
     def __str__(self):  # __unicode__ for Python 2
         return self.user.email
     class Meta:

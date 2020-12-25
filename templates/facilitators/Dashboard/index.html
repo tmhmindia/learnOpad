@@ -82,7 +82,9 @@
                 padding:0;
             }
         }
-        
+        #content {
+            padding: 20px 30px;
+        }
         @media only screen and (max-width: 1800px) {
             #content {
                 padding: 20px 30px;
@@ -217,9 +219,9 @@ a:hover{
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Courses</div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Approved Courses</div>
                                             {% if total_course %}
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_course }}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{approve_course}}/{{ total_course }}</div>
                                             {% else %}
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
                                             {% endif %}
@@ -317,7 +319,7 @@ a:hover{
                                     <div class='carousel-item active'>
                                         <div class='container'>
                                             <div class='row text-center'>
-                                                <!-- <div class='col-md-4 col-sm-12 mb-2'>
+                                                 <div class='col-md-4 col-sm-12 mb-2'>
                                                     <div class="card border">
                                                         
                                                         {% if courses.0.thumbnail %}
@@ -406,7 +408,6 @@ a:hover{
                     <div class="container">
                         <div class="owl-carousel land_co ftco-owl"  id="owl">
                             {% for course in courses %}
-                       
                             <div class="item">
             
                                     <a class=" course-card"  href="{% url 'VideoPage'%}?Cid={{course.Cid}}">
@@ -422,7 +423,7 @@ a:hover{
                                                 <span><i class="fa fa-star" aria-hidden="true"></i>{{course.no_of_ratings}} </span>
                                                 <div class="course_info">
                                                     <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                    <span>{{course.days}}</span>
+                                                    <span>{{course.days}} days</span>
                                                 </div>
                                                 </div>
                                                 

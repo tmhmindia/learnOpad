@@ -18,16 +18,16 @@ from .models import Staff
 @allowed_users(['Admins','Staff'])
 def Dashboard(request):
     obj=Revenue()
-    dashboard_data={'learners':Learners.objects.all(),'facilitators':Facilitator.objects.all(),'total_applicants':Applicants.objects.filter(status='Due').count(),
+    dashboard_data={'learners':Learners.objects.all().order_by('-added'),'facilitators':Facilitator.objects.all().order_by('-added'),'total_applicants':Applicants.objects.filter(status='Due').count(),
                     'total_courses':Course.objects.all().count(), 'total_active_queries':Queries.objects.filter(replay=None).count()+LQueries.objects.filter(replay=None).count(),
                     'total_course_orders':OrderCourses.objects.all().count(),'total_traingings':CorporatesTalks.objects.all().count()+Campus.objects.all().count(),
-                    'enrollments':enrollment.objects.all(),'total_revenue':obj.get_total_admin_revenue(),'staff_total':Staff.objects.all().count()
+                    'enrollments':enrollment.objects.all().order_by('-addedenroll'),'total_revenue':obj.get_total_admin_revenue(),'staff_total':Staff.objects.all().count()
                         } 
     return render(request,'myAdmin/dashboard/index.html',dashboard_data)
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def manage_facilitators(request):
-    applicants=Applicants.objects.filter(status="Due")
+    applicants=Applicants.objects.filter(status="Due").order_by('-added')
     return render(request,'myAdmin/dashboard/manage_facilitators.html',{'applicants':applicants})
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
@@ -45,7 +45,7 @@ def Approved_facilitators(request):
 
         return JsonResponse({"name":applicant.name})
     else:
-        facilitators=Facilitator.objects.all()
+        facilitators=Facilitator.objects.all().order_by('-added')
         return render(request,'myAdmin/dashboard/aprooved_facilitators.html',{'facilitators':facilitators})
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
@@ -59,12 +59,12 @@ def Approved_courses(request):
         CourseApprovalEmailToFacilitator(course)
         return JsonResponse({"name":course.title})
     else:
-        courses=Course.objects.filter(approve=True)
+        courses=Course.objects.filter(approve=True).order_by('-added')
         return render(request,'myAdmin/dashboard/aprooved_courses.html',{'courses':courses})
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def campus_training(request):
-    campus_records=Campus.objects.all()
+    campus_records=Campus.objects.all().order_by('-added')
     return render(request,'myAdmin/dashboard/view_campus_sub.html',{'records':campus_records})
 
 @login_required(login_url='/user/signin/')
@@ -79,22 +79,30 @@ def facilitator_support(request):
         return JsonResponse("success",safe=False)
 
     else:
-        queries=Queries.objects.all()
+        queries=Queries.objects.all().order_by('-added')
         return render(request,'myAdmin/dashboard/fac_support.html',{'queries':queries})    
 
 
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def facilitator_orders(request):
-    subscriptions=FacilitatorSubscriptions.objects.filter(status=True)
+    subscriptions=FacilitatorSubscriptions.objects.filter(status=True).order_by('-added')
     return render(request,'myAdmin/dashboard/fac_subscription.html',{'subscriptions':subscriptions})   
 
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def course_orders(request):
-    orders=OrderCourses.objects.all()
-    revenues=Revenue.objects.all()
-    return render(request,'myAdmin/dashboard/course_orders.html',{'orders':orders,'revenues':revenues}) 
+    if request.method == 'POST':
+        id=request.POST.get('id',None)
+        revenue=Revenue.objects.get(id=int(id))
+        revenue.status='paid'
+        revenue.save()
+        MailOnRevenueCourseToFacilitator(revenue)
+        return JsonResponse("success",safe=False)
+    else:
+        orders=OrderCourses.objects.all().order_by('-date_added')
+        revenues=Revenue.objects.all().order_by('-added')
+        return render(request,'myAdmin/dashboard/course_orders.html',{'orders':orders,'revenues':revenues}) 
 
 def myprofile(request):
     if request.method == 'POST':
@@ -126,7 +134,7 @@ def category(request):
             return JsonResponse({'success':False})
         return JsonResponse({'name':cat.name,'success':True})
     else:
-        categories=Category.objects.all()
+        categories=Category.objects.all().order_by('-added')
     return render(request,'myAdmin/dashboard/category.html',{'categories':categories})
 def subcategory(request):
     if request.method =='POST':
@@ -142,8 +150,8 @@ def subcategory(request):
             return JsonResponse({'success':False})
         return JsonResponse({'name':cat.name,'success':True})
     else:
-        categories=Category.objects.all()
-        subcategory=SubCategory.objects.all()
+        categories=Category.objects.all().order_by('-added')
+        subcategory=SubCategory.objects.all().order_by('-added')
     return render(request,'myAdmin/dashboard/sub-category.html',{'categories':categories,'subcategory':subcategory}) 
 
 def staff(request):
@@ -169,7 +177,7 @@ def staff(request):
             return JsonResponse({'name':staff.user.first_name,'success':False})
 
     else:
-        staff=Staff.objects.all()
+        staff=Staff.objects.all().order_by('-added')
         return render(request,'myAdmin/dashboard/manage_staff.html',{'staff':staff}) 
 
     
@@ -185,14 +193,14 @@ def learner_support(request):
         return JsonResponse("success",safe=False)
 
     else:
-        queries=LQueries.objects.all()
+        queries=LQueries.objects.all().order_by('-added')
         return render(request,'myAdmin/dashboard/learner_support.html',{'queries':queries})  
 
        
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def cor_training(request):
-    records=CorporatesTalks.objects.all()
+    records=CorporatesTalks.objects.all().order_by('-added')
     return render(request,'myAdmin/dashboard/view_corporate_sub.html',{'records':records})
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
@@ -226,8 +234,20 @@ def view_edit_courses(request):
         course=Course.objects.get(Cid=int(Cid))
         course.title=request.POST.get('title')
         course.description=request.POST.get('description')
-        course.days=request.POST.get('days')
-        course.months= request.POST.get('months')
+        if(course.days == request.POST.get('days',None)):
+            pass 
+        else:
+            days=int(request.POST.get('days',None))
+            month=days//30
+            day=int(days % 30)
+            months=str(month)+" month "+str(day)+" days" 
+            course.days=request.POST.get('days',None)
+            course.months=months
+        if int(request.POST.get('subcat'))!=course.subCat_id.subCat_id:
+            subcat=SubCategory.objects.get(subCat_id=int(request.POST.get('subcat')))
+            course.subCat_id=subcat
+            
+
         course.price= request.POST.get('price')
         course.save()
         return JsonResponse({"success":"success"})
@@ -235,22 +255,23 @@ def view_edit_courses(request):
         Cid=request.GET.get('Cid',None)
         if Cid is not None:
             course=Course.objects.get(Cid=Cid)
-        return render(request,'myAdmin/dashboard/view_edit_course.html',{'course':course})
+        subcat=SubCategory.objects.all()
+        return render(request,'myAdmin/dashboard/view_edit_course.html',{'course':course,'subcat':subcat})
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def manage_learners(request):
-    learners=Learners.objects.all()
+    learners=Learners.objects.all().order_by('-added')
     return render(request,'myAdmin/dashboard/manage_learners.html',{'learners':learners})
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def manage_courses(request):
-    courses=Course.objects.filter(approve=False)
+    courses=Course.objects.filter(approve=False).order_by('-added')
     return render(request,'myAdmin/dashboard/manage_course.html',{'courses':courses})
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def query_submission(request):
-    contactus_list=ContactUs.objects.all()
-    councelling_details=OnlineCounsellingDetails.objects.all()
+    contactus_list=ContactUs.objects.all().order_by('-added')
+    councelling_details=OnlineCounsellingDetails.objects.all().order_by('-added')
     return render(request,'myAdmin/dashboard/query_submission.html',{'contact_list':contactus_list,'councelling_list':councelling_details})
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
@@ -276,12 +297,36 @@ def view_edit_learners(request):
 def DeleteCourse(request):
     Cid=request.POST.get('Cid',None)
     course=Course.objects.get(Cid=int(Cid))
+    course.approve=False
+    course.save()
+    MailOnDeactivateCourseToAdmin(course)
+    MailOnDeactivateCourseToUser(course)
+    return JsonResponse({"success":True})
+def DeleteRejectedCourse(request):
+    Cid=request.POST.get('Cid',None)
+    course=Course.objects.get(Cid=int(Cid))
+    CourseRejection(course)
     course.delete()
     return JsonResponse({"success":True})
 def DeleteUser(request):
     id=request.POST.get('id',None)
+    flag=request.POST.get('flag',None)
+    if flag == "true":
+        flag=True
+
+    else:
+        flag=False
+        
     user=CustomUser.objects.get(id=int(id))
-    user.delete()
+    user.is_active=flag
+    user.save()
+    if flag:
+        MailToActiveUsers(user)
+        MailOnActivateUserToAdmin(user)
+
+    else:
+        MailToDeactivateUsers(user)
+        MailOnDeactivateUserToAdmin(user)   
     return JsonResponse({"success":True})
 def DeleteTrainingData(request):
     campus=request.POST.get('campus',None)
@@ -325,4 +370,30 @@ def DeleteCategorySubcategory(request):
         record=Category.objects.get(cat_id=int(category)).delete()
     else:
         record=SubCategory.objects.get(subCat_id=int(subcategory)).delete()
+    return JsonResponse({"success":True})
+def UpdateCategory(request):
+    name=request.POST.get('name',None)
+    id=request.POST.get('id',None)
+    if id:
+        category=Category.objects.get(cat_id=int(id))
+        category.name=name
+        category.save()
+    
+    return JsonResponse({"success":True})
+def UpdateSubCategory(request):
+    name=request.POST.get('name',None)
+    cid=request.POST.get('cid',None)
+    sid=request.POST.get('sid',None)
+
+    if sid:
+        subcat=SubCategory.objects.get(subCat_id=int(sid))
+        subcat.name=name
+        subcat.save()
+        if cid and subcat.cat_id.cat_id != cid:
+            category=Category.objects.get(cat_id=int(cid))
+            subcat.cat_id=category
+            subcat.save()
+
+
+    
     return JsonResponse({"success":True})

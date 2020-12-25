@@ -157,7 +157,6 @@
                                  }">
                                                 </div>
 
-                                                <a class="btn btn-sm btn-white mb-2 mb-sm-0" href="javascript:;">Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -170,8 +169,8 @@
 
                                     <div class="col-sm-9">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="firstName" id="firstNameLabel" placeholder="Clarice" aria-label="Clarice" value="{{firstname}}">
-                                            <input type="text" class="form-control" name="lastName" id="lastNameLabel" placeholder="Boone" aria-label="Boone" value="{{lastname}}">
+                                            <input type="text" class="form-control" name="firstName" id="firstNameLabel" placeholder="Clarice" aria-label="Clarice" value="{{firstname}}" required>
+                                            <input type="text" class="form-control" name="lastName" id="lastNameLabel" placeholder="Boone" aria-label="Boone" value="{{lastname}}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -197,9 +196,7 @@
 
                                     <div class="col-sm-9">
                                         <div class="input-group align-items-center">
-                                            <input type="text" class="js-masked-input form-control" name="phone" id="phoneLabel" placeholder="+x(xxx)xxx-xx-xx" aria-label="+x(xxx)xxx-xx-xx" value="{{ourdata.phone}}" data-hs-mask-options="{
-                               &quot;template&quot;: &quot;+0(000)000-00-00&quot;
-                             }" maxlength="16">
+                                            <input type="text" class=" form-control" name="phone" id="phoneLabel" placeholder="mobile number"  {% if ourdata.phone %}value="{{ourdata.phone}}" {% endif %}maxlength="10">
 
                                            </div></div></div>
 
@@ -208,7 +205,7 @@
                                 <div class="row form-group">
                                     <label for="dob" class="col-sm-3 col-form-label input-label">DOB</label>
                                     <div class="col-sm-9">
-                                        <input type="date" class="form-control" name="dob" aria-label="dob" value="{{ourdata.DOB|date:'Y-m-d'}}">
+                                        <input type="date" class="form-control" name="dob" aria-label="dob" {% if ourdata.DOB %} value="{{ourdata.DOB|date:'Y-m-d'}}"{% endif %}>
                                     </div>
                                 </div>
                                 <!-- End Form Group -->
@@ -256,9 +253,9 @@
                                         <!-- End Select -->
 
                                         <div class="mb-3">
-                                            <input type="text" class="form-control" name="country" id="cityLabel" placeholder="Country" aria-label="City" value="{{ourdata.country}}">
+                                            <input type="text" class="form-control" name="country" id="cityLabel" placeholder="Country" aria-label="City" {% if ourdata.country %}value="{{ourdata.country}}"{% endif %}>
                                         </div>
-                                        <input type="text" class="form-control" name="state" id="stateLabel" placeholder="State" aria-label="State" value="{{ourdata.state}}">
+                                        <input type="text" class="form-control" name="state" id="stateLabel" placeholder="State" aria-label="State" {% if ourdata.state %}value="{{ourdata.state}}"{% endif %}>
                                     </div>
                                 </div>
                                 <!-- End Form Group -->
@@ -268,7 +265,7 @@
                                     <label for="addressLine1Label" class="col-sm-3 col-form-label input-label">Permanent Address</label>
 
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="addressLine1" id="addressLine1Label" placeholder="Your address*" aria-label="Your address" value="{{ourdata.Paddress}}" >
+                                        <input type="text" class="form-control" name="addressLine1" id="addressLine1Label" placeholder="Your address*" aria-label="Your address" {% if ourdata.PAddress %}value="{{ourdata.PAddress}}"{% endif %} >
                                     </div>
                                 </div>
                                 <!-- End Form Group -->
@@ -282,7 +279,7 @@
                                     <label for="addressLine2Label" class="col-sm-3 col-form-label input-label">Temporary Address <span class="input-label-secondary">(Optional)</span></label>
 
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="addressLine2" id="addressLine2Label" placeholder="Your address" aria-label="Your address" value="{{ourdata.Taddress}}">
+                                        <input type="text" class="form-control" name="addressLine2" id="addressLine2Label" placeholder="Your address" aria-label="Your address" {% if ourdata.TAddress %}value="{{ourdata.TAddress}}"{% endif %}>
                                     </div>
                                 </div>
                                 <!-- End Form Group -->
@@ -304,7 +301,7 @@
                                     <label for="zipCodeLabel" class="col-sm-3 col-form-label input-label">Zip code <i class="far fa-question-circle text-body ml-1" data-toggle="tooltip" data-placement="top" title="" data-original-title="You can find your code in a postal address."></i></label>
 
                                     <div class="col-sm-9">
-                                        <input type="text" class="js-masked-input form-control" name="zipCode" id="zipCodeLabel" placeholder="Your zip code" aria-label="Your zip code" value="{{ourdata.zipcode}}" data-hs-mask-options="{
+                                        <input type="text" class="js-masked-input form-control" name="zipCode" id="zipCodeLabel" placeholder="Your zip code" aria-label="Your zip code" {% if ourdata.zipcode %}value="{{ourdata.zipcode}}"{% endif %} data-hs-mask-options="{
                              &quot;template&quot;: &quot;AA0 0AA&quot;
                            }" maxlength="7">
                                     </div>

@@ -361,10 +361,10 @@
                                   dataType: 'json',
                                   success: function (data) {
                                       if (data.msg.suc_res) {
-                                       swal("Hurray!", data.msg.suc_res, "success");
+                                       swal("Hurray!", data.msg.suc_res, "success").then(function(){ window.location.href='/home'});
                                       }
                                       else {
-                                        swal("Sorry!", data.msg.err_res, "error");
+                                        swal("Sorry!", data.msg.err_res, "error").then(function(){ window.location.href='/home'});
                                       }
                                   }
                               });

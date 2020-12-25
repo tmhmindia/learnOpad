@@ -230,111 +230,7 @@
                     </div>
                     <!-- End Card -->
 
-                    <!-- Card -->
-                    <div class="card mb-3 mb-lg-5">
-                        <div class="card-header">
-                            <h5 class="card-title">Connected accounts</h5>
-                        </div>
-
-                        <!-- Body -->
-                        <div class="card-body">
-                            <p class="card-text">Integrated features from these accounts make it easier to collaborate with people you know on Front.</p>
-
-                            <!-- Form -->
-                            <form>
-                                <div class="list-group list-group-flush list-group-no-gutters">
-                                    <!-- List Item -->
-                                    <div class="list-group-item">
-                                        <div class="media">
-                                            <img class="avatar avatar-xs mr-3" src="{% static 'facilitators/settings/google.svg'%}" alt="Image Description">
-                                            <div class="media-body">
-                                                <div class="row align-items-center">
-                                                    <div class="col">
-                                                        <h6 class="mb-0">Google</h6>
-                                                        <small>Calendar and contacts</small>
-                                                    </div>
-
-                                                    <div class="col-auto">
-                                                        <!-- Checkbox Switch -->
-                                                        <label class="toggle-switch" for="connectedAccounts1">
-                              <input id="connectedAccounts1" type="checkbox" class="toggle-switch-input">
-                              <span class="toggle-switch-label">
-                                <span class="toggle-switch-indicator"></span>
-                              </span>
-                            </label>
-                                                        <!-- End Checkbox Switch -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End List Item -->
-
-
-
-                                    <!-- List Item -->
-                              <div class="list-group-item">
-                                        <div class="media">
-                                            <img class="avatar avatar-xs mr-3" src="{% static 'facilitators/settings/slack.svg'%}" alt="Image Description">
-                                            <div class="media-body">
-                                                <div class="row align-items-center">
-                                                    <div class="col">
-                                                        <h6 class="mb-0">Slack</h6>
-                                                        <small>Communication <a class="link" href="">Learn more</a></small>
-                                                    </div>
-
-                                                    <div class="col-auto">
-                                                        <!-- Checkbox Switch -->
-                                                        <label class="toggle-switch" for="connectedAccounts3">
-                              <input id="connectedAccounts3" type="checkbox" class="toggle-switch-input" checked="">
-                              <span class="toggle-switch-label">
-                                <span class="toggle-switch-indicator"></span>
-                              </span>
-                            </label>
-                                                        <!-- End Checkbox Switch -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End List Item -->
-
-                                    <!-- List Item -->
-                                    <div class="list-group-item">
-                                        <div class="media">
-                                            <img class="avatar avatar-xs mr-3" src="{% static 'facilitators/settings/mailchimp.svg'%}" alt="Image Description">
-                                            <div class="media-body">
-                                                <div class="row align-items-center">
-                                                    <div class="col">
-                                                        <h6 class="mb-0">Mailchimp</h6>
-                                                        <small>Email marketing service</small>
-                                                    </div>
-
-                                                    <div class="col-auto">
-                                                        <!-- Checkbox Switch -->
-                                                        <label class="toggle-switch" for="connectedAccounts4">
-                              <input id="connectedAccounts4" type="checkbox" class="toggle-switch-input" checked="">
-                              <span class="toggle-switch-label">
-                                <span class="toggle-switch-indicator"></span>
-                              </span>
-                            </label>
-                                                        <!-- End Checkbox Switch -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End List Item -->
-
-
-                                </div>
-                            </form>
-                            <!-- End Form -->
-                        </div>
-                        <!-- End Body -->
-                    </div>
-                    <!-- End Card -->
-
+                    
                     <!-- Card -->
                     <div class="card mb-3 mb-lg-5">
                         <div class="card-header">
@@ -555,10 +451,10 @@
                                   dataType: 'json',
                                   success: function (data) {
                                       if (data.msg.suc_res) {
-                                       swal("Hurray!", data.msg.suc_res, "success");
+                                       swal("Hurray!", data.msg.suc_res+" your session expired", "success").then(function(){ window.location.href='/home'});
                                       }
                                       else {
-                                        swal("Sorry!", data.msg.err_res, "error");
+                                        swal("Sorry!", data.msg.err_res, "error").then(function(){ window.location.href='/home'});
                                       }
                                   }
                               });

@@ -70,10 +70,12 @@
                                         <tbody>
                                             {% for category in categories %}
                                             <tr>
-                                                <th>{{category.name}}</th>
+                                                <th><p id="id-{{category.cat_id}}">{{category.name}}</p><input type="text" value="{{category.name}}" class="inputs" id="cat-{{category.cat_id}}"><button type="button" class="save btn btn-success ml-2" id="save-{{category.cat_id}}" onClick="save('{{category.cat_id}}')">save</button></th>
                                                
                                                 <th> 
                                                     <button type="button" onClick="DeleteCatSubcat('{{category.cat_id}}',true)" class="btn btn-danger btn-sm">Delete</button>
+                                                    <button type="button" onClick="Edit('{{category.cat_id}}')" class="btn btn-danger btn-sm">Edit</button>
+
                                                 </th>
                                             </tr>
                                             {% endfor %}
@@ -103,6 +105,56 @@
         <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
         <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
         <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
+
+        <script>
+$(document).ready(function(){
+
+$('.inputs').hide();
+$('.save').hide();
+
+
+});
+function Edit(id){
+    $('#id-'+id).hide();
+    $('#cat-'+id).show();
+    $('#save-'+id).show();
+
+}
+function save(id){
+    var formData = new FormData();
+  formData.append('name',$('#cat-'+id).val());
+  formData.append('id',id);
+
+  
+
+
+ 
+$.ajax({
+    url: "{% url 'update_category' %}",
+    data: formData,
+    contentType: false,
+    processData: false,
+    headers: {
+                        "X-CSRFTOKEN": "{{ csrf_token }}"
+                },
+    type: 'POST',
+    cache: false,
+    
+    error: function(xhr, status, error) {
+        alert(error);
+    },
+    success: function(response) {
+        
+    swal("Done!", "Edit Successfully ", "success").then(function(){
+       
+    window.location.reload();
+    });
+}
+});
+
+}
+    
+    </script>
         <script>
     $("#category").submit(function(event){
                 event.preventDefault();

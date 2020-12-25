@@ -130,7 +130,7 @@
               {% if request.user|has_group:"Admins" or request.user|has_group:"Staff" %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'dashboard_admin'%}">
-                    <i class="fa fa-heart "></i>
+                  <i class="fas fa-toggle-on"></i>
                   <span class="menu-title">Switch to Admin</span>
                 </a>
               </li>
@@ -138,7 +138,7 @@
             {% if request.user|has_group:"Learners" %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'learner_index'%}">
-                  <i class="fa fa-heart "></i>
+                <i class="fas fa-toggle-on"></i>
                 <span class="menu-title">Switch to Learner</span>
               </a>
             </li>
@@ -199,7 +199,7 @@
           window.location.href="/experts/{{request.user.user.facilitator.getintialGroup}}/"
         }
         else{
-          swal('Sorry !',"You have no Learners","success")
+          swal('Sorry !',"You have no Learners","warning")
         }
       }
     </script>
