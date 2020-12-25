@@ -70,7 +70,7 @@
                                         <tbody>
                                             {% for category in categories %}
                                             <tr>
-                                                <th>{{category.name}}</th>
+                                                <th><input type="text" value="{{category.name}}" id="cat-{{category.cat_id}}"></th>
                                                
                                                 <th> 
                                                     <button type="button" onClick="DeleteCatSubcat('{{category.cat_id}}',true)" class="btn btn-danger btn-sm">Delete</button>

@@ -120,7 +120,7 @@ Course subscription    {% endblock title %}
                                                     <!-- <button type="button" class="btn btn-cyan btn-md mt-2">Send </button> -->
                                                     <!-- <a href=""><button type="button" class="btn btn-success btn-sm">Active</button></a> -->
                                                     {% if revenue.status == "pending" %}
-                                                    <button type="button" onClick="PaidRevenue('{{revenue.id}}')"  class="btn btn-danger btn-sm" >Paid </button>
+                                                    <button type="button" onClick="PaidRevenue('{{revenue.id}}')"  class="btn btn-danger btn-sm" >Pay </button>
                                                     {% else %}
                                                     <button type="button"   class="btn btn-success btn-sm" disabled>Paid </button>
 

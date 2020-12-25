@@ -159,10 +159,10 @@ def CourseCreationEmailToFacilitator(course):
     recipient = [course.offering.all()[0].user.user.email,]
     context={
         'name':course.offering.all()[0].name,
-        'msg':'''The course you have created on the LearnOpad Platform is successfully uploaded and therefore open to interested aspirants to enroll.
+        'msg':'''The course creation request is successfully submitted.Please wait to know the status of your course
 Course name : '''+course.title+'''
 Course code : '''+course.code+'''
-NOTE : The course code provided above is unique to your '''+ course.title +''' course, you can use that unique code to edit your course. Don't share it with anyone.'''
+NOTE : The course code provided above is unique to your '''+ course.title +'''.'''
      }
     text_message = f"Email with a nice embedded image {context.get('name')}."
    
@@ -428,6 +428,21 @@ def MailOnDeactivateCourseToAdmin(course):
     html_message=render_to_string('html/email_template.html',context)
      
     send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+
+def MailOnRevenueCourseToFacilitator(revenue):
+    sender = settings.EMAIL_HOST_USER
+    recipient = [revenue.revenue_item.course.offering.all()[0].user.user.email,]
+    context={
+        'name':revenue.revenue_item.course.offering.all()[0].name,
+        'msg':"We are very delighted to inform you that your revenue of "+revenue.revenue_item.course.title+" has been credited to your account.Hoping to see more revenue is made through your courses in coming days."
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+     
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+
+
 def SHORTLIST(request):
     id=request.POST.get('id',None)
     user=CustomUser.objects.get(id=int(id))

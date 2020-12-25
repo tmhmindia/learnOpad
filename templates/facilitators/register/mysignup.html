@@ -389,7 +389,7 @@ body {
   {% endfor %}
    <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
     <button type="submit" id="post-btn" name="submit" class="submit action-button btn btn-success">Submit</button>
-    <p class="wait"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
+    <p id="wait"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p>
                    
       </fieldset>
       
@@ -421,7 +421,7 @@ body {
  $(document).ready(function(){
   $(".alert").css("display:None")
     var $myForm = $('#msform');
-    $('.wait').hide(); 
+    $('#wait').hide(); 
 
     
     $myForm.submit(function(event){
@@ -453,10 +453,8 @@ var formData = new FormData();
   formData.append('data',JSON.stringify(data))
 let csrftoken = getCookie('csrftoken');
 
- $.ajaxSetup({async: false});
 $.ajax({
     url: '{% url "facilitator-register" %}',
-    async: false,
     data: formData,
     contentType: false,
     processData: false,
@@ -464,12 +462,11 @@ $.ajax({
 "X-CSRFTOKEN": "{{ csrf_token }}",
                 },
     type: 'POST',
-    cache: false,
     beforeSend: function() { 
-      $('.wait').show(); 
+      $('#wait').show(); 
   },
     complete: function() { 
-      $('.wait').hide(); 
+      $('#wait').hide(); 
 
     },
     
@@ -480,7 +477,7 @@ $.ajax({
 
       if (response.redirect) {
         
-        swal("Congratulation!", "Your profile is successfully created .", "success").then(function(){ 
+        swal("Congratulation!", "Your have successfully submitted", "success").then(function(){ 
 
                         window.location.href ='{% url "facilitator" %}';
                         }
@@ -490,7 +487,6 @@ $.ajax({
     }
 });
 
-$.ajaxSetup({async: true}); 
 
 });
 });

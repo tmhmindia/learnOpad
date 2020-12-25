@@ -122,10 +122,15 @@
            
             swal({
   title: "Are you sure?",
-  text: "You want to disapproved this course !",
+  text: "You want to disapprove this course !",
   icon: "warning",
   buttons: true,
   dangerMode: true,
+  buttons: {
+    cancel:"Cancel",
+    ok: "Yes"
+    
+  }
 })
 .then((willDelete) => {
   if (willDelete) {
@@ -137,7 +142,7 @@
                },
           data: {Cid : id},
           success: function (data) {
-            swal("Disapprove!", "Course has been disapproved", "success").then(function(){
+            swal("Disapprove!", "Course has been disapprove", "success").then(function(){
                 window.location.reload();});
           },
           error: function (data) {

@@ -14,7 +14,7 @@ urlpatterns = [
     path('learnopad/admin/view/campus/', views.campus_training, name='campus_training'),
     path('learnopad/admin/view/corporate/', views.cor_training, name='cor_training'),
     path('learnopad/admin/view/queries/', views.query_submission, name='query_submission'),
-    path('learnopad/admin/Delete/Course/', views.DeleteCourse, name='delete_course'),
+    path('learnopad/admin/DisApprove/Course/', views.DeleteCourse, name='delete_course'),
     path('learnopad/admin/Delete/User/', views.DeleteUser, name='delete_user'),
     path('learnopad/admin/Delete/contact/Councelling/', views.DeleteCouncellingContactUsData, name='delete_contactus_councelling'),
     path('learnopad/admin/Delete/Training/', views.DeleteTrainingData, name='delete_training'),
@@ -30,7 +30,8 @@ urlpatterns = [
     path('learnopad/admin/Delete/Order/Course', views.DeleteOrderCourse, name='delete_order_course'),
     path('learnopad/admin/staff/', views.staff, name='staff'),
     path('learnopad/admin/Delete/Category/', views.DeleteCategorySubcategory, name='delete_CatSubcat'),
-   
+    path('learnopad/admin/Delete/Rejected/Course/', views.DeleteRejectedCourse, name='delete_rejected_course'),
+
 
 
 

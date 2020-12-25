@@ -122,18 +122,23 @@
   icon: "warning",
   buttons: true,
   dangerMode: true,
+  buttons: {
+    cancel:"Cancel",
+    ok: "Yes"
+    
+  }
 })
 .then((willDelete) => {
   if (willDelete) {
     $.ajax({
           type: 'POST',
-          url: '{% url "delete_course" %}',
+          url: '{% url "delete_rejected_course" %}',
           headers: {
                        "X-CSRFTOKEN": "{{ csrf_token }}"
                },
           data: {Cid : id},
           success: function (data) {
-            swal("Deleted!", "Your Course has been deleted.", "success",function(){
+            swal("Deleted!", "Your Course has been deleted.", "success").then(function(){
                 window.location.reload();});
           },
           error: function (data) {

@@ -97,6 +97,7 @@ def course_orders(request):
         revenue=Revenue.objects.get(id=int(id))
         revenue.status='paid'
         revenue.save()
+        MailOnRevenueCourseToFacilitator(revenue)
         return JsonResponse("success",safe=False)
     else:
         orders=OrderCourses.objects.all().order_by('-date_added')
@@ -300,6 +301,12 @@ def DeleteCourse(request):
     course.save()
     MailOnDeactivateCourseToAdmin(course)
     MailOnDeactivateCourseToUser(course)
+    return JsonResponse({"success":True})
+def DeleteRejectedCourse(request):
+    Cid=request.POST.get('Cid',None)
+    course=Course.objects.get(Cid=int(Cid))
+    CourseRejection(course)
+    course.delete()
     return JsonResponse({"success":True})
 def DeleteUser(request):
     id=request.POST.get('id',None)

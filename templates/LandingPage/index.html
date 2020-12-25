@@ -468,6 +468,7 @@ a:hover{
                         <div class="owl-carousel land_co ftco-owl"  id="owl-{{c.cat_id}}">
                            
                             {% for course in c.course_set.all %}
+                            {% if course.approve %}
                             {% if request.user|has_group:"Learners"%}
                             {% if course in request.user.learner.enrolled.all %}
                                 <div class="item">
@@ -484,7 +485,7 @@ a:hover{
                                                     <span><i class="fa fa-star" aria-hidden="true"></i>{{course.no_of_ratings}} </span>
                                                     <div class="course_info">
                                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                        <span>{{course.days}}</span>
+                                                        <span>{{course.days}} days</span>
                                                     </div>
                                                     </div>
                                                     
@@ -515,7 +516,7 @@ a:hover{
                                                 <span><i class="fa fa-star" aria-hidden="true"></i>{{course.no_of_ratings}} </span>
                                                 <div class="course_info">
                                                     <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                    <span>{{course.days}}</span>
+                                                    <span>{{course.days}} days</span>
                                                 </div>
                                                 </div>
                                                 
@@ -547,7 +548,7 @@ a:hover{
                                                 <span><i class="fa fa-star" aria-hidden="true"></i>{{course.no_of_ratings}} </span>
                                                 <div class="course_info">
                                                     <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                    <span>{{course.days}}</span>
+                                                    <span>{{course.days}} days</span>
                                                 </div>
                                                 </div>
                                                 
@@ -563,6 +564,7 @@ a:hover{
                                     </a>
                                 
                             </div>
+                            {% endif %}
                             {% endif %}
                                {% endfor %}
                               

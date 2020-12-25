@@ -130,10 +130,10 @@
             if(flag)
             {
                  signal="Active";
-                 cancel="Deactivated";
+                 cancel="Deactivate";
             }
             else{
-                signal="Deactivated";
+                signal="Deactivate";
                 cancel="Active";
             }
             swal({
@@ -142,6 +142,11 @@
   icon: "warning",
   buttons: true,
   dangerMode: true,
+  buttons: {
+    cancel:"Cancel",
+    ok: "Yes"
+    
+  }
 })
 .then((willDelete) => {
   if (willDelete) {
