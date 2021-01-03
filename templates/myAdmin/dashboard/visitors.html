@@ -2,7 +2,7 @@
 {% load static %}
 <!-- ---------------------------------------------- -->
     {% block title %}
-    Manage Courses
+    Approved Facilitators
     {% endblock title %}
 <!-- --------------------------------------------- -->
     {% block header %}
@@ -17,18 +17,18 @@
     {% endblock stylesheet %}
 <!-- ----------------------------------------------------- -->
     {% block content %}
-<!-- ============================================================== -->
+          <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Manage Courses</h4>
+                        <h4 class="page-title">Manage Visitors</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Manage Courses</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Manage Visitors</li>
                                 </ol>
                             </nav>
                         </div>
@@ -49,37 +49,32 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Requested Courses</h5>
+                                <h5 class="card-title">Manage Visitors</h5>
                                 <div class="table-responsive">
                                     <table id="zero_config" class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Course title</th>
-                                                <th>Code</th>
-                                                <th>Created</th>
-                                                <th>Facilitator_created</th>
-                                               
+                                                <th>Name</th>
+                                                <th>Phone number</th>
+                                                <th>Mail id</th>
+                                                <th>Added on</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for course in courses %}
+                                           
                                             <tr>
-                                                <th>{{course.title}}</th>
-                                                <th>{{course.code}}</th>
-                                                <th>{{course.added.date}}</th>
-                                                <th>{{course.offering.all.0.name}}</th>
-                                                
+                                                <th>abcccccc</th>
+                                                <th>abcccccc </th>
+                                                <th>abcccccc</th>
+                                                <th>abcccccc</th>
                                                 <th> 
-                                                    <a href="{% url 'view_edit_courses' %}?Cid={{course.Cid}}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
-                                                    <button type="button" onclick="Approved('{{course.Cid}}')" class="btn btn-info btn-md">Approve</button>
-                                                        <button type="button" onclick="DeleteCourse('{{course.Cid}}')" class="btn btn-danger btn-md">Reject</button>
-                                                        
+                                                    <button type="button" class="btn btn-success btn-sm">Active</button>
                                                 </th>
                                             </tr>
-                                            {% endfor %}
+                                            
                                         </tbody>
-                                       
+                                        
                                     </table>
                                 </div>
 
@@ -103,77 +98,17 @@
             <!-- ============================================================== -->
             <!-- ============================================================== -->
             <!-- footer -->
-            <!-- ============================================================== -->
-         
+            <!-- ============================================================== --> 
            
     {% endblock content %}
 <!-- ------------------------------------------------- -->
     {% block javascript %}
-   
   
+   
     <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
-    <script>
-        function DeleteCourse(id)
-        {
-            swal({
-  title: "Are you sure?",
-  text: "You will not be able to recover this Course Data!",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-  buttons: {
-    cancel:"Cancel",
-    ok: "Yes"
-    
-  }
-})
-.then((willDelete) => {
-  if (willDelete) {
-    $.ajax({
-          type: 'POST',
-          url: '{% url "delete_rejected_course" %}',
-          headers: {
-                       "X-CSRFTOKEN": "{{ csrf_token }}"
-               },
-          data: {Cid : id},
-          success: function (data) {
-            swal("Deleted!", "Your Course has been deleted.", "success").then(function(){
-                window.location.reload();});
-          },
-          error: function (data) {
-            swal("NOT Deleted!", "Something blew up.", "error");
-          }
-        });
-  } else {
-    swal("Cancelled", "Your course is safe :)", "success");
-  }
-});
 
-
-}
-        function Approved(id)
-        {
-            $.ajax({
-      type: "POST",
-      url: "{% url 'Approved_courses'%}",
-      data:{"Cid":id},
-      headers: {
-                        "X-CSRFTOKEN": "{{ csrf_token }}"
-                },
-      success: function(data){
-        
-        swal("Done!", data.name+" is Approved", "success").then(function(){ window.location.reload();
-});
-
-
-
-
-      }
-});
-        }
-    </script>
     <script>
         /****************************************
          *       Basic Table                   *
