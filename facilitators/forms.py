@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 from django import forms
 from  LandingPage.models import *
+from django.forms import ValidationError
 
 # form of personal details 
 
@@ -31,19 +32,22 @@ class UserForm(UserCreationForm):
         if commit:
             user.save()
         return user
-    from django.forms import ValidationError
-
+    def clean_password2(self):
+        if self.cleaned_data['password2'] !=self.cleaned_data['password1']:
+            raise forms.ValidationError("Confirm password was wrong !")
+        return self.cleaned_data['password2']
     def clean(self):
         super(UserForm, self).clean() 
         email = self.cleaned_data['email']
+       
+
         user=None
         try:
             user=CustomUser.objects.get(email=email)
         except:
             user=None
-        if user is not None:
-            self._errors['emailerror'] = self.error_class([ 
-                'Email is already exist']) 
+        if user:
+            raise ValidationError("Email is already exist")
         return self.cleaned_data 
 
         

@@ -41,8 +41,6 @@ class Facilitator(models.Model):
     name=models.CharField(max_length=100,null=True,blank=True)
     DOB=models.DateTimeField(blank=True,null=True)
     phone=models.CharField(max_length=13,null=True,blank=True)
-    country=models.TextField(blank=True, null=True)
-    state=models.TextField(blank=True, null=True)
     PAddress=models.TextField(blank=True,null=True)
     TAddress=models.TextField(blank=True,null=True)
     profile=models.ImageField(upload_to ='Mentor_profiles/',default='default/profile.png',null=True, blank=True)

@@ -53,14 +53,18 @@ def signup(request):
                 return redirect("/Courses/Cart/?checkout='true'")
             return redirect('/')
         else:
-            exist=True
+            error=[]
+            for values in form.errors.values():
+                error.append(values[0])
+            return render(request, 'login/signin_signup.html', {'form': form,'signin':False,'signup':True,'error':error})
+
               
 
             
 
     else:
         form = UserForm()
-    return render(request, 'login/signin_signup.html', {'form': form,'exist':exist,'signin':False,'signup':True})
+        return render(request, 'login/signin_signup.html', {'form': form,'exist':exist,'signin':False,'signup':True,error:None})
 
 class user_login(View):
     
