@@ -24,6 +24,8 @@ def Dashboard(request):
                     'enrollments':enrollment.objects.all().order_by('-addedenroll'),'total_revenue':obj.get_total_admin_revenue(),'staff_total':Staff.objects.all().count()
                         } 
     return render(request,'myAdmin/dashboard/index.html',dashboard_data)
+def visitors(request):    
+    return render(request,'myAdmin/dashboard/visitors.html')
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def manage_facilitators(request):
