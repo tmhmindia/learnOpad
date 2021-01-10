@@ -1,0 +1,249 @@
+{% extends '../base.html' %}
+{% load static %}
+<!-- ---------------------------------------------- -->
+    {% block title %}
+    View Applicants
+    {% endblock title %}
+<!-- --------------------------------------------- -->
+    {% block header %}
+    <link href="{% static 'admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css'%}" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/extra-libs/multicheck/multicheck.css'%}">
+    <link href="{% static 'admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css'%}" rel="stylesheet">
+    <link href="{% static 'admin/assets/libs/flot/css/float-chart.css'%}" rel="stylesheet">
+     <!-- Custom CSS -->
+     <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/libs/select2/dist/css/select2.min.css'%}">
+     <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/libs/jquery-minicolors/jquery.minicolors.css'%}">
+     <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'%}">
+     <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/libs/quill/dist/quill.snow.css'%}">
+  
+    {% endblock header %}
+<!-- ------------------------------------------- -->
+    {% block stylesheet %}
+
+   
+    {% endblock stylesheet %}
+<!-- ----------------------------------------------------- -->
+    {% block content %}
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">{{applicant.name}}</h3>
+                                <ul class="list-style-none">
+                                    <li class="d-flex no-block border-top pb-3 pt-3">Email: <span class="pl-2 text-info"> {{applicant.user.email}}</span></li>
+                                    <li class="d-flex no-block border-top pb-3 pt-3">Phone No:<span class="pl-2 text-info">{{applicant.phone}}</span></li>
+                                    <li  class="d-flex no-block border-top pb-3 pt-3"> <a href="mailto:" > <button class="btn btn-primary"> Mail this Applicant</button> </a></li>
+
+                                   
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <ul class="list-style-none">
+                                    <li class="d-flex no-block border-top pb-3 pt-3 text-center">Portfolio : <a href="{{applicant.portfolio.url}}"><span class="pl-2 text-info">Download Portfolio</span> </a></li>
+                                    <li class="d-flex no-block border-top pb-3 pt-3">Interest: <span class="pl-2 text-danger">{{applicant.intrest}}</span></li>
+                                    <li class="d-flex no-block border-top pb-3 pt-3">Shortlist: {% if applicant.shortlist %}<span class="pl-2 text-info">Shortlisted</span>{% else %}<span class="pl-2 text-danger">Under Review</span>{% endif %}</li>
+
+                                    <li class="d-flex no-block border-top pb-3 pt-3">Status: {% if applicant.user.is_active %}<span class="pl-2 text-info">Active</span>{% else %}<span class="pl-2 text-danger">Inactive</span>{% endif %}</li>
+                                </ul>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <ul class="list-style-none">
+                                    <li  class="d-flex no-block border-top pb-3 pt-3">Linkedin Profile:<a href="{{applicant.experience.Linkedin_Url}}"> <i class="fab fa-linkedin fa-3x"></i></a> </li>
+                                    <li class="d-flex no-block border-top pb-3 pt-3">Website Url : <a href="{{applicant.experience.Website_Url}}"><i class="fas fa-browser fa-3x"></i></a> </li>
+                                    <li class="d-flex no-block border-top pb-3 pt-3">Youtube Channel: <a href="{{applicant.experience.Youtube_Url}}"><i class="fab fa-youtube fa-3x"></i></a> </li>
+                                   
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <ul class="list-style-none">
+                                    <li  class="d-flex no-block border-top pb-3 pt-3">Relevent Experiance:<span class="pl-2 text-info">{{applicant.experience.get_RExperience_display}}</span></li>
+                                    <li class="d-flex no-block border-top pb-3 pt-3">Total Experiance :<span class="pl-2 text-info">{{applicant.experience.get_TExperience_display}}</span></li>
+                                    <li class="d-flex no-block border-top pb-3 pt-3">Applay on:<span class="pl-2 text-info">{{applicant.added.date}}</span></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: right;width: 100%;">
+                    <button type="button" onclick="DeleteUser('{{applicant.user.id}}',false)"class="btn btn-warning btn-lr">Deactivate this Applicant</button>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+           
+           
+    {% endblock content %}
+<!-- ------------------------------------------------- -->
+    {% block javascript %}
+   
+    
+    <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
+    <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
+    <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
+    <script>
+        function DeleteUser(id,flag)
+        {
+            var signal;
+            var cancel;
+            if(flag)
+            {
+                 signal="Active";
+                 cancel="Deactivate";
+            }
+            else{
+                signal="Deactivate";
+                cancel="Active";
+            }
+            
+            
+            
+            swal({
+  title: "Are you sure?",
+  text: "You want to "+signal+" this Applicant",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+  buttons: {
+    cancel:"Cancel",
+    ok: "Yes"
+    
+  }
+})
+.then((willDelete) => {
+  if (willDelete) {
+    $.ajax({
+          type: 'POST',
+          url: '{% url "delete_user" %}',
+          headers: {
+                       "X-CSRFTOKEN": "{{ csrf_token }}"
+               },
+          data: {id : id,flag:flag},
+          success: function (data) {
+            swal(signal, "Your Applicant  is "+signal+"", "success");
+          },
+          error: function (data) {
+            swal("NOT "+signal+"!", "Something blew up.", "error");
+          }
+        });
+  } else {
+    swal("Cancelled", "Your Applicant is "+cancel, "success");
+  }
+});
+
+        }
+    </script>
+    <script>
+$("#facilitator_profile_update").click(function(event){
+event.preventDefault();
+var formData = new FormData();
+formData.append('name',$('#name').val());
+formData.append('email',$('#email').val());
+formData.append('phone',$('#phone').val());
+formData.append('DOB',$('#DOB').val());
+formData.append('PAddress',$('#PAddress').val());
+formData.append('state',$('#state').val());
+formData.append('country',$('#country').val());
+formData.append('zipcode',$('#zip').val());
+formData.append('bio',$('#bio').val());
+$.ajax({
+url: "{% url 'view_edit_facilitators' %}",
+async: false,
+data: formData,
+contentType: false,
+processData: false,
+headers: {
+               "X-CSRFTOKEN": "{{ csrf_token }}"
+       },
+type: 'POST',
+cache: false,
+
+error: function(xhr, status, error) {
+alert(error);
+},
+success: function(response) {
+    swal("Done!", "Profile updated Successfully", "success").then(function(){ window.location.reload();});
+
+}
+});
+
+
+});
+   </script>
+   
+    <script>
+        //***********************************//
+        // For select 2
+        //***********************************//
+        $(".select2").select2();
+
+        /*colorpicker*/
+        $('.demo').each(function() {
+        //
+        // Dear reader, it's actually very easy to initialize MiniColors. For example:
+        //
+        //  $(selector).minicolors();
+        //
+        // The way I've done it below is just for the demo, so don't get confused
+        // by it. Also, data- attributes aren't supported at this time...they're
+        // only used for this demo.
+        //
+        $(this).minicolors({
+                control: $(this).attr('data-control') || 'hue',
+                position: $(this).attr('data-position') || 'bottom left',
+
+                change: function(value, opacity) {
+                    if (!value) return;
+                    if (opacity) value += ', ' + opacity;
+                    if (typeof console === 'object') {
+                        console.log(value);
+                    }
+                },
+                theme: 'bootstrap'
+            });
+
+        });
+        /*datwpicker*/
+        jQuery('.mydatepicker').datepicker();
+        jQuery('#datepicker-autoclose').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+
+    </script>
+    {% endblock javascript%}
+

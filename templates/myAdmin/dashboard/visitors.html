@@ -55,24 +55,27 @@
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Phone number</th>
                                                 <th>Mail id</th>
                                                 <th>Added on</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           
+                                           {% for visiter in visiters %}
                                             <tr>
-                                                <th>abcccccc</th>
-                                                <th>abcccccc </th>
-                                                <th>abcccccc</th>
-                                                <th>abcccccc</th>
+                                                <th>{{visiter.get_full_name}}</th>
+                                                <th>{{visiter.email}}</th>
+                                                <th>{{visiter.date_joined.date}}</th>
                                                 <th> 
-                                                    <button type="button" class="btn btn-success btn-sm">Active</button>
+                                                    {% if visiter.is_active %}
+                                                    <button type="button" onclick="DeleteUser('{{visiter.id}}',false)" class="btn btn-danger btn-sm">Deactivate</a>
+
+                                                    {% else %}
+                                                    <button type="button" onclick="DeleteUser('{{visiter.id}}',true)" class="btn btn-success btn-sm">Activate</button></a>
+                                                    {% endif %}                                               
                                                 </th>
                                             </tr>
-                                            
+                                            {% endfor %}
                                         </tbody>
                                         
                                     </table>
@@ -108,6 +111,64 @@
     <script src="{% static 'admin/assets/extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/multicheck/jquery.multicheck.js' %}"></script>
     <script src="{% static 'admin/assets/extra-libs/DataTables/datatables.min.js' %}"></script>
+    <script>
+        function DeleteUser(id,flag)
+        {
+
+            var signal;
+            var cancel;
+            if(flag)
+            {
+                 signal="Active";
+                 cancel="Deactivate";
+            }
+            else{
+                signal="Deactivate";
+                cancel="Active";
+            }
+            swal({
+  title: "Are you sure?",
+  text: "You want to  "+signal+" this User!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+  buttons: {
+    cancel:"Cancel",
+    ok: "Yes"
+    
+  }
+})
+.then((willDelete) => {
+  if (willDelete) {
+    $.ajax({
+          type: 'POST',
+          url: '{% url "delete_user" %}',
+          headers: {
+                       "X-CSRFTOKEN": "{{ csrf_token }}"
+               },
+          data: {id : id,flag:flag},
+          success: function (data) {
+            swal(signal, "This User  is  "+signal+".", "success").then(function(){ window.location.reload()});
+          },
+          error: function (data) {
+            swal("NOT  "+signal+"!", "Something blew up.", "error");
+          }
+        });
+  } else {
+    swal("Cancelled", " This User is "+cancel, "success");
+  }
+});
+
+
+
+
+
+
+
+          
+
+        }
+    </script>
 
     <script>
         /****************************************

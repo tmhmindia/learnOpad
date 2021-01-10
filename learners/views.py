@@ -17,6 +17,7 @@ import os
 from django.conf import settings
 from mailing.views import ToLearnerForCertificate
 import magic
+
 # Create your views here.
 
 #landing page's learners page
@@ -44,6 +45,7 @@ def certicate(request):
         if total.date()<=datetime.now().date():
             completed.append(enroll.Cid)
         completed=Course.objects.all()
+        
     context={
         'completed':completed
     }
@@ -62,6 +64,7 @@ def index(request):
     enrolled_courses=enrollment.objects.filter(Lid=Learners.objects.get(user=request.user).Lid)
     ongoing=[]
     completed=[]
+    schedules=[]
     for enroll in enrolled_courses:   
         time=enroll.addedenroll
         course=Course.objects.get(Cid=enroll.Cid.Cid)
@@ -86,11 +89,17 @@ def index(request):
             # print(((today_year-enrolled_year)*365+(today_month-enrolled_month)*30+abs(today_date-enrolled_date)))
             per=(((today_year-enrolled_year)*365+(today_month-enrolled_month)*30+abs(today_date-enrolled_date))*100)//(month*30+day)
             ongoing.append([enroll.Cid,per])
+            up = datetime.today() + timedelta(days=7)
+            calender= Calender.objects.filter(start__lte = up,course=enroll.Cid)
+            for schedule in calender:
+                schedules.append(schedule)
+
     context={
         'ongoing':ongoing,
-        'completed':completed
+        'completed':completed,
+        'calender':schedules
     }
-    print(context)
+    
     return render(request,'learners/dashboard/index.html',context)
 
 #learners dashboard internship page

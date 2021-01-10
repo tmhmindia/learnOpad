@@ -284,6 +284,19 @@ Create Courses
                                                             <label for="exampleFormControlTextarea1">Skills covered</label>
                                                             <textarea class="form-control" name="takaway" id="id_ctakeaway" rows="3" required></textarea>
                                                 </div>
+                                                <div class="form-check form-check-inline">
+
+                                                    <input class="form-check-input" type="checkbox" id="livemode" value="live">
+                                                    <label class="form-check-label" for="inlineCheckbox1">live</label>
+
+                                                </div>
+
+                                                  <div class="form-check form-check-inline">
+
+                                                    <input class="form-check-input" type="checkbox" id="classroom" value="classroom">
+                                                    <label class="form-check-label" for="inlineCheckbox2">classroom</label>
+
+                                                </div>
                                                
 
                                               <button type="submit" id="course_create" class="btn btn-primary">Submit <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></button>
@@ -469,7 +482,19 @@ Create Courses
                                                             <label for="exampleFormControlTextarea1">Skills covered</label>
                                                             <textarea class="form-control" name="takaway" id="update_takeaway" rows="3"></textarea>
                                                 </div>
+                                                <div class="form-check form-check-inline">
 
+                                                    <input class="form-check-input" type="checkbox" id="update_live" value="live">
+                                                    <label class="form-check-label" for="inlineCheckbox1">live</label>
+
+                                                </div>
+
+                                                  <div class="form-check form-check-inline">
+
+                                                    <input class="form-check-input" type="checkbox" id="update_classroom" value="classroom">
+                                                    <label class="form-check-label" for="inlineCheckbox2">classroom</label>
+
+                                                </div>
                                               <button type="submit" id="course_update_btn" class="btn btn-primary">Submit <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></button>
 
                                         </form>
@@ -553,8 +578,11 @@ Create Courses
         $("#update_level").val(course['level']);
         $("#update_language").val(course['language']);
         $("#update_takeaway").val(course['takeaway']);
+        $('#update_live').prop('checked',course['live']);
+        $('#update_classroom').prop('checked', course['classroom']);
 
-
+        
+       
 
 
 
@@ -577,6 +605,8 @@ $("#updatecourseForm").submit(function (event) {
     var id = $("#UpdateCourseSelect").val();
 
     var formData = new FormData();
+    var classroom=$("#update_classroom").prop("checked") == true ? "true" :"false";
+    var live=$("#update_live").prop("checked") == true ? "true" :"false";
   formData.append('video',$('#update_video').get(0).files[0])
   formData.append('price',$("#update_price").val())
   formData.append('Cid',id)
@@ -590,6 +620,10 @@ $("#updatecourseForm").submit(function (event) {
   formData.append('language',$("#update_language").val())
   formData.append('takeaway',$("#update_takeaway").val())
   formData.append('thumbnail',$('#update_thumbnail').get(0).files[0])
+  console.log(classroom+" "+live)
+  formData.append("classroom",classroom)
+  formData.append("live",live)
+
 
  $.ajax({
     url: "{% url 'update_course' %}",
@@ -810,6 +844,8 @@ $.ajax({
    var $video;
    var data = {};
    var $thumbnail;
+   var classroom=$("#classroom").prop("checked") == true ? "true" :"false";
+   var live=$("#livemode").prop("checked") == true ? "true" : "false" ;
    var course_details={
        "title":$('#id_ctitle').val(),
        "description":$('#id_cdescription').val(),
@@ -818,7 +854,10 @@ $.ajax({
         "days":$('#id_cdays').val(),
         "level":$('#id_clevel').val(),
         "language":$('#id_clanguage').val(),
-        "price":$('#id_cprice').val()
+        "price":$('#id_cprice').val(),
+       "classroom": classroom  ,
+        "live":live
+
 
  
    };

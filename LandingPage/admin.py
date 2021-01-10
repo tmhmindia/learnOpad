@@ -67,4 +67,6 @@ admin.site.register(Audience,AudienceAdmin)
 admin.site.register(ContactUs,ContactAdmin)
 #admin.site.register(CorporatesTalks,CorporateTalksAdmin)
 admin.site.register(Rating)
+admin.site.register(Calender)
+
 #admin.site.register(Partners,PartnersAdmin)

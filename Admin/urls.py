@@ -8,6 +8,8 @@ urlpatterns = [
     path('learnopad/admin/manage/Courses/', views.manage_courses, name='manage_courses'),
     path('learnopad/admin/manage/facilitators/', views.manage_facilitators, name='manage_facilitators'),
     path('learnopad/admin/edit/facilitators/', views.view_edit_facilitators, name='view_edit_facilitators'),
+    path('learnopad/admin/edit/Applicants/', views.view_edit_applicant, name='view_edit_applicant'),
+
     path('learnopad/admin/edit/Courses/', views.view_edit_courses, name='view_edit_courses'),
     path('learnopad/admin/Approved/Courses/', views.Approved_courses, name='Approved_courses'),
     path('learnopad/admin/Approved/facilitators/', views.Approved_facilitators, name='Approved_facilitators'),

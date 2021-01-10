@@ -98,6 +98,10 @@ class Course(models.Model):
     language=models.CharField(max_length=100,null=False,blank=False,default='English')
     offering=models.ManyToManyField(Facilitator,through='offer',related_name='offering')
     level = models.CharField(choices=Level,max_length=50,default='Beginner')
+    live=models.BooleanField(default=False,null=True,blank=True)
+    onilne_recorded=models.BooleanField(default=False,null=True,blank=True)
+    classroom=models.BooleanField(default=False,null=True,blank=True)
+
     def no_of_ratings(self):
         ratings = Rating.objects.filter(course=self)
         return len(ratings)
@@ -241,7 +245,6 @@ class Queries(models.Model):
 
 
 class ContactUs(models.Model):
-   
     name=models.CharField(max_length=50)
     email=models.EmailField(max_length=100)
     mobile=models.CharField(max_length=10)
@@ -255,3 +258,12 @@ class ContactUs(models.Model):
         verbose_name='Contact Us'
         verbose_name_plural='Contact Us'
 
+class Calender(models.Model):
+    start=models.DateTimeField(blank=True,null=True)
+    end=models.DateTimeField(blank=True,null=True)
+    postpond=models.BooleanField(default=False,null=True,blank=True)
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
+    course = models.ForeignKey(Course,related_name='calender',on_delete=models.CASCADE,blank=True,null=True)
+
+    

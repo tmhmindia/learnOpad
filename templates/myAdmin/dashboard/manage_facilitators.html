@@ -71,7 +71,7 @@
                                                 <th>{{applicant.added.date}}</th>
                                                 
                                                 <th> 
-                                                    <a href="{% url 'view_edit_facilitators' %}?Fid={{}}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
+                                                    <a href="{% url 'view_edit_applicant' %}?Aid={{applicant.Aid}}"><button type="button" class="btn btn-cyan btn-md">View/Edit</button></a>
                                                     <button type="button" onclick="Approved('{{applicant.Aid}}')" id="btn_approve-{{applicant.Aid}}" class="btn btn-info btn-md">Approve</button>
                                                     <button type="button" onclick="Shortlist('{{applicant.user.id}}')" id="btn_shortlist-{{applicant.user.id}}" {% if applicant.shortlist %} class="btn btn-success btn-md"{% else %}class="btn btn-danger btn-md"{% endif %} >{% if applicant.shortlist %}Shortlisted{% else %}Shortlist{% endif %}</button>
                                                    

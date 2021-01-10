@@ -24,13 +24,18 @@ def Dashboard(request):
                     'enrollments':enrollment.objects.all().order_by('-addedenroll'),'total_revenue':obj.get_total_admin_revenue(),'staff_total':Staff.objects.all().count()
                         } 
     return render(request,'myAdmin/dashboard/index.html',dashboard_data)
-def visitors(request):    
-    return render(request,'myAdmin/dashboard/visitors.html')
+def visitors(request):
+    visiters=CustomUser.objects.all()    
+    return render(request,'myAdmin/dashboard/visitors.html',{"visiters":visiters})
+
+
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def manage_facilitators(request):
     applicants=Applicants.objects.filter(status="Due").order_by('-added')
     return render(request,'myAdmin/dashboard/manage_facilitators.html',{'applicants':applicants})
+
+
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def Approved_facilitators(request):
@@ -228,6 +233,21 @@ def view_edit_facilitators(request):
         if Fid is not None:
             facilitator=Facilitator.objects.get(Fid=Fid)
         return render(request,'myAdmin/dashboard/view_edit_facilitators.html',{'facilitator':facilitator})
+
+
+@login_required(login_url='/user/signin/')
+@allowed_users(['Admins','Staff'])
+def view_edit_applicant(request):
+    if request.method=='POST':
+        pass
+
+    else:
+        Aid=request.GET.get('Aid',None)
+        if Aid is not None:
+            applicant=Applicants.objects.get(Aid=Aid)
+            return render(request,'myAdmin/dashboard/view_edit_applicant.html',{'applicant':applicant})
+
+
 @login_required(login_url='/user/signin/')
 @allowed_users(['Admins','Staff'])
 def view_edit_courses(request):

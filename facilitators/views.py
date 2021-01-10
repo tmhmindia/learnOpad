@@ -399,6 +399,14 @@ def UpdateCourse(request):
         course.level=updated_data.get('level',None)
         course.language=updated_data.get('language',None)
         course.price=updated_data.get('price',None)
+        if updated_data.get('live',None) == "true":
+            course.live=True
+        else:
+            course.live=False
+        if updated_data.get('classroom',None) == "true":
+            course.classroom=True
+        else:
+            course.classroom=False
         if(course.days == updated_data.get('days',None)):
             pass 
         else:

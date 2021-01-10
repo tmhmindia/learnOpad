@@ -12,7 +12,7 @@ from LandingPage.models import Course,Category,SubCategory,offer,Facilitator,Que
 class CourseSerializers(serializers.ModelSerializer):
     class Meta:
         model=Course
-        fields=('Cid','title','description','thumbnail','video','price','level','language','categories','days','months','audience','takeaway','subCat_id',)
+        fields=('Cid','title','description','thumbnail','video','price','level','language','categories','days','months','audience','takeaway','subCat_id','live','classroom')
 # serializer for Live session model
 class LiveSessionsSerializer(serializers.ModelSerializer):
     class Meta:
