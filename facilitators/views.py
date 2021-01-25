@@ -119,6 +119,9 @@ def facilitator_Dashboard_Landing_page(request):
     context['approved'] = approved
 
     return render(request, 'facilitators/Dashboard/index.html',context)
+def liveclasses(request):
+        return render(request, 'facilitators/Dashboard/live_classes.html')
+
 
 
 @login_required(login_url='/facilitator/login/')

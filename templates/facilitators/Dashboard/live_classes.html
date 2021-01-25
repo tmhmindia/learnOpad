@@ -1,0 +1,178 @@
+{% extends '../base.html' %}
+{% load static %}
+<!-- ---------------------------------------------- -->
+    {% block title %}
+My Earnings|Facilitator
+    {% endblock title %}
+<!-- --------------------------------------------- -->
+    {% block header %}
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'facilitators/css2/all.min.css'%}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <!-- <link href="{% static 'facilitators/css/main.css'%}" rel="stylesheet"> -->
+    <link href="{% static 'facilitators/css/my_earning.css'%}" rel="stylesheet">
+    {% endblock header %}
+<!-- ------------------------------------------- -->
+    {% block stylesheet %}
+   <style>
+        #accordionSidebar {
+            height: 100%;
+            width: 160px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+        
+        #topbar {
+            position: fixed;
+            z-index: 100;
+            vertical-align: top;
+            left: 224px;
+        }
+        
+        @media only screen and (max-width: 400px) {
+            #topbar {
+                left: 0;
+            }
+            #accordionSidebar {
+                top: 65px;
+            }
+        }
+        
+        @media only screen and (max-width: 767px) {
+            #topbar {
+                left: 0;
+            }
+            #accordionSidebar {
+                top: 65px;
+            }
+            #content {
+                left: auto;
+               
+                width: 100%;
+                width: calc(100% - 0px);
+            }
+            .content-wrapper {
+                padding:0;
+            }
+        }
+        
+        @media only screen and (max-width: 1800px) {
+            #content {
+                padding: 20px 30px;
+            }
+        }
+    </style>
+
+    {% endblock stylesheet %}
+<!-- ----------------------------------------------------- -->
+    {% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="outer-container-that-is-relative bg-white" style=" position: relative;font-family: 'Raleway';" id="content">
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+                    </div>
+
+                    <div class="wd-100p">
+                        <form action="">
+                            <div class="form-group">
+                                <label for="topicname">Topicname</label>
+                                <input type="text" class="form-control" id="topicname" placeholder="Enter Topicname">
+                              </div>
+                              <div class="form-group">
+                                <label for="date_time">Date Time</label>
+
+                                <input type="datetime-local"  style="max-width:300px" class="form-control " id="date_time" placeholder="Enter Topicname">
+                              </div>
+                        </form>
+                    </div>
+                    <div class="border-0 font-weight-bold h4">
+                        <p>Overview
+                            <hr>
+                        </p>
+                    </div>
+
+                    
+
+
+
+                    <!---Earning Chart(monthly)-->
+                    <div class="table-responsive earnings ">
+                        <table  id="order-listing" class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th width="10%" >S.No.</th>
+                                    <th width="20%" >Topic name</th>
+                                    <th width="20%" >Date time</th>
+                                    <th width="10%" >Status</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                <tr>
+                                    <td scope="row">1</td>
+                                    
+                                    <td>abc</td>
+                                    <td>abc</td>
+                                    <td>abc</td>
+                                </tr>
+                              
+
+                            </tbody>
+                        </table>
+                        <div class="prev">
+
+
+                            <a href="#"><i class="fa fa-chevron-left"></i></a>
+                            <a href="#">PREV</a>
+                            <a href="#">NEXT</a>
+                            <a href="#"><i class="fa fa-chevron-right"></i></a>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+    <!-- Bootstrap core JavaScript-->
+    <!-- <script src="{% static 'facilitators/vendor/jquery/jquery.min.js'%}"></script> -->
+    <script src="{% static 'facilitators/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'facilitators/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'facilitators/js/sb-admin-2.min.js'%}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{% static 'facilitators/vendor/chart.js/Chart.min.js'%}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{% static 'facilitators/js/demo/chart-area-demo.js'%}"></script>
+    <script src="{% static 'facilitators/js/demo/chart-pie-demo.js'%}"></script>
+
+    {% endblock content %}
+<!-- ------------------------------------------------- -->
+    {% block javascript %}
+
+    {% endblock javascript%}
+

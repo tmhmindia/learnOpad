@@ -4,6 +4,8 @@ from . import views
 urlpatterns = [
     path('facilitator/dashboard/explore', views.facilitator_Dashboard_explore_courses_page, name="explorecourses"),
     path('facilitator/dashboard/earnings/<int:pk>/', views.facilitator_Dashboard_myearnings_page, name="earnings"),
+    path('facilitator/dashboard/liveclasses', views.liveclasses, name="liveclasses"),
+
     # path('facilitator/recoverpassword/<int:pk>/', views.forgot_password, name="forgotPassword"),
     path('facilitator/dashboard/create_course', views.facilitator_Dashboard_create_course_page, name="createcourse"),
     path('facilitator/dashboard/', views.facilitator_Dashboard_Landing_page,name="dashboard"),
