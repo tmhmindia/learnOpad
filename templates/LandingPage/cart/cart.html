@@ -158,7 +158,7 @@ var options = {
     "image": "{% static 'LandingPage/img/logotiny.png' %}",
     "order_id": "{{ order_id }}" , //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
     "handler": function (response){
-      swal("Done!", "Wait for Varifying the payment Process", "warning").then(function(){
+      swal("Done!", "Wait for Varifying the payment Process", "success").then(function(){
             $.ajax({
             url: "{% url 'payment_verify' %}",
             async: false,

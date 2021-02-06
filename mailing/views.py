@@ -41,6 +41,22 @@ def successOnRegistration(user):
     
     send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
 
+def successOnRegistrationToVisiters(user):
+    recipient = [user.email,]
+    sender =settings.EMAIL_HOST_USER # 
+    context={
+        'name':user.first_name+" "+user.last_name,
+        'msg':'''Thank you for signing up & we hope that you will get the most out of LearnOpad.<br>
+If you have any questions our support team is available to help you so please fill our Contact Us form with your query.'''
+     }
+    text_message = f"Email with a nice embedded image {context.get('name')}."
+   
+    html_message=render_to_string('html/email_template.html',context)
+    
+    send_email(subject="TMHM PVT LTD", text_content=text_message, html_content=html_message, sender=sender, recipient=recipient)
+
+
+
 def ToAdminFacilitatorRegistrationQuery(query):
     sender = settings.EMAIL_HOST_USER
     recipient = ["kamal.edutrainer@gmail.com",]

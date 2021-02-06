@@ -19,7 +19,9 @@ urlpatterns = [
     path('About/facilitator/<int:pk>/',views.aboutfacilitator, name="aboutfacilitator"),
     path('delete/videos/',views.GetVideos, name="GetVideos"),
     path('update/videos/',views.UpdateVideos, name="update_videos"),
-    path('update/course/',views.UpdateCourse, name="update_course")
+    path('update/course/',views.UpdateCourse, name="update_course"),
+    path('Postponed/class/',views.postponed_class, name="postponed_class")
+
 
 
 

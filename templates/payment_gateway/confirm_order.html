@@ -199,7 +199,7 @@ var options = {
         
 
         
-        swal("Done!", "Wait for Varifying the payment Process", "warning").then(function(){
+        swal("Done!", "Wait for Varifying the payment Process", "success").then(function(){
             $.ajax({
             url: "{% url 'payment_verify' %}",
             async: false,

@@ -43,6 +43,7 @@ from django.core.paginator import Paginator
 from payment_gateway.models import Revenue
 from django.core import serializers
 from mailing.views import *
+from dateutil.parser import parse as myparser
 
 
 #facilitator page
@@ -119,10 +120,23 @@ def facilitator_Dashboard_Landing_page(request):
     context['approved'] = approved
 
     return render(request, 'facilitators/Dashboard/index.html',context)
+
 def liveclasses(request):
-        return render(request, 'facilitators/Dashboard/live_classes.html')
+    if request.method == 'POST':
+        course=Course.objects.get(Cid=request.POST.get('course'))
+        frm= myparser(request.POST.get('from'))
+        to= myparser(request.POST.get('to'))
+        calender=Calender.objects.create(course=course,start=frm,end=to)
+        calender.save()
+    
+    schedules=Calender.objects.filter(course__offering__Fid=request.user.user.facilitator.Fid)
+    return render(request, 'facilitators/Dashboard/live_classes.html',{"schedules":schedules})
 
 
+def postponed_class(request):
+    if request.method == 'POST':
+        calender=Calender.objects.get(id=int(request.POST.get('id'))).delete()
+        return JsonResponse({"success":True})
 
 @login_required(login_url='/facilitator/login/')
 @allowed_Facilitator_Dashboard()
@@ -205,7 +219,7 @@ def facilitator_Profile_page(request,pk):
         ourdata.phone = request.POST.get('phone')
         ourdata.country = request.POST.get('country')
         if request.POST.get('dob'):
-            ourdata.DOB=request.POST.get('dob')
+            ourdata.DOB=myparser(request.POST.get('dob'))
 
         ourdata.state = request.POST.get('state')
         ourdata.PAddress = request.POST.get('addressLine1')

@@ -90,16 +90,32 @@ My Earnings|Facilitator
                     </div>
 
                     <div class="wd-100p">
-                        <form action="">
+                        <form action="{% url 'liveclasses' %}" method="POST">
+                            {% csrf_token %}
                             <div class="form-group">
-                                <label for="topicname">Topicname</label>
-                                <input type="text" class="form-control" id="topicname" placeholder="Enter Topicname">
+                                <label for="topicname">course</label>
+                                <select  id="UpdateCourseSelect" name="course" class="form-control">
+                                    <option value="empty">Select</option>
+                                    {% for course in request.user.user.facilitator.offering.all %}
+                                        {% if course.approve %}
+                                    <option value="{{course.Cid}}">{{course.title}}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>                              </div>
+                              <div class="form-group">
+                                <label for="date_time">From</label>
+
+                                <input type="datetime-local"  style="max-width:300px" class="form-control " name="from" id="from" placeholder="From">
                               </div>
                               <div class="form-group">
-                                <label for="date_time">Date Time</label>
+                                <label for="date_time">To</label>
 
-                                <input type="datetime-local"  style="max-width:300px" class="form-control " id="date_time" placeholder="Enter Topicname">
-                              </div>
+                                <input type="datetime-local"  style="max-width:300px" class="form-control " name="to" id="to" placeholder="To">
+                             
+                             </div>
+                             <div class="form-group">
+                                 <button class="btn btn-primary" type="submit">schedule</button>
+                             </div>
                         </form>
                     </div>
                     <div class="border-0 font-weight-bold h4">
@@ -117,23 +133,28 @@ My Earnings|Facilitator
                         <table  id="order-listing" class="table">
                             <thead class="thead-light">
                                 <tr>
-                                    <th width="10%" >S.No.</th>
-                                    <th width="20%" >Topic name</th>
-                                    <th width="20%" >Date time</th>
-                                    <th width="10%" >Status</th>
+                                    <th width="10%" >code</th>
+                                    <th width="20%" >Course name</th>
+                                    <th width="20%" >From</th>
+                                    <th width="20%" >To</th>
+                                    <th width="10%" >Action</th>
+
 
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                {% for calender in schedules %}
+                                {% if not calender.postpond %}
                                 <tr>
-                                    <td scope="row">1</td>
+                                    <td scope="row">{{calender.course.code}}</td>
                                     
-                                    <td>abc</td>
-                                    <td>abc</td>
-                                    <td>abc</td>
+                                    <td>{{calender.course.title}}</td>
+                                    <td>{{calender.start}}</td>
+                                    <td>{{calender.end}}</td>
+                                    <td><button class="btn btn-primary btn-sm" onClick="PostpondCourse('{{calender.id}}')">postpond</button></td>
                                 </tr>
-                              
+                                {% endif %}
+                              {% endfor %}
 
                             </tbody>
                         </table>
@@ -155,6 +176,8 @@ My Earnings|Facilitator
 
     <!-- Bootstrap core JavaScript-->
     <!-- <script src="{% static 'facilitators/vendor/jquery/jquery.min.js'%}"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <script src="{% static 'facilitators/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
 
     <!-- Core plugin JavaScript-->
@@ -169,10 +192,50 @@ My Earnings|Facilitator
     <!-- Page level custom scripts -->
     <script src="{% static 'facilitators/js/demo/chart-area-demo.js'%}"></script>
     <script src="{% static 'facilitators/js/demo/chart-pie-demo.js'%}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     {% endblock content %}
 <!-- ------------------------------------------------- -->
     {% block javascript %}
+    <script>
+        function PostpondCourse(id)
+        {
+            swal({
+  title: "Are you sure?",
+  text: "You want to postpone these class !",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+  buttons: {
+    cancel:"Cancel",
+    ok: "Yes"
+    
+  }
+})
+.then((willDelete) => {
+  if (willDelete) {
+    $.ajax({
+          type: 'POST',
+          url: '{% url "postponed_class" %}',
+          headers: {
+                       "X-CSRFTOKEN": "{{ csrf_token }}"
+               },
+          data: {id : id},
+          success: function (data) {
+            swal("Postponed!", "Your Class has been postponed.", "success").then(function(){
+                window.location.reload();});
+          },
+          error: function (data) {
+            swal("NOT Postponed!", "Something blew up.", "error");
+          }
+        });
+  } else {
+    swal("Cancelled", "cancel posponed", "success");
+  }
+});
 
+
+}
+</script>
     {% endblock javascript%}
 

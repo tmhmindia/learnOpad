@@ -4,6 +4,7 @@ from facilitators.models import *
 from LandingPage.models import *
 from django.utils import timezone
 from datetime import  timedelta
+
 # Create your models here.
 class Learners(models.Model):
     Lid=models.AutoField(primary_key=True)
@@ -38,6 +39,8 @@ class Learners(models.Model):
             return groups[0].id
         except:
             return 0
+    def get_schedules_of_courses_this_learner(self):
+        pass
 
 
 

@@ -29,6 +29,7 @@ import datetime
 from django.template import RequestContext
 from django.contrib import messages
 from django.contrib.messages import get_messages
+from mailing.views import  successOnRegistrationToVisiters
 
 # global signup system
 def login_page(request):
@@ -45,6 +46,7 @@ def signup(request):
             group = Group.objects.get(name='Visiters')
             user.groups.add(group)
             login(request, user)
+            successOnRegistrationToVisiters(user)
             payment=request.GET.get('payment',None)
             subscription=request.GET.get('subscription',None)
             if subscription is not None:
@@ -64,7 +66,7 @@ def signup(request):
 
     else:
         form = UserForm()
-        return render(request, 'login/signin_signup.html', {'form': form,'exist':exist,'signin':False,'signup':True,error:None})
+        return render(request, 'login/signin_signup.html', {'form': form,'exist':exist,'signin':False,'signup':True,'error':None})
 
 class user_login(View):
     

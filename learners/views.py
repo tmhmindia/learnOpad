@@ -17,6 +17,7 @@ import os
 from django.conf import settings
 from mailing.views import ToLearnerForCertificate
 import magic
+from dateutil.parser import parse as myparser
 
 # Create your views here.
 
@@ -137,11 +138,11 @@ def profile(request):
         ourdata.name=str(firstname)+" "+str(lastname)
         ourdata.phone = request.POST.get('phone')
         if request.POST.get('dob'):
-            ourdata.DOB = request.POST.get('dob')
+            ourdata.DOB = myparser(request.POST.get('dob'))
         ourdata.state = request.POST.get('state')
         ourdata.country = request.POST.get('country')
-        ourdata.Paddress = request.POST.get('addressLine1')
-        ourdata.Taddress = request.POST.get('addressLine2')
+        ourdata.PAddress = request.POST.get('addressLine1')
+        ourdata.TAddress = request.POST.get('addressLine2')
         ourdata.zipcode = request.POST.get('zipCode')
         ourdata.save()
         context = {'ourdata':ourdata, 'firstname':firstname, 'lastname':lastname}
